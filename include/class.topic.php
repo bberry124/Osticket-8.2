@@ -131,7 +131,7 @@ implements TemplateVariable, Searchable {
 
     static function getTopicName($id) {
         $names = static::getHelpTopics(false, true);
-        return is_numeric($id) && isset($names[$id]) ? $names[$id] : '';
+        return $names[$id];
     }
 
     function getDeptId() {
@@ -320,7 +320,7 @@ implements TemplateVariable, Searchable {
     }
 
     static function getHelpTopics($publicOnly=false, $disabled=false, $localize=true, $whitelist=array(), $allData=false) {
-      global $cfg;
+        global $cfg;
       static $topics, $names = array();
 
       // If localization is specifically requested, then rebuild the list.
@@ -403,8 +403,8 @@ implements TemplateVariable, Searchable {
         return self::getHelpTopics(true);
     }
 
-    static function getAllHelpTopics($localize=false) {
-        return self::getHelpTopics(false, true, $localize);
+    function getAllHelpTopics() {
+        return self::getHelpTopics(false, true);
     }
 
     static function getLocalNameById($id) {

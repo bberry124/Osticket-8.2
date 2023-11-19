@@ -83,7 +83,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
 			    <option value="0" selected="selected">&mdash; <?php
                 echo __('System Default'); ?> &mdash;</option>
 			    <?php
-			    $sql='SELECT dept_id, dept_name FROM '.DEPT_TABLE.' dept ORDER by dept_name';
+			    $sql='SELECT id, name FROM '.DEPT_TABLE.' dept ORDER by name';
 			    if(($res=db_query($sql)) && db_num_rows($res)){
 				while(list($id,$name)=db_fetch_row($res)){
 				    $selected=($info['dept_id'] && $id==$info['dept_id'])?'selected="selected"':'';
@@ -130,6 +130,7 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
 			<select name="topic_id">
                 <option value="0" selected="selected">&mdash; <?php echo __('System Default'); ?> &mdash;</option>
 			    <?php
+                print("df");
                     $topics = Topic::getHelpTopics();
                     while (list($id,$topic) = each($topics)) { ?>
                         <option value="<?php echo $id; ?>"<?php echo ($info['topic_id']==$id)?'selected':''; ?>><?php echo $topic; ?></option>
