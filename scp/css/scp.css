@@ -1,17 +1,16 @@
 body {
-  font-family: "Lato", "Helvetica Neue", arial, helvetica, sans-serif;
-  font-weight: 400;
-  letter-spacing: 0.15px;
-  -webkit-font-smoothing:antialiased;
-          font-smoothing:antialiased;
-}
-body, html {
+	/*
     background:#eee;
+    */
+    background:#f3f6fb;
+    font-family:arial, helvetica, sans-serif;
+    font-size:10pt;
     color:#000;
-    font-size:14px;
     margin:0;
     padding:0;
 }
+
+
 .greenText{ color:green; }
 .blueText{ color:blue; }
 .redText{ color:red; }

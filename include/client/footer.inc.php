@@ -1,9 +1,9 @@
-        </div>
+</div>
     </div>
     <div id="footer">
         <p><?php echo __('Copyright &copy;'); ?> <?php echo date('Y'); ?> <?php
-        echo Format::htmlchars((string) $ost->company ?: 'osTicket.com'); ?> - <?php echo __('All rights reserved.'); ?></p>
-        <a id="poweredBy" href="https://osticket.com" target="_blank"><?php echo __('Helpdesk software - powered by osTicket'); ?></a>
+        echo Format::htmlchars((string) $ost->company ?: 'integraphone.com.au'); ?> - <?php echo __('All rights reserved.'); ?></p>
+        <a id="poweredBy" href="http://integraphone.com.au" target="_blank"><?php echo __('Helpdesk software - powered by osTicket'); ?></a>
     </div>
 <div id="overlay"></div>
 <div id="loading">

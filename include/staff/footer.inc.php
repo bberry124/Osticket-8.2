@@ -2,8 +2,8 @@
 </div>
 <?php if (!isset($_SERVER['HTTP_X_PJAX'])) { ?>
     <div id="footer">
-        <?php echo __('Copyright &copy;') ?> 2006-<?php echo date('Y'); ?>&nbsp;<?php
-        echo Format::htmlchars((string) $ost->company ?: 'osTicket.com'); ?>&nbsp;<?php echo __('All Rights Reserved.'); ?>
+        <?php echo __('Copyright &copy;') ?> 1994-<?php echo date('Y'); ?>&nbsp;<?php
+        echo Format::htmlchars((string) $ost->company ?: 'intergraphone.com.au'); ?>&nbsp;<?php echo __('All Rights Reserved.'); ?>
     </div>
 <?php
 if(is_object($thisstaff) && $thisstaff->isStaff()) { ?>
