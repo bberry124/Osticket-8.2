@@ -79,6 +79,13 @@ Class CSRF {
 
         return sprintf('<input type="hidden" name="%s" value="%s" />', $name, $this->getToken());
     }
+    
+    function getSearchValue($email, $name='' ) {
+        if(!$name) $name = $this->name;
+
+        return sprintf('%s=%s&a=search&query=%s&basic_search=Search', $name, $this->getToken(), $email);
+
+    }
 }
 
 /* global function to add hidden token input with to forms */
@@ -87,5 +94,11 @@ function csrf_token() {
 
     if($ost && $ost->getCSRF())
         echo $ost->getCSRFFormInput();
+}
+function get_search_Query($email) {
+    global $ost;
+
+    if($ost && $ost->getCSRF())
+        echo $ost->getSearchQuery($email);
 }
 ?>

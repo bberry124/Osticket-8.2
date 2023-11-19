@@ -108,6 +108,10 @@ class osTicket {
         return $this->getCSRF()->getFormInput();
     }
 
+    function getSearchQuery($email) {
+        return $this->getCSRF()->getSearchValue($email);
+    }
+    
     function validateCSRFToken($token) {
         return ($token && $this->getCSRF()->validateToken($token));
     }
