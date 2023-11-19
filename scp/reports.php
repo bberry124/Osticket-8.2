@@ -25,6 +25,7 @@ $page='';
 
 /*... Quick stats ...*/
 $stats= $thisstaff->getTicketsStats();
+
 //Navigation
 $nav->setTabActive('reports');
 $inc = 'reports.inc.php';

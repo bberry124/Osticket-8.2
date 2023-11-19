@@ -906,6 +906,11 @@ class OsticketConfig extends Config {
         return ($this->get('queue_bucket_counts'));
     }
 
+    function showAssignedTickets() {
+        return ($this->get('show_assigned_tickets'));
+    }
+    
+
     function getDefaultTicketNumberFormat() {
         return $this->get('ticket_number_format');
     }

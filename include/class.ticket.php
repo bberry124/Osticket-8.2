@@ -3935,6 +3935,64 @@ implements RestrictedAccess, Threadable, Searchable {
     return ($num === 0);
     }
 
+    static function getStaffStats($staff) {
+        
+        global $cfg;
+
+        /* Unknown or invalid staff */
+        if (!$staff
+                || (!is_object($staff) && !($staff=Staff::lookup($staff)))
+                || !$staff->isStaff())
+            return null;
+
+        $where = array('(task.staff_id='.db_input($staff->getId())
+                    .sprintf(' AND task.flags & %d != 0 ', TaskModel::ISOPEN)
+                    .') ');
+        $where2 = '';
+
+        if(($teams=$staff->getTeams()))
+            $where[] = ' ( task.team_id IN('.implode(',', db_input(array_filter($teams)))
+                        .') AND '
+                        .sprintf('task.flags & %d != 0 ', TaskModel::ISOPEN)
+                        .')';
+
+        if(!$staff->showAssignedOnly() && ($depts=$staff->getDepts())) //Staff with limited access just see Assigned tasks.
+            $where[] = 'task.dept_id IN('.implode(',', db_input($depts)).') ';
+
+        $where = implode(' OR ', $where);
+        if ($where) $where = 'AND ( '.$where.' ) ';
+
+        $sql =  'SELECT \'open\', count(task.id ) AS tasks '
+                .'FROM ' . TASK_TABLE . ' task '
+                . sprintf(' WHERE task.flags & %d != 0 ', TaskModel::ISOPEN)
+                . $where . $where2
+
+                .'UNION SELECT \'overdue\', count( task.id ) AS tasks '
+                .'FROM ' . TASK_TABLE . ' task '
+                . sprintf(' WHERE task.flags & %d != 0 ', TaskModel::ISOPEN)
+                . sprintf(' AND task.flags & %d != 0 ', TaskModel::ISOVERDUE)
+                . $where
+
+                .'UNION SELECT \'assigned\', count( task.id ) AS tasks '
+                .'FROM ' . TASK_TABLE . ' task '
+                . sprintf(' WHERE task.flags & %d != 0 ', TaskModel::ISOPEN)
+                .'AND task.staff_id = ' . db_input($staff->getId()) . ' '
+                . $where
+
+                .'UNION SELECT \'closed\', count( task.id ) AS tasks '
+                .'FROM ' . TASK_TABLE . ' task '
+                . sprintf(' WHERE task.flags & %d = 0 ', TaskModel::ISOPEN)
+                . $where;
+
+        $res = db_query($sql);
+        $stats = array();
+        while ($row = db_fetch_row($res))
+            $stats[$row[0]] = $row[1];
+
+        return $stats;
+        
+    }
+    
     static function getChildTickets($pid) {
         return Ticket::objects()
                 ->filter(array('ticket_pid'=>$pid))

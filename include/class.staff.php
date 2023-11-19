@@ -758,12 +758,12 @@ implements AuthenticatedUser, EmailContact, TemplateVariable, Searchable {
         $this->stats = array();
     }
 
-    function getTasksStats() {
+    function getTicketsStats() {
 
-        if (!$this->stats['tasks'])
-            $this->stats['tasks'] = Task::getStaffStats($this);
-
-        return  $this->stats['tasks'];
+        if(!$this->stats['tickets'])
+        
+            $this->stats['tickets'] = Ticket::getStaffStats($this);
+        return  $this->stats['tickets'];
     }
 
     function getNumAssignedTasks() {

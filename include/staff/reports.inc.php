@@ -6,11 +6,11 @@ if($_REQUEST['status']) { //Query string status has nothing to do with the real 
     $qstr.='status='.urlencode($_REQUEST['status']);
 }
 
+
 $showoverdue=$showanswered=$showassigned=false;
 $staffId=0; 
 
 $showassigned   =(($cfg->showAssignedTickets() || $thisstaff->showAssignedTickets()));
-
 //Get status we are actually going to use on the query...making sure it is clean!
 $status=null;
 
