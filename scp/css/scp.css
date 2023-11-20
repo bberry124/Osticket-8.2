@@ -334,7 +334,42 @@ a time {
 /***********************************************************************
                  Start Custom Queues Menu System
 /***********************************************************************/
-
+#threads {
+    margin: 0;
+    padding: 5px 10px 0 10px;
+    border: 1px solid #aaa;
+    background: #F4FAFF;
+    height: 30px;
+}
+#threads li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: inline;
+}
+#content a:not(.re-icon) {
+    color: #184E81;
+}
+#threads li a {
+    display: inline-block;
+    width: auto;
+    height: 30px;
+    line-height: 30px;
+    border-top: 1px solid #F4FAFF;
+    padding: 0 10px 0 32px;
+    margin-right: 10px;
+}
+#threads li a.active {
+    height: 29px;
+    background-color: #fff;
+    border: 1px solid #aaa;
+    border-bottom: none;
+    border-top: 2px solid #ed9100;
+    font-weight: bold;
+}
+#toggle_ticket_thread {
+    background: url(../images/icons/open.gif) 10px 50% no-repeat;
+}
 #sub_nav {
     background:#f7f7f7;
     border-bottom:1px solid #bebebe;

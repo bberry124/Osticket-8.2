@@ -60,129 +60,209 @@ if ($_POST)
  <?php csrf_token(); ?>
  <input type="hidden" name="do" value="create">
  <input type="hidden" name="a" value="open">
-<div style="margin-bottom:20px; padding-top:5px;">
-    <div class="pull-left flush-left">
-        <h2><?php echo __('Open a New Ticket');?></h2>
-    </div>
-</div>
+ <h2><?php echo __('Open a New Ticket');?></h2>
  <table class="form_table fixed" width="940" border="0" cellspacing="0" cellpadding="2">
-    <thead>
+ <thead>
     <!-- This looks empty - but beware, with fixed table layout, the user
          agent will usually only consult the cells in the first row to
          construct the column widths of the entire toable. Therefore, the
          first row needs to have two cells -->
-        <tr><td style="padding:0;"></td><td style="padding:0;"></td></tr>
+        <tr><td></td><td></td></tr>
+        <tr>
+            <th colspan="2">
+                <h4><?php echo __('New Ticket');?></h4>
+            </th>
+        </tr>
     </thead>
     <tbody>
         <tr>
             <th colspan="2">
-                <em><strong><?php echo __('User and Collaborators'); ?></strong>: </em>
-                <div class="error"><?php echo $errors['user']; ?></div>
+                <em><strong><?php echo __('User Information'); ?></strong>: </em>
             </th>
         </tr>
-              <?php
-              if ($user) { ?>
-                  <tr><td><?php echo __('User'); ?>:</td><td>
-                    <div id="user-info">
-                      <input type="hidden" name="uid" id="uid" value="<?php echo $user->getId(); ?>" />
-                      <?php if ($thisstaff->hasPerm(User::PERM_EDIT)) { ?>
-                      <a href="#" onclick="javascript:
-                      $.userLookup('ajax.php/users/<?php echo $user->getId(); ?>/edit',
-                      function (user) {
-                        $('#user-name').text(user.name);
-                        $('#user-email').text(user.email);
-                      });
-                      return false;
-                      ">
-                      <?php } else { ?>
-                      <a href="#">
-                      <?php } ?>
-                      <i class="icon-user"></i>
-                      <span id="user-name"><?php echo Format::htmlchars($user->getName()); ?></span>
-                      &lt;<span id="user-email"><?php echo $user->getEmail(); ?></span>&gt;
-                    </a>
-                    <a class="inline button" style="overflow:inherit" href="#"
+        <?php
+        if ($user) { ?>
+        <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('User'); ?>:</td><td>
+            <div id="user-info">
+                <input type="hidden" name="uid" id="uid" value="<?php echo $user->getId(); ?>" />
+            <a href="#" onclick="javascript:
+                $.userLookup('ajax.php/users/<?php echo $user->getId(); ?>/edit',
+                        function (user) {
+                            $('#user-name').text(user.name);
+                            $('#user-email').text(user.email);
+                        });
+                return false;
+                "><i class="icon-user"></i>
+                <span id="user-name"><?php echo Format::htmlchars($user->getName()); ?></span>
+                &lt;<span id="user-email"><?php echo $user->getEmail(); ?></span>&gt;
+                </a>
+                <a class="action-button" style="overflow:inherit" href="#"
                     onclick="javascript:
-                    $.userLookup('ajax.php/users/select/'+$('input#uid').val(),
-                    function(user) {
-                      $('input#uid').val(user.id);
-                      $('#user-name').text(user.name);
-                      $('#user-email').text('<'+user.email+'>');
-                    });
-                    return false;
-                    "><i class="icon-retweet"></i> <?php echo __('Change'); ?></a>
-                  </div>
-                </td>
-              </tr>
+                        $.userLookup('ajax.php/users/select/'+$('input#uid').val(),
+                            function(user) {
+                                $('input#uid').val(user.id);
+                                $('#user-name').text(user.name);
+                                $('#user-email').text('<'+user.email+'>');
+                        });
+                        return false;
+                    "><i class="icon-edit"></i> <?php echo __('Change'); ?></a>
+            </div>
+        </td></tr>
               <?php
             } else { //Fallback: Just ask for email and name
               ?>
-              <tr id="userRow">
-                <td width="120"><?php echo __('User'); ?>:</td>
-                <td>
-                  <span>
-                    <select class="userSelection" name="name" id="user-name"
-                    data-placeholder="<?php echo __('Select User'); ?>">
-                  </select>
-                </span>
-
-                <a class="inline button" style="overflow:inherit" href="#"
-                onclick="javascript:
-                $.userLookup('ajax.php/users/lookup/form', function (user) {
-                  var newUser = new Option(user.email + ' - ' + user.name, user.id, true, true);
-                  return $(&quot;#user-name&quot;).append(newUser).trigger('change');
-                });
-                return false;
-                "><i class="icon-plus"></i> <?php echo __('Add New'); ?></a>
-
-                <span class="error">*</span>
-                <br/><span class="error"><?php echo $errors['name']; ?></span>
-              </td>
-              <div>
-                <input type="hidden" size=45 name="email" id="user-email" class="attached"
-                placeholder="<?php echo __('User Email'); ?>"
-                autocomplete="off" autocorrect="off" value="<?php echo $info['email']; ?>" />
-              </div>
-            </tr>
-            <?php
-          } ?>
-          <tr id="ccRow">
-            <td width="160"><?php echo __('Cc'); ?>:</td>
+        <tr>
+            <td width="160" class="required">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Company:
+            </td>
             <td>
-              <span>
-                <select class="collabSelections" name="ccs[]" id="cc_users_open" multiple="multiple"
-                ref="tags" data-placeholder="<?php echo __('Select Contacts'); ?>">
-              </select>
-            </span>
 
-            <a class="inline button" style="overflow:inherit" href="#"
-            onclick="javascript:
-            $.userLookup('ajax.php/users/lookup/form', function (user) {
-              var newUser = new Option(user.name, user.id, true, true);
-              return $(&quot;#cc_users_open&quot;).append(newUser).trigger('change');
-            });
-            return false;
-            "><i class="icon-plus"></i> <?php echo __('Add New'); ?></a>
+                <input type="text" size="50" name="company" id="company" class="typeahead" value="<?php echo $info['company']; ?>"
+                    autocomplete="off" autocorrect="off" autocapitalize="off">
+                &nbsp;<span class="error">*&nbsp;<?php echo $errors['company']; ?></span>
+            </td>
+        </tr>	
+        <tr>
+            <td width="160" class="required">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email:
+            </td>
+            <td>
 
-            <br/><span class="error"><?php echo $errors['ccs']; ?></span>
-          </td>
+                <input type="text" size="50" name="email" id="email" class="typeahead" value="<?php echo $info['email']; ?>"
+                    autocomplete="off" autocorrect="off" autocapitalize="off">
+                &nbsp;<span class="error">*&nbsp;<?php echo $errors['email']; ?></span>
+            <?php 
+            if($cfg->notifyONNewStaffTicket()) { ?>
+               &nbsp;&nbsp;&nbsp;
+               <input type="checkbox" name="alertuser" <?php echo (!$errors || $info['alertuser'])? 'checked="checked"': ''; ?>>Send alert to user.
+            <?php 
+             } ?>
+            </td>
+        </tr>
+        <tr>
+            <td width="160">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email BCC:
+            </td>
+            <td>
+
+                <input type="text" size="50" name="email2" id="email2" class="typeahead" value="<?php echo $info['email2']; ?>"
+                    autocomplete="off" autocorrect="off" autocapitalize="off">
+                &nbsp;<span class="error">&nbsp;<?php echo $errors['email2']; ?></span>
+            <?php 
+            if($cfg->notifyONNewStaffTicket()) { ?>
+               &nbsp;&nbsp;&nbsp;
+               <input type="checkbox" name="alertuser2" <?php echo (!$errors || $info['alertuser2'])? 'checked="checked"': ''; ?>>Send alert to user.
+            <?php 
+             } ?>
+            </td>
+        </tr>				
+<!-- end coderXO mod -->
+
+        <tr>
+            <td width="160" class="required"> 
+            <!-- start coderXO mod --> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Contact Person'); ?>: <!-- end coderXO mod -->
+            </td>
+            <td>
+                <span style="display:inline-block;">
+                    <input type="text" size=45 name="name" id="user-name" value="<?php echo $info['name']; ?>" /> </span>
+                <font class="error">* <?php echo $errors['name']; ?></font>
+            </td>
+        </tr>
+        <tr>
+            <td width="160">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Phone Number:
+            </td>
+            <td>
+                <input type="text" size="20" name="phone" id="phone" value="<?php echo $info['phone']; ?>">
+                &nbsp;<span class="error">&nbsp;<?php echo $errors['phone']; ?></span>
+                Ext <input type="text" size="6" name="phone_ext" id="phone_ext" value="<?php echo $info['phone_ext']; ?>">
+                &nbsp;<span class="error">&nbsp;<?php echo $errors['phone_ext']; ?></span>
+			</td>
+        </tr>
+        <!-- start coderXO mod -->
+        <tr>
+            <td width="160">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mobile: 
+            </td>
+            <td>
+                <input type="text" size="20" name="mobile" id="mobile" value="<?php echo $info['mobile']; ?>">
+            </td>
+        </tr>
+        <tr>
+            <td width="160" valign="top">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Site Address:
+            </td>
+            <td>
+
+                <input type="text" size="50" name="address" id="address" value="<?php echo $info['address']; ?>" >
+                &nbsp;
+								<br/>
+							  <input type="text" size="50" name="address2" id="address2" value="<?php echo $info['address2']; ?>" >
+                &nbsp;
+            </td>
+        </tr>		
+        <tr>
+            <td width="160">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Suburb:
+            </td>
+            <td>
+
+                <input type="text" size="20" name="suburb" id="suburb" value="<?php echo $info['suburb']; ?>" >
+                &nbsp;
+								&nbsp;
+								&nbsp;
+								State:
+							  <select name="state" id="state" >
+									<option value=""></option>										
+									<option value="ACT" <?php echo $info['state'] == 'ACT' ? "selected=\"selected\"":""; ?>>ACT</option>
+									<option value="NSW" <?php echo $info['state'] == 'NSW' ? "selected=\"selected\"":""; ?>>NSW</option>
+									<option value="NT" <?php echo $info['state'] == 'NT' ? "selected=\"selected\"":""; ?>>NT</option>
+									<option value="SA" <?php echo $info['state'] == 'SA' ? "selected=\"selected\"":""; ?>>SA</option>	
+									<option value="TAS" <?php echo $info['state'] == 'TAS' ? "selected=\"selected\"":""; ?>>TAS</option>
+									<option value="VIC" <?php echo $info['state'] == 'VIC' ? "selected=\"selected\"":""; ?>>VIC</option>
+									<option value="QLD" <?php echo $info['state'] == 'QLD' ? "selected=\"selected\"":""; ?>>QLD</option>											
+									<option value="WA" <?php echo $info['state'] == 'WA' ? "selected=\"selected\"":""; ?>>WA</option>																									
+								</select>
+								&nbsp;
+								&nbsp;
+								
+                Postcode: <input type="text" size="5" name="postcode" id="postcode" value="<?php echo $info['postcode']; ?>" >
+                &nbsp;								
+            </td>
+        </tr>		
+        <tr>
+            <td width="160">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VIP Support:
+            </td>
+            <td>
+						
+							  <select name="vip" id="vip" >
+								  <option value="No">No</option>
+									<option value="Yes" <?php echo $info['vip'] == 'Yes' ? "selected=\"selected\"":""; ?>>Yes</option>
+								</select>
+								&nbsp;
+								&nbsp;
+								
+                Contract Number: <input type="text" size="10" name="contract" id="contract" value="<?php echo $info['contract']; ?>" >
+                &nbsp;								
+            </td>
+        </tr>								
+<!-- end coderXO mod -->
+        <?php
+        } ?>
         </tr>
         <?php
         if ($cfg->notifyONNewStaffTicket()) {
          ?>
-        <tr class="no_border">
-          <td>
-            <?php echo __('Ticket Notice');?>:
-          </td>
-          <td>
-            <select id="reply-to" name="reply-to">
-              <option value="all"><?php echo __('Alert All'); ?></option>
-              <option value="user"><?php echo __('Alert to User'); ?></option>
-              <option value="none">&mdash; <?php echo __('Do Not Send Alert'); ?> &mdash;</option>
-            </select>
-          </td>
+        <tr>
+            <td width="160">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Ticket Notice'); ?>:</td>
+            <td>
+            <input type="checkbox" name="alertuser" <?php echo (!$errors || $info['alertuser'])? 'checked="checked"': ''; ?>><?php
+                echo __('Send alert to user.'); ?>
+            </td>
         </tr>
-      <?php } ?>
+        <?php
+        } ?>
     </tbody>
     <tbody>
         <tr>
@@ -192,7 +272,7 @@ if ($_POST)
         </tr>
         <tr>
             <td width="160" class="required">
-                <?php echo __('Ticket Source');?>:
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Ticket Source');?>:
             </td>
             <td>
                 <select name="source">
@@ -208,11 +288,31 @@ if ($_POST)
                     ?>
                 </select>
                 &nbsp;<font class="error"><b>*</b>&nbsp;<?php echo $errors['source']; ?></font>
+                Other:&nbsp;<input type="text" size="20" name="source_other" id="source_other" value="<?php echo $info['source_other']; ?>" >
+            </td>
+        </tr>
+        <tr>
+        <td width="160">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Department'); ?>:
+            </td>
+            <td>
+                <select name="deptId">
+                    <option value="" selected >&mdash; <?php echo __('Select Department'); ?>&mdash;</option>
+                    <?php
+                    if($depts=Dept::getDepartments()) {
+                        foreach($depts as $id =>$name) {
+                            echo sprintf('<option value="%d" %s>%s</option>',
+                                    $id, ($info['deptId']==$id)?'selected="selected"':'',$name);
+                        }
+                    }
+                    ?>
+                </select>
+                &nbsp;<font class="error"><?php echo $errors['deptId']; ?></font>
             </td>
         </tr>
         <tr>
             <td width="160" class="required">
-                <?php echo __('Help Topic'); ?>:
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Help Topic'); ?>:
             </td>
             <td>
                 <select name="topicId" onchange="javascript:
@@ -228,20 +328,20 @@ if ($_POST)
                             }
                           });">
                     <?php
-                    if ($topics=$thisstaff->getTopicNames(false, false)) {
+                    if ($topics=Topic::getHelpTopics()) {
                         if (count($topics) == 1)
                             $selected = 'selected="selected"';
                         else { ?>
                         <option value="" selected >&mdash; <?php echo __('Select Help Topic'); ?> &mdash;</option>
-<?php                   }
+					<?php }
                         foreach($topics as $id =>$name) {
                             echo sprintf('<option value="%d" %s %s>%s</option>',
                                 $id, ($info['topicId']==$id)?'selected="selected"':'',
                                 $selected, $name);
                         }
-                        if (count($topics) == 1 && !$forms) {
+                        if (count($topics) == 1 && !$form) {
                             if (($T = Topic::lookup($id)))
-                                $forms =  $T->getForms();
+                                $form =  $T->getForm();
                         }
                     }
                     ?>
@@ -251,33 +351,26 @@ if ($_POST)
         </tr>
         <tr>
             <td width="160">
-                <?php echo __('Department'); ?>:
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Priority');?>:
             </td>
             <td>
-                <select name="deptId">
-                    <option value="" selected >&mdash; <?php echo __('Select Department'); ?>&mdash;</option>
+                <select name="priorityId">
+                    <option value="0" selected >&mdash; System Default &mdash;</option>
                     <?php
-                    if($depts=$thisstaff->getDepartmentNames(true)) {
-                        foreach($depts as $id =>$name) {
-                            if (!($role = $thisstaff->getRole($id))
-                                || !$role->hasPerm(Ticket::PERM_CREATE)
-                            ) {
-                                // No access to create tickets in this dept
-                                continue;
-                            }
+                    if($priorities=Priority::getPriorities()) {
+                        foreach($priorities as $id =>$name) {
                             echo sprintf('<option value="%d" %s>%s</option>',
-                                    $id, ($info['deptId']==$id)?'selected="selected"':'',$name);
+                                    $id, ($info['priorityId']==$id)?'selected="selected"':'',$name);
                         }
                     }
                     ?>
                 </select>
-                &nbsp;<font class="error"><?php echo $errors['deptId']; ?></font>
+                &nbsp;<font class="error">&nbsp;<?php echo $errors['priorityId']; ?></font>
             </td>
-        </tr>
-
+         </tr>
          <tr>
             <td width="160">
-                <?php echo __('SLA Plan');?>:
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('SLA Plan');?>:
             </td>
             <td>
                 <select name="slaId">
@@ -294,10 +387,9 @@ if ($_POST)
                 &nbsp;<font class="error">&nbsp;<?php echo $errors['slaId']; ?></font>
             </td>
          </tr>
-
          <tr>
             <td width="160">
-                <?php echo __('Due Date');?>:
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Due Date');?>:
             </td>
             <td>
                 <?php
@@ -313,7 +405,7 @@ if ($_POST)
         <?php
         if($thisstaff->hasPerm(Ticket::PERM_ASSIGN, false)) { ?>
         <tr>
-            <td width="160"><?php echo __('Assign To');?>:</td>
+            <td width="160">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Assign To');?>:</td>
             <td>
                 <select id="assignId" name="assignId">
                     <option value="0" selected="selected">&mdash; <?php echo __('Select an Agent OR a Team');?> &mdash;</option>
@@ -345,6 +437,15 @@ if ($_POST)
                 </select>&nbsp;<span class='error'>&nbsp;<?php echo $errors['assignId']; ?></span>
             </td>
         </tr>
+        <tr>
+				<td width='160'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Carrier:</td>
+				<td><input type="text" size="50" name="carrier" id="carrier" value="<?php echo $carrier; ?>" ></td>
+			</tr>
+			
+			<tr>
+				<td width='160'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Carrier Ref:</td>
+				<td><input type="text" size="50" name="carrier_ref" id="carrier_ref" value="<?php echo $carrier_ref; ?>" ></td>
+			</tr>
         <?php } ?>
         </tbody>
         <tbody id="dynamic-form">
@@ -355,6 +456,7 @@ if ($_POST)
                 include(STAFFINC_DIR .  'templates/dynamic-form.tmpl.php');
             }
         ?>
+        </tbody>
         </tbody>
         <tbody>
         <?php
@@ -472,6 +574,149 @@ print $response_form->getField('attachments')->render();
         </tr>
     </tbody>
 </table>
+<br/>
+
+		<ul id="threads">
+			<li ><a class="active" id="toggle_ticket_thread">Billing & Parts</a></li>
+		</ul>	
+		
+		<br/>
+		<div id="div_style">
+			<table id="myTable" bgcolor="#F8F8F8" width="100%" border="1" cellspacing="0">
+			  <tr>
+				<th align="center" width="10%"><font color="#0066CC">Code</font></th>
+				<th align="center" width="5%"><font color="#0066CC">Qty</font></th>
+				<th align="center" width="65%"><font color="#0066CC">Description</font></th>
+				<th align="center" width="10%"><font color="#0066CC">Unit Price</font></th>
+				<th align="center" width="10%"><font color="#0066CC">Total</font></th>
+			  </tr>
+			  <tr>
+				<td align="center"><div contenteditable>&nbsp;</div></td>
+				<td align="center"><div contenteditable>&nbsp;</div></td>
+				<td align="left"><div contenteditable>&nbsp;</div></td>
+				<td><table width="100%"><tr><td width="1%" align="left">$</td><td width="9%" align="right"><div contenteditable>&nbsp;</div></td></tr></table></td>
+				<td align="center" bgcolor="#CCCCCC"><table width='100%'><tr><td width='1%' align='left'>$</td><td width="9%" align="right">&nbsp;</td></tr></table></td>
+			  </tr>
+			  <tr>
+				<td align="center"><div contenteditable>&nbsp;</div></td>
+				<td align="center"><div contenteditable>&nbsp;</div></td>
+				<td align="left"><div contenteditable>&nbsp;</div></td>
+				<td><table width="100%"><tr><td width="1%" align="left">$</td><td width="9%" align="right"><div contenteditable>&nbsp;</div></td></tr></table></td>
+				<td align="center" bgcolor="#CCCCCC"><table width='100%'><tr><td width='1%' align='left'>$</td><td width="9%" align="right">&nbsp;</td></tr></table></td>
+			  </tr>
+			  <tr>
+				<td align="center"><div contenteditable>&nbsp;</div></td>
+				<td align="center"><div contenteditable>&nbsp;</div></td>
+				<td align="left"><div contenteditable>&nbsp;</div></td>
+				<td><table width="100%"><tr><td width="1%" align="left">$</td><td width="9%" align="right"><div contenteditable>&nbsp;</div></td></tr></table></td>
+				<td align="center" bgcolor="#CCCCCC"><table width='100%'><tr><td width='1%' align='left'>$</td><td width="9%" align="right">&nbsp;</td></tr></table></td>
+			  </tr>
+			  <tr>
+				<td align="center"><div contenteditable>&nbsp;</div></td>
+				<td align="center"><div contenteditable>&nbsp;</div></td>
+				<td align="left"><div contenteditable>&nbsp;</div></td>
+				<td><table width="100%"><tr><td width="1%" align="left">$</td><td width="9%" align="right"><div contenteditable>&nbsp;</div></td></tr></table></td>
+				<td align="center" bgcolor="#CCCCCC"><table width='100%'><tr><td width='1%' align='left'>$</td><td width="9%" align="right">&nbsp;</td></tr></table></td>
+			  </tr>
+			  <tr>
+				<td align="center"><div contenteditable>&nbsp;</div></td>
+				<td align="center"><div contenteditable>&nbsp;</div></td>
+				<td align="left"><div contenteditable>&nbsp;</div></td>
+				<td><table width="100%"><tr><td width="1%" align="left">$</td><td width="9%" align="right"><div contenteditable>&nbsp;</div></td></tr></table></td>
+				<td align="center" bgcolor="#CCCCCC"><table width='100%'><tr><td width='1%' align='left'>$</td><td width="9%" align="right">&nbsp;</td></tr></table></td>
+			  </tr>
+			  <tr>
+				<td align="center"><div contenteditable>&nbsp;</div></td>
+				<td align="center"><div contenteditable>&nbsp;</div></td>
+				<td align="left"><div contenteditable>&nbsp;</div></td>
+				<td><table width="100%"><tr><td width="1%" align="left">$</td><td width="9%" align="right"><div contenteditable>&nbsp;</div></td></tr></table></td>
+				<td align="center" bgcolor="#CCCCCC"><table width='100%'><tr><td width='1%' align='left'>$</td><td width="9%" align="right">&nbsp;</td></tr></table></td>
+			  </tr>
+			  <tr>
+				<td align="center"><div contenteditable>&nbsp;</div></td>
+				<td align="center"><div contenteditable>&nbsp;</div></td>
+				<td align="left"><div contenteditable>&nbsp;</div></td>
+				<td><table width="100%"><tr><td width="1%" align="left">$</td><td width="9%" align="right"><div contenteditable>&nbsp;</div></td></tr></table></td>
+				<td align="center" bgcolor="#CCCCCC"><table width='100%'><tr><td width='1%' align='left'>$</td><td width="9%" align="right">&nbsp;</td></tr></table></td>
+			  </tr>
+			  <tr>
+				<td align="center"><div contenteditable>&nbsp;</div></td>
+				<td align="center"><div contenteditable>&nbsp;</div></td>
+				<td align="left"><div contenteditable>&nbsp;</div></td>
+				<td><table width="100%"><tr><td width="1%" align="left">$</td><td width="9%" align="right"><div contenteditable>&nbsp;</div></td></tr></table></td>
+				<td align="center" bgcolor="#CCCCCC"><table width='100%'><tr><td width='1%' align='left'>$</td><td width="9%" align="right">&nbsp;</td></tr></table></td>
+			  </tr>
+			  <tr>
+				<td align="center"><div contenteditable>&nbsp;</div></td>
+				<td align="center"><div contenteditable>&nbsp;</div></td>
+				<td align="left"><div contenteditable>&nbsp;</div></td>
+				<td><table width="100%"><tr><td width="1%" align="left">$</td><td width="9%" align="right"><div contenteditable>&nbsp;</div></td></tr></table></td>
+				<td align="center" bgcolor="#CCCCCC"><table width='100%'><tr><td width='1%' align='left'>$</td><td width="9%" align="right">&nbsp;</td></tr></table></td>
+			  </tr>
+			  <tr>
+				<td align="center"><div contenteditable>&nbsp;</div></td>
+				<td align="center"><div contenteditable>&nbsp;</div></td>
+				<td align="left"><div contenteditable>&nbsp;</div></td>
+				<td><table width="100%"><tr><td width="1%" align="left">$</td><td width="9%" align="right"><div contenteditable>&nbsp;</div></td></tr></table></td>
+				<td align="center" bgcolor="#CCCCCC"><table width='100%'><tr><td width='1%' align='left'>$</td><td width="9%" align="right">&nbsp;</td></tr></table></td>
+			  </tr>
+			  <tr>
+				<td align="center"><div contenteditable>&nbsp;</div></td>
+				<td align="center"><div contenteditable>&nbsp;</div></td>
+				<td align="left"><div contenteditable>&nbsp;</div></td>
+				<td><table width="100%"><tr><td width="1%" align="left">$</td><td width="9%" align="right"><div contenteditable>&nbsp;</div></td></tr></table></td>
+				<td align="center" bgcolor="#CCCCCC"><table width='100%'><tr><td width='1%' align='left'>$</td><td width="9%" align="right">&nbsp;</td></tr></table></td>
+			  </tr>
+			</table>
+			
+			<table id='fixed_table' bgcolor="#F8F8F8" width="100%" border="1" cellspacing="0">
+			<tr>
+				<td align="center" width="10%" bgcolor="#DDDDDD">&nbsp;</td>
+				<td align="center" width="5%" ><div contenteditable>1</div></td>
+				<td align="right" width="65%" bgcolor="#DDDDDD"><font color="#0066CC">Labour Charge</font></td>
+				<td ><table width="100%"><tr><td width="1%" align="left">$</td><td width="9%" align="right"><div contenteditable>132.00</div></td></tr></table></td>
+				<td align="center" width="10%" bgcolor="#DDDDDD"><table width='100%'><tr><td width='1%' align='left'>$</td><td width="9%" align="right">&nbsp;</td></tr></table></td>
+			</tr>
+			
+			<tr>
+				<td align="center" width="10%" bgcolor="#DDDDDD">&nbsp;</td>
+				<td align="center" width="5%"><div contenteditable>1</div></td>
+				<td align="right" width="65%" bgcolor="#DDDDDD"><font color="#0066CC">Onsite Call Out Fee</font></td>
+				<td ><table width="100%"><tr><td width="1%" align="left">$</td><td width="9%" align="right"><div contenteditable>198.00</div></td></tr></table></td>
+				<td align="center" width="10%" bgcolor="#DDDDDD"><table width='100%'><tr><td width='1%' align='left'>$</td><td width="9%" align="right">&nbsp;</td></tr></table></td>
+			</tr>
+		</table>
+			
+			<div align="right">
+		<table id='final_table' bgcolor="#F8F8F8" width="20%">
+			<tr>
+				<td bgcolor="#F5FFFF" align="right" width="50%"><font color="#0066CC">Net</font></td>
+				<td style="border: 1px solid black;" align="right" width="50%" bgcolor="#DDDDDD"><font color="#0066CC"><table width='100%' align='center'><tr><td width='1%' align='left'>$</td><td width='9%' align='right'>&nbsp;</td></tr></table></font></td>
+			</tr>
+			
+			<tr>
+				<td bgcolor="#F5FFFF" align="right" width="50%"><font color="#0066CC">GST</font></td>
+				<td style="border: 1px solid black;" align="right" width="50%" bgcolor="#DDDDDD"><font color="#0066CC"><table width='100%' align='center'><tr><td width='1%' align='left'>$</td><td width='9%' align='right'>&nbsp;</td></tr></table></font></td>
+			</tr>
+			
+			<tr>
+				<td bgcolor="#F5FFFF" align="right" width="50%"><font color="#00CCCC">Total</font></td>
+				<td style="border: 1px solid black;" align="right" width="50%" bgcolor="#DDDDDD"><font color="#0099CC"><table align='center' width='100%'><tr><td width='1%' align='left'>$</td><td align='right' width='9%'>&nbsp;</td></tr></table></font></td>
+			</tr>
+			
+			
+		</table>
+	</div>
+			
+			</div>
+		
+		
+		<br/>
+<div align="right">
+<button type="button" onclick="window.location.reload()">Reload</button>
+<button type="button" onclick="displayResult()">Add row</button>
+<button type="button" onClick="updateTable()">Update</button>
+</div>
 <p style="text-align:center;">
     <input type="submit" name="submit" value="<?php echo _P('action-button', 'Open');?>">
     <input type="reset"  name="reset"  value="<?php echo __('Reset');?>">
