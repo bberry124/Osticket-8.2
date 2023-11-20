@@ -81,7 +81,21 @@ $qstr .= '&amp;order='.($order=='DESC' ? 'ASC' : 'DESC');
  <input type="hidden" name="do" value="mass_process" >
 <input type="hidden" id="action" name="a" value="" >
  <table class="list" border="0" cellspacing="1" cellpadding="0" width="940">
-    <thead>
+ <caption><span class="pull-left" style="display:inline-block;vertical-align:middle"><?php
+         echo $showing; ?></span>
+         <div class="pull-right"><?php echo __('Sorting Mode'); ?>:
+        <select name="help_topic_sort_mode" onchange="javascript:
+    var $form = $(this).closest('form');
+    $form.find('input[name=a]').val('sort');
+    $form.submit();
+">
+<?php foreach (OsticketConfig::allTopicSortModes() as $i=>$m)
+    echo sprintf('<option value="%s"%s>%s</option>',
+        $i, $i == $cfg->getTopicSortMode() ? ' selected="selected"' : '', $m); ?>
+        </select>
+    </div>
+    </caption>   
+ <thead>
         <tr>
             <th width="4%">&nbsp;</th>
             <th width="38%"><a <?php echo $name_sort; ?> href="slas.php?<?php echo $qstr; ?>&sort=name"><?php echo __('Name');?></a></th>
@@ -149,7 +163,11 @@ $qstr .= '&amp;order='.($order=='DESC' ? 'ASC' : 'DESC');
 if ($count): //Show options..
     echo '<div>&nbsp;'.__('Page').':'.$pageNav->getPageLinks().'&nbsp;</div>';
 ?>
-
+<p class="centered" id="actions">
+    <input class="button" type="submit" name="enable" value="<?php echo __('Enable'); ?>" >
+    <input class="button" type="submit" name="disable" value="<?php echo __('Disable'); ?>" >
+    <input class="button" type="submit" name="delete" value="<?php echo __('Delete'); ?>" >
+</p>
 <?php
 endif;
 ?>

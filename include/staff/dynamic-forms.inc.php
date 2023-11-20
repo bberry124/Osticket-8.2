@@ -43,7 +43,8 @@ $showing=$pageNav->showing().' '._N('form','forms',$count);
 <input type="hidden" name="do" value="mass_process" >
 <input type="hidden" id="action" name="a" value="" >
 <table class="list" border="0" cellspacing="1" cellpadding="0" width="940">
-    <thead>
+<caption><?php echo $showing; ?></caption>    
+<thead>
         <tr>
             <th width="4%">&nbsp;</th>
             <th width="50%"><?php echo __('Built-in Forms'); ?></th>
@@ -117,7 +118,9 @@ $showing=$pageNav->showing().' '._N('form','forms',$count);
 if ($count) //Show options..
     echo '<div>&nbsp;'.__('Page').':'.$pageNav->getPageLinks().'&nbsp;</div>';
 ?>
-
+<p class="centered" id="actions">
+    <input class="button" type="submit" name="delete" value="<?php echo __('Delete'); ?>">
+</p>
 </form>
 
 <div style="display:none;" class="dialog" id="confirm-action">

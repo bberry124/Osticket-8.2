@@ -87,16 +87,15 @@ $showing = $pageNav->showing().' '._N('department', 'departments', $count);
  <input type="hidden" name="do" value="mass_process" >
  <input type="hidden" id="action" name="a" value="" >
  <table class="list" border="0" cellspacing="1" cellpadding="0" width="940">
-    <thead>
+ <caption><?php echo $showing; ?></caption>  
+ <thead>
         <tr>
             <th width="4%">&nbsp;</th>
             <th width="12%"><a <?php echo $name_sort; ?> href="departments.php?<?php echo $qstr; ?>&sort=name"><?php echo __('Name');?></a></th>
-            <th width="5%"><a <?php echo $status_sort; ?> href="departments.php?<?php echo $qstr;?>&sort=status"><?php echo __('Status');?></a></th>
-            <th width="5%"><a  <?php echo $type_sort; ?> href="departments.php?<?php echo $qstr; ?>&sort=type"><?php echo __('Type');?></a></th>
+            <th width="10%"><a  <?php echo $type_sort; ?> href="departments.php?<?php echo $qstr; ?>&sort=type"><?php echo __('Type');?></a></th>
             <th width="5%"><a  <?php echo $users_sort; ?>href="departments.php?<?php echo $qstr; ?>&sort=members"><?php echo __('Agents');?></a></th>
-            <th width="25%"><a  <?php echo $email_sort; ?> href="departments.php?<?php echo $qstr; ?>&sort=email"><?php echo __('Email Address');?></a></th>
-            <th width="10%"><a  <?php echo $manager_sort; ?> href="departments.php?<?php echo $qstr; ?>&sort=manager"><?php echo __('Manager');?></a></th>
-            <th width="15%"><a  <?php echo $created_sort; ?> href="departments.php?<?php echo $qstr; ?>&sort=created"><?php echo __('Created');?></a></th>
+            <th width="38%"><a  <?php echo $email_sort; ?> href="departments.php?<?php echo $qstr; ?>&sort=email"><?php echo __('Email Address');?></a></th>
+            <th width="30%"><a  <?php echo $manager_sort; ?> href="departments.php?<?php echo $qstr; ?>&sort=manager"><?php echo __('Department Manager');?></a></th>
         </tr>
     </thead>
     <tbody>
@@ -138,10 +137,6 @@ $showing = $pageNav->showing().' '._N('department', 'departments', $count);
                   <?php echo $sel? 'checked="checked"' : ''; ?>
                   <?php echo $default? 'disabled="disabled"' : ''; ?> >
                 </td>
-                <td>
-                  <a href="departments.php?id=<?php echo $id; ?>"><?php
-                echo Dept::getNameById($id); ?></a>&nbsp;<?php echo $default; ?>
-                </td>
                 <td><?php
                   if(!strcasecmp($dept->getStatus(), 'Active'))
                     echo $dept->getStatus();
@@ -162,7 +157,7 @@ $showing = $pageNav->showing().' '._N('department', 'departments', $count);
                     echo Format::htmlchars($email); ?></a></span></td>
                 <td><a href="staff.php?id=<?php echo $dept->manager_id; ?>"><?php
                     echo $dept->manager_id ? $dept->manager : ''; ?>&nbsp;</a></td>
-                <td><?php echo $dept->created; ?></td>
+                
             </tr>
             <?php
             } //end of foreach.
@@ -187,6 +182,12 @@ $showing = $pageNav->showing().' '._N('department', 'departments', $count);
 if ($count):
     echo '<div>&nbsp;'.__('Page').':'.$pageNav->getPageLinks().'&nbsp;</div>';
 ?>
+
+<p class="centered" id="actions">
+    <input class="button" type="submit" name="make_public" value="<?php echo __('Make Public');?>" >
+    <input class="button" type="submit" name="make_private" value="<?php echo __('Make Private');?>" >
+    <input class="button" type="submit" name="delete" value="<?php echo __('Delete Dept(s)');?>" >
+</p>
 <?php
 endif;
 ?>

@@ -3,7 +3,7 @@
 <div class="sticky bar opaque">
     <div class="content">
         <div class="pull-left flush-left">
-            <h2><?php echo __('Installed Plugins'); ?></h2>
+            <h2><?php echo __('Currently Installed Plugins'); ?></h2>
         </div>
         <div class="pull-right flush-right">
             <a href="plugins.php?a=add" class="green button action-button"><i class="icon-plus-sign"></i> <?php
@@ -55,13 +55,10 @@ $showing=$pageNav->showing().' '._N('plugin', 'plugins', $count);
     <thead>
         <tr>
             <th width="4%">&nbsp;</th>
-            <th width="40%"><?php echo sprintf('%s (%s)',
-                    __('Plugin Name'),
-                    __('instances'));
+            <th width="40%"><?php echo __('Plugin Name');
                 ?></th>
-            <th width="10%"><?php echo __('Version'); ?></th>
-            <th width="10%"><?php echo __('Status'); ?></th>
-            <th width="20%"><?php echo __('Date Installed'); ?></th>
+            <th width="20%"><?php echo __('Status'); ?></th>
+            <th width="36%"><?php echo __('Date Installed'); ?></th>
         </tr>
     </thead>
     <tbody>
@@ -110,7 +107,11 @@ foreach ($ost->plugins->allInstalled() as $p) {
 if ($count) //Show options..
     echo '<div>&nbsp;'.__('Page').':'.$pageNav->getPageLinks().'&nbsp;</div>';
 ?>
-
+<p class="centered" id="actions">
+    <input class="button" type="submit" name="delete" value="<?php echo __('Delete'); ?>">
+    <input class="button" type="submit" name="enable" value="<?php echo __('Enable'); ?>">
+    <input class="button" type="submit" name="disable" value="<?php echo __('Disable'); ?>">
+</p>
 </form>
 
 <div style="display:none;" class="dialog" id="confirm-action">

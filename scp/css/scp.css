@@ -1153,7 +1153,7 @@ table.list caption {
 }
 
 table.list thead th {
-    background-color:#eee;
+    background:#c6d8dc;
     color:#000;
     text-align:left;
     vertical-align:top;
@@ -1194,9 +1194,10 @@ table tfoot td {
 }
 
 table.list tfoot td {
+    background: #c6d8dc;
     padding: 2px;
 }
-
+#actions button, .button {padding:2px 5px 3px;margin-right:10px;color:#777;}
 a.refresh {
     display:block;
     float:right;

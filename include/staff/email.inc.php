@@ -130,7 +130,6 @@ $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
 			<select name="topic_id">
                 <option value="0" selected="selected">&mdash; <?php echo __('System Default'); ?> &mdash;</option>
 			    <?php
-                print("df");
                     $topics = Topic::getHelpTopics();
                     while (list($id,$topic) = each($topics)) { ?>
                         <option value="<?php echo $id; ?>"<?php echo ($info['topic_id']==$id)?'selected':''; ?>><?php echo $topic; ?></option>

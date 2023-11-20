@@ -107,7 +107,8 @@ $query="$select $from $where ORDER BY $order_by LIMIT ".$pageNav->getStart().","
     <input type="hidden" name="do" value="mass_process" >
     <input type="hidden" id="action" name="a" value="" >
     <table class="list" border="0" cellspacing="1" cellpadding="0" width="940">
-        <thead>
+    <caption><?php echo $showing; ?></caption>    
+    <thead>
             <tr>
                 <th width="4%">&nbsp;</th>
                 <th width="56%"><a <?php echo $email_sort; ?> href="banlist.php?<?php echo $qstr; ?>&sort=email"><?php echo __('Email Address');?></a></th>

@@ -81,7 +81,8 @@ else
  <input type="hidden" name="do" value="mass_process" >
 <input type="hidden" id="action" name="a" value="" >
  <table class="list" border="0" cellspacing="1" cellpadding="0" width="940">
-    <thead>
+ <caption><?php echo $showing; ?></caption>   
+ <thead>
         <tr>
             <th width="4%">&nbsp;</th>
             <th width="35%"><a <?php echo $name_sort; ?> href="pages.php?<?php echo $qstr; ?>&sort=name"><?php echo __('Name'); ?></a></th>
@@ -136,7 +137,11 @@ else
 if($total): //Show options..
     echo '<div>&nbsp;'.__('Page').':'.$pageNav->getPageLinks().'&nbsp;</div>';
 ?>
-
+<p class="centered" id="actions">
+    <input class="button" type="submit" name="enable" value="<?php echo __('Enable'); ?>" >
+    <input class="button" type="submit" name="disable" value="<?php echo __('Disable'); ?>" >
+    <input class="button" type="submit" name="delete" value="<?php echo __('Delete'); ?>" >
+</p>
 <?php
 endif;
 ?>

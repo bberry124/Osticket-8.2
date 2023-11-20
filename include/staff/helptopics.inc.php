@@ -63,11 +63,10 @@ $order_by = 'sort';
  <input type="hidden" name="do" value="mass_process" >
 <input type="hidden" id="action" name="a" value="sort" >
  <table class="list" border="0" cellspacing="1" cellpadding="0" width="940">
-
-    <thead>
-<tr><td colspan="7">
-    <div style="padding:3px" class="pull-right"><?php echo __('Sorting Mode'); ?>:
-    <select name="help_topic_sort_mode" onchange="javascript:
+ <caption><span class="pull-left" style="display:inline-block;vertical-align:middle"><?php
+         echo $showing; ?></span>
+         <div class="pull-right"><?php echo __('Sorting Mode'); ?>:
+        <select name="help_topic_sort_mode" onchange="javascript:
     var $form = $(this).closest('form');
     $form.find('input[name=a]').val('sort');
     $form.submit();
@@ -77,7 +76,8 @@ $order_by = 'sort';
         $i, $i == $cfg->getTopicSortMode() ? ' selected="selected"' : '', $m); ?>
         </select>
     </div>
-</td></tr>
+    </caption>
+    <thead>
         <tr>
             <th width="4%" style="height:20px;">&nbsp;</th>
             <th style="padding-left:4px;vertical-align:middle" width="26%"><?php echo __('Help Topic'); ?></th>
@@ -185,7 +185,14 @@ $order_by = 'sort';
 if ($count): //Show options..
      echo '<div>&nbsp;'.__('Page').':'.$pageNav->getPageLinks().'&nbsp;</div>';
 ?>
-
+<p class="centered" id="actions">
+<?php if ($cfg->getTopicSortMode() != 'a') { ?>
+    <input class="button no-confirm" type="submit" name="sort" value="Save"/>
+<?php } ?>
+    <input class="button" type="submit" name="enable" value="Enable" ></button>
+    <input class="button" type="submit" name="disable" value="Disable"></button>
+    <input class="button" type="submit" name="delete" value="Delete"></button>
+</p>
 <?php
 endif;
 ?>
