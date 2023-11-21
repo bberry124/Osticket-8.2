@@ -456,6 +456,14 @@ class OsticketConfig extends Config {
         return $this->getInfo();
     }
 
+    function getDefaultTimezoneId() {
+        return $this->get('default_timezone_id');
+    }
+
+    function observeDaylightSaving() {
+        return ($this->config['enable_daylight_saving']);
+    }
+    
     function getTitle() {
         return $this->get('helpdesk_title');
     }

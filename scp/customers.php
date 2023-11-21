@@ -34,7 +34,7 @@ $inc = 'customers.inc.php';
 if ($thisstaff->hasPerm(Ticket::PERM_CREATE, false))  {
     $nav->addSubMenu(array('desc' => 'New Customer',
         'href' => 'customers.php?a=new',
-        'iconclass' => 'newTicket'),
+        'iconclass' => 'newuser'),
         ($_REQUEST['a'] == 'new'));
 
 }

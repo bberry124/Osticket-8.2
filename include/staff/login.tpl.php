@@ -40,7 +40,7 @@ if ($thisstaff && $thisstaff->is2FAPending())
             <fieldset>
             <input type="text" name="userid" id="name" value="<?php
                 echo $info['userid'] ?? null; ?>" placeholder="<?php echo __('Email or Username'); ?>"
-                autofocus autocorrect="off" autocapitalize="off">
+                autofocus autocorrect="off" autocapitalize="off" >
             <input type="password" name="passwd" id="pass" maxlength="128" placeholder="<?php echo __('Password'); ?>" autocorrect="off" autocapitalize="off">
                 <h3 style="display:inline"><a id="reset-link" class="<?php
                     if (!$show_reset || !$cfg->allowPasswordReset()) echo 'hidden';
@@ -65,6 +65,6 @@ if (count($ext_bks)) { ?>
     }
 } ?>
 </div>
-<div id="copyRights"><?php echo __('Integra Corporation Pty Ltd © | 1994 - 2023 | Version 7.3'); ?> </div>
+<div id="copyRights"><?php echo __('Integra Corporation Pty Ltd © | 1994 - 2024 | Version 7.1'); ?> </div>
 </body>
 </html>

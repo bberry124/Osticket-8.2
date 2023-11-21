@@ -82,13 +82,13 @@ body {
 
 body, input {
     font-family: helvetica, arial, sans-serif;
-    color: #000;
+    color: #0094B3;
 }
 
 #loginBox {
-    border:1px solid #2a67ac;
-    border-right:2px solid #2a67ac;
-    border-bottom:3px solid #2a67ac;
+    border:1px solid #5299A8;
+    border-right:2px solid #5299A8;
+    border-bottom:3px solid #5299A8;
     box-shadow: 2px 2px 8px rgba(42, 103, 172, 0.5);
     background:#fff;
     width:400px;
@@ -134,7 +134,7 @@ h3 {
     text-align:center;
     font-size:0.8em;
     font-weight:normal;
-    color:#d00;
+    color:#0094B3;
 }
 
 form {
@@ -160,11 +160,11 @@ input[type=reset], input[type=submit], input[type=button] {
 fieldset input {
     display: block;
     margin-bottom: 1em;
-    border: 1px solid #ccc;
-    border: 1px solid rgba(0,0,0,0.3);
+    border: 1px solid #5299A8;
     background: #fff;
     padding: 2px 4px;
     width: 100%;
+    outline-style: none;
 }
 
 hr {
@@ -240,10 +240,10 @@ input.submit {
     height:24px;
     line-height:24px;
     font-weight:bold;
-    border:1px solid #666666;
+    border:1px solid #0094B3;
     padding:0 30px;
     background: url('../images/grey_btn_bg.png?1312910883') top left repeat-x;
-    color: #333;
+    color: #0094B3;
 }
 
 input.submit:hover, input.submit:active {
@@ -251,7 +251,7 @@ input.submit:hover, input.submit:active {
 }
 #copyRights {
     font-size:0.7em;
-    color:#888;
+    color:#0094B3;
     padding:1em;
     text-align:center;
 }

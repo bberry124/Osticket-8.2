@@ -1,9 +1,14 @@
 <?php
-	if (!defined('OSTSCPINC') || !$thisstaff
-    || !$thisstaff->hasPerm(Ticket::PERM_CREATE, false))
-    die('Access Denied');
-    $info=array();
-	$info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
+if (!defined('OSTSCPINC') || !$thisstaff
+|| !$thisstaff->hasPerm(Ticket::PERM_CREATE, false))
+die('Access Denied');
+$info=array();
+if(!$_REQUEST['id']) {
+    $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
+} else {
+    $info=Format::htmlchars(($errors && $_POST)?$_POST:$customers_info);
+}
+
     function generateRandom( $len ){
 //		$strpattern = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 		$strpattern = "0123456789";
@@ -226,7 +231,7 @@
                 <td>
                     <input type="text" size="59" name="website" id="website" class="typeahead" value="<?php echo $info['website']; ?>"
                         autocomplete="off" autocorrect="off" autocapitalize="off">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" onclick="gotoCustomerUrl();">Click Here</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button style="margin-top:5px" type="button" onclick="gotoCustomerUrl();">Click Here</button>
                 </td>
             </tr>
         </tbody>
@@ -248,7 +253,7 @@
 
                  <input type="text" size="50" name="address" id="address" value="<?php echo $info['address']; ?>" >
                  &nbsp;
-                 <input type="text" size="50" name="address2" id="address2" value="<?php echo $info['address2']; ?>" >
+                 <input style="margin-top:5px" type="text" size="50" name="address2" id="address2" value="<?php echo $info['address2']; ?>" >
                  &nbsp;
              </td>
          </tr>
@@ -550,7 +555,7 @@
     </table>
     </td>
 
-    <td valign ="top" align="center" style="background-color:#e4ebf1; border-radius:6px; position:relative" width="33%">
+    <td valign ="top" align="center" style="background-color:#e4ebf1; border-radius:6px; position:relative" width="33%" id="quick">
         <table style="width:100%;">
             <thead>
                 <tr style="height: 27px; background: #c6d8dc;">
@@ -565,7 +570,7 @@
                         <td>
                             <br/>
                             <br/>
-                            <input type="button" onclick="document.location='tickets.php?a=open&cid=<?php echo $_REQUEST['id']; ?>';" value="Create Ticket" style="width:156px;color:red;"/><br/><br/>
+                            <input type="button" onclick="document.location='tickets.php?a=open&cid=<?php echo $_REQUEST['id']; ?>';" value="Create New Ticket" style="width:156px;"/><br/><br/>
                         </td>
                     </tr>
                     <tr style="text-align: center;">
@@ -585,7 +590,7 @@
             <tbody>
                 <tr >
                     <td colspan=2 align='center' >
-                        <div style="position:absolute; top:450px;">
+                        <div style="position:absolute; top:450px; ">
 
                             <input type="submit" name="do" value="<?php echo ($info['id']) ? "Update":"Add"; ?>" />
                             <input type="reset"  name="reset"  value="Reset" />
@@ -599,7 +604,7 @@
             <tbody>
             <tr >
                 <td colspan=2 align='center' >
-                    <div style="position:absolute; bottom:0px">
+                    <div style="position:absolute; bottom:0px;margin-bottom:20px">
                         <input type="submit" name="do" value="<?php echo ($info['id']) ? "Update":"Add"; ?>" />
                         <input type="reset"  name="reset"  value="Reset" />
                         <input type="button" name="cancel" value="Cancel" onclick='window.location.href="customers.php"'>

@@ -30,7 +30,7 @@ $nav->setTabActive('suppliers');
 if ($thisstaff->hasPerm(Ticket::PERM_CREATE, false)) {
     $nav->addSubMenu(array('desc'=>'New Supplier',
                            'href'=>'suppliers.php?a=new',
-                           'iconclass'=>'newTicket'),
+                           'iconclass'=>'newuser'),
                         ($_REQUEST['a']=='new'));    
 
 }
