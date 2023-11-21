@@ -1,5 +1,6 @@
 (function ($) {
     $.drawPlots = function(json) {
+        console.log(json);
         $('#line-chart-here').empty();
         $('#line-chart-legend').empty();
         var r = new Raphael('line-chart-here'),

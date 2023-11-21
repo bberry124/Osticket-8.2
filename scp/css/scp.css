@@ -346,8 +346,8 @@ a time {
     padding: 0;
     display: inline;
 }
-#content a:not(.re-icon) {
-    color: #000;
+#content thead a:not(.re-icon) {
+    color: #fff;
 }
 #threads li a {
     display: inline-block;
@@ -1186,7 +1186,7 @@ table.list caption {
 
 table.list thead th {
     background:#0094b3;
-    color:#000;
+    color:#fff;
     text-align:left;
     vertical-align:top;
     padding: 4px 5px;
@@ -1228,6 +1228,10 @@ table tfoot td {
 table.list tfoot td {
     background: #0094b3;
     padding: 2px;
+    color: #fff;
+}
+tfoot td a{
+    color: #fff;
 }
 #actions button, .button {padding:2px 5px 3px;margin-right:10px;color:#777;}
 a.refresh {
