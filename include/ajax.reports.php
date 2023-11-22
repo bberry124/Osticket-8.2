@@ -258,6 +258,7 @@ class OverviewReportAjaxAPI extends AjaxController {
             .' AND NOT annulled'
             .' GROUP BY state, DATE_FORMAT(timestamp, \'%Y-%m-%d\')'
             .' ORDER BY 2, 1');
+        echo $res;
         # Initialize array of plot values
         $plots = array();
         foreach ($events as $e) { $plots[$e] = array(); }
@@ -311,7 +312,10 @@ class OverviewReportAjaxAPI extends AjaxController {
 			*/	
 	}
 
-// --- end coderXO mod --- //						
+// --- end coderXO mod --- //		
+
+// this array diff is the issye , need to figure out how these two array are generated and fix 
+// Not possible in 30 mins , please seek help help me
         foreach (array_diff($events, $slots) as $slot)
             $plots[$slot][] = 0;
         return $this->encode(array("times" => $times, "plots" => $plots,

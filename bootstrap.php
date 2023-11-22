@@ -98,6 +98,8 @@ class Bootstrap {
         define('TEAM_TABLE',$prefix.'team');
         define('TEAM_MEMBER_TABLE',$prefix.'team_member');
         define('DEPT_TABLE',$prefix.'department');
+        define('GROUP_TABLE',$prefix.'groups');
+        define('GROUP_DEPT_TABLE', $prefix.'group_dept_access');
         define('STAFF_DEPT_TABLE', $prefix.'staff_dept_access');
         define('ROLE_TABLE', $prefix.'role');
 
@@ -113,9 +115,10 @@ class Bootstrap {
         define('THREAD_ENTRY_MERGE_TABLE', $prefix.'thread_entry_merge');
 
         define('LOCK_TABLE',$prefix.'lock');
-
+        define('TICKET_EVENT_TABLE',$prefix.'ticket_event');
         define('TICKET_TABLE',$prefix.'ticket');
         define('TICKET_CDATA_TABLE', $prefix.'ticket__cdata');
+        define('TICKET_THREAD_TABLE',$prefix.'ticket_thread');
         define('THREAD_EVENT_TABLE',$prefix.'thread_event');
         define('THREAD_REFERRAL_TABLE',$prefix.'thread_referral');
         define('THREAD_COLLABORATOR_TABLE', $prefix.'thread_collaborator');

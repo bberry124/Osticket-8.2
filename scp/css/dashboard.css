@@ -27,3 +27,34 @@ span.label.disabled {
 span.label {
     cursor: pointer;
 }
+
+/* start coderXO mod */
+#table-here tr :not(:first-child) {
+    text-align: center;
+    padding-right: 2.3em;
+    width: 12%;
+}
+#table-here thead th:nth-child(2),th:nth-child(3) {
+   color:red;
+}
+#table-here thead th:nth-child(4),th:nth-child(5), th:nth-child(6),th:nth-child(7) {
+   color:blue;
+}
+#table-here thead th:nth-child(8),th:nth-child(9) {
+   color:#66cc00;
+	 white-space:nowrap;
+}
+/* end coderXO mod */
+
+#table-here tr :not(:first-child) div {
+    position: relative;
+    margin-right: -1em;
+}
+#table-here tr :not(:first-child) div div {
+    position: absolute;
+    -moz-border-radius: 1em;
+    -webkit-border-radius: 1em;
+    border-radius: 1em;
+}
+
+

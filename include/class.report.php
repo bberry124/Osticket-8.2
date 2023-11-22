@@ -247,7 +247,7 @@ class OverviewReport {
                 ->distinct('topic_id');
             break;
         case 'staff':
-            $headers = array(__('Agent'));
+            $headers = array(__('Staff'));
             $header = function($row) { return new AgentsName(array(
                 'first' => $row['staff__firstname'], 'last' => $row['staff__lastname'])); };
             $pk = 'staff_id';

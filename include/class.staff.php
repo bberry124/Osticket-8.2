@@ -138,9 +138,9 @@ implements AuthenticatedUser, EmailContact, TemplateVariable, Searchable {
     function getVar($tag) {
         switch ($tag) {
         case 'mobile':
-            return Format::phone($this->ht['mobile']);
+            return Format::phone($this->mobile);
         case 'phone':
-            return Format::phone($this->ht['phone']);
+            return Format::phone($this->phone);
         }
     }
 
@@ -357,13 +357,17 @@ implements AuthenticatedUser, EmailContact, TemplateVariable, Searchable {
     }
 
     function getName() {
-        return new AgentsName(array('first' => $this->ht['firstname'], 'last' => $this->ht['lastname']));
+        return new AgentsName(array('first' => $this->firstname, 'last' => $this->lastname));
     }
 
     function getAvatarAndName() {
         return $this->getAvatar().Format::htmlchars((string) $this->getName());
     }
 
+    
+    function canViewStaffStats() {
+        return $this->can_view_staff_stats;
+    }
     function getFirstName() {
         return $this->firstname;
     }
@@ -468,6 +472,18 @@ implements AuthenticatedUser, EmailContact, TemplateVariable, Searchable {
 
     function getDepts() {
         return $this->getDepartments();
+    }
+
+    function getGroupId() {
+        return $this->group_id;
+    }
+
+    function getGroup() {
+
+        if(!$this->group && $this->getGroupId())
+            $this->group = Group::lookup($this->getGroupId());
+
+        return $this->group;
     }
 
     function getDepartmentNames($activeonly=false) {

@@ -27,6 +27,7 @@ class Dispatcher {
     }
 
     function resolve($url, $args=null) {
+
         if ($this->file) { $this->lazy_load(); }
         # Support HTTP method emulation with the _method GET argument
         if (isset($_GET['_method'])) {

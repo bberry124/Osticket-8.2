@@ -26,22 +26,23 @@ require_once (INCLUDE_DIR.'class.api.php');
  */
 class AjaxController extends ApiController {
 
+    function AjaxController() {
+    
+    }
     function staffOnly() {
         global $thisstaff;
-
-        if (!$thisstaff || !$thisstaff->isValid()) {
-            $this->exerr(401, sprintf('%s (%s)',
-                        __('Access Denied'), $_SERVER['REMOTE_ADDR']));
+        if(!$thisstaff || !$thisstaff->isValid()) {
+            Http::response(401,sprintf(__('Access Denied. IP %s'),$_SERVER['REMOTE_ADDR']));
         }
-
-        return true;
     }
 
     /**
      * Convert a PHP array into a JSON-encoded string
      */
     function json_encode($what) {
-        return Format::json_encode($what);
+        require_once (INCLUDE_DIR.'class.json.php');
+        $encoder = new JsonDataEncoder();
+        return $encoder->encode($what);
     }
 
     function encode($what) {

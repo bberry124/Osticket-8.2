@@ -92,44 +92,36 @@ foreach ($groups as $g=>$desc) {
       ?>
         <th <?php if ($j === 0) echo 'width="30%" class="flush-left"'; ?>><?php echo Format::htmlchars($c);
         switch ($c) {
+          case 'Active':
+            ?>
+            <?php
+            break;
+          case 'Completed':
+              ?>
+              <?php
+              break;
           case 'Opened':
             ?>
-              <i class="help-tip icon-question-sign" href="#opened"></i>
             <?php
             break;
           case 'Assigned':
             ?>
-              <i class="help-tip icon-question-sign" href="#assigned"></i>
             <?php
             break;
-            case 'Overdue':
+           case 'Overdue':
               ?>
-                <i class="help-tip icon-question-sign" href="#overdue"></i>
               <?php
               break;
-            case 'Closed':
+          case 'Reopened':
               ?>
-                <i class="help-tip icon-question-sign" href="#closed"></i>
               <?php
               break;
-            case 'Reopened':
+          case 'Service Time':
               ?>
-                <i class="help-tip icon-question-sign" href="#reopened"></i>
               <?php
               break;
-            case 'Deleted':
+          case 'Response Time':
               ?>
-                <i class="help-tip icon-question-sign" href="#deleted"></i>
-              <?php
-              break;
-            case 'Service Time':
-              ?>
-                <i class="help-tip icon-question-sign" href="#service_time"></i>
-              <?php
-              break;
-            case 'Response Time':
-              ?>
-                <i class="help-tip icon-question-sign" href="#response_time"></i>
               <?php
               break;
         }
@@ -179,4 +171,15 @@ foreach ($groups as $g=>$desc) {
                 $(this).attr("selected","selected");
         });
     <?php } ?>
+</script>
+<script>
+    $( document ).ready(function() {
+        $("#tabs").tabs();
+        if ($("#ListBoxPages").val() == null) {
+            $("#tabs").css("display", "none");
+        }
+        $("#ListBoxPages").change(function () {
+            $("#tabs").css("display", "block");
+        });
+});
 </script>

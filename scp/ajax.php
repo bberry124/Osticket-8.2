@@ -25,7 +25,7 @@ define('AJAX_REQUEST', 1);
 require('staff.inc.php');
 
 //Clean house...don't let the world see your crap.
-ini_set('display_errors', '0'); // Set by installer
+ini_set('display_errors', '1'); // Set by installer
 ini_set('display_startup_errors', '0'); // Set by installer
 
 //TODO: disable direct access via the browser? i,e All request must have REFER?

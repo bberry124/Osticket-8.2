@@ -1298,14 +1298,14 @@ a.print {
     margin-top:3px;
 }
 
-.table tr.header td,
+/* .table tr.header td,
 .table tr.header th,
 .table > thead th {
     font-weight: 400;
     font-size: 1.3em;
     text-align: left;
     min-height: 24px;
-}
+} */
 .table tbody:not(:first-child) th {
   padding-top: 1.4em;
 }
