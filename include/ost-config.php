@@ -17,7 +17,7 @@
 **********************************************************************/
 
 #Disable direct access.
-if(!strcasecmp(basename((string) $_SERVER['SCRIPT_NAME']),basename(__FILE__)) || !defined('ROOT_PATH')) die('kwaheri rafiki!');
+if(!strcasecmp(basename($_SERVER['SCRIPT_NAME']),basename(__FILE__)) || !defined('ROOT_PATH')) die('kwaheri rafiki!');
 
 #Install flag
 define('OSTINSTALLED',TRUE);
@@ -36,7 +36,7 @@ define('ADMIN_EMAIL','hosting@integracorp.com.au');
 
 #Mysql Login info
 define('DBTYPE','mysql');
-define('DBHOST','localhost'); 
+define('DBHOST','192.168.130.87'); 
 define('DBNAME','integrap_osti4');
 define('DBUSER','integrap_osti4');
 define('DBPASS','yeLLow$#6836');

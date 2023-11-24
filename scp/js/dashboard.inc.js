@@ -16,7 +16,6 @@
                     smtimes = Array.prototype.concat.apply([], json.times),
                     plots = [],
                     max = 0;
-
                 // Convert the timestamp to number of whole days after the
                 // unix epoch.
                 for (key in smtimes) {

@@ -19,7 +19,9 @@ $ost->addExtraHeader('<meta name="tip-namespace" content="dashboard.dashboard" /
     "$('#content').data('tipNamespace', 'dashboard.dashboard');");
 require(STAFFINC_DIR.'header.inc.php');
 ?>
+
 <script type="text/javascript" src="<?php echo ROOT_PATH; ?>js/jquery-1.8.3.min.js?70898b3"></script>
+<script type="text/javascript" src="<?php echo ROOT_PATH; ?>js/jquery-ui-1.10.3.custom.min.js?70898b3"></script>
 <script type="text/javascript" src="js/raphael-min.js?70898b3"></script>
 <script type="text/javascript" src="js/g.raphael.js?70898b3"></script>
 <script type="text/javascript" src="js/g.line-min.js?70898b3"></script>
@@ -29,6 +31,8 @@ require(STAFFINC_DIR.'header.inc.php');
 <script>var $oldjQuery = $.noConflict(true);</script>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css?70898b3"/>
 <link rel="stylesheet" type="text/css" href="css/dashboard.css?70898b3"/>
+<link type="text/css" href="<?php echo ROOT_PATH; ?>css/ui-lightness/jquery-ui-1.10.3.custom.min.css?70898b3"
+        rel="stylesheet" media="screen" />
 
 <h2><?php echo __('Ticket Activity');
 ?>&nbsp;<i class="help-tip icon-question-sign" href="#ticket_activity"></i></h2>

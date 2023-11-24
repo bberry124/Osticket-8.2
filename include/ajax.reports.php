@@ -258,7 +258,7 @@ class OverviewReportAjaxAPI extends AjaxController {
             .' AND NOT annulled'
             .' GROUP BY state, DATE_FORMAT(timestamp, \'%Y-%m-%d\')'
             .' ORDER BY 2, 1');
-        echo $res;
+
         # Initialize array of plot values
         $plots = array();
         foreach ($events as $e) { $plots[$e] = array(); }

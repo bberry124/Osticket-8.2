@@ -1306,9 +1306,9 @@ a.print {
     text-align: left;
     min-height: 24px;
 } */
-.table tbody:not(:first-child) th {
+/* .table tbody:not(:first-child) th {
   padding-top: 1.4em;
-}
+} */
 
 .table tr:not(:last-child):not(.header) {
     border-bottom:1px dotted #ddd;
@@ -1457,8 +1457,12 @@ div.section-break h3 {
     border-right:1px solid #ddd;
 }
 
-td {
+.form_table td {
     border-bottom:2px solid #fff;
+}
+
+#table-here td, th {
+    border-bottom:1px solid #dddddd;
 }
 
 .custtable td , #quick td {

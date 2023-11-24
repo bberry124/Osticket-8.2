@@ -342,10 +342,10 @@ table {
 .table tbody + tbody {
   border-top: 2px solid #dddddd;
 }
-.table-condensed th,
+/* .table-condensed th,
 .table-condensed td {
   padding: 4px 5px;
-}
+} */
 .table-bordered {
   border: 1px solid #dddddd;
   border-collapse: separate;
