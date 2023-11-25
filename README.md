@@ -1,1 +1,1 @@
-# Osticket-8.2-
+# Osticket-8.2
