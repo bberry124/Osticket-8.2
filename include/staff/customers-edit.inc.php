@@ -148,7 +148,7 @@ if(!$_REQUEST['id']) {
                 <td>
                     <input type="text" size="59" name="acnt_rand_manager" id="acnt_rand_manager" class="typeahead" value="<?php if ($info['acnt_rand_manager']!="") echo $info['acnt_rand_manager']; ?>"
                         autocomplete="off" autocorrect="off" autocapitalize="off">
-                    &nbsp;<span class="error">*&nbsp;<?php echo $errors['acnt_rand_manager']; if ($info['acnt_rand_manager']=="") echo '&nbsp;&nbsp;&nbsp; Please save Account Manager.';?></span>
+                    &nbsp;<span class="error">*&nbsp;</br><?php  if ($info['acnt_rand_manager']=="") echo '&nbsp;&nbsp;&nbsp; Please save Account Manager.';?></span>
                 </td>
             </tr>
             </tbody>
@@ -167,7 +167,7 @@ if(!$_REQUEST['id']) {
                 <td>
                     <input type="text" size="59" name="company" id="company" class="typeahead" value="<?php echo $info['company']; ?>"
                         autocomplete="off" autocorrect="off" autocapitalize="off">
-                    &nbsp;<span class="error">*&nbsp;<?php echo $errors['company']; ?></span>
+                    &nbsp;<span class="error">*&nbsp;</span>
                 </td>
             </tr>
             <tr>
@@ -186,7 +186,7 @@ if(!$_REQUEST['id']) {
                 <td>
                     <input type="text" size="59" name="trading" id="trading" class="typeahead" value="<?php echo $info['trading']; ?>"
                         autocomplete="off" autocorrect="off" autocapitalize="off">
-                    &nbsp;<span class="error">*&nbsp;<?php echo $errors['trading']; ?></span>
+                    &nbsp;<span class="error">*&nbsp;</span>
                 </td>
             </tr>
             <tr>
@@ -328,7 +328,7 @@ if(!$_REQUEST['id']) {
                 </td>
                 <td>
                     <input type="text" size="15" name="name" id="name" value="<?php echo $info['name']; ?>">
-                    &nbsp;<span class="error">*&nbsp;<?php echo $errors['name']; ?></span>&nbsp;&nbsp;
+                    &nbsp;<span class="error">*&nbsp;</span>&nbsp;&nbsp;
                     Preferred Name:&nbsp;<input type="text" size="15" name="preferredname" id="preferredname" value="<?php echo $info['preferredname']; ?>">
                 </td>
             </tr>

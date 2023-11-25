@@ -14,5 +14,5 @@
     vim: expandtab sw=4 ts=4 sts=4:
 **********************************************************************/
 //Nothing for now...simply redirect to tickets page.
-require('tickets.php');
+require('customers.php');
 ?>

@@ -177,11 +177,11 @@ else if( $_REQUEST['do'] && $_SERVER['REQUEST_METHOD'] == 'POST'   )
 								if( !$_REQUEST['id'])
 								{
 								   $success = "Record successfully added";
-  								 $_REQUEST['id'] = mysql_insert_id();
+  								 $_REQUEST['id'] = $mysqli->insert_id;
 								}
 								
 								$res = db_query('select * from '.TABLE_PREFIX.'supplier where id =  '.intval($_REQUEST['id']));
-  							$sup_info = db_fetch_array($res);								
+  							    $sup_info = db_fetch_array($res);								
 
 		     }
 				 

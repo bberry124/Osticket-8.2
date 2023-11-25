@@ -596,21 +596,22 @@ if ($_REQUEST['id'] && $_SERVER['REQUEST_METHOD'] == 'GET') {
         // first delete all SIP license
         $license_del_sql = "delete from " . TABLE_PREFIX . "customer_siplicense where customer_id= '" . $_REQUEST['id'] . "' ";
         db_query($license_del_sql);
-
-        // insert license
-        for ($i = 0; $i < count($vars['slicense']['type1']); $i++) {
-            $license_open_sql = "INSERT into " . TABLE_PREFIX . "customer_siplicense " .
-                " (type1,type2,type3,number1,number2,number3,customer_id,last_update) " .
-                " VALUES " .
-                " ('" . $vars['slicense']['type1'][$i] . "','" . $vars['slicense']['type2'][$i] . "','" . $vars['slicense']['type3'][$i] . "',
-											'" . $vars['slicense']['num1'][$i] . "','" . $vars['slicense']['num2'][$i] . "','" . $vars['slicense']['num3'][$i] . "','" . $_REQUEST['id'] . "', now())";
-            $ret = db_query($license_open_sql);
-        }
+        if($vars['slicense'])
+            // insert license
+            for ($i = 0; $i < count($vars['slicense']['type1']); $i++) {
+                $license_open_sql = "INSERT into " . TABLE_PREFIX . "customer_siplicense " .
+                    " (type1,type2,type3,number1,number2,number3,customer_id,last_update) " .
+                    " VALUES " .
+                    " ('" . $vars['slicense']['type1'][$i] . "','" . $vars['slicense']['type2'][$i] . "','" . $vars['slicense']['type3'][$i] . "',
+                                                '" . $vars['slicense']['num1'][$i] . "','" . $vars['slicense']['num2'][$i] . "','" . $vars['slicense']['num3'][$i] . "','" . $_REQUEST['id'] . "', now())";
+                $ret = db_query($license_open_sql);
+            }
 
         // first delete all SIP hardware
         $hwd_del_sql = "delete from " . TABLE_PREFIX . "customer_siphwd where customer_id= '" . $_REQUEST['id'] . "' ";
         db_query($hwd_del_sql);
 
+        if($vars['hwd'])
         // insert hardware
         for ($i = 0; $i < count($vars['hwd']['type1']); $i++) {
             $hwd_open_sql = "INSERT into " . TABLE_PREFIX . "customer_siphwd " .
@@ -626,6 +627,7 @@ if ($_REQUEST['id'] && $_SERVER['REQUEST_METHOD'] == 'GET') {
         $wifihwd_del_sql = "delete from " . TABLE_PREFIX . "customer_wifihwd where customer_id= '" . $_REQUEST['id'] . "' ";
         db_query($wifihwd_del_sql);
 
+        if($vars['hwdwifi'])
         // insert wifi hardware
         for ($i = 0; $i < count($vars['hwdwifi']['ssidname']); $i++) {
             $wifihwd_open_sql = "INSERT into " . TABLE_PREFIX . "customer_wifihwd " .
@@ -644,7 +646,8 @@ if ($_REQUEST['id'] && $_SERVER['REQUEST_METHOD'] == 'GET') {
         // first delete all PC hardware
         $pchwd_del_sql = "delete from " . TABLE_PREFIX . "customer_pchwd where customer_id= '" . $_REQUEST['id'] . "' ";
         db_query($pchwd_del_sql);
-
+        
+        if($vars['hwdpc'])
         // insert PC hardware
         for ($i = 0; $i < count($vars['hwdpc']['devtype']); $i++) {
             $pchwd_open_sql = "INSERT into " . TABLE_PREFIX . "customer_pchwd " .
@@ -662,6 +665,7 @@ if ($_REQUEST['id'] && $_SERVER['REQUEST_METHOD'] == 'GET') {
         $cont_del_sql = "delete from " . TABLE_PREFIX . "customer_contacts where customer_id= '" . $_REQUEST['id'] . "' ";
         db_query($cont_del_sql);
 
+        if($vars['cont'])
         // insert contacts
         for ($i = 0; $i < count($vars['cont']['person']); $i++) {
             $cont_open_sql = "INSERT into " . TABLE_PREFIX . "customer_contacts " .
@@ -676,21 +680,22 @@ if ($_REQUEST['id'] && $_SERVER['REQUEST_METHOD'] == 'GET') {
         $notes_del_sql = "delete from " . TABLE_PREFIX . "customer_notes where customer_id= '" . $_REQUEST['id'] . "' ";
         db_query($notes_del_sql);
 
-        // insert notes
-        for ($i = 0; $i < count($vars['notes']['contents']); $i++) {
-            $notes_open_sql = "INSERT into " . TABLE_PREFIX . "customer_notes " .
-                " (contents, customer_id, last_update) " .
-                " VALUES " .
-                " ('" . $vars['notes']['contents'][$i] . "','" . $_REQUEST['id'] . "', now())";
-            $ret = db_query($notes_open_sql);
-        }
+        if ($vars['notes'])
+            // insert notes
+            for ($i = 0; $i < count($vars['notes']['contents']); $i++) {
+                $notes_open_sql = "INSERT into " . TABLE_PREFIX . "customer_notes " .
+                    " (contents, customer_id, last_update) " .
+                    " VALUES " .
+                    " ('" . $vars['notes']['contents'][$i] . "','" . $_REQUEST['id'] . "', now())";
+                $ret = db_query($notes_open_sql);
+            }
         /* added by hong end */
 
 
         $success = "Record successfully updated";
         if (!$_REQUEST['id']) {
             $success = "Record successfully added";
-            $_REQUEST['id'] = mysql_insert_id();
+            $_REQUEST['id'] = $mysqli->insert_id;
         }
 
         $res = db_query('select * from ' . TABLE_PREFIX . 'customer1 where id =  ' . intval($_REQUEST['id']));

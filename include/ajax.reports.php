@@ -52,15 +52,17 @@ class OverviewReportAjaxAPI extends AjaxController {
         $groups = array(
             "dept" => array(
                 "table" => DEPT_TABLE,
-                "pk" => "dept_id",
-                "sort" => 'T1.dept_name',
-                "fields" => 'T1.dept_name',
+                "pk" => "id",
+                "ck" => "dept_id",
+                "sort" => 'T1.name',
+                "fields" => 'T1.name',
                 "headers" => array('Department'),
-                "filter" => ('T1.dept_id IN ('.implode(',', db_input($thisstaff->getDepts())).')')
+                "filter" => ('T1.id IN ('.implode(',', db_input($thisstaff->getDepts())).')')
             ),
             "topic" => array(
                 "table" => TOPIC_TABLE,
                 "pk" => "topic_id",
+                "ck" => "topic_id",
                 "sort" => 'name',
                 "fields" => "CONCAT_WS(' / ',"
                     ."(SELECT P.topic FROM ".TOPIC_TABLE." P WHERE P.topic_id = T1.topic_pid),"
@@ -71,6 +73,7 @@ class OverviewReportAjaxAPI extends AjaxController {
             "staff" => array(
                 "table" => STAFF_TABLE,
                 "pk" => 'staff_id',
+                "ck" => "staff_id",
                 "sort" => 'name',
                 "fields" => "CONCAT_WS(' ', T1.firstname, T1.lastname) as name",
                 "headers" => array('Staff Member'),
@@ -101,7 +104,7 @@ class OverviewReportAjaxAPI extends AjaxController {
                 COUNT(*)-COUNT(NULLIF(A1.state, "reopened")) AS Reopened
             FROM '.$info['table'].' T1 
                 LEFT JOIN '.TICKET_EVENT_TABLE.' A1 
-                    ON (A1.'.$info['pk'].'=T1.'.$info['pk'].'
+                    ON (A1.'.$info['ck'].'=T1.'.$info['pk'].'
                          AND NOT annulled 
                          AND (A1.timestamp BETWEEN '.$start.' AND '.$stop.'))
                 LEFT JOIN '.STAFF_TABLE.' S1 ON (S1.staff_id=A1.staff_id)
@@ -112,7 +115,7 @@ class OverviewReportAjaxAPI extends AjaxController {
             array(1, 'SELECT '.$info['fields'].',
                 FORMAT(AVG(DATEDIFF(T2.closed, T2.created)),1) AS ServiceTime
             FROM '.$info['table'].' T1 
-                LEFT JOIN '.TICKET_TABLE.' T2 ON (T2.'.$info['pk'].'=T1.'.$info['pk'].')
+                LEFT JOIN '.TICKET_TABLE.' T2 ON (T2.'.$info['ck'].'=T1.'.$info['pk'].')
                 LEFT JOIN '.STAFF_TABLE.' S1 ON (S1.staff_id=T2.staff_id)
             WHERE '.$info['filter'].' AND T2.closed BETWEEN '.$start.' AND '.$stop.'
             GROUP BY T1.'.$info['pk'].'
@@ -121,7 +124,7 @@ class OverviewReportAjaxAPI extends AjaxController {
             array(1, 'SELECT '.$info['fields'].',
                 FORMAT(AVG(DATEDIFF(B2.created, B1.created)),1) AS ResponseTime
             FROM '.$info['table'].' T1 
-                LEFT JOIN '.TICKET_TABLE.' T2 ON (T2.'.$info['pk'].'=T1.'.$info['pk'].')
+                LEFT JOIN '.TICKET_TABLE.' T2 ON (T2.'.$info['ck'].'=T1.'.$info['pk'].')
                 LEFT JOIN '.TICKET_THREAD_TABLE.' B2 ON (B2.ticket_id = T2.ticket_id
                     AND B2.thread_type="R")
                 LEFT JOIN '.TICKET_THREAD_TABLE.' B1 ON (B2.pid = B1.id)
@@ -130,11 +133,11 @@ class OverviewReportAjaxAPI extends AjaxController {
             GROUP BY T1.'.$info['pk'].'
             ORDER BY '.$info['sort'])
         );
-				
-						
+        // var_dump($queries);
+        
 // --- start coderXO mod --- //
-        $res = db_query('SELECT '.$info['fields'].",COUNT(ticket_id) FROM ".TICKET_TABLE." A1 LEFT JOIN ".$info['table']." T1 ON ( A1.".$info['pk']." = T1.".$info['pk']." )  WHERE A1.created >= $start AND  ( A1.closed >= $stop or A1.closed = '' or A1.closed is null ) GROUP BY T1.".$info['pk']." ");    
-				while($row = db_fetch_row($res))
+        $res = db_query('SELECT '.$info['fields'].",COUNT(ticket_id) FROM ".TICKET_TABLE." A1 LEFT JOIN ".$info['table']." T1 ON ( A1.".$info['ck']." = T1.".$info['pk']." )  WHERE A1.created >= $start AND  ( A1.closed >= $stop or A1.closed = '' or A1.closed is null ) GROUP BY T1.".$info['pk']." ");    
+        while($row = db_fetch_row($res))
 							$open[$row[0]] = $row;
 // --- end coderXO mod --- //								
 				
@@ -155,7 +158,7 @@ class OverviewReportAjaxAPI extends AjaxController {
 								  else {
 								    $row = array_merge( array($row[0] , 0) ,array_slice($row,-$c+1) );
 								  }
-							//	print_r($row);
+								// print_r($row);
 						//		print $cols;
 // --- end coderXO mod --- //									
                 foreach ($rows as &$r) {
@@ -190,7 +193,7 @@ class OverviewReportAjaxAPI extends AjaxController {
 					
 			 }
 			 $rows[] = $total;
- 
+
 	 		 return array("columns" => array_merge($info['headers'],
 						
                         array('Active','Completed','Opened','Assigned','Overdue','Reopened',
@@ -258,7 +261,13 @@ class OverviewReportAjaxAPI extends AjaxController {
             .' AND NOT annulled'
             .' GROUP BY state, DATE_FORMAT(timestamp, \'%Y-%m-%d\')'
             .' ORDER BY 2, 1');
-
+        echo 'SELECT state, DATE_FORMAT(timestamp, \'%Y-%m-%d\'), '
+        .'COUNT(ticket_id)'
+    .' FROM '.TICKET_EVENT_TABLE
+    .' WHERE timestamp BETWEEN '.$start.' AND '.$stop
+    .' AND NOT annulled'
+    .' GROUP BY state, DATE_FORMAT(timestamp, \'%Y-%m-%d\')'
+    .' ORDER BY 2, 1';
         # Initialize array of plot values
         $plots = array();
         foreach ($events as $e) { $plots[$e] = array(); }

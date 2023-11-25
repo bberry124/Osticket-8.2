@@ -1374,7 +1374,7 @@ td.multi-line {
     padding-bottom: 0.4em;
 }
 
-input[type=text], input[type=password], textarea, input {
+/* input[type=text], input[type=password], textarea, input {
     padding: 3px 5px;
     font-size: 0.95em;
     background:#fff;
@@ -1382,7 +1382,7 @@ input[type=text], input[type=password], textarea, input {
     border-radius:4px;
    -webkit-border-radius: 4px;
    -moz-border-radius: 4px;
-}
+} */
 input {
     /* added by hong */
     -moz-border-radius:6px;
@@ -3417,7 +3417,7 @@ td.tabali{
 	background-color: #CCCCCC;
 	*/
 	background: #c6d3e4;
-	color: #fff;
+	color: #000;
 	padding:5px;
 	border: 1px solid #aaa;
 }
@@ -3872,14 +3872,14 @@ input[type=checkbox] {
   margin-top: 3px;
 }
 
-input, textarea {
+/* input, textarea {
     padding: 3px 5px;
     font-size: 0.95em;
     border-radius:4px;
    -webkit-border-radius: 4px;
    -moz-border-radius: 4px;
     border: 1px solid #bbb;
-}
+} */
 
 small {
     font-weight: normal;
@@ -3949,7 +3949,7 @@ select {
     background-color:#fff;
     -moz-border-radius:8px;
     -webkit-border-radius:8px;
-    border-radius:8px;
+    border-radius:13px;
     border:1px solid #c8c8c8;
     display:inline-block;
     cursor:pointer;
@@ -3961,7 +3961,7 @@ select {
     padding-left: 10px;
     padding-right:10px;
     */
-    height:25px;
+    height:23px;
     outline: none !important;
 }
 
