@@ -1041,7 +1041,7 @@ if(!$_REQUEST['id']) {
                 </td>
             </tr>
             <tr>
-                <td align="right"><b>Service Status</b></td>
+                <td align="right">Service Status</td>
                 <td align='left'>
                     <select name="service1" id="service1" width='80%' style='width:80%;'
                             onchange="this.className=this.options[this.selectedIndex].className">
@@ -1061,7 +1061,7 @@ if(!$_REQUEST['id']) {
             </tr>
 
             <tr>
-                <td align="right"><b>Upstream Provider</b></td>
+                <td align="right">Upstream Provider</td>
                 <td align='left'>
                     <select name="upstream_provider1" id="upstream_provider_other1" style='width:80%;' onchange="getUpstreamProvider(1,0);">
                         <option value="">&lt;Select&gt;</option>
@@ -1127,7 +1127,7 @@ if(!$_REQUEST['id']) {
             </tr>
 
             <tr>
-                <td align="right"><b>Service ID</b></td>
+                <td align="right">Service Status</td>
                 <td align='left'>
                     <input name="service_id1" id="service_id1" type="text" style='width:80%;' value="<?php echo $info['service_id1']; ?>">
                 </td>
@@ -1194,7 +1194,7 @@ if(!$_REQUEST['id']) {
             </tr>
 
             <tr>
-                <td align="right"><b>Underlining Carrier</b></td>
+                <td align="right">Underlining Carrier</td>
                 <td>
                     <select name="internet_underlining_carrier1" id="internet_underlining_carrier1" style='width:81%;'>
                         <option value="">&lt;Select&gt;</option>
@@ -1313,7 +1313,7 @@ if(!$_REQUEST['id']) {
             </tr>
 
             <tr>
-                <td align="right"><b>Contact Term</b></td>
+                <td align="right">Contact Term</td>
                 <td align='left'>
                     <input name="contact_term1" id="contact_term1" type="text" style='width:80%;' value="<?php echo $info['contact_term1']; ?>">
                     Months
@@ -1453,7 +1453,7 @@ if(!$_REQUEST['id']) {
                 </td>
             </tr>
             <tr>
-                <td align="right"><b>Service Status</b></td>
+                <td align="right">Service Status</td>
                 <td align='left'>
                     <select name="service2" id="service2" width='80%' style='width:80%;'
                             onchange="this.className=this.options[this.selectedIndex].className">
@@ -1473,7 +1473,7 @@ if(!$_REQUEST['id']) {
             </tr>
 
             <tr>
-                <td align="right"><b>Upstream Provider</b></td>
+                <td align="right">Upstream Provider</td>
                 <td align='left'>
                     <select name="upstream_provider2" id="upstream_provider_other2" style='width:80%;' onchange="getUpstreamProvider(2,0);">
                         <option value="">&lt;Select&gt;</option>
@@ -1539,7 +1539,7 @@ if(!$_REQUEST['id']) {
             </tr>
 
             <tr>
-                <td align="right"><b>Service ID</b></td>
+                <td align="right">Service ID</td>
                 <td align='left'>
                     <input name="service_id2" id="service_id2" type="text" style='width:80%;' value="<?php echo $info['service_id2']; ?>">
                 </td>
@@ -1606,7 +1606,7 @@ if(!$_REQUEST['id']) {
             </tr>
 
             <tr>
-                <td align="right"><b>Underlining Carrier</b></td>
+                <td align="right">Underlining Carrier</td>
                 <td>
                     <select name="internet_underlining_carrier2" id="internet_underlining_carrier2" style='width:81%;'>
                         <option value="">&lt;Select&gt;</option>
@@ -1865,7 +1865,7 @@ if(!$_REQUEST['id']) {
                 </td>
             </tr>
             <tr>
-                <td align="right"><b>Service Status</b></td>
+                <td align="right">Service Status</td>
                 <td align='left'>
                     <select name="service3" id="service3" width='80%' style='width:80%;'
                             onchange="this.className=this.options[this.selectedIndex].className">
@@ -1885,7 +1885,7 @@ if(!$_REQUEST['id']) {
             </tr>
 
             <tr>
-                <td align="right"><b>Upstream Provider</b></td>
+                <td align="right">Upstream Provider</td>
                 <td align='left'>
                     <select name="upstream_provider3" id="upstream_provider_other3" style='width:80%;' onchange="getUpstreamProvider(3,0);">
                         <option value="">&lt;Select&gt;</option>
@@ -1951,7 +1951,7 @@ if(!$_REQUEST['id']) {
             </tr>
 
             <tr>
-                <td align="right"><b>Service ID</b></td>
+                <td align="right">Service Status</td>
                 <td align='left'>
                     <input name="service_id3" id="service_id3" type="text" style='width:80%;' value="<?php echo $info['service_id3']; ?>">
                 </td>
@@ -2018,7 +2018,7 @@ if(!$_REQUEST['id']) {
             </tr>
 
             <tr>
-                <td align="right"><b>Underlining Carrier</b></td>
+                <td align="right">Underlining Carrier</td>
                 <td>
                     <select name="internet_underlining_carrier3" id="internet_underlining_carrier3" style='width:81%;'>
                         <option value="">&lt;Select&gt;</option>
@@ -2277,7 +2277,7 @@ if(!$_REQUEST['id']) {
                 </td>
             </tr>
             <tr>
-                <td align="right"><b>Service Status</b></td>
+                <td align="right">Service Status</td>
                 <td align='left'>
                     <select name="service4" id="service4" width='80%' style='width:80%;'
                             onchange="this.className=this.options[this.selectedIndex].className">
@@ -2297,7 +2297,7 @@ if(!$_REQUEST['id']) {
             </tr>
 
             <tr>
-                <td align="right"><b>Upstream Provider</b></td>
+                <td align="right">Upstream Provider</td>
                 <td align='left'>
                     <select name="upstream_provider4" id="upstream_provider_other4" style='width:80%;' onchange="getUpstreamProvider(4,0);">
                         <option value="">&lt;Select&gt;</option>
@@ -2363,7 +2363,7 @@ if(!$_REQUEST['id']) {
             </tr>
 
             <tr>
-                <td align="right"><b>Service ID</b></td>
+                <td align="right">Service Status</td>
                 <td align='left'>
                     <input name="service_id4" id="service_id4" type="text" style='width:80%;' value="<?php echo $info['service_id4']; ?>">
                 </td>
@@ -2430,7 +2430,7 @@ if(!$_REQUEST['id']) {
             </tr>
 
             <tr>
-                <td align="right"><b>Underlining Carrier</b></td>
+                <td align="right">Underlining Carrier</td>
                 <td>
                     <select name="internet_underlining_carrier4" id="internet_underlining_carrier4" style='width:81%;'>
                         <option value="">&lt;Select&gt;</option>
@@ -2691,7 +2691,7 @@ if(!$_REQUEST['id']) {
                 </td>
             </tr>
             <tr>
-                <td align="right"><b>Service Status</b></td>
+                <td align="right">Service Status</td>
                 <td align='left'>
                     <select name="service5" id="service5" width='80%' style='width:80%;'
                             onchange="this.className=this.options[this.selectedIndex].className">
@@ -2711,7 +2711,7 @@ if(!$_REQUEST['id']) {
             </tr>
 
             <tr>
-                <td align="right"><b>Upstream Provider</b></td>
+                <td align="right">Upstream Provider</td>
                 <td align='left'>
                     <select name="upstream_provider5" id="upstream_provider_other5" style='width:80%;' onchange="getUpstreamProvider(5,0);">
                         <option value="">&lt;Select&gt;</option>
@@ -2777,7 +2777,7 @@ if(!$_REQUEST['id']) {
             </tr>
 
             <tr>
-                <td align="right"><b>Service ID</b></td>
+                <td align="right">Service Status</td>
                 <td align='left'>
                     <input name="service_id5" id="service_id5" type="text" style='width:80%;' value="<?php echo $info['service_id5']; ?>">
                 </td>
@@ -2844,7 +2844,7 @@ if(!$_REQUEST['id']) {
             </tr>
 
             <tr>
-                <td align="right"><b>Underlining Carrier</b></td>
+                <td align="right">Underlining Carrier</td>
                 <td>
                     <select name="internet_underlining_carrier5" id="internet_underlining_carrier5" style='width:81%;'>
                         <option value="">&lt;Select&gt;</option>
@@ -3105,7 +3105,7 @@ if(!$_REQUEST['id']) {
                 </td>
             </tr>
             <tr>
-                <td align="right"><b>Service Status</b></td>
+                <td align="right">Service Status</td>
                 <td align='left'>
                     <select name="service6" id="service6" width='80%' style='width:80%;'
                             onchange="this.className=this.options[this.selectedIndex].className">
@@ -3125,7 +3125,7 @@ if(!$_REQUEST['id']) {
             </tr>
 
             <tr>
-                <td align="right"><b>Upstream Provider</b></td>
+                <td align="right">Upstream Provider</td>
                 <td align='left'>
                     <select name="upstream_provider6" id="upstream_provider_other6" style='width:80%;' onchange="getUpstreamProvider(6,0);">
                         <option value="">&lt;Select&gt;</option>
@@ -3191,7 +3191,7 @@ if(!$_REQUEST['id']) {
             </tr>
 
             <tr>
-                <td align="right"><b>Service ID</b></td>
+                <td align="right">Service Status</td>
                 <td align='left'>
                     <input name="service_id6" id="service_id6" type="text" style='width:80%;' value="<?php echo $info['service_id6']; ?>">
                 </td>
@@ -3258,7 +3258,7 @@ if(!$_REQUEST['id']) {
             </tr>
 
             <tr>
-                <td align="right"><b>Underlining Carrier</b></td>
+                <td align="right">Underlining Carrier</td>
                 <td>
                     <select name="internet_underlining_carrier6" id="internet_underlining_carrier6" style='width:81%;'>
                         <option value="">&lt;Select&gt;</option>
@@ -3519,7 +3519,7 @@ if(!$_REQUEST['id']) {
                 </td>
             </tr>
             <tr>
-                <td align="right"><b>Service Status</b></td>
+                <td align="right">Service Status</td>
                 <td align='left'>
                     <select name="service7" id="service7" width='80%' style='width:80%;'
                             onchange="this.className=this.options[this.selectedIndex].className">
@@ -3539,7 +3539,7 @@ if(!$_REQUEST['id']) {
             </tr>
 
             <tr>
-                <td align="right"><b>Upstream Provider</b></td>
+                <td align="right">Upstream Provider</td>
                 <td align='left'>
                     <select name="upstream_provider7" id="upstream_provider_other7" style='width:80%;' onchange="getUpstreamProvider(7,0);">
                         <option value="">&lt;Select&gt;</option>
@@ -3605,7 +3605,7 @@ if(!$_REQUEST['id']) {
             </tr>
 
             <tr>
-                <td align="right"><b>Service ID</b></td>
+                <td align="right">Service Status</td>
                 <td align='left'>
                     <input name="service_id7" id="service_id7" type="text" style='width:80%;' value="<?php echo $info['service_id7']; ?>">
                 </td>
@@ -3672,7 +3672,7 @@ if(!$_REQUEST['id']) {
             </tr>
 
             <tr>
-                <td align="right"><b>Underlining Carrier</b></td>
+                <td align="right">Underlining Carrier</td>
                 <td>
                     <select name="internet_underlining_carrier7" id="internet_underlining_carrier7" style='width:81%;'>
                         <option value="">&lt;Select&gt;</option>
@@ -3938,21 +3938,21 @@ if(!$_REQUEST['id']) {
           </tr>
           <tr>
             <td><b>SIP Use</b></td>
-            <td><select name="sip_use1" id="sip_use1" width='100%' style='width:100%;'>
+            <td><select name="sip_use1" id="sip_use1" width='100%' style='width:92%;'>
               <option value="">&lt;Select&gt;</option>
               <option value="primary" <?php echo $info['sip_use1'] == 'primary' ? "selected=\"selected\"":""; ?>>Primary Number</option>
               <option value="fax" <?php echo $info['sip_use1'] == 'fax' ? "selected=\"selected\"":""; ?>>Fax Number</option>
               <option value="dial" <?php echo $info['sip_use1'] == 'dial' ? "selected=\"selected\"":""; ?>>In Dial Number</option>
               <option value="other" <?php echo $info['sip_use1'] == 'other' ? "selected=\"selected\"":""; ?>>&lt;Other&gt;</option>
             </select></td>
-            <td><select name="sip_use2" id="sip_use2" width='100%' style='width:100%;'>
+            <td><select name="sip_use2" id="sip_use2" width='100%' style='width:92%;'>
               <option value="">&lt;Select&gt;</option>
               <option value="primary" <?php echo $info['sip_use2'] == 'primary' ? "selected=\"selected\"":""; ?>>Primary Number</option>
               <option value="fax" <?php echo $info['sip_use2'] == 'fax' ? "selected=\"selected\"":""; ?>>Fax Number</option>
               <option value="dial" <?php echo $info['sip_use2'] == 'dial' ? "selected=\"selected\"":""; ?>>In Dial Number</option>
               <option value="other" <?php echo $info['sip_use2'] == 'other' ? "selected=\"selected\"":""; ?>>&lt;Other&gt;</option>
             </select></td>
-            <td><select name="sip_use3" id="sip_use3" width='100%' style='width:100%;'>
+            <td><select name="sip_use3" id="sip_use3" width='100%' style='width:92%;'>
               <option value="">&lt;Select&gt;</option>
               <option value="primary" <?php echo $info['sip_use3'] == 'primary' ? "selected=\"selected\"":""; ?>>Primary Number</option>
               <option value="fax" <?php echo $info['sip_use3'] == 'fax' ? "selected=\"selected\"":""; ?>>Fax Number</option>
@@ -3968,19 +3968,19 @@ if(!$_REQUEST['id']) {
           </tr>
           <tr>
             <td><b>SIP Upstream Provider</b></td>
-            <td><select name="sip_upstream1" id="sip_upstream1" width='100%' style='width:100%;'>
+            <td><select name="sip_upstream1" id="sip_upstream1" width='100%' style='width:92%;'>
               <option value="">&lt;Select&gt;</option>
               <option value="viaip" <?php echo $info['sip_upstream1'] == 'viaip' ? "selected=\"selected\"":""; ?>>ViaIP</option>
               <option value="symbio" <?php echo $info['sip_upstream1'] == 'symbio' ? "selected=\"selected\"":""; ?>>Symbio</option>
               <option value="other" <?php echo $info['sip_upstream1'] == 'other' ? "selected=\"selected\"":""; ?>>&lt;Other&gt;</option>
             </select></td>
-            <td><select name="sip_upstream2" id="sip_upstream2" width='100%' style='width:100%;'>
+            <td><select name="sip_upstream2" id="sip_upstream2" width='100%' style='width:92%;'>
               <option value="">&lt;Select&gt;</option>
               <option value="viaip" <?php echo $info['sip_upstream2'] == 'viaip' ? "selected=\"selected\"":""; ?>>ViaIP</option>
               <option value="symbio" <?php echo $info['sip_upstream2'] == 'symbio' ? "selected=\"selected\"":""; ?>>Symbio</option>
               <option value="other" <?php echo $info['sip_upstream2'] == 'other' ? "selected=\"selected\"":""; ?>>&lt;Other&gt;</option>
             </select></td>
-            <td><select name="sip_upstream3" id="sip_upstream3" width='100%' style='width:100%;'>
+            <td><select name="sip_upstream3" id="sip_upstream3" width='100%' style='width:92%;'>
               <option value="">&lt;Select&gt;</option>
               <option value="viaip" <?php echo $info['sip_upstream3'] == 'viaip' ? "selected=\"selected\"":""; ?>>ViaIP</option>
               <option value="symbio" <?php echo $info['sip_upstream3'] == 'symbio' ? "selected=\"selected\"":""; ?>>Symbio</option>
@@ -3996,7 +3996,7 @@ if(!$_REQUEST['id']) {
           </tr>
           <tr>
             <td><b>SIP Connection</b></td>
-            <td><select name="sip_connect1" id="sip_connect1" width='100%' style='width:100%;'>
+            <td><select name="sip_connect1" id="sip_connect1" width='100%' style='width:92%;'>
               <option value="">&lt;Select&gt;</option>
               <option value="ip_pb_onpremise" <?php echo $info['sip_connect1'] == 'ip_pb_onpremise' ? "selected=\"selected\"":""; ?>>Hardware - IP/PBX - On Premise</option>
               <option value="ip_pb_host" <?php echo $info['sip_connect1'] == 'ip_pb_host' ? "selected=\"selected\"":""; ?>>Hardware - IP/PBX - Hosted</option>
@@ -4009,7 +4009,7 @@ if(!$_REQUEST['id']) {
               <option value="cli_note" <?php echo $info['sip_connect1'] == 'cli_note' ? "selected=\"selected\"":""; ?>>Soft Client - Notebook</option>
               <option value="other" <?php echo $info['sip_connect1'] == 'other' ? "selected=\"selected\"":""; ?>>&lt;Other&gt;</option>
             </select></td>
-            <td><select name="sip_connect2" id="sip_connect2" width='100%' style='width:100%;'>
+            <td><select name="sip_connect2" id="sip_connect2" width='100%' style='width:92%;'>
               <option value="">&lt;Select&gt;</option>
               <option value="ip_pb_onpremise" <?php echo $info['sip_connect2'] == 'ip_pb_onpremise' ? "selected=\"selected\"":""; ?>>Hardware - IP/PBX - On Premise</option>
               <option value="ip_pb_host" <?php echo $info['sip_connect2'] == 'ip_pb_host' ? "selected=\"selected\"":""; ?>>Hardware - IP/PBX - Hosted</option>
@@ -4022,7 +4022,7 @@ if(!$_REQUEST['id']) {
               <option value="cli_note" <?php echo $info['sip_connect2'] == 'cli_note' ? "selected=\"selected\"":""; ?>>Soft Client - Notebook</option>
               <option value="other" <?php echo $info['sip_connect2'] == 'other' ? "selected=\"selected\"":""; ?>>&lt;Other&gt;</option>
             </select></td>
-            <td><select name="sip_connect3" id="sip_connect3" width='100%' style='width:100%;'>
+            <td><select name="sip_connect3" id="sip_connect3" width='100%' style='width:92%;'>
               <option value="">&lt;Select&gt;</option>
               <option value="ip_pb_onpremise" <?php echo $info['sip_connect3'] == 'ip_pb_onpremise' ? "selected=\"selected\"":""; ?>>Hardware - IP/PBX - On Premise</option>
               <option value="ip_pb_host" <?php echo $info['sip_connect3'] == 'ip_pb_host' ? "selected=\"selected\"":""; ?>>Hardware - IP/PBX - Hosted</option>
