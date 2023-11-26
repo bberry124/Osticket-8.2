@@ -503,7 +503,7 @@
 							 Supplier Search<br/><br/>
 
 							 <input type="text"  name="query" size=30 autocomplete="off" autocorrect="off" autocapitalize="off">
-               <br/><input type="submit" class="button" value="Search">			 
+               <br/><input type="submit" value="Search" style="margin-top:20px">			 
 							 
 							 <br/><br/><br/>
 							 <hr size="1" width="76%" />

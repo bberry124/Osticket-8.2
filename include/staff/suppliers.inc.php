@@ -73,7 +73,7 @@ $pageNav->setURL('suppliers.php',$qstr);
         <tr>
             <td><input type="text"  name="query" size=30 value="<?php echo Format::htmlchars($_REQUEST['query']); ?>"
                 autocomplete="off" autocorrect="off" autocapitalize="off"></td>
-            <td><input type="submit" class="button" value="Search"></td>
+            <td><input type="submit" value="Search"></td>
         </tr>
 			  <?php
 					if($error)

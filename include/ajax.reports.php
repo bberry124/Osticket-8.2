@@ -261,13 +261,6 @@ class OverviewReportAjaxAPI extends AjaxController {
             .' AND NOT annulled'
             .' GROUP BY state, DATE_FORMAT(timestamp, \'%Y-%m-%d\')'
             .' ORDER BY 2, 1');
-        echo 'SELECT state, DATE_FORMAT(timestamp, \'%Y-%m-%d\'), '
-        .'COUNT(ticket_id)'
-    .' FROM '.TICKET_EVENT_TABLE
-    .' WHERE timestamp BETWEEN '.$start.' AND '.$stop
-    .' AND NOT annulled'
-    .' GROUP BY state, DATE_FORMAT(timestamp, \'%Y-%m-%d\')'
-    .' ORDER BY 2, 1';
         # Initialize array of plot values
         $plots = array();
         foreach ($events as $e) { $plots[$e] = array(); }

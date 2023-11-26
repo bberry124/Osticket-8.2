@@ -112,7 +112,7 @@ $pageNav->setURL('customers.php',$qstr);
                   <option value="rebl_customer" <?php if(Format::htmlchars($_REQUEST['custom_type'])=="rebl_customer") echo 'selected="selected"'; ?>>Rebl Customer</option>
                   <option value="positive_business_online" <?php if(Format::htmlchars($_REQUEST['custom_type'])=="positive_business_online") echo 'selected="selected"'; ?>>Positive Business Online</option>
                 </select></td>
-                <td><input type="submit" class="button" value="Search"></td>
+                <td><input type="submit" value="Search"></td>
             </tr>
 
                   <?php

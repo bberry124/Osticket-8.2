@@ -2650,6 +2650,7 @@ button, input[type="submit"], input[type="reset"], input[type="button"] {
     border-radius:15px;
     display:inline-block;
     cursor:pointer;
+    border:1px solid #bcbcbc;
     padding:3px;
     border-color: rgb(134, 121, 121);
     padding-left: 20px;

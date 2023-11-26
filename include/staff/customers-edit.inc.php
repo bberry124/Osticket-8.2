@@ -114,19 +114,19 @@ if(!$_REQUEST['id']) {
                 </td>
                 <td>
                     <select name="custom_status" style="width: 135px;" id="custom_status" onchange="this.className=this.options[this.selectedIndex].className" >
-                      <option value="">&lt;Select&gt;</option>
+                      <option value=""></option>
                       <option value="active" class="greenText" <?php echo $info['custom_status'] == 'active' ? "selected=\"selected\"":""; ?>>Active</option>
                       <option value="closed" class="redText" <?php echo $info['custom_status'] == 'closed' ? "selected=\"selected\"":""; ?>>Closed</option>
                     </select>
-                    &nbsp;&nbsp;&nbsp;Customer Type:
+                    <!-- &nbsp;&nbsp;&nbsp;Customer Type:
                     <select name="custom_type" id="custom_type" style="width: 220px;">
-                        <option value="">&lt;Select&gt;</option>
+                        <option value=""></option>
                         <option value="business" <?php echo $info['custom_type'] == 'business' ? "selected=\"selected\"":""; ?>>Business</option>
                         <option value="residential" <?php echo $info['custom_type'] == 'residential' ? "selected=\"selected\"":""; ?>>Residential</option>
                         <option value="government" <?php echo $info['custom_type'] == 'government' ? "selected=\"selected\"":""; ?>>Government</option>
                         <option value="integra_media" <?php echo $info['custom_type'] == 'integra_media' ? "selected=\"selected\"":""; ?>>Integra Media</option>
                         <option value="positive_business_online" <?php echo $info['custom_type'] == 'positive_business_online' ? "selected=\"selected\"":""; ?>>Positive Business Online</option>
-                    </select>
+                    </select> -->
                 </td>
 
             </tr>
@@ -554,12 +554,12 @@ if(!$_REQUEST['id']) {
     </table>
     </td>
 
-    <td valign ="top" align="center" style="background-color:#e4ebf1; border-radius:6px; position:relative" width="33%" id="quick">
+    <td valign ="top" align="center" style="background-color:#f3f3f3; position:relative" width="33%" id="quick">
         <table style="width:100%;">
             <thead>
-                <tr style="height: 27px; background: #c6d8dc;">
+                <tr style="height: 27px; background: #0094b3;">
                     <th colspan="3">
-                        <em><strong> Quick Launch Menu</strong></em>
+                        <em><strong> Tools </strong></em>
                     </th>
                 </tr>
             </thead>
