@@ -458,10 +458,9 @@ if(!$_REQUEST['id']) {
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email BCC:
                 </td>
                 <td>
-
                     <input type="text" size="50" name="email2" id="email2" class="typeahead" value="<?php echo $info['email2']; ?>"
                         autocomplete="off" autocorrect="off" autocapitalize="off">
-                    &nbsp;<span class="error">&nbsp;<?php echo $errors['email2']; ?></span>
+                    &nbsp;<span class="error">*&nbsp;<?php echo $errors['email2']; ?></span>
                 </td>
             </tr>
         </tbody>
@@ -1211,7 +1210,7 @@ if(!$_REQUEST['id']) {
                     Device IP
                 </td>
                 <td align='left'>
-                    <input name="hardware_device_ip1" id="hardware_device_ip1" type="text" style='width:80%;' value="<?php echo $info['hardware_device_ip']; ?>">
+                    <input name="hardware_device_ip1" id="hardware_device_ip1" type="text" style='width:80%;' value="<?php echo $info['hardware_device_ip1']; ?>">
                 </td>
             </tr>
 

@@ -143,7 +143,11 @@ else
 if($res && $num): //Show options..
     echo '<div>&nbsp;'.__('Page').':'.$pageNav->getPageLinks().'&nbsp;</div>';
 ?>
-
+<p class="centered" id="actions">
+    <input class="button" type="submit" name="enable" value="<?php echo __('Enable');?>" >
+    <input class="button" type="submit" name="disable" value="<?php echo __('Disable');?>" >
+    <input class="button" type="submit" name="delete" value="<?php echo __('Delete');?>" >
+</p>
 <?php
 endif;
 ?>
