@@ -1390,7 +1390,7 @@ input {
     border-radius:6px;
     border:1px solid #dcdcdc;
     outline: snow;
-    padding: 2px;
+    padding: 2px 2px 2px 10px;
 /* added end */
 }
 .form_table input[type=radio], .form_table input[type=checkbox] {
@@ -1401,6 +1401,7 @@ input {
     background:#fff;
     border:1px solid #aaa;
     border-radius:13px;
+    padding-left: 12px;
 }
 .form_table .required {
     font-weight:bold;
@@ -1427,6 +1428,7 @@ input {
     background:#eee;
     */
     background:#0094B3;
+    color: white;
     padding:0;
     padding:5px;
 }
@@ -3301,7 +3303,7 @@ tr i.help-tip.warning {
 }
 
 #custom_nav {
-    background:#e7eef4;
+    background:#e3e3e3;
     padding-top:4px;
     z-index:200;
     border-top:1px solid #ddd;
@@ -3948,6 +3950,7 @@ select {
     background:linear-gradient(to bottom, #fff 5%, #fff 100%);
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff', endColorstr='#fff',GradientType=0);
     background-color:#fff;
+    padding-left: 12px;
     -moz-border-radius:8px;
     -webkit-border-radius:8px;
     border-radius:13px;

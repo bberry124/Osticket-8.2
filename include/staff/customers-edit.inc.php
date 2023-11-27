@@ -85,7 +85,7 @@ if(!$_REQUEST['id']) {
         <thead>
             <tr>
                 <th colspan="3">
-                    <em><strong><?php if(!$_REQUEST['id']) echo 'New '; ?> Account Details</strong></em>
+                    <strong> Account Type</strong>
                 </th>
             </tr>
         </thead>
@@ -107,62 +107,67 @@ if(!$_REQUEST['id']) {
                         <?php
                         }
                     ?>
-
             <tr>
-                <td width="160">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Customer Status:
-                </td>
                 <td>
-                    <select name="custom_status" style="width: 135px;" id="custom_status" onchange="this.className=this.options[this.selectedIndex].className" >
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Account Status
+                    </td>
+                    <td>
+                <select name="custom_status" style="width: 166px;" id="custom_status" onchange="this.className=this.options[this.selectedIndex].className" >
                       <option value=""></option>
                       <option value="active" class="greenText" <?php echo $info['custom_status'] == 'active' ? "selected=\"selected\"":""; ?>>Active</option>
                       <option value="closed" class="redText" <?php echo $info['custom_status'] == 'closed' ? "selected=\"selected\"":""; ?>>Closed</option>
                     </select>
-                    <!-- &nbsp;&nbsp;&nbsp;Customer Type:
-                    <select name="custom_type" id="custom_type" style="width: 220px;">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Account Type
+                </td>
+                <td>
+                    <select name="custom_type" id="custom_type" style="width: 166px;">
                         <option value=""></option>
                         <option value="business" <?php echo $info['custom_type'] == 'business' ? "selected=\"selected\"":""; ?>>Business</option>
                         <option value="residential" <?php echo $info['custom_type'] == 'residential' ? "selected=\"selected\"":""; ?>>Residential</option>
                         <option value="government" <?php echo $info['custom_type'] == 'government' ? "selected=\"selected\"":""; ?>>Government</option>
                         <option value="integra_media" <?php echo $info['custom_type'] == 'integra_media' ? "selected=\"selected\"":""; ?>>Integra Media</option>
                         <option value="positive_business_online" <?php echo $info['custom_type'] == 'positive_business_online' ? "selected=\"selected\"":""; ?>>Positive Business Online</option>
-                    </select> -->
+                    </select>
                 </td>
 
             </tr>
 
             <tr>
-                <td width="160" class="required">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Account Number:
+                <td class="required">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Account Number
                 </td>
                 <td>
                     <input type="text" size="59" name="acnt_rand_no" id="acnt_rand_no" class="typeahead" value="<?php if ($info['acnt_rand_no']!="") echo $info['acnt_rand_no']; else echo generateRandom(8); ?>"
-                        autocomplete="off" autocorrect="off" autocapitalize="off">
-                    &nbsp;<span class="error">*&nbsp;<?php echo $errors['acnt_rand_no']; if ($info['acnt_rand_no']=="") echo '&nbsp;&nbsp;&nbsp; Please save Random Number.';?></span>
+                        autocomplete="off" autocorrect="off" autocapitalize="off" style="width: 160px;">
+                    &nbsp;<span class="error">*&nbsp;</span>
                 </td>
             </tr>
             <tr>
-                <td width="160" class="required">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Account Manager:
+                <td class="required">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Account Manager
                 </td>
                 <td>
                     <input type="text" size="59" name="acnt_rand_manager" id="acnt_rand_manager" class="typeahead" value="<?php if ($info['acnt_rand_manager']!="") echo $info['acnt_rand_manager']; ?>"
-                        autocomplete="off" autocorrect="off" autocapitalize="off">
-                    &nbsp;<span class="error">*&nbsp;</br><?php  if ($info['acnt_rand_manager']=="") echo '&nbsp;&nbsp;&nbsp; Please save Account Manager.';?></span>
+                        autocomplete="off" autocorrect="off" autocapitalize="off" style="width: 160px;">
+                    &nbsp;<span class="error">*&nbsp;</span>
                 </td>
             </tr>
             </tbody>
         <thead>
             <tr>
                 <th colspan="3">
-                    <em><strong><?php if(!$_REQUEST['id']) echo 'New '; ?> Customer Details</strong></em>
+                    <strong>Customer Details</strong>
                 </th>
             </tr>
         </thead>
         <tbody></tbody>
             <tr>
                 <td width="160" class="required">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Company Name:
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Company Name
                 </td>
                 <td>
                     <input type="text" size="59" name="company" id="company" class="typeahead" value="<?php echo $info['company']; ?>"
@@ -172,7 +177,7 @@ if(!$_REQUEST['id']) {
             </tr>
             <tr>
                 <td width="160">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trust Name:
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trust Details
                 </td>
                 <td>
                     <input type="text" size="59" name="trust" id="trust" class="typeahead" value="<?php echo $info['trust']; ?>"
@@ -181,7 +186,7 @@ if(!$_REQUEST['id']) {
             </tr>
             <tr>
                 <td width="160" class="required">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trading Name:
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trading Name
                 </td>
                 <td>
                     <input type="text" size="59" name="trading" id="trading" class="typeahead" value="<?php echo $info['trading']; ?>"
@@ -191,21 +196,21 @@ if(!$_REQUEST['id']) {
             </tr>
             <tr>
                 <td width="160">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A.B.N. Number:
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ABN Number
                 </td>
                 <td>
                     <input type="text" size="18" name="abn" id="abn" class="typeahead" value="<?php echo $info['abn']; ?>"
                         autocomplete="off" autocorrect="off" autocapitalize="off">
                         &nbsp;<span class="error">&nbsp;<?php echo $errors['fax']; ?></span>
 
-                        A.C.N. Number:
+                        ACN Number:
                     <input type="text" size="18" name="acn" id="acn" class="typeahead" value="<?php echo $info['acn']; ?>"
                         autocomplete="off" autocorrect="off" autocapitalize="off">
                 </td>
             </tr>
             <tr>
                 <td width="160">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Business Category:
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Business Type
                 </td>
                 <td>
                     <input type="radio" name="busicat" value="1" <?php echo $info['busicat'] == '1' ? "checked=\"checked\"":""; ?>/>
@@ -226,7 +231,7 @@ if(!$_REQUEST['id']) {
             </tr>
             <tr>
                 <td width="160">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Website URL :
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Web URL
                 </td>
                 <td>
                     <input type="text" size="59" name="website" id="website" class="typeahead" value="<?php echo $info['website']; ?>"
@@ -240,14 +245,14 @@ if(!$_REQUEST['id']) {
          <thead>
          <tr>
              <th colspan="3">
-                 <em><strong>Site Address</strong></em>
+                 <strong>Site Address</strong>
              </th>
          </tr>
          </thead>
          <tbody>
          <tr>
              <td width="160" valign="top">
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Site Address:
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Site Address
              </td>
              <td>
 
@@ -259,7 +264,7 @@ if(!$_REQUEST['id']) {
          </tr>
          <tr>
              <td width="160">
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Suburb:
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Suburb
              </td>
              <td>
 
@@ -285,7 +290,7 @@ if(!$_REQUEST['id']) {
          </tr>
          <tr>
              <td width="160">
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;City:
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;City
              </td>
              <td>
                  <input type="text" size="18" name="city" id="city" class="typeahead" value="<?php echo $info['city']; ?>"
@@ -302,14 +307,14 @@ if(!$_REQUEST['id']) {
         <thead>
             <tr>
                 <th colspan="3">
-                    <em><strong>Primary Contact Person</strong></em>
+                    <strong>Primary Contact Person</strong>
                 </th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td width="160">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Title :
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Title
                 </td>
                 <td>
                     <select name="title" id="title" style="width:100px;">
@@ -324,17 +329,17 @@ if(!$_REQUEST['id']) {
             </tr>
             <tr>
                 <td width="160" class="required">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;First Name:
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;First Name
                 </td>
                 <td>
                     <input type="text" size="15" name="name" id="name" value="<?php echo $info['name']; ?>">
                     &nbsp;<span class="error">*&nbsp;</span>&nbsp;&nbsp;
-                    Preferred Name:&nbsp;<input type="text" size="15" name="preferredname" id="preferredname" value="<?php echo $info['preferredname']; ?>">
+                    Preferred Name&nbsp;<input type="text" size="15" name="preferredname" id="preferredname" value="<?php echo $info['preferredname']; ?>">
                 </td>
             </tr>
             <tr>
                 <td width="160">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Middle Name(s):
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Middle Name
                 </td>
                 <td>
                     <input type="text" size="15" name="middlename" id="middlename" value="<?php echo $info['middlename']; ?>">
@@ -342,7 +347,7 @@ if(!$_REQUEST['id']) {
             </tr>
             <tr>
                 <td width="160">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last Name:
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last Name
                 </td>
                 <td>
                     <input type="text" size="15" name="surname" id="surname" value="<?php echo $info['surname']; ?>">
@@ -350,7 +355,7 @@ if(!$_REQUEST['id']) {
             </tr>
             <tr>
                 <td width="160">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Company Position:
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Company Position
                 </td>
                 <td>
                     <input type="text" size="50" name="position" id="position" class="typeahead" value="<?php echo $info['position']; ?>"
@@ -360,7 +365,7 @@ if(!$_REQUEST['id']) {
 
             <tr>
                 <td width="160" class="required">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Drivers License ID:
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Drivers License #
                 </td>
                 <td>
                     <input type="text" size="15" name="license_id" id="license_id" value="<?php echo $info['license_id']; ?>">
@@ -468,7 +473,7 @@ if(!$_REQUEST['id']) {
         <thead>
             <tr>
                 <th colspan="3">
-                    <em><strong>Support</strong></em>
+                    <strong>Support</strong>
                 </th>
             </tr>
         </thead>
@@ -533,7 +538,7 @@ if(!$_REQUEST['id']) {
         <thead>
             <tr>
                 <th colspan="3">
-                    <em><strong>Other Contacts</strong></em>
+                    <strong>Other Contacts</strong>
                 </th>
             </tr>
         </thead>
@@ -555,11 +560,11 @@ if(!$_REQUEST['id']) {
     </td>
 
     <td valign ="top" align="center" style="background-color:#f3f3f3; position:relative" width="33%" id="quick">
-        <table style="width:100%;">
+    <table class="form_table" style="width:100%" border="0" cellspacing="0" cellpadding="2">
             <thead>
-                <tr style="height: 27px; background: #0094b3;">
-                    <th colspan="3">
-                        <em><strong> Tools </strong></em>
+                <tr style="height: 27px; background: #0094b3;color:white;">
+                    <th colspan="3" style="text-align:center;">
+                        <strong> Tools </strong>
                     </th>
                 </tr>
             </thead>
@@ -574,12 +579,12 @@ if(!$_REQUEST['id']) {
                     </tr>
                     <tr style="text-align: center;">
                         <td>
-                            <input type="button" onclick="window.open('customers.php?a=label&id=<?php echo $_REQUEST['id']; ?>','_blank','width=280,height=200,scrollbars=0,resizable=0');" value="Print Shipping Label" /><br/><br/>
+                            <input type="button" onclick="document.location='tickets.php?<?php get_search_Query($info['email']); ?>'" style="width:156px;" value="<?php echo __('View Ticket History'); ?>" ><br/><br/>
                         </td>
                     </tr>
                     <tr style="text-align: center;">
                         <td>
-                            <input type="button" onclick="document.location='tickets.php?<?php get_search_Query($info['email']); ?>'" style="width:156px;" value="<?php echo __('View Ticket History'); ?>" >
+                            <input type="button" onclick="window.open('customers.php?a=label&id=<?php echo $_REQUEST['id']; ?>','_blank','width=280,height=200,scrollbars=0,resizable=0');" value="Print Shipping Label" />
                         </td>
                     </tr>
                 </form>
@@ -1138,7 +1143,7 @@ if(!$_REQUEST['id']) {
                     <select name="device_type1" id="device_type1" width='80%' style='width:80%;'
                             onchange="this.className=this.options[this.selectedIndex].className">
                         <option value="">&lt;Select&gt;</option>
-                        <option class="orangeText" value="pending" >Router</option>
+                        <option class="orangeText" value="pending" <?php echo $info['device_type1'] == 'pending' ? "selected=\"selected\"":""; ?>>Router</option>
                     </select>
                 </td>
             </tr>
@@ -1324,8 +1329,8 @@ if(!$_REQUEST['id']) {
                 <td align='left'>
                     <select name="wireless_enabled1" id="wireless_enabled1" width='80%' style='width:80%;'
                             onchange="this.className=this.options[this.selectedIndex].className">
-                        <option value="">Yes</option>
                         <option value="">No</option>
+                        <option value="active" <?php echo $info['wireless_enabled1'] == 'active' ? "selected=\"selected\"":""; ?>>Yes</option>
                     </select>
                 </td>
             </tr>
@@ -1550,7 +1555,7 @@ if(!$_REQUEST['id']) {
                     <select name="device_type2" id="device_type2" width='80%' style='width:80%;'
                             onchange="this.className=this.options[this.selectedIndex].className">
                         <option value="">&lt;Select&gt;</option>
-                        <option class="orangeText" value="pending" >Router</option>
+                        <option class="orangeText" value="pending" <?php echo $info['device_type2'] == 'pending' ? "selected=\"selected\"":""; ?>>Router</option>
                     </select>
                 </td>
             </tr>
@@ -1736,8 +1741,8 @@ if(!$_REQUEST['id']) {
                 <td align='left'>
                     <select name="wireless_enabled2" id="wireless_enabled2" width='80%' style='width:80%;'
                             onchange="this.className=this.options[this.selectedIndex].className">
-                        <option value="">Yes</option>
                         <option value="">No</option>
+                        <option value="active" <?php echo $info['wireless_enabled2'] == 'active' ? "selected=\"selected\"":""; ?>>Yes</option>
                     </select>
                 </td>
             </tr>
@@ -1962,7 +1967,7 @@ if(!$_REQUEST['id']) {
                     <select name="device_type3" id="device_type3" width='80%' style='width:80%;'
                             onchange="this.className=this.options[this.selectedIndex].className">
                         <option value="">&lt;Select&gt;</option>
-                        <option class="orangeText" value="pending" >Router</option>
+                        <option class="orangeText" value="pending" <?php echo $info['device_type3'] == 'pending' ? "selected=\"selected\"":""; ?>>Router</option>
                     </select>
                 </td>
             </tr>
@@ -2148,8 +2153,8 @@ if(!$_REQUEST['id']) {
                 <td align='left'>
                     <select name="wireless_enabled3" id="wireless_enabled3" width='80%' style='width:80%;'
                             onchange="this.className=this.options[this.selectedIndex].className">
-                        <option value="">Yes</option>
                         <option value="">No</option>
+                        <option value="active" <?php echo $info['wireless_enabled3'] == 'active' ? "selected=\"selected\"":""; ?>>Yes</option>
                     </select>
                 </td>
             </tr>
@@ -2374,7 +2379,7 @@ if(!$_REQUEST['id']) {
                     <select name="device_type4" id="device_type4" width='80%' style='width:80%;'
                             onchange="this.className=this.options[this.selectedIndex].className">
                         <option value="">&lt;Select&gt;</option>
-                        <option class="orangeText" value="pending" >Router</option>
+                        <option class="orangeText" value="pending" <?php echo $info['device_type4'] == 'pending' ? "selected=\"selected\"":""; ?>>Router</option>
                     </select>
                 </td>
             </tr>
@@ -2560,8 +2565,8 @@ if(!$_REQUEST['id']) {
                 <td align='left'>
                     <select name="wireless_enabled4" id="wireless_enabled4" width='80%' style='width:80%;'
                             onchange="this.className=this.options[this.selectedIndex].className">
-                        <option value="">Yes</option>
                         <option value="">No</option>
+                        <option value="active" <?php echo $info['wireless_enabled4'] == 'active' ? "selected=\"selected\"":""; ?>>Yes</option>
                     </select>
                 </td>
             </tr>
@@ -2788,7 +2793,7 @@ if(!$_REQUEST['id']) {
                     <select name="device_type5" id="device_type5" width='80%' style='width:80%;'
                             onchange="this.className=this.options[this.selectedIndex].className">
                         <option value="">&lt;Select&gt;</option>
-                        <option class="orangeText" value="pending" >Router</option>
+                        <option class="orangeText" value="pending" <?php echo $info['device_type5'] == 'pending' ? "selected=\"selected\"":""; ?>>Router</option>
                     </select>
                 </td>
             </tr>
@@ -2974,8 +2979,8 @@ if(!$_REQUEST['id']) {
                 <td align='left'>
                     <select name="wireless_enabled5" id="wireless_enabled5" width='80%' style='width:80%;'
                             onchange="this.className=this.options[this.selectedIndex].className">
-                        <option value="">Yes</option>
                         <option value="">No</option>
+                        <option value="active" <?php echo $info['wireless_enabled5'] == 'active' ? "selected=\"selected\"":""; ?>>Yes</option>
                     </select>
                 </td>
             </tr>
@@ -3202,7 +3207,7 @@ if(!$_REQUEST['id']) {
                     <select name="device_type6" id="device_type6" width='80%' style='width:80%;'
                             onchange="this.className=this.options[this.selectedIndex].className">
                         <option value="">&lt;Select&gt;</option>
-                        <option class="orangeText" value="pending" >Router</option>
+                        <option class="orangeText" value="pending"  <?php echo $info['device_type6'] == 'pending' ? "selected=\"selected\"":""; ?>>Router</option>
                     </select>
                 </td>
             </tr>
@@ -3388,8 +3393,8 @@ if(!$_REQUEST['id']) {
                 <td align='left'>
                     <select name="wireless_enabled6" id="wireless_enabled6" width='80%' style='width:80%;'
                             onchange="this.className=this.options[this.selectedIndex].className">
-                        <option value="">Yes</option>
                         <option value="">No</option>
+                        <option value="active" <?php echo $info['wireless_enabled6'] == 'active' ? "selected=\"selected\"":""; ?>>Yes</option>
                     </select>
                 </td>
             </tr>
@@ -3616,7 +3621,7 @@ if(!$_REQUEST['id']) {
                     <select name="device_type7" id="device_type7" width='80%' style='width:80%;'
                             onchange="this.className=this.options[this.selectedIndex].className">
                         <option value="">&lt;Select&gt;</option>
-                        <option class="orangeText" value="pending" >Router</option>
+                        <option class="orangeText" value="pending" <?php echo $info['device_type7'] == 'pending' ? "selected=\"selected\"":""; ?>>Router</option>
                     </select>
                 </td>
             </tr>
@@ -3802,8 +3807,8 @@ if(!$_REQUEST['id']) {
                 <td align='left'>
                     <select name="wireless_enabled7" id="wireless_enabled7" width='80%' style='width:80%;'
                             onchange="this.className=this.options[this.selectedIndex].className">
-                        <option value="">Yes</option>
                         <option value="">No</option>
+                        <option value="active" <?php echo $info['wireless_enabled7'] == 'active' ? "selected=\"selected\"":""; ?>>Yes</option>
                     </select>
                 </td>
             </tr>

@@ -77,7 +77,7 @@ if ($_POST)
     <tbody>
         <tr>
             <th colspan="2">
-                <em><strong><?php echo __('User Information'); ?></strong>: </em>
+                <strong><?php echo __('User Information'); ?></strong>:
             </th>
         </tr>
         <?php
