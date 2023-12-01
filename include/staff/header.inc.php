@@ -33,6 +33,7 @@ if (osTicket::is_ie())
     </style>
     <![endif]-->
     <script type="text/javascript" src="<?php echo ROOT_PATH; ?>js/jquery-3.7.0.min.js?0375576"></script>
+    <script type="text/javascript" src="<?php echo ROOT_PATH; ?>scp/js/tips.js?0375576"></script>
     <link rel="stylesheet" href="<?php echo ROOT_PATH ?>css/thread.css?0375576" media="all"/>
     <link rel="stylesheet" href="<?php echo ROOT_PATH ?>scp/css/scp.css?0375576" media="all"/>
     <link rel="stylesheet" href="<?php echo ROOT_PATH; ?>css/redactor.css?0375576" media="screen"/>

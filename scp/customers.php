@@ -127,7 +127,24 @@ if ($_REQUEST['id'] && $_SERVER['REQUEST_METHOD'] == 'GET') {
             " 	vip_club		 = '" . db_input($vars['vip_club'], false) . "',  " .
             " 	voice_sla		 = '" . db_input($vars['voice_sla'], false) . "',  " .
             " 	network_sla		 = '" . db_input($vars['network_sla'], false) . "',  " .
-
+            " 	reggst		 = '" . db_input($vars['reggst'], false) . "',  " .
+            " 	establ		 = '" . db_input($vars['establ'], false) . "',  " .
+            " 	businesstype		 = '" . db_input($vars['businesstype'], false) . "',  " .
+            " 	other1		 = '" . db_input($vars['other1'], false) . "',  " .
+            " 	exdate		 = '" . db_input($vars['exdate'], false) . "',  " .
+            " 	exdate1		 = '" . db_input($vars['exdate1'], false) . "',  " .
+            " 	state1		 = '" . db_input($vars['state1'], false) . "',  " .
+            " 	state2		 = '" . db_input($vars['state2'], false) . "',  " .
+            " 	voice		 = '" . db_input($vars['voice'], false) . "',  " .
+            " 	mobile1		 = '" . db_input($vars['mobile1'], false) . "',  " .
+            " 	ints1		 = '" . db_input($vars['ints1'], false) . "',  " .
+            " 	ints2		 = '" . db_input($vars['ints2'], false) . "',  " .
+            " 	webhosting		 = '" . db_input($vars['webhosting'], false) . "',  " .
+            " 	security		 = '" . db_input($vars['security'], false) . "',  " .
+            " 	landline		 = '" . db_input($vars['landline'], false) . "',  " .
+            " 	telephone		 = '" . db_input($vars['telephone'], false) . "',  " .
+            " 	faxn		 = '" . db_input($vars['faxn'], false) . "',  " .
+            " 	officeemail		 = '" . db_input($vars['officeemail'], false) . "',  " .
             " 	upstream_provider1	 = '" . db_input($vars['upstream_provider1'], false) . "',  " .
             " 	upstream_provider2	 = '" . db_input($vars['upstream_provider2'], false) . "',  " .
             " 	upstream_provider3	 = '" . db_input($vars['upstream_provider3'], false) . "',  " .
@@ -446,27 +463,27 @@ if ($_REQUEST['id'] && $_SERVER['REQUEST_METHOD'] == 'GET') {
             " 	mdf_pair_detailed5	     = '" . db_input($vars['mdf_pair_detailed5'], false) . "',  " .
             " 	mdf_pair_detailed6	     = '" . db_input($vars['mdf_pair_detailed6'], false) . "',  " .
             " 	mdf_pair_detailed7	     = '" . db_input($vars['mdf_pair_detailed7'], false) . "',  " .
-//            " 	subnet_mask1	 = '" . db_input($vars['subnet_mask1'], false) . "',  " .
-//            " 	subnet_mask2	 = '" . db_input($vars['subnet_mask2'], false) . "',  " .
-//            " 	subnet_mask3	 = '" . db_input($vars['subnet_mask3'], false) . "',  " .
-//            " 	primary_dns1	 = '" . db_input($vars['primary_dns1'], false) . "',  " .
-//            " 	primary_dns2	 = '" . db_input($vars['primary_dns2'], false) . "',  " .
-//            " 	primary_dns3	 = '" . db_input($vars['primary_dns3'], false) . "',  " .
-//            " 	secondary_dns1	 = '" . db_input($vars['secondary_dns1'], false) . "',  " .
-//            " 	secondary_dns2	 = '" . db_input($vars['secondary_dns2'], false) . "',  " .
-//            " 	secondary_dns3	 = '" . db_input($vars['secondary_dns3'], false) . "',  " .
-//            " 	ip_pbx_brand1	 = '" . db_input($vars['ip_pbx_brand1'], false) . "',  " .
-//            " 	ip_pbx_brand2	 = '" . db_input($vars['ip_pbx_brand2'], false) . "',  " .
-//            " 	ip_pbx_brand3	 = '" . db_input($vars['ip_pbx_brand3'], false) . "',  " .
-//            " 	ip_pbx_model1	 = '" . db_input($vars['ip_pbx_model1'], false) . "',  " .
-//            " 	ip_pbx_model2	 = '" . db_input($vars['ip_pbx_model2'], false) . "',  " .
-//            " 	ip_pbx_model3	 = '" . db_input($vars['ip_pbx_model3'], false) . "',  " .
-//            " 	serial_number1	 = '" . db_input($vars['serial_number1'], false) . "',  " .
-//            " 	serial_number2	 = '" . db_input($vars['serial_number2'], false) . "',  " .
-//            " 	serial_number3	 = '" . db_input($vars['serial_number3'], false) . "',  " .
-//            " 	unique_id1	 = '" . db_input($vars['unique_id1'], false) . "',  " .
-//            " 	unique_id2	 = '" . db_input($vars['unique_id2'], false) . "',  " .
-//            " 	unique_id3	 = '" . db_input($vars['unique_id3'], false) . "',  " .
+           " 	subnet_mask1	 = '" . db_input($vars['subnet_mask1'], false) . "',  " .
+           " 	subnet_mask2	 = '" . db_input($vars['subnet_mask2'], false) . "',  " .
+           " 	subnet_mask3	 = '" . db_input($vars['subnet_mask3'], false) . "',  " .
+           " 	primary_dns1	 = '" . db_input($vars['primary_dns1'], false) . "',  " .
+           " 	primary_dns2	 = '" . db_input($vars['primary_dns2'], false) . "',  " .
+           " 	primary_dns3	 = '" . db_input($vars['primary_dns3'], false) . "',  " .
+           " 	secondary_dns1	 = '" . db_input($vars['secondary_dns1'], false) . "',  " .
+           " 	secondary_dns2	 = '" . db_input($vars['secondary_dns2'], false) . "',  " .
+           " 	secondary_dns3	 = '" . db_input($vars['secondary_dns3'], false) . "',  " .
+           " 	ip_pbx_brand1	 = '" . db_input($vars['ip_pbx_brand1'], false) . "',  " .
+           " 	ip_pbx_brand2	 = '" . db_input($vars['ip_pbx_brand2'], false) . "',  " .
+           " 	ip_pbx_brand3	 = '" . db_input($vars['ip_pbx_brand3'], false) . "',  " .
+           " 	ip_pbx_model1	 = '" . db_input($vars['ip_pbx_model1'], false) . "',  " .
+           " 	ip_pbx_model2	 = '" . db_input($vars['ip_pbx_model2'], false) . "',  " .
+           " 	ip_pbx_model3	 = '" . db_input($vars['ip_pbx_model3'], false) . "',  " .
+           " 	serial_number1	 = '" . db_input($vars['serial_number1'], false) . "',  " .
+           " 	serial_number2	 = '" . db_input($vars['serial_number2'], false) . "',  " .
+           " 	serial_number3	 = '" . db_input($vars['serial_number3'], false) . "',  " .
+           " 	unique_id1	 = '" . db_input($vars['unique_id1'], false) . "',  " .
+           " 	unique_id2	 = '" . db_input($vars['unique_id2'], false) . "',  " .
+           " 	unique_id3	 = '" . db_input($vars['unique_id3'], false) . "',  " .
 
             "   trading		     = '" . db_input($vars['trading'], false) . "', " .
             " 	abn	             = '" . db_input($vars['abn'], false) . "',  " .
@@ -691,7 +708,7 @@ if ($_REQUEST['id'] && $_SERVER['REQUEST_METHOD'] == 'GET') {
             $cont_open_sql = "INSERT into " . TABLE_PREFIX . "customer_contacts " .
                 " (person,position,department,phone,mobile,email,customer_id,last_update) " .
                 " VALUES " .
-                " ('" . $vars['cont']['person'][$i] . "','" . $vars['cont']['position'][$i] . "','" . $vars['cont']['dept'][$i] . "','" .
+                " ('" . $vars['cont']['person'][$i] . "','" . $vars['cont']['position'][$i] . "','" . $vars['cont']['department'][$i] . "','" .
                 $vars['cont']['phone'][$i] . "','" . $vars['cont']['mobile'][$i] . "','" . $vars['cont']['email'][$i] . "','" . $_REQUEST['id'] . "', now())";
             $ret = db_query($cont_open_sql);
         }

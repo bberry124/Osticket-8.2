@@ -3322,7 +3322,7 @@ tr i.help-tip.warning {
     font-weight:bold;
     position:relative;
 
-    border-radius:5px 5px 0 0;
+    border-radius:16px 16px 0 0;
     border-style: solid;
     border-width: 1px 1px 0;
     border-color: transparent;
@@ -3342,8 +3342,8 @@ tr i.help-tip.warning {
 }
 
 #custom_nav li.active, #custom_nav li.inactive:hover {
-    box-shadow: 4px -3px 6px -3px rgba(0,0,0,0.3);
-    border-color: #c5d9ec;
+    box-shadow: 5px -1px 1px 0px rgba(0,0,0,0.2);
+    border-color: #a1a1a1;
     cursor: pointer;
     text-decoration: none;
 }
@@ -4065,3 +4065,12 @@ img.avatar + img.avatar {
     height: auto;
     max-height: 400px !important;
 }
+  /* Change background color */
+  #file::-webkit-progress-value {
+    background-color: red;
+  }
+
+  /* Change thickness */
+  #file {
+    height: 30px; /* Adjust the height as needed */
+  }

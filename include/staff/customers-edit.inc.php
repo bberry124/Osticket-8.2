@@ -108,7 +108,7 @@ if(!$_REQUEST['id']) {
                         }
                     ?>
             <tr>
-                <td>
+                <td style="width:23%;">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Account Status
                     </td>
                     <td>
@@ -117,14 +117,18 @@ if(!$_REQUEST['id']) {
                       <option value="active" class="greenText" <?php echo $info['custom_status'] == 'active' ? "selected=\"selected\"":""; ?>>Active</option>
                       <option value="closed" class="redText" <?php echo $info['custom_status'] == 'closed' ? "selected=\"selected\"":""; ?>>Closed</option>
                     </select>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Account Type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="text" size="59" name="acnt_rand_no" id="acnt_rand_no" class="typeahead" value="<?php if ($info['acnt_rand_no']!="") echo $info['acnt_rand_no']; else echo generateRandom(8); ?>"
+                        autocomplete="off" autocorrect="off" autocapitalize="off" style="width: 30%;">
+                    &nbsp;<span class="error">*&nbsp;</span>
                 </td>
             </tr>
             <tr>
-                <td>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Account Type
+                <td class="required">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Account Number
                 </td>
                 <td>
-                    <select name="custom_type" id="custom_type" style="width: 166px;">
+                <select name="custom_type" id="custom_type" style="width: 166px;">
                         <option value=""></option>
                         <option value="business" <?php echo $info['custom_type'] == 'business' ? "selected=\"selected\"":""; ?>>Business</option>
                         <option value="residential" <?php echo $info['custom_type'] == 'residential' ? "selected=\"selected\"":""; ?>>Residential</option>
@@ -132,27 +136,9 @@ if(!$_REQUEST['id']) {
                         <option value="integra_media" <?php echo $info['custom_type'] == 'integra_media' ? "selected=\"selected\"":""; ?>>Integra Media</option>
                         <option value="positive_business_online" <?php echo $info['custom_type'] == 'positive_business_online' ? "selected=\"selected\"":""; ?>>Positive Business Online</option>
                     </select>
-                </td>
-
-            </tr>
-
-            <tr>
-                <td class="required">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Account Number
-                </td>
-                <td>
-                    <input type="text" size="59" name="acnt_rand_no" id="acnt_rand_no" class="typeahead" value="<?php if ($info['acnt_rand_no']!="") echo $info['acnt_rand_no']; else echo generateRandom(8); ?>"
-                        autocomplete="off" autocorrect="off" autocapitalize="off" style="width: 160px;">
-                    &nbsp;<span class="error">*&nbsp;</span>
-                </td>
-            </tr>
-            <tr>
-                <td class="required">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Account Manager
-                </td>
-                <td>
                     <input type="text" size="59" name="acnt_rand_manager" id="acnt_rand_manager" class="typeahead" value="<?php if ($info['acnt_rand_manager']!="") echo $info['acnt_rand_manager']; ?>"
-                        autocomplete="off" autocorrect="off" autocapitalize="off" style="width: 160px;">
+                        autocomplete="off" autocorrect="off" autocapitalize="off" style="width: 30%;">
                     &nbsp;<span class="error">*&nbsp;</span>
                 </td>
             </tr>
@@ -160,7 +146,7 @@ if(!$_REQUEST['id']) {
         <thead>
             <tr>
                 <th colspan="3">
-                    <strong>Customer Details</strong>
+                    <strong>Company Details</strong>
                 </th>
             </tr>
         </thead>
@@ -171,7 +157,7 @@ if(!$_REQUEST['id']) {
                 </td>
                 <td>
                     <input type="text" size="59" name="company" id="company" class="typeahead" value="<?php echo $info['company']; ?>"
-                        autocomplete="off" autocorrect="off" autocapitalize="off">
+                        autocomplete="off" autocorrect="off" autocapitalize="off" style="width:92.5%;">
                     &nbsp;<span class="error">*&nbsp;</span>
                 </td>
             </tr>
@@ -181,7 +167,7 @@ if(!$_REQUEST['id']) {
                 </td>
                 <td>
                     <input type="text" size="59" name="trust" id="trust" class="typeahead" value="<?php echo $info['trust']; ?>"
-                        autocomplete="off" autocorrect="off" autocapitalize="off">
+                        autocomplete="off" autocorrect="off" autocapitalize="off" style="width:92.5%;">
                 </td>
             </tr>
             <tr>
@@ -190,7 +176,7 @@ if(!$_REQUEST['id']) {
                 </td>
                 <td>
                     <input type="text" size="59" name="trading" id="trading" class="typeahead" value="<?php echo $info['trading']; ?>"
-                        autocomplete="off" autocorrect="off" autocapitalize="off">
+                        autocomplete="off" autocorrect="off" autocapitalize="off" style="width:92.5%;">
                     &nbsp;<span class="error">*&nbsp;</span>
                 </td>
             </tr>
@@ -202,8 +188,7 @@ if(!$_REQUEST['id']) {
                     <input type="text" size="18" name="abn" id="abn" class="typeahead" value="<?php echo $info['abn']; ?>"
                         autocomplete="off" autocorrect="off" autocapitalize="off">
                         &nbsp;<span class="error">&nbsp;<?php echo $errors['fax']; ?></span>
-
-                        ACN Number:
+                        &nbsp;&nbsp;ACN Number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <input type="text" size="18" name="acn" id="acn" class="typeahead" value="<?php echo $info['acn']; ?>"
                         autocomplete="off" autocorrect="off" autocapitalize="off">
                 </td>
@@ -214,22 +199,43 @@ if(!$_REQUEST['id']) {
                 </td>
                 <td>
                     <input type="radio" name="busicat" value="1" <?php echo $info['busicat'] == '1' ? "checked=\"checked\"":""; ?>/>
-                    Private (Pty Ltd)
+                    Private (Pty Ltd)&nbsp;&nbsp;&nbsp;
                     <input type="radio" name="busicat" value="2" <?php echo $info['busicat'] == '2' ? "checked=\"checked\"":""; ?>/>
-                    Public (Ltd)
+                    Public (Ltd)&nbsp;&nbsp;&nbsp;
                     <input type="radio" name="busicat" value="3" <?php echo $info['busicat'] == '3' ? "checked=\"checked\"":""; ?>/>
-                    Sole Trader&nbsp;
+                    Sole Trader&nbsp;&nbsp;&nbsp;
                     <input type="radio" name="busicat" value="4" <?php echo $info['busicat'] == '4' ? "checked=\"checked\"":""; ?>/>
                     Trust <br/>
                     <input type="radio" name="busicat" value="5" <?php echo $info['busicat'] == '5' ? "checked=\"checked\"":""; ?>/>
-                    Partnership&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    Partnership&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <input type="radio" name="busicat" value="6" <?php echo $info['busicat'] == '6' ? "checked=\"checked\"":""; ?>/>
-                    Union&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    Union&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <input type="radio" name="busicat" value="7" <?php echo $info['busicat'] == '7' ? "checked=\"checked\"":""; ?>/>
                     Association
                 </td>
             </tr>
             <tr>
+                <td width="160">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reigstered for GST
+                </td>
+                <td>
+                <input type="radio" name="reggst" value="1" <?php echo $info['reggst'] == '1' ? "checked=\"checked\"":""; ?>/>
+                    Yes&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="reggst" value="2" <?php echo $info['reggst'] == '2' ? "checked=\"checked\"":""; ?>/>
+                    No
+                </td>
+            </tr>
+            <tr>
+               <td width="160">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date Established
+                </td>
+                <td>
+                <input type="date" size="18" name="establ" id="establ" class="typeahead" value="<?php echo $info['establ']; ?>"
+                        autocomplete="off" autocorrect="off" autocapitalize="off">
+                        &nbsp;&nbsp;Time in business&nbsp;&nbsp;&nbsp;<strong>5 Years, 2 Months, 7 Days</strong>
+                </td>
+            </tr>
+            <!-- <tr>
                 <td width="160">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Web URL
                 </td>
@@ -238,10 +244,84 @@ if(!$_REQUEST['id']) {
                         autocomplete="off" autocorrect="off" autocapitalize="off">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button style="margin-top:5px" type="button" onclick="gotoCustomerUrl();">Click Here</button>
                 </td>
-            </tr>
+            </tr> -->
         </tbody>
-
-
+        <thead>
+         <tr>
+             <th colspan="3">
+                 <strong>Business Market Sector</strong>
+             </th>
+         </tr>
+         </thead>
+         <tbody>
+            <tr>
+                <td>
+                &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="businesstype" value="1" <?php echo $info['businesstype'] == '1' ? "checked=\"checked\"":""; ?>/>
+                &nbsp;&nbsp;Education
+                    </td>
+                    <td>
+                    <input type="radio" name="businesstype" value="2" <?php echo $info['businesstype'] == '2' ? "checked=\"checked\"":""; ?>/>
+                    &nbsp;&nbsp;Health Care&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" name="businesstype" value="3" <?php echo $info['businesstype'] == '3' ? "checked=\"checked\"":""; ?>/>
+                    &nbsp;&nbsp;Retail&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" name="businesstype" value="4" <?php echo $info['businesstype'] == '4' ? "checked=\"checked\"":""; ?>/>
+                    Building
+                </td>
+                    </tr>
+                <tr>
+                    <td>
+                &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="businesstype" value="5" <?php echo $info['businesstype'] == '5' ? "checked=\"checked\"":""; ?>/>
+                &nbsp;&nbsp;Government
+                    </td>
+                    <td>
+                    <input type="radio" name="businesstype" value="6" <?php echo $info['businesstype'] == '6' ? "checked=\"checked\"":""; ?>/>
+                    &nbsp;&nbsp;Transport&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" name="businesstype" value="7" <?php echo $info['businesstype'] == '7' ? "checked=\"checked\"":""; ?>/>
+                    &nbsp;&nbsp;Finance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" name="businesstype" value="8" <?php echo $info['businesstype'] == '8' ? "checked=\"checked\"":""; ?>/>
+                    Emergency
+                </td>
+                    </tr>
+                    <tr>
+                    <td>
+                &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="businesstype" value="9" <?php echo $info['businesstype'] == '9' ? "checked=\"checked\"":""; ?>/>
+                &nbsp;&nbsp;Hospitality
+                    </td>
+                    <td>
+                    <input type="radio" name="businesstype" value="10" <?php echo $info['businesstype'] == '10' ? "checked=\"checked\"":""; ?>/>
+                    &nbsp;&nbsp;Legal&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" name="businesstype" value="11" <?php echo $info['businesstype'] == '11' ? "checked=\"checked\"":""; ?>/>
+                    &nbsp;&nbsp;Advertising&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" name="businesstype" value="12" <?php echo $info['businesstype'] == '12' ? "checked=\"checked\"":""; ?>/>
+                    Residential
+                </td>
+                    </tr>
+                    <tr>
+                    <td>
+                &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="businesstype" value="13" <?php echo $info['businesstype'] == '13' ? "checked=\"checked\"":""; ?>/>
+                &nbsp;&nbsp;Entertainment
+                    </td>
+                    <td>
+                    <input type="radio" name="businesstype" value="14" <?php echo $info['businesstype'] == '14' ? "checked=\"checked\"":""; ?>/>
+                    &nbsp;&nbsp;IT Industry&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" name="businesstype" value="15" <?php echo $info['businesstype'] == '15' ? "checked=\"checked\"":""; ?>/>
+                    &nbsp;Manufacturing&nbsp;
+                    <input type="radio" name="businesstype" value="16" <?php echo $info['businesstype'] == '16' ? "checked=\"checked\"":""; ?>/>
+                    Construction
+                </td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="businesstype" value="17" <?php echo $info['businesstype'] == '17' ? "checked=\"checked\"":""; ?>/>
+                        &nbsp;&nbsp;Other
+                    </td>
+                    <td>
+                    <input type="text" size="18" name="other1" id="other1" class="typeahead" value="<?php echo $info['other1']; ?>"
+                        autocomplete="off" autocorrect="off" autocapitalize="off" style="width:92.5%;">
+                    </td>
+                    </tr>
+                    </tbody>
+                    
          <thead>
          <tr>
              <th colspan="3">
@@ -251,15 +331,19 @@ if(!$_REQUEST['id']) {
          </thead>
          <tbody>
          <tr>
-             <td width="160" valign="top">
-                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Site Address
+             <td width="160">
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Address Line 1
              </td>
              <td>
-
-                 <input type="text" size="50" name="address" id="address" value="<?php echo $info['address']; ?>" >
-                 &nbsp;
-                 <input style="margin-top:5px" type="text" size="50" name="address2" id="address2" value="<?php echo $info['address2']; ?>" >
-                 &nbsp;
+                 <input type="text" size="50" name="address" id="address" value="<?php echo $info['address']; ?>" style="width:92.5%;">
+                    </td>
+                    </tr>
+                    <tr>
+                    <td width="160">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Address Line 2
+                    </td>
+                    <td>
+                 <input style="margin-top:5px; width:92.5%;" type="text" size="50" name="address2" id="address2" value="<?php echo $info['address2']; ?>">
              </td>
          </tr>
          <tr>
@@ -294,16 +378,61 @@ if(!$_REQUEST['id']) {
              </td>
              <td>
                  <input type="text" size="18" name="city" id="city" class="typeahead" value="<?php echo $info['city']; ?>"
-                        autocomplete="off" autocorrect="off" autocapitalize="off">
+                        autocomplete="off" autocorrect="off" autocapitalize="off" style="width:33%;">
                  &nbsp;<span class="error">&nbsp;<?php echo $errors['fax']; ?></span>
-
-                 Country:
+                 Country:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                  <input type="text" size="18" name="country" id="country" class="typeahead" value="<?php echo $info['country']; ?>"
-                        autocomplete="off" autocorrect="off" autocapitalize="off">
+                        autocomplete="off" autocorrect="off" autocapitalize="off" style="width:38%;">
              </td>
          </tr>
          </tbody>
-
+         <thead>
+         <tr>
+             <th colspan="3">
+                 <strong>Company Contact Details</strong>
+             </th>
+         </tr>
+         </thead>
+         <tbody>
+            <tr>
+            <td width="160" class="required">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Landline Number
+            </td>
+            <td>
+                <input type="text" size="15" name="landline" id="landline" value="<?php echo $info['landline']; ?>">
+                    &nbsp;1300/1800 Telephone&nbsp;<input type="text" size="15" name="telephone" id="telephone" value="<?php echo $info['telephone']; ?>" style="width:32%;">
+            </td>
+            </tr>
+            <tr>
+            <td width="160" class="required">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fax Number
+            </td>
+            <td>
+                <input type="text" size="15" name="fax" id="fax" value="<?php echo $info['fax']; ?>">
+                    &nbsp;1300/1800 Fax&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="text" size="15" name="faxn" id="faxn" value="<?php echo $info['faxn']; ?>" style="width:32%;">
+            </td>
+            </tr>
+            <tr>
+                <td width="160" class="required">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Office Email
+                </td>
+                <td>
+                    <input type="text" size="50" name="officeemail" id="officeemail" class="typeahead" value="<?php echo $info['officeemail']; ?>"
+                        autocomplete="off" autocorrect="off" autocapitalize="off" style="width:92%;">
+                </td>
+            </tr>
+             <tr>
+                <td width="160">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Web URL
+                </td>
+                <td>
+                    <input type="text" size="59" name="website" id="website" class="typeahead" value="<?php echo $info['website']; ?>"
+                        autocomplete="off" autocorrect="off" autocapitalize="off" style="width:65%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button style="margin-top:5px" type="button" onclick="gotoCustomerUrl();">Click Here</button>
+                </td>
+            </tr>
+        </tbody>
         <thead>
             <tr>
                 <th colspan="3">
@@ -318,7 +447,7 @@ if(!$_REQUEST['id']) {
                 </td>
                 <td>
                     <select name="title" id="title" style="width:100px;">
-                      <option value="">&lt;Select&gt;</option>
+                      <option value=""></option>
                       <option value="mr" <?php echo $info['title'] == 'mr' ? "selected=\"selected\"":""; ?>>Mr</option>
                       <option value="dr"<?php echo $info['title'] == 'dr' ? "selected=\"selected\"":""; ?>>Dr</option>
                       <option value="ms"<?php echo $info['title'] == 'ms' ? "selected=\"selected\"":""; ?>>Ms</option>
@@ -334,7 +463,7 @@ if(!$_REQUEST['id']) {
                 <td>
                     <input type="text" size="15" name="name" id="name" value="<?php echo $info['name']; ?>">
                     &nbsp;<span class="error">*&nbsp;</span>&nbsp;&nbsp;
-                    Preferred Name&nbsp;<input type="text" size="15" name="preferredname" id="preferredname" value="<?php echo $info['preferredname']; ?>">
+                    Preferred Name&nbsp;<input type="text" size="15" name="preferredname" id="preferredname" value="<?php echo $info['preferredname']; ?>" style="width:35%;">
                 </td>
             </tr>
             <tr>
@@ -342,15 +471,15 @@ if(!$_REQUEST['id']) {
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Middle Name
                 </td>
                 <td>
-                    <input type="text" size="15" name="middlename" id="middlename" value="<?php echo $info['middlename']; ?>">
+                    <input type="text" size="15" name="middlename" id="middlename" value="<?php echo $info['middlename']; ?>" style="width:92.5%;">
                 </td>
             </tr>
             <tr>
                 <td width="160">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last Name
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sure Name
                 </td>
                 <td>
-                    <input type="text" size="15" name="surname" id="surname" value="<?php echo $info['surname']; ?>">
+                    <input type="text" size="15" name="surname" id="surname" value="<?php echo $info['surname']; ?>" style="width:92.5%;">
                 </td>
             </tr>
             <tr>
@@ -359,11 +488,11 @@ if(!$_REQUEST['id']) {
                 </td>
                 <td>
                     <input type="text" size="50" name="position" id="position" class="typeahead" value="<?php echo $info['position']; ?>"
-                        autocomplete="off" autocorrect="off" autocapitalize="off">
+                        autocomplete="off" autocorrect="off" autocapitalize="off" style="width:92.5%;">
                 </td>
             </tr>
 
-            <tr>
+            <!-- <tr>
                 <td width="160" class="required">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Drivers License #
                 </td>
@@ -387,7 +516,7 @@ if(!$_REQUEST['id']) {
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date of Birth:
                     <input type="date" size="50" name="pri_birth" id="pri_birth" value="<?php echo $info['pri_birth']; ?>">
                 </td>
-            </tr>
+            </tr> -->
 <!--            <tr>-->
 <!--                <td width="160">-->
 <!--                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date of Birth:-->
@@ -397,40 +526,39 @@ if(!$_REQUEST['id']) {
 <!--                </td>-->
 <!--            </tr>-->
 
-            <tr>
+            <!-- <tr>
                 <td width="160" class="required">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Phone Number:
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Phone Number
                 </td>
                 <td>
                     <input type="text" size="20" name="phone" id="phone" value="<?php echo $info['phone']; ?>">
                     &nbsp;<span class="error">*&nbsp;<?php echo $errors['phone']; ?></span>
-                    Ext: <input type="text" size="5" name="phone_ext" id="phone_ext" value="<?php echo $info['phone_ext']; ?>">
-                    &nbsp;<span class="error">&nbsp;<?php echo $errors['phone_ext']; ?></span>
+                    Ext&nbsp;&nbsp;  <input type="text" size="5" name="phone_ext" id="phone_ext" value="<?php echo $info['phone_ext']; ?>">
                 </td>
             </tr>
 
             <tr>
                 <td width="160" class="required">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inbound Tel:
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inbound Tel
                 </td>
                 <td>
                     <input type="text" size="18" name="bound_tel" id="bound_tel" value="<?php echo $info['bound_tel'];  ?>">
-                    &nbsp;Direct Number:
-                    &nbsp;<input type="text" size="18" name="direct_phone" id="direct_phone" value="<?php echo $info['direct_phone']; ?>">
-                    &nbsp;EP:
+                    &nbsp;Direct Number&nbsp;
+                    &nbsp;<input type="text" size="18" name="direct_phone" id="direct_phone" value="<?php echo $info['direct_phone']; ?>" style="width:25%;">
+                    &nbsp;EP
                     &nbsp;<input type="checkbox" name="check1" value="1" <?php echo $info['check1'] == '1' ? "checked=\"checked\"":""; ?>/>
                 </td>
             </tr>
 
             <tr>
                 <td width="160">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inbound Fax:
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inbound Fax
                 </td>
                 <td>
                     <input type="text" size="18" name="bound_fax" id="bound_fax" value="<?php echo $info['bound_fax'];  ?>">
-                    &nbsp;Fax Number:&nbsp;&nbsp;&nbsp;
+                    &nbsp;Fax Number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;<input type="text" size="18" name="fax" id="fax" class="typeahead" value="<?php echo $info['fax']; ?>"
-                        autocomplete="off" autocorrect="off" autocapitalize="off">
+                        autocomplete="off" autocorrect="off" autocapitalize="off" style="width:25%;">
                     &nbsp;EP:
                     &nbsp;<input type="checkbox" name="check2" value="1" <?php echo $info['check2'] == '1' ? "checked=\"checked\"":""; ?>/>
                         <!--
@@ -439,10 +567,10 @@ if(!$_REQUEST['id']) {
                         autocomplete="off" autocorrect="off" autocapitalize="off">
                          -->
                 </td>
-            </tr>
+            </tr> 
             <tr>
                 <td width="160">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mobile:
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mobile Number
                 </td>
                 <td>
                     <input type="text" size="20" name="mobile" id="mobile" value="<?php echo $info['mobile']; ?>">
@@ -450,26 +578,97 @@ if(!$_REQUEST['id']) {
             </tr>
             <tr>
                 <td width="160" class="required">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email:
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email
                 </td>
                 <td>
                     <input type="text" size="50" name="email" id="email" class="typeahead" value="<?php echo $info['email']; ?>"
-                        autocomplete="off" autocorrect="off" autocapitalize="off">
+                        autocomplete="off" autocorrect="off" autocapitalize="off" style="width:92%;">
                     &nbsp;<span class="error">*&nbsp;<?php echo $errors['email']; ?></span>
                 </td>
             </tr>
-            <tr>
+            <!-- <tr>
                 <td width="160">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email BCC:
                 </td>
                 <td>
                     <input type="text" size="50" name="email2" id="email2" class="typeahead" value="<?php echo $info['email2']; ?>"
-                        autocomplete="off" autocorrect="off" autocapitalize="off">
+                        autocomplete="off" autocorrect="off" autocapitalize="off" style="width:92%;">
                     &nbsp;<span class="error">*&nbsp;<?php echo $errors['email2']; ?></span>
                 </td>
+            </tr> -->
+        </tbody>
+        <thead>
+            <tr>
+                <th colspan="3">
+                    <strong>Primary Contact | Identification</strong>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <td width="160" class="required">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Drivers License #
+                </td>
+                <td>
+                <input type="text" size="15" name="license_id" id="license_id" value="<?php echo $info['license_id']; ?>">
+                Expiry Date <input type="date" size="5" name="exdate" id="exdate" value="<?php echo $info['exdate']; ?>" >
+                &nbsp;&nbsp;&nbsp;State
+                 <select name="state1" id="state1" >
+                     <option value=""></option>
+                     <option value="ACT" <?php echo $info['state1'] == 'ACT' ? "selected=\"selected\"":""; ?>>ACT</option>
+                     <option value="NSW" <?php echo $info['state1'] == 'NSW' ? "selected=\"selected\"":""; ?>>NSW</option>
+                     <option value="NT" <?php echo $info['state1'] == 'NT' ? "selected=\"selected\"":""; ?>>NT</option>
+                     <option value="SA" <?php echo $info['state1'] == 'SA' ? "selected=\"selected\"":""; ?>>SA</option>
+                     <option value="TAS" <?php echo $info['state1'] == 'TAS' ? "selected=\"selected\"":""; ?>>TAS</option>
+                     <option value="VIC" <?php echo $info['state1'] == 'VIC' ? "selected=\"selected\"":""; ?>>VIC</option>
+                     <option value="QLD" <?php echo $info['state1'] == 'QLD' ? "selected=\"selected\"":""; ?>>QLD</option>
+                     <option value="WA" <?php echo $info['state1'] == 'WA' ? "selected=\"selected\"":""; ?>>WA</option>
+                 </select>
+                    </td>
+            </tr>
+            <tr>
+            <td width="160" class="required">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Passport #
+                </td>
+                <td>
+                <input type="text" size="15" name="passport_id" id="passport_id" value="<?php echo $info['passport_id']; ?>">
+                Expiry Date <input type="date" size="5" name="exdate1" id="exdate1" value="<?php echo $info['exdate1']; ?>" >
+                &nbsp;&nbsp;&nbsp;State
+                 <select name="state2" id="state2">
+                     <option value=""></option>
+                     <option value="ACT" <?php echo $info['state2'] == 'ACT' ? "selected=\"selected\"":""; ?>>ACT</option>
+                     <option value="NSW" <?php echo $info['state2'] == 'NSW' ? "selected=\"selected\"":""; ?>>NSW</option>
+                     <option value="NT" <?php echo $info['state2'] == 'NT' ? "selected=\"selected\"":""; ?>>NT</option>
+                     <option value="SA" <?php echo $info['state2'] == 'SA' ? "selected=\"selected\"":""; ?>>SA</option>
+                     <option value="TAS" <?php echo $info['state2'] == 'TAS' ? "selected=\"selected\"":""; ?>>TAS</option>
+                     <option value="VIC" <?php echo $info['state2'] == 'VIC' ? "selected=\"selected\"":""; ?>>VIC</option>
+                     <option value="QLD" <?php echo $info['state2'] == 'QLD' ? "selected=\"selected\"":""; ?>>QLD</option>
+                     <option value="WA" <?php echo $info['state2'] == 'WA' ? "selected=\"selected\"":""; ?>>WA</option>
+                 </select>
+                    </td>
+                    </tr>
+            <tr>
+                <td>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date of Birth
+                    </td>
+                <td>
+                    <input type="date" size="50" name="pri_birth" id="pri_birth" value="<?php echo $info['pri_birth']; ?>">
+                    </td>    
+            </tr>
+            <tr>
+                <td width="160">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gender
+                </td>
+                <td>
+                <select name="gender" id="gender">
+                  <option value=""></option>
+                  <option value="male" <?php echo $info['gender'] == 'male' ? "selected=\"selected\"":""; ?>>Male</option>
+                  <option value="female" <?php echo $info['gender'] == 'female' ? "selected=\"selected\"":""; ?>>Female</option>
+                  <option value="intersex" <?php echo $info['gender'] == 'intersex' ? "selected=\"selected\"":""; ?>>Intersex</option>
+                </select>
+            </td>
             </tr>
         </tbody>
-
         <thead>
             <tr>
                 <th colspan="3">
@@ -480,7 +679,7 @@ if(!$_REQUEST['id']) {
         <tbody>
             <tr>
                 <td width="160">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VIP Support:
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VIP Support
                 </td>
                 <td>
 
@@ -489,13 +688,13 @@ if(!$_REQUEST['id']) {
                         <option value="Yes" <?php echo $info['vip'] == 'Yes' ? "selected=\"selected\"":""; ?>>Yes</option>
                     </select>
                     Contract Number: <input type="text" size="10" name="contract" id="contract" value="<?php echo $info['contract']; ?>" >
-                    Plan Code: <input type="text" size="10" name="plan_code" id="plan_code" value="<?php echo $info['plan_code']; ?>" >
+                    Plan Code: <input type="text" size="10" name="plan_code" id="plan_code" value="<?php echo $info['plan_code']; ?>" style='width:13%;'>
                 </td>
             </tr>
 
             <tr>
                 <td width="160">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VIP Club:
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VIP Club
                 </td>
                 <td>
                     <select name="vip_club" id="vip_club" >
@@ -507,7 +706,7 @@ if(!$_REQUEST['id']) {
 
             <tr>
                 <td width="160">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Voice SLA:
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Voice SLA
                 </td>
                 <td>
 
@@ -522,7 +721,7 @@ if(!$_REQUEST['id']) {
 
             <tr>
                 <td width="160">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Network SLA:
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Network SLA
                 </td>
                 <td>
 
@@ -544,7 +743,7 @@ if(!$_REQUEST['id']) {
         </thead>
         <tbody>
           <tr>
-            <td id="contacts" colspan="4">
+            <td id="contacts" colspan="4" style="border:none;">
                 <table width="100%" border="0" id="myTable4">
                 </table>
             </td>
@@ -555,7 +754,77 @@ if(!$_REQUEST['id']) {
             </td>
           </tr>
         </tbody>
-
+        <thead>
+        <tr>
+            <th colspan="3">
+                <strong>Contacts</strong>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                </td>
+                <td>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Start Date&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contact Term
+                </td>
+            </tr>
+        <tr>
+            <td>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Voice
+            </td>
+            <td>
+                    <input type="date" size="10" name="voice" id="voice" value="<?php echo $info['voice']; ?>" >
+                    <input type="date" size="10" name="voice" id="voice" value="<?php echo $info['voice']; ?>" >
+                    
+            </td>
+        </tr>
+        <tr>
+            <td>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mobile
+                    </td>
+                    <td>
+                    <input type="date" size="10" name="mobile1" id="mobile1" value="<?php echo $info['mobile1']; ?>" >
+                    <input type="date" size="10" name="mobile1" id="mobile1" value="<?php echo $info['mobile1']; ?>" >
+                    </td>
+        </tr>
+        <tr>
+            <td>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Internet S1
+                    </td>
+                    <td>
+                    <input type="date" size="10" name="ints1" id="ints1" value="<?php echo $info['ints1']; ?>" >
+                    <input type="date" size="10" name="ints1" id="ints1" value="<?php echo $info['ints1']; ?>" >
+                    </td>
+        </tr>
+        <tr>
+            <td>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Internet S2
+                    </td>
+                    <td>
+                    <input type="date" size="10" name="ints2" id="ints2" value="<?php echo $info['ints2']; ?>" >
+                    <input type="date" size="10" name="ints2" id="ints2" value="<?php echo $info['ints2']; ?>" >
+                    </td>
+        </tr>
+        <tr>
+            <td>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Web Hosting
+                    </td>
+                    <td>
+                    <input type="date" size="10" name="webhosting" id="webhosting" value="<?php echo $info['webhosting']; ?>" >
+                    <input type="date" size="10" name="webhosting" id="webhosting" value="<?php echo $info['webhosting']; ?>" >
+                    </td>
+        </tr>
+        <tr>
+            <td>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Security
+                    </td>
+                    <td>
+                    <input type="date" size="10" name="security" id="security" value="<?php echo $info['security']; ?>" >
+                    <input type="date" size="10" name="security" id="security" value="<?php echo $info['security']; ?>" >
+                    </td>
+        </tr>
     </table>
     </td>
 
@@ -572,19 +841,19 @@ if(!$_REQUEST['id']) {
                 <form action="customers.php" method="get">
                     <tr style="text-align: center;">
                         <td>
+                            <!-- <br/> -->
                             <br/>
-                            <br/>
-                            <input type="button" onclick="document.location='tickets.php?a=open&cid=<?php echo $_REQUEST['id']; ?>';" value="Create New Ticket" style="width:156px;"/><br/><br/>
+                            <input type="button" onclick="document.location='tickets.php?a=open&cid=<?php echo $_REQUEST['id']; ?>';" value="Create New Ticket" style="width:80%;"><br/>
                         </td>
                     </tr>
                     <tr style="text-align: center;">
                         <td>
-                            <input type="button" onclick="document.location='tickets.php?<?php get_search_Query($info['email']); ?>'" style="width:156px;" value="<?php echo __('View Ticket History'); ?>" ><br/><br/>
+                            <input type="button" onclick="document.location='tickets.php?<?php get_search_Query($info['email']); ?>'" value="<?php echo __('View Ticket History'); ?>" style="width:80%;"><br/>
                         </td>
                     </tr>
                     <tr style="text-align: center;">
                         <td>
-                            <input type="button" onclick="window.open('customers.php?a=label&id=<?php echo $_REQUEST['id']; ?>','_blank','width=280,height=200,scrollbars=0,resizable=0');" value="Print Shipping Label" />
+                            <input type="button" onclick="window.open('customers.php?a=label&id=<?php echo $_REQUEST['id']; ?>','_blank','width=280,height=200,scrollbars=0,resizable=0');" value="Print Shipping Label" style="width:80%;">
                         </td>
                     </tr>
                 </form>
@@ -594,7 +863,7 @@ if(!$_REQUEST['id']) {
             <tbody>
                 <tr >
                     <td colspan=2 align='center' >
-                        <div style="position:absolute; top:450px; ">
+                        <div style="position:absolute; top:393px; ">
 
                             <input type="submit" name="do" value="<?php echo ($info['id']) ? "Update":"Add"; ?>" />
                             <input type="reset"  name="reset"  value="Reset" />
@@ -604,11 +873,88 @@ if(!$_REQUEST['id']) {
                     </td>
                 </tr>
             </tbody>
+            <tbody>
+                <tr >
+                    <td colspan=2 align='center' >
+                        <div style="position:absolute; top:601px; ">
 
+                            <input type="submit" name="do" value="<?php echo ($info['id']) ? "Update":"Add"; ?>" />
+                            <input type="reset"  name="reset"  value="Reset" />
+                            <input type="button" name="cancel" value="Cancel" onclick='window.location.href="customers.php"'>
+                            <input type="hidden" name="id" value="<?php echo $info['id']; ?>" />
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr >
+                    <td colspan=2 align='center' >
+                        <div style="position:absolute; top:772px; ">
+
+                            <input type="submit" name="do" value="<?php echo ($info['id']) ? "Update":"Add"; ?>" />
+                            <input type="reset"  name="reset"  value="Reset" />
+                            <input type="button" name="cancel" value="Cancel" onclick='window.location.href="customers.php"'>
+                            <input type="hidden" name="id" value="<?php echo $info['id']; ?>" />
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody>
+            <tbody>
+                <tr >
+                    <td colspan=2 align='center' >
+                        <div style="position:absolute; top:945px; ">
+
+                            <input type="submit" name="do" value="<?php echo ($info['id']) ? "Update":"Add"; ?>" />
+                            <input type="reset"  name="reset"  value="Reset" />
+                            <input type="button" name="cancel" value="Cancel" onclick='window.location.href="customers.php"'>
+                            <input type="hidden" name="id" value="<?php echo $info['id']; ?>" />
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr >
+                    <td colspan=2 align='center' >
+                        <div style="position:absolute; top:1225px; ">
+                            <input type="submit" name="do" value="<?php echo ($info['id']) ? "Update":"Add"; ?>" />
+                            <input type="reset"  name="reset"  value="Reset" />
+                            <input type="button" name="cancel" value="Cancel" onclick='window.location.href="customers.php"'>
+                            <input type="hidden" name="id" value="<?php echo $info['id']; ?>" />
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr >
+                    <td colspan=2 align='center' >
+                        <div style="position:absolute; top:1397px; ">
+
+                            <input type="submit" name="do" value="<?php echo ($info['id']) ? "Update":"Add"; ?>" />
+                            <input type="reset"  name="reset"  value="Reset" />
+                            <input type="button" name="cancel" value="Cancel" onclick='window.location.href="customers.php"'>
+                            <input type="hidden" name="id" value="<?php echo $info['id']; ?>" />
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr >
+                    <td colspan=2 align='center' >
+                        <div style="position:absolute; top:1568px; ">
+
+                            <input type="submit" name="do" value="<?php echo ($info['id']) ? "Update":"Add"; ?>" />
+                            <input type="reset"  name="reset"  value="Reset" />
+                            <input type="button" name="cancel" value="Cancel" onclick='window.location.href="customers.php"'>
+                            <input type="hidden" name="id" value="<?php echo $info['id']; ?>" />
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
             <tbody>
             <tr >
                 <td colspan=2 align='center' >
-                    <div style="position:absolute; bottom:0px;margin-bottom:20px">
+                    <div style="position:absolute; bottom:0px;margin-bottom:5px">
                         <input type="submit" name="do" value="<?php echo ($info['id']) ? "Update":"Add"; ?>" />
                         <input type="reset"  name="reset"  value="Reset" />
                         <input type="button" name="cancel" value="Cancel" onclick='window.location.href="customers.php"'>
@@ -625,7 +971,15 @@ if(!$_REQUEST['id']) {
     <tr>
     <td colspan=2 >
     <br>
-
+                        <table style="width:100%;">
+    <thead>
+                <tr style="height: 27px; background: #0094b3;color:white;">
+                    <th colspan="3" style="text-align:left;padding-left:10px;">
+                        <strong> Services </strong>
+                    </th>
+                </tr>
+            </thead>
+                    </table>
     <script type="text/javascript">
     function changeTab(tabName, obj) {
 
@@ -1012,13 +1366,13 @@ if(!$_REQUEST['id']) {
 
             <tr>
                 <td><b>IP Address</b></td>
-                <td><input name="ip_address1" id="ip_address1" type="text" style='width:100%;' value="<?php echo $info['ip_address1']; ?>" onchange="interact(1, 1)"></td>
-                <td><input name="ip_address2" id="ip_address2" type="text" style='width:100%;' value="<?php echo $info['ip_address2']; ?>" onchange="interact(2, 1)"></td>
-                <td><input name="ip_address3" id="ip_address3" type="text" style='width:100%;' value="<?php echo $info['ip_address3']; ?>" onchange="interact(3, 1)"></td>
-                <td><input name="ip_address4" id="ip_address4" type="text" style='width:100%;' value="<?php echo $info['ip_address4']; ?>" onchange="interact(4, 1)"></td>
-                <td><input name="ip_address5" id="ip_address5" type="text" style='width:100%;' value="<?php echo $info['ip_address5']; ?>" onchange="interact(5, 1)"></td>
-                <td><input name="ip_address6" id="ip_address6" type="text" style='width:100%;' value="<?php echo $info['ip_address6']; ?>" onchange="interact(6, 1)"></td>
-                <td><input name="ip_address7" id="ip_address7" type="text" style='width:100%;' value="<?php echo $info['ip_address7']; ?>" onchange="interact(7, 1)"></td>
+                <td><input name="ip_address1" id="ip_address1" type="text" style='width:97%; padding:0px;height:25px;' value="<?php echo $info['ip_address1']; ?>" onchange="interact(1, 1)"></td>
+                <td><input name="ip_address2" id="ip_address2" type="text" style='width:97%; padding:0px;height:25px;' value="<?php echo $info['ip_address2']; ?>" onchange="interact(2, 1)"></td>
+                <td><input name="ip_address3" id="ip_address3" type="text" style='width:97%; padding:0px;height:25px;' value="<?php echo $info['ip_address3']; ?>" onchange="interact(3, 1)"></td>
+                <td><input name="ip_address4" id="ip_address4" type="text" style='width:97%; padding:0px;height:25px;' value="<?php echo $info['ip_address4']; ?>" onchange="interact(4, 1)"></td>
+                <td><input name="ip_address5" id="ip_address5" type="text" style='width:97%; padding:0px;height:25px;' value="<?php echo $info['ip_address5']; ?>" onchange="interact(5, 1)"></td>
+                <td><input name="ip_address6" id="ip_address6" type="text" style='width:97%; padding:0px;height:25px;' value="<?php echo $info['ip_address6']; ?>" onchange="interact(6, 1)"></td>
+                <td><input name="ip_address7" id="ip_address7" type="text" style='width:97%; padding:0px;height:25px;' value="<?php echo $info['ip_address7']; ?>" onchange="interact(7, 1)"></td>
             </tr>
             <tr>
                 <td><b>Details</b></td>
@@ -1399,9 +1753,9 @@ if(!$_REQUEST['id']) {
                     Order Date
                 </td>
                 <td align='left'>
-                    <input name="order_date1" id="order_date1" type="date" style='width:40%;' value="<?php echo $info['order_date1']; ?>">
+                    <input name="order_date1" id="order_date1" type="date" style='width:32%;' value="<?php echo $info['order_date1']; ?>">
                     By
-                    <input name="order_by1" id="order_by1" type="text" style='width:50%;' value="<?php echo $info['order_by1']; ?>">
+                    <input name="order_by1" id="order_by1" type="text" style='width:35%;' value="<?php echo $info['order_by1']; ?>">
                 </td>
                 <td align='right'>
                     Ref
@@ -1416,9 +1770,9 @@ if(!$_REQUEST['id']) {
                     Activation Date
                 </td>
                 <td align='left'>
-                    <input name="activation_date1" id="activation_date1" type="date" style='width:40%;' value="<?php echo $info['activation_date1']; ?>">
+                    <input name="activation_date1" id="activation_date1" type="date" style='width:32%;' value="<?php echo $info['activation_date1']; ?>">
                     By
-                    <input name="activation_by1" id="activation_by1" type="text" style='width:50%;' value="<?php echo $info['activation_by1']; ?>">
+                    <input name="activation_by1" id="activation_by1" type="text" style='width:35%;' value="<?php echo $info['activation_by1']; ?>">
                 </td>
                 <td align='right'>
                     Ref
@@ -1433,9 +1787,9 @@ if(!$_REQUEST['id']) {
                     Cancellation Date
                 </td>
                 <td align='left'>
-                    <input name="cancellation_date1" id="cancellation_date1" type="date" style='width:40%;' value="<?php echo $info['cancellation_date1']; ?>">
+                    <input name="cancellation_date1" id="cancellation_date1" type="date" style='width:32%;' value="<?php echo $info['cancellation_date1']; ?>">
                     By
-                    <input name="cancellation_by1" id="cancellation_by1" type="text" style='width:50%;' value="<?php echo $info['cancellation_by1']; ?>">
+                    <input name="cancellation_by1" id="cancellation_by1" type="text" style='width:35%;' value="<?php echo $info['cancellation_by1']; ?>">
                 </td>
                 <td align='right'>
                     Ref
@@ -1811,9 +2165,9 @@ if(!$_REQUEST['id']) {
                     Order Date
                 </td>
                 <td align='left'>
-                    <input name="order_date2" id="order_date2" type="date" style='width:40%;' value="<?php echo $info['order_date2']; ?>">
+                    <input name="order_date2" id="order_date2" type="date" style='width:32%;' value="<?php echo $info['order_date2']; ?>">
                     By
-                    <input name="order_by2" id="order_by2" type="text" style='width:50%;' value="<?php echo $info['order_by2']; ?>">
+                    <input name="order_by2" id="order_by2" type="text" style='width:35%;' value="<?php echo $info['order_by2']; ?>">
                 </td>
                 <td align='right'>
                     Ref
@@ -1828,9 +2182,9 @@ if(!$_REQUEST['id']) {
                     Activation Date
                 </td>
                 <td align='left'>
-                    <input name="activation_date2" id="activation_date2" type="date" style='width:40%;' value="<?php echo $info['activation_date2']; ?>">
+                    <input name="activation_date2" id="activation_date2" type="date" style='width:32%;' value="<?php echo $info['activation_date2']; ?>">
                     By
-                    <input name="activation_by2" id="activation_by2" type="text" style='width:50%;' value="<?php echo $info['activation_by2']; ?>">
+                    <input name="activation_by2" id="activation_by2" type="text" style='width:35%;' value="<?php echo $info['activation_by2']; ?>">
                 </td>
                 <td align='right'>
                     Ref
@@ -1845,9 +2199,9 @@ if(!$_REQUEST['id']) {
                     Cancellation Date
                 </td>
                 <td align='left'>
-                    <input name="cancellation_date2" id="cancellation_date2" type="date" style='width:40%;' value="<?php echo $info['cancellation_date2']; ?>">
+                    <input name="cancellation_date2" id="cancellation_date2" type="date" style='width:32%;' value="<?php echo $info['cancellation_date2']; ?>">
                     By
-                    <input name="cancellation_by2" id="cancellation_by2" type="text" style='width:50%;' value="<?php echo $info['cancellation_by2']; ?>">
+                    <input name="cancellation_by2" id="cancellation_by2" type="text" style='width:35%;' value="<?php echo $info['cancellation_by2']; ?>">
                 </td>
                 <td align='right'>
                     Ref
@@ -1983,7 +2337,7 @@ if(!$_REQUEST['id']) {
                     Brand
                 </td>
                 <td align='left'>
-                    <input name="hardware_brand3" id="hardware_brand3" type="text" style='width:80%;' value="<?php echo $info['hardware_brand1']; ?>">
+                    <input name="hardware_brand3" id="hardware_brand3" type="text" style='width:80%;' value="<?php echo $info['hardware_brand3']; ?>">
                 </td>
             </tr>
 
@@ -2223,9 +2577,9 @@ if(!$_REQUEST['id']) {
                     Order Date
                 </td>
                 <td align='left'>
-                    <input name="order_date3" id="order_date3" type="date" style='width:40%;' value="<?php echo $info['order_date3']; ?>">
+                    <input name="order_date3" id="order_date3" type="date" style='width:32%;' value="<?php echo $info['order_date3']; ?>">
                     By
-                    <input name="order_by3" id="order_by3" type="text" style='width:50%;' value="<?php echo $info['order_by3']; ?>">
+                    <input name="order_by3" id="order_by3" type="text" style='width:35%;' value="<?php echo $info['order_by3']; ?>">
                 </td>
                 <td align='right'>
                     Ref
@@ -2240,9 +2594,9 @@ if(!$_REQUEST['id']) {
                     Activation Date
                 </td>
                 <td align='left'>
-                    <input name="activation_date3" id="activation_date3" type="date" style='width:40%;' value="<?php echo $info['activation_date3']; ?>">
+                    <input name="activation_date3" id="activation_date3" type="date" style='width:32%;' value="<?php echo $info['activation_date3']; ?>">
                     By
-                    <input name="activation_by3" id="activation_by3" type="text" style='width:50%;' value="<?php echo $info['activation_by3']; ?>">
+                    <input name="activation_by3" id="activation_by3" type="text" style='width:35%;' value="<?php echo $info['activation_by3']; ?>">
                 </td>
                 <td align='right'>
                     Ref
@@ -2257,9 +2611,9 @@ if(!$_REQUEST['id']) {
                     Cancellation Date
                 </td>
                 <td align='left'>
-                    <input name="cancellation_date3" id="cancellation_date3" type="date" style='width:40%;' value="<?php echo $info['cancellation_date3']; ?>">
+                    <input name="cancellation_date3" id="cancellation_date3" type="date" style='width:32%;' value="<?php echo $info['cancellation_date3']; ?>">
                     By
-                    <input name="cancellation_by3" id="cancellation_by3" type="text" style='width:50%;' value="<?php echo $info['cancellation_by3']; ?>">
+                    <input name="cancellation_by3" id="cancellation_by3" type="text" style='width:35%;' value="<?php echo $info['cancellation_by3']; ?>">
                 </td>
                 <td align='right'>
                     Ref
@@ -2635,9 +2989,9 @@ if(!$_REQUEST['id']) {
                     Order Date
                 </td>
                 <td align='left'>
-                    <input name="order_date4" id="order_date4" type="date" style='width:40%;' value="<?php echo $info['order_date4']; ?>">
+                    <input name="order_date4" id="order_date4" type="date" style='width:32%;' value="<?php echo $info['order_date4']; ?>">
                     By
-                    <input name="order_by4" id="order_by4" type="text" style='width:50%;' value="<?php echo $info['order_by4']; ?>">
+                    <input name="order_by4" id="order_by4" type="text" style='width:35%;' value="<?php echo $info['order_by4']; ?>">
                 </td>
                 <td align='right'>
                     Ref
@@ -2652,9 +3006,9 @@ if(!$_REQUEST['id']) {
                     Activation Date
                 </td>
                 <td align='left'>
-                    <input name="activation_date4" id="activation_date4" type="date" style='width:40%;' value="<?php echo $info['activation_date4']; ?>">
+                    <input name="activation_date4" id="activation_date4" type="date" style='width:32%;' value="<?php echo $info['activation_date4']; ?>">
                     By
-                    <input name="activation_by4" id="activation_by4" type="text" style='width:50%;' value="<?php echo $info['activation_by4']; ?>">
+                    <input name="activation_by4" id="activation_by4" type="text" style='width:35%;' value="<?php echo $info['activation_by4']; ?>">
                 </td>
                 <td align='right'>
                     Ref
@@ -2669,9 +3023,9 @@ if(!$_REQUEST['id']) {
                     Cancellation Date
                 </td>
                 <td align='left'>
-                    <input name="cancellation_date4" id="cancellation_date4" type="date" style='width:40%;' value="<?php echo $info['cancellation_date4']; ?>">
+                    <input name="cancellation_date4" id="cancellation_date4" type="date" style='width:32%;' value="<?php echo $info['cancellation_date4']; ?>">
                     By
-                    <input name="cancellation_by4" id="cancellation_by4" type="text" style='width:50%;' value="<?php echo $info['cancellation_by4']; ?>">
+                    <input name="cancellation_by4" id="cancellation_by4" type="text" style='width:35%;' value="<?php echo $info['cancellation_by4']; ?>">
                 </td>
                 <td align='right'>
                     Ref
@@ -3049,9 +3403,9 @@ if(!$_REQUEST['id']) {
                     Order Date
                 </td>
                 <td align='left'>
-                    <input name="order_date5" id="order_date5" type="date" style='width:40%;' value="<?php echo $info['order_date5']; ?>">
+                    <input name="order_date5" id="order_date5" type="date" style='width:32%;' value="<?php echo $info['order_date5']; ?>">
                     By
-                    <input name="order_by5" id="order_by5" type="text" style='width:50%;' value="<?php echo $info['order_by5']; ?>">
+                    <input name="order_by5" id="order_by5" type="text" style='width:35%;' value="<?php echo $info['order_by5']; ?>">
                 </td>
                 <td align='right'>
                     Ref
@@ -3066,9 +3420,9 @@ if(!$_REQUEST['id']) {
                     Activation Date
                 </td>
                 <td align='left'>
-                    <input name="activation_date5" id="activation_date5" type="date" style='width:40%;' value="<?php echo $info['activation_date5']; ?>">
+                    <input name="activation_date5" id="activation_date5" type="date" style='width:32%;' value="<?php echo $info['activation_date5']; ?>">
                     By
-                    <input name="activation_by5" id="activation_by5" type="text" style='width:50%;' value="<?php echo $info['activation_by5']; ?>">
+                    <input name="activation_by5" id="activation_by5" type="text" style='width:35%;' value="<?php echo $info['activation_by5']; ?>">
                 </td>
                 <td align='right'>
                     Ref
@@ -3083,9 +3437,9 @@ if(!$_REQUEST['id']) {
                     Cancellation Date
                 </td>
                 <td align='left'>
-                    <input name="cancellation_date5" id="cancellation_date5" type="date" style='width:40%;' value="<?php echo $info['cancellation_date5']; ?>">
+                    <input name="cancellation_date5" id="cancellation_date5" type="date" style='width:32%;' value="<?php echo $info['cancellation_date5']; ?>">
                     By
-                    <input name="cancellation_by5" id="cancellation_by5" type="text" style='width:50%;' value="<?php echo $info['cancellation_by5']; ?>">
+                    <input name="cancellation_by5" id="cancellation_by5" type="text" style='width:35%;' value="<?php echo $info['cancellation_by5']; ?>">
                 </td>
                 <td align='right'>
                     Ref
@@ -3463,9 +3817,9 @@ if(!$_REQUEST['id']) {
                     Order Date
                 </td>
                 <td align='left'>
-                    <input name="order_date6" id="order_date6" type="date" style='width:40%;' value="<?php echo $info['order_date6']; ?>">
+                    <input name="order_date6" id="order_date6" type="date" style='width:35%;' value="<?php echo $info['order_date6']; ?>">
                     By
-                    <input name="order_by6" id="order_by6" type="text" style='width:50%;' value="<?php echo $info['order_by6']; ?>">
+                    <input name="order_by6" id="order_by6" type="text" style='width:35%;' value="<?php echo $info['order_by6']; ?>">
                 </td>
                 <td align='right'>
                     Ref
@@ -3480,9 +3834,9 @@ if(!$_REQUEST['id']) {
                     Activation Date
                 </td>
                 <td align='left'>
-                    <input name="activation_date6" id="activation_date6" type="date" style='width:40%;' value="<?php echo $info['activation_date6']; ?>">
+                    <input name="activation_date6" id="activation_date6" type="date" style='width:32%;' value="<?php echo $info['activation_date6']; ?>">
                     By
-                    <input name="activation_by6" id="activation_by6" type="text" style='width:50%;' value="<?php echo $info['activation_by6']; ?>">
+                    <input name="activation_by6" id="activation_by6" type="text" style='width:35%;' value="<?php echo $info['activation_by6']; ?>">
                 </td>
                 <td align='right'>
                     Ref
@@ -3497,9 +3851,9 @@ if(!$_REQUEST['id']) {
                     Cancellation Date
                 </td>
                 <td align='left'>
-                    <input name="cancellation_date6" id="cancellation_date6" type="date" style='width:40%;' value="<?php echo $info['cancellation_date6']; ?>">
+                    <input name="cancellation_date6" id="cancellation_date6" type="date" style='width:32%;' value="<?php echo $info['cancellation_date6']; ?>">
                     By
-                    <input name="cancellation_by6" id="cancellation_by6" type="text" style='width:50%;' value="<?php echo $info['cancellation_by6']; ?>">
+                    <input name="cancellation_by6" id="cancellation_by6" type="text" style='width:35%;' value="<?php echo $info['cancellation_by6']; ?>">
                 </td>
                 <td align='right'>
                     Ref
@@ -3877,9 +4231,9 @@ if(!$_REQUEST['id']) {
                     Order Date
                 </td>
                 <td align='left'>
-                    <input name="order_date7" id="order_date7" type="date" style='width:40%;' value="<?php echo $info['order_date7']; ?>">
+                    <input name="order_date7" id="order_date7" type="date" style='width:32%;' value="<?php echo $info['order_date7']; ?>">
                     By
-                    <input name="order_by7" id="order_by7" type="text" style='width:50%;' value="<?php echo $info['order_by7']; ?>">
+                    <input name="order_by7" id="order_by7" type="text" style='width:35%;' value="<?php echo $info['order_by7']; ?>">
                 </td>
                 <td align='right'>
                     Ref
@@ -3894,9 +4248,9 @@ if(!$_REQUEST['id']) {
                     Activation Date
                 </td>
                 <td align='left'>
-                    <input name="activation_date7" id="activation_date7" type="date" style='width:40%;' value="<?php echo $info['activation_date7']; ?>">
+                    <input name="activation_date7" id="activation_date7" type="date" style='width:32%;' value="<?php echo $info['activation_date7']; ?>">
                     By
-                    <input name="activation_by7" id="activation_by7" type="text" style='width:50%;' value="<?php echo $info['activation_by7']; ?>">
+                    <input name="activation_by7" id="activation_by7" type="text" style='width:35%;' value="<?php echo $info['activation_by7']; ?>">
                 </td>
                 <td align='right'>
                     Ref
@@ -3911,9 +4265,9 @@ if(!$_REQUEST['id']) {
                     Cancellation Date
                 </td>
                 <td align='left'>
-                    <input name="cancellation_date7" id="cancellation_date7" type="date" style='width:40%;' value="<?php echo $info['cancellation_date7']; ?>">
+                    <input name="cancellation_date7" id="cancellation_date7" type="date" style='width:32%;' value="<?php echo $info['cancellation_date7']; ?>">
                     By
-                    <input name="cancellation_by7" id="cancellation_by7" type="text" style='width:50%;' value="<?php echo $info['cancellation_by7']; ?>">
+                    <input name="cancellation_by7" id="cancellation_by7" type="text" style='width:35%;' value="<?php echo $info['cancellation_by7']; ?>">
                 </td>
                 <td align='right'>
                     Ref
@@ -4540,7 +4894,7 @@ if(!$_REQUEST['id']) {
     <!-- wipage code -->
     <tr >
         <td colspan=2 align='center'>
-            <p style="padding-left:250px;">
+            <p style="padding-left:650px;">
                 <input type="submit" name="do" value="<?php echo ($info['id']) ? "Update":"Add"; ?>" />
                 <input type="reset"  name="reset"  value="Reset" />
                 <input type="button" name="cancel" value="Cancel" onclick='window.location.href="customers.php"'>

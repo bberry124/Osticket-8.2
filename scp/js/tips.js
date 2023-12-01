@@ -1,10 +1,6 @@
 jQuery(function() {
     var showtip = function (url, elem,xoffset) {
 
-            // If element is no longer visible
-            if (!elem.is(':visible'))
-                return;
-
             var pos = elem.offset();
             var y_pos = pos.top - 12;
             var x_pos = pos.left + (xoffset || (elem.width() + 16));
@@ -13,25 +9,20 @@ jQuery(function() {
             var tip_box = $('<div>').addClass('tip_box');
             var tip_shadow = $('<div>').addClass('tip_shadow');
             var tip_content = $('<div>').addClass('tip_content').load(url, function() {
-                if (elem.is(':visible')) {
-                    tip_content.prepend('<a href="#" class="tip_close"><i class="icon-remove-circle"></i></a>').append(tip_arrow);
-                    var width = $(window).width(),
-                    rtl = $('html').hasClass('rtl'),
-                    size = tip_content.outerWidth(),
-                    left = the_tip.position().left,
-                    left_room = left - size,
-                    right_room = width - size - left,
-                    flip = rtl
-                        ? (left_room > 0 && left_room > right_room)
-                        : (right_room < 0 && left_room > right_room);
-                    if (flip) {
-                        the_tip.css({'left':x_pos-tip_content.outerWidth()-elem.width()-32+'px'});
-                        tip_box.addClass('right');
-                        tip_arrow.addClass('flip-x');
-                    }
-                } else {
-                    // Self close  if the element is gone
-                    $('.tip_box').remove();
+                tip_content.prepend('<a href="#" class="tip_close"><i class="icon-remove-circle"></i></a>').append(tip_arrow);
+            var width = $(window).width(),
+                rtl = $('html').hasClass('rtl'),
+                size = tip_content.outerWidth(),
+                left = the_tip.position().left,
+                left_room = left - size,
+                right_room = width - size - left,
+                flip = rtl
+                    ? (left_room > 0 && left_room > right_room)
+                    : (right_room < 0 && left_room > right_room);
+                if (flip) {
+                    the_tip.css({'left':x_pos-tip_content.outerWidth()-elem.width()-32+'px'});
+                    tip_box.addClass('right');
+                    tip_arrow.addClass('flip-x');
                 }
             });
 
@@ -40,22 +31,16 @@ jQuery(function() {
                 "top":y_pos + "px",
                 "left":x_pos + "px"
             }).addClass(elem.data('id'));
-
-            // Close any open tips
             $('.tip_box').remove();
-            // Only show the tip if the element is still visible.
-            if (elem.is(':visible')) {
-                $('body').append(the_tip.hide().fadeIn());
-                $('.' + elem.data('id') + ' .tip_shadow').css({
-                    "height":$('.' + elem.data('id')).height() + 5
-                });
-            }
+            $('body').append(the_tip.hide().fadeIn());
+            $('.' + elem.data('id') + ' .tip_shadow').css({
+                "height":$('.' + elem.data('id')).height() + 5
+            });
     },
     getHelpTips = (function() {
         var dfd, cache = {};
-        return function(elem) {
-            var namespace =
-                   $(elem).closest('[data-tip-namespace]').data('tipNamespace')
+        return function(namespace) {
+            var namespace = namespace
                 || $('#content').data('tipNamespace')
                 || $('meta[name=tip-namespace]').attr('content');
             if (!namespace)
@@ -77,8 +62,8 @@ jQuery(function() {
 
     var tip_id = 1;
     //Generic tip.
-    $(document)
-    .on('click mouseover', '.tip', function(e) {
+    $('.tip')
+    .live('click mouseover', function(e) {
         e.preventDefault();
         if (!this.rel)
             this.rel = 'tip-' + (tip_id++);
@@ -99,12 +84,12 @@ jQuery(function() {
             }
         }
     })
-    .on('mouseout', '.tip', function(e) {
+    .live('mouseout', function(e) {
         clearTimeout($(this).data('timer'));
     });
 
-    $(document)
-    .on('mouseover click', '.help-tip', function(e) {
+    $('.help-tip')
+    .live('mouseover click', function(e) {
         e.preventDefault();
 
         var elem = $(this),
@@ -144,11 +129,11 @@ jQuery(function() {
                 }
             }, 500);
 
-        elem.on('mouseout', function() {
+        elem.live('mouseout', function() {
             clearTimeout(tip_timer);
         });
 
-        getHelpTips(elem).then(function(tips) {
+        getHelpTips().then(function(tips) {
             var href = elem.attr('href');
             if (href) {
                 section = tips[elem.attr('href').substr(1)];
@@ -189,8 +174,7 @@ jQuery(function() {
     });
 
     //faq preview tip
-    $(document)
-    .on('mouseover', '.previewfaq', function(e) {
+    $('.previewfaq').live('mouseover', function(e) {
         e.preventDefault();
         var elem = $(this);
 
@@ -209,12 +193,12 @@ jQuery(function() {
                 showtip(url,elem,xoffset);
             }
         }
-    }).on('mouseout', '.previewfaq', function(e) {
+    }).live('mouseout', function(e) {
         clearTimeout($(this).data('timer'));
     });
 
 
-    $(document).on('mouseover', 'a.collaborators.preview', function(e) {
+    $('a.collaborators.preview').live('mouseover', function(e) {
         e.preventDefault();
         var elem = $(this);
 
@@ -227,47 +211,24 @@ jQuery(function() {
         } else {
             showtip(url,elem,xoffset);
         }
-    }).on('mouseout', 'a.collaborators.preview', function(e) {
+    }).live('mouseout', function(e) {
         clearTimeout($(this).data('timer'));
-    }).on('click', 'a.collaborators.preview', function(e) {
+    }).live('click', function(e) {
         clearTimeout($(this).data('timer'));
         $('.tip_box').remove();
     });
 
-    $(document).on('mouseover', 'a.merge.preview', function(e) {
+
+    //Ticket preview
+    $('.ticketPreview').live('mouseover', function(e) {
         e.preventDefault();
         var elem = $(this);
 
-        var url = 'ajax.php/'+elem.attr('href').substr(1)+'/preview';
-        var xoffset = 100;
-        elem.data('timer', 0);
-
-        if (e.type=='mouseover') {
-            elem.data('timer',setTimeout(function() { showtip(url, elem, xoffset);},750))
-        } else {
-            showtip(url,elem,xoffset);
-        }
-    }).on('mouseout', 'a.merge.preview', function(e) {
-        clearTimeout($(this).data('timer'));
-    }).on('click', 'a.merge.preview', function(e) {
-        clearTimeout($(this).data('timer'));
-        $('.tip_box').remove();
-    });
-
-
-    // Tooltip preview
-    $(document).on('mouseover', '.preview', function(e) {
-        var elem = $(this);
-        if (!elem.attr('href'))
-            return;
         var vars = elem.attr('href').split('=');
-        if (!elem.data('preview'))
-            return;
-        e.preventDefault();
-        var url = 'ajax.php/'+elem.data('preview').substr(1);
-        // TODO - hash url to integer and use it as id.
-        var id= url.match(/\d/g).join("");
+        var url = 'ajax.php/tickets/'+vars[1]+'/preview';
+        var id='t'+vars[1];
         var xoffset = 80;
+
         elem.data('timer', 0);
         if(!elem.data('id')) {
             elem.data('id', id);
@@ -279,7 +240,33 @@ jQuery(function() {
                 showtip(url,elem,xoffset);
             }
         }
-    }).on('mouseout', '.preview', function(e) {
+    }).live('mouseout', function(e) {
+        $(this).data('id', 0);
+        clearTimeout($(this).data('timer'));
+    });
+
+    //User preview
+    $('.userPreview').live('mouseover', function(e) {
+        e.preventDefault();
+        var elem = $(this);
+
+        var vars = elem.attr('href').split('=');
+        var url = 'ajax.php/users/'+vars[1]+'/preview';
+        var id='u'+vars[1];
+        var xoffset = 80;
+
+        elem.data('timer', 0);
+        if(!elem.data('id')) {
+            elem.data('id', id);
+            if(e.type=='mouseover') {
+                 /* wait about 1 sec - before showing the tip - mouseout kills the timeout*/
+                 elem.data('timer',setTimeout(function() { showtip(url,elem,xoffset);},750))
+            }else{
+                clearTimeout(elem.data('timer'));
+                showtip(url, elem, xoffset);
+            }
+        }
+    }).live('mouseout', function(e) {
         $(this).data('id', 0);
         clearTimeout($(this).data('timer'));
     });
@@ -290,17 +277,21 @@ jQuery(function() {
         $(this).parent().parent().remove();
     });
 
-    $(document).on('mouseup', function (e) {
+    $(document).live('mouseup', function (e) {
         var container = $('.tip_box');
         if (!container.is(e.target)
             && container.has(e.target).length === 0) {
             container.remove();
         }
     });
-    
 });
 
-function init()
+//code from wipage
+/*
+	for editing cells and add button
+*/
+
+	function init()
 {
     var tables = document.getElementsByClassName("editabletable");
     var i;
@@ -1040,16 +1031,16 @@ function displayContacts(person, position, department, phone, mobile, email)
 	var table=document.getElementById("myTable4");
 	
 	var row=table.insertRow(-1);
-	row.innerHTML="<td width='160'>&nbsp;&nbsp;&nbsp;&nbsp;Contact Person :</td><td><input type='text' size='50' value='" + person + "' name='cont[person][]'></td>";
+	row.innerHTML="<td width='160'>&nbsp;&nbsp;&nbsp;&nbsp;Contact Person :</td><td><input type='text' size='50' value='" + person + "' name='cont[person][]' ></td>";
 	
 	var row=table.insertRow(-1);
-	row.innerHTML="<td width='160'>&nbsp;&nbsp;&nbsp;&nbsp;Position :</td><td><input type='text' size='20'  value='" + position + "' name='cont[position][]'>&nbsp;&nbsp;Department :  <input type='text' size='20'  value='' name='cont[dept][]'></td>";
+	row.innerHTML="<td width='160'>&nbsp;&nbsp;&nbsp;&nbsp;Position :</td><td><input type='text' size='20'  value='" + position + "' name='cont[position][]'>&nbsp;&nbsp;Department :  <input type='text' size='20'  value='"+ department + "' name='cont[department][]'></td>";
 	
 	var row=table.insertRow(-1);
-	row.innerHTML="<td width='160'>&nbsp;&nbsp;&nbsp;&nbsp;Phone Number :</td><td><input type='text' size='20'  value='" + phone + "' name='cont[phone][]'>&nbsp;&nbsp;Mobile :  <input type='text' size='20'  value='' name='cont[mobile][]'></td>";
+	row.innerHTML="<td width='160'>&nbsp;&nbsp;&nbsp;&nbsp;Phone Number :</td><td><input type='text' size='20'  value='" + phone + "' name='cont[phone][]'>&nbsp;&nbsp;Mobile :  <input type='text' size='20'  value='"+mobile+"' name='cont[mobile][]'></td>";
 	
 	var row=table.insertRow(-1);
-	row.innerHTML="<td width='160' style='border-bottom: #65c4eb 1px solid;'>&nbsp;&nbsp;&nbsp;&nbsp;Email Address :</td><td style='border-bottom: #65c4eb 1px solid;'><input type='text' size='50'  value='' name='cont[email][]'></td>";
+	row.innerHTML="<td width='160'>&nbsp;&nbsp;&nbsp;&nbsp;Email Address :</td><td><input type='text' size='50'  value='"+ email + "' name='cont[email][]'></td>";
 }
 
 function addContact()
@@ -1057,16 +1048,16 @@ function addContact()
 	var table=document.getElementById("myTable4");
 	
 	var row=table.insertRow(-1);
-	row.innerHTML="<td width='160'>&nbsp;&nbsp;&nbsp;&nbsp;Contact Person :</td><td><input type='text' size='50' name='cont[person][]'></td>";
+	row.innerHTML="<td width='160'>&nbsp;&nbsp;&nbsp;&nbsp;Contact Person :</td><td><input type='text' size='50' name='cont[person][]' style='width:92.5%;'></td>";
 	
 	var row=table.insertRow(-1);
-	row.innerHTML="<td width='160'>&nbsp;&nbsp;&nbsp;&nbsp;Position :</td><td><input type='text' size='20' name='cont[position][]'>&nbsp;&nbsp;Department :  <input type='text' size='20' name='cont[dept][]'></td>";
+	row.innerHTML="<td width='160'>&nbsp;&nbsp;&nbsp;&nbsp;Position :</td><td><input type='text' size='20' name='cont[position][]'>&nbsp;&nbsp;Department :  <input type='text' size='20' name='cont[department][]' style='width:33%;'></td>";
 	
 	var row=table.insertRow(-1);
-	row.innerHTML="<td width='160'>&nbsp;&nbsp;&nbsp;&nbsp;Phone Number :</td><td><input type='text' size='20' name='cont[phone][]'>&nbsp;&nbsp;Mobile :  <input type='text' size='20' name='cont[mobile][]'></td>";
+	row.innerHTML="<td width='160'>&nbsp;&nbsp;&nbsp;&nbsp;Phone Number :</td><td><input type='text' size='20' name='cont[phone][]'>&nbsp;&nbsp;Mobile :  <input type='text' size='20' name='cont[mobile][]' style='width:41%;'></td>";
 	
 	var row=table.insertRow(-1);
-	row.innerHTML="<td width='160'>&nbsp;&nbsp;&nbsp;&nbsp;Email Address :</td><td><input type='text' size='50' name='cont[email][]'></td>";
+	row.innerHTML="<td width='160'>&nbsp;&nbsp;&nbsp;&nbsp;Email Address :</td><td><input type='text' size='50' name='cont[email][]' style='width:92.5%;'></td>";
 
 }
 
@@ -1181,3 +1172,4 @@ function addNotes()
 	row.innerHTML= "<td colspan='2'><hr/></td>";
 
 }
+// end add hong
