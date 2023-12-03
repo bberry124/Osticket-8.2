@@ -136,11 +136,17 @@ if ($_REQUEST['id'] && $_SERVER['REQUEST_METHOD'] == 'GET') {
             " 	state1		 = '" . db_input($vars['state1'], false) . "',  " .
             " 	state2		 = '" . db_input($vars['state2'], false) . "',  " .
             " 	voice		 = '" . db_input($vars['voice'], false) . "',  " .
+            " 	voicem		 = '" . db_input($vars['voicem'], false) . "',  " .
             " 	mobile1		 = '" . db_input($vars['mobile1'], false) . "',  " .
+            " 	mobile1m		 = '" . db_input($vars['mobile1m'], false) . "',  " .
             " 	ints1		 = '" . db_input($vars['ints1'], false) . "',  " .
+            " 	ints1m		 = '" . db_input($vars['ints1m'], false) . "',  " .
             " 	ints2		 = '" . db_input($vars['ints2'], false) . "',  " .
+            " 	ints2m		 = '" . db_input($vars['ints2m'], false) . "',  " .
             " 	webhosting		 = '" . db_input($vars['webhosting'], false) . "',  " .
+            " 	webhostingm		 = '" . db_input($vars['webhostingm'], false) . "',  " .
             " 	security		 = '" . db_input($vars['security'], false) . "',  " .
+            " 	securitym		 = '" . db_input($vars['securitym'], false) . "',  " .
             " 	landline		 = '" . db_input($vars['landline'], false) . "',  " .
             " 	telephone		 = '" . db_input($vars['telephone'], false) . "',  " .
             " 	faxn		 = '" . db_input($vars['faxn'], false) . "',  " .

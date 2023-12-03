@@ -1048,16 +1048,16 @@ function addContact()
 	var table=document.getElementById("myTable4");
 	
 	var row=table.insertRow(-1);
-	row.innerHTML="<td width='160'>&nbsp;&nbsp;&nbsp;&nbsp;Contact Person :</td><td><input type='text' size='50' name='cont[person][]' style='width:92.5%;'></td>";
+	row.innerHTML="<td width='160'>&nbsp;&nbsp;&nbsp;&nbsp;Contact Person :</td><td><input type='text' size='50' name='cont[person][]' style='width:92%;'></td>";
 	
 	var row=table.insertRow(-1);
 	row.innerHTML="<td width='160'>&nbsp;&nbsp;&nbsp;&nbsp;Position :</td><td><input type='text' size='20' name='cont[position][]'>&nbsp;&nbsp;Department :  <input type='text' size='20' name='cont[department][]' style='width:33%;'></td>";
 	
 	var row=table.insertRow(-1);
-	row.innerHTML="<td width='160'>&nbsp;&nbsp;&nbsp;&nbsp;Phone Number :</td><td><input type='text' size='20' name='cont[phone][]'>&nbsp;&nbsp;Mobile :  <input type='text' size='20' name='cont[mobile][]' style='width:41%;'></td>";
+	row.innerHTML="<td width='160'>&nbsp;&nbsp;&nbsp;&nbsp;Phone Number :</td><td><input type='text' size='20' name='cont[phone][]'>&nbsp;&nbsp;Mobile :  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' size='20' name='cont[mobile][]' style='width:33%;'></td>";
 	
 	var row=table.insertRow(-1);
-	row.innerHTML="<td width='160'>&nbsp;&nbsp;&nbsp;&nbsp;Email Address :</td><td><input type='text' size='50' name='cont[email][]' style='width:92.5%;'></td>";
+	row.innerHTML="<td width='160'>&nbsp;&nbsp;&nbsp;&nbsp;Email Address :</td><td><input type='text' size='50' name='cont[email][]' style='width:92%;'></td>";
 
 }
 

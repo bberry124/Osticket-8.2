@@ -766,63 +766,184 @@ if(!$_REQUEST['id']) {
                 <td>
                 </td>
                 <td>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Start Date&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contact Term
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Start Date&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contact Term
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0%&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;25%&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50%&nbsp;&nbsp;&nbsp;&nbsp;75%&nbsp;&nbsp;&nbsp;&nbsp;100%
                 </td>
             </tr>
         <tr>
             <td>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Voice
             </td>
-            <td>
-                    <input type="date" size="10" name="voice" id="voice" value="<?php echo $info['voice']; ?>" >
-                    <input type="date" size="10" name="voice" id="voice" value="<?php echo $info['voice']; ?>" >
-                    
+            <td style="display:flex; align-items:center">
+            &nbsp;&nbsp;&nbsp;&nbsp;<input type="date" size="10" name="voice" id="voice" value="<?php echo $info['voice']; ?>">&nbsp;&nbsp;
+                    <select name="voicem" id="voicem" style="width:25%;">
+                  <option value=""></option>
+                  <option value="12months" <?php echo $info['voicem'] == '12months' ? "selected=\"selected\"":""; ?>>12months</option>
+                  <option value="24months" <?php echo $info['voicem'] == '24months' ? "selected=\"selected\"":""; ?>>24months</option>
+                  <option value="36months" <?php echo $info['voicem'] == '36months' ? "selected=\"selected\"":""; ?>>36months</option>
+                  <option value="48months" <?php echo $info['voicem'] == '48months' ? "selected=\"selected\"":""; ?>>48months</option>
+                </select>&nbsp;&nbsp;
+                <?php
+                $inputDate = isset($info['voice']) ? $info['voice'] : date('Y-m-d');
+                $selectedMonths = isset($info['voicem']) ? intval(substr($info['voicem'], 0, 2)) : 0;
+                if ($selectedMonths > 0) {
+                    $newDate = date('Y-m-d', strtotime($inputDate . ' + ' . $selectedMonths . ' months'));
+                    $currentDate = date('Y-m-d');
+                    $elapsedTime = strtotime($currentDate) - strtotime($inputDate);
+                    $totalTime = strtotime($newDate) - strtotime($inputDate);
+                    $percentage = ($elapsedTime / $totalTime) * 100;
+                    echo '<progress id="progress-bar" value="' . (100 - $percentage) . '" max="100"></progress>';
+                } else {
+                    echo '<progress id="progress-bar" value="0" max="100"></progress>';
+                }
+                ?>
+       
             </td>
         </tr>
         <tr>
             <td>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mobile
                     </td>
-                    <td>
-                    <input type="date" size="10" name="mobile1" id="mobile1" value="<?php echo $info['mobile1']; ?>" >
-                    <input type="date" size="10" name="mobile1" id="mobile1" value="<?php echo $info['mobile1']; ?>" >
+                    <td style="display:flex; align-items:center">
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="date" size="10" name="mobile1" id="mobile1" value="<?php echo $info['mobile1']; ?>" >&nbsp;&nbsp;
+                    <select name="mobile1m" id="mobile1m" style="width:25%;">
+                  <option value=""></option>
+                  <option value="12months" <?php echo $info['mobile1m'] == '12months' ? "selected=\"selected\"":""; ?>>12months</option>
+                  <option value="24months" <?php echo $info['mobile1m'] == '24months' ? "selected=\"selected\"":""; ?>>24months</option>
+                  <option value="36months" <?php echo $info['mobile1m'] == '36months' ? "selected=\"selected\"":""; ?>>36months</option>
+                  <option value="48months" <?php echo $info['mobile1m'] == '48months' ? "selected=\"selected\"":""; ?>>48months</option>
+                </select>&nbsp;&nbsp;
+                <?php
+                $inputDate = isset($info['mobile1']) ? $info['mobile1'] : date('Y-m-d');
+                $selectedMonths = isset($info['mobile1m']) ? intval(substr($info['mobile1m'], 0, 2)) : 0;
+                if ($selectedMonths > 0) {
+                    $newDate = date('Y-m-d', strtotime($inputDate . ' + ' . $selectedMonths . ' months'));
+                    $currentDate = date('Y-m-d');
+                    $elapsedTime = strtotime($currentDate) - strtotime($inputDate);
+                    $totalTime = strtotime($newDate) - strtotime($inputDate);
+                    $percentage = ($elapsedTime / $totalTime) * 100;
+                    echo '<progress id="progress-bar" value="' . (100 - $percentage) . '" max="100"></progress>';
+                } else {
+                    echo '<progress id="progress-bar" value="0" max="100"></progress>';
+                }
+                ?>
                     </td>
         </tr>
         <tr>
             <td>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Internet S1
                     </td>
-                    <td>
-                    <input type="date" size="10" name="ints1" id="ints1" value="<?php echo $info['ints1']; ?>" >
-                    <input type="date" size="10" name="ints1" id="ints1" value="<?php echo $info['ints1']; ?>" >
+                    <td style="display:flex; align-items:center">
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="date" size="10" name="ints1" id="ints1" value="<?php echo $info['ints1']; ?>" >&nbsp;&nbsp;
+                    <select name="ints1m" id="ints1m" style="width:25%;">
+                  <option value=""></option>
+                  <option value="12months" <?php echo $info['ints1m'] == '12months' ? "selected=\"selected\"":""; ?>>12months</option>
+                  <option value="24months" <?php echo $info['ints1m'] == '24months' ? "selected=\"selected\"":""; ?>>24months</option>
+                  <option value="36months" <?php echo $info['ints1m'] == '36months' ? "selected=\"selected\"":""; ?>>36months</option>
+                  <option value="48months" <?php echo $info['ints1m'] == '48months' ? "selected=\"selected\"":""; ?>>48months</option>
+                </select>&nbsp;&nbsp;
+                <?php
+                $inputDate = isset($info['ints1']) ? $info['ints1'] : date('Y-m-d');
+                $selectedMonths = isset($info['ints1m']) ? intval(substr($info['ints1m'], 0, 2)) : 0;
+                if ($selectedMonths > 0) {
+                    $newDate = date('Y-m-d', strtotime($inputDate . ' + ' . $selectedMonths . ' months'));
+                    $currentDate = date('Y-m-d');
+                    $elapsedTime = strtotime($currentDate) - strtotime($inputDate);
+                    $totalTime = strtotime($newDate) - strtotime($inputDate);
+                    $percentage = ($elapsedTime / $totalTime) * 100;
+                    echo '<progress id="progress-bar" value="' . (100 - $percentage) . '" max="100"></progress>';
+                } else {
+                    echo '<progress id="progress-bar" value="0" max="100"></progress>';
+                }
+                ?>
                     </td>
         </tr>
         <tr>
             <td>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Internet S2
                     </td>
-                    <td>
-                    <input type="date" size="10" name="ints2" id="ints2" value="<?php echo $info['ints2']; ?>" >
-                    <input type="date" size="10" name="ints2" id="ints2" value="<?php echo $info['ints2']; ?>" >
+                    <td style="display:flex; align-items:center">
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="date" size="10" name="ints2" id="ints2" value="<?php echo $info['ints2']; ?>" >&nbsp;&nbsp;
+                    <select name="ints2m" id="ints2m" style="width:25%;">
+                  <option value=""></option>
+                  <option value="12months" <?php echo $info['ints2m'] == '12months' ? "selected=\"selected\"":""; ?>>12months</option>
+                  <option value="24months" <?php echo $info['ints2m'] == '24months' ? "selected=\"selected\"":""; ?>>24months</option>
+                  <option value="36months" <?php echo $info['ints2m'] == '36months' ? "selected=\"selected\"":""; ?>>36months</option>
+                  <option value="48months" <?php echo $info['ints2m'] == '48months' ? "selected=\"selected\"":""; ?>>48months</option>
+                </select>&nbsp;&nbsp;
+                <?php
+                $inputDate = isset($info['ints2']) ? $info['ints2'] : date('Y-m-d');
+                $selectedMonths = isset($info['ints2m']) ? intval(substr($info['ints2m'], 0, 2)) : 0;
+                if ($selectedMonths > 0) {
+                    $newDate = date('Y-m-d', strtotime($inputDate . ' + ' . $selectedMonths . ' months'));
+                    $currentDate = date('Y-m-d');
+                    $elapsedTime = strtotime($currentDate) - strtotime($inputDate);
+                    $totalTime = strtotime($newDate) - strtotime($inputDate);
+                    $percentage = ($elapsedTime / $totalTime) * 100;
+                    echo '<progress id="progress-bar" value="' . (100 - $percentage) . '" max="100"></progress>';
+                } else {
+                    echo '<progress id="progress-bar" value="0" max="100"></progress>';
+                }
+                ?>
                     </td>
         </tr>
         <tr>
             <td>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Web Hosting
                     </td>
-                    <td>
-                    <input type="date" size="10" name="webhosting" id="webhosting" value="<?php echo $info['webhosting']; ?>" >
-                    <input type="date" size="10" name="webhosting" id="webhosting" value="<?php echo $info['webhosting']; ?>" >
+                    <td style="display:flex; align-items:center">
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="date" size="10" name="webhosting" id="webhosting" value="<?php echo $info['webhosting']; ?>" >&nbsp;&nbsp;
+                    <select name="webhostingm" id="webhostingm" style="width:25%;">
+                  <option value=""></option>
+                  <option value="12months" <?php echo $info['webhostingm'] == '12months' ? "selected=\"selected\"":""; ?>>12months</option>
+                  <option value="24months" <?php echo $info['webhostingm'] == '24months' ? "selected=\"selected\"":""; ?>>24months</option>
+                  <option value="36months" <?php echo $info['webhostingm'] == '36months' ? "selected=\"selected\"":""; ?>>36months</option>
+                  <option value="48months" <?php echo $info['webhostingm'] == '48months' ? "selected=\"selected\"":""; ?>>48months</option>
+                </select>&nbsp;&nbsp;
+                <?php
+                $inputDate = isset($info['webhosting']) ? $info['webhosting'] : date('Y-m-d');
+                $selectedMonths = isset($info['webhostingm']) ? intval(substr($info['webhostingm'], 0, 2)) : 0;
+                if ($selectedMonths > 0) {
+                    $newDate = date('Y-m-d', strtotime($inputDate . ' + ' . $selectedMonths . ' months'));
+                    $currentDate = date('Y-m-d');
+                    $elapsedTime = strtotime($currentDate) - strtotime($inputDate);
+                    $totalTime = strtotime($newDate) - strtotime($inputDate);
+                    $percentage = ($elapsedTime / $totalTime) * 100;
+                    echo '<progress id="progress-bar" value="' . (100 - $percentage) . '" max="100"></progress>';
+                } else {
+                    echo '<progress id="progress-bar" value="0" max="100"></progress>';
+                }
+                ?>
                     </td>
         </tr>
         <tr>
             <td>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Security
                     </td>
-                    <td>
-                    <input type="date" size="10" name="security" id="security" value="<?php echo $info['security']; ?>" >
-                    <input type="date" size="10" name="security" id="security" value="<?php echo $info['security']; ?>" >
+                    <td style="display:flex; align-items:center">
+                    &nbsp;&nbsp;&nbsp;&nbsp;<input type="date" size="10" name="security" id="security" value="<?php echo $info['security']; ?>" >&nbsp;&nbsp;
+                    <select name="securitym" id="securitym" style="width:25%;">
+                  <option value=""></option>
+                  <option value="12months" <?php echo $info['securitym'] == '12months' ? "selected=\"selected\"":""; ?>>12months</option>
+                  <option value="24months" <?php echo $info['securitym'] == '24months' ? "selected=\"selected\"":""; ?>>24months</option>
+                  <option value="36months" <?php echo $info['securitym'] == '36months' ? "selected=\"selected\"":""; ?>>36months</option>
+                  <option value="48months" <?php echo $info['securitym'] == '48months' ? "selected=\"selected\"":""; ?>>48months</option>
+                </select>&nbsp;&nbsp;
+                <?php
+                $inputDate = isset($info['security']) ? $info['security'] : date('Y-m-d');
+                $selectedMonths = isset($info['securitym']) ? intval(substr($info['securitym'], 0, 2)) : 0;
+                if ($selectedMonths > 0) {
+                    $newDate = date('Y-m-d', strtotime($inputDate . ' + ' . $selectedMonths . ' months'));
+                    $currentDate = date('Y-m-d');
+                    $elapsedTime = strtotime($currentDate) - strtotime($inputDate);
+                    $totalTime = strtotime($newDate) - strtotime($inputDate);
+                    $percentage = ($elapsedTime / $totalTime) * 100;
+                    echo '<progress id="progress-bar" value="' . (100 - $percentage) . '" max="100"></progress>';
+                } else {
+                    echo '<progress id="progress-bar" value="0" max="100"></progress>';
+                }
+                ?>
                     </td>
         </tr>
     </table>
