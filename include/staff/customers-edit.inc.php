@@ -768,7 +768,7 @@ if(!$_REQUEST['id']) {
                 <td>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Start Date&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contact Term
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0%&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;25%&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50%&nbsp;&nbsp;&nbsp;&nbsp;75%&nbsp;&nbsp;&nbsp;&nbsp;100%
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0%&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;25%&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50%&nbsp;&nbsp;&nbsp;&nbsp;75%&nbsp;&nbsp;&nbsp;&nbsp;100%
                 </td>
             </tr>
         <tr>
@@ -779,10 +779,12 @@ if(!$_REQUEST['id']) {
             &nbsp;&nbsp;&nbsp;&nbsp;<input type="date" size="10" name="voice" id="voice" value="<?php echo $info['voice']; ?>">&nbsp;&nbsp;
                     <select name="voicem" id="voicem" style="width:25%;">
                   <option value=""></option>
-                  <option value="12months" <?php echo $info['voicem'] == '12months' ? "selected=\"selected\"":""; ?>>12months</option>
-                  <option value="24months" <?php echo $info['voicem'] == '24months' ? "selected=\"selected\"":""; ?>>24months</option>
-                  <option value="36months" <?php echo $info['voicem'] == '36months' ? "selected=\"selected\"":""; ?>>36months</option>
-                  <option value="48months" <?php echo $info['voicem'] == '48months' ? "selected=\"selected\"":""; ?>>48months</option>
+                  <option value="12months" <?php echo $info['voicem'] == '12months' ? "selected=\"selected\"":""; ?>>12 Months</option>
+                  <option value="24months" <?php echo $info['voicem'] == '24months' ? "selected=\"selected\"":""; ?>>24 Months</option>
+                  <option value="36months" <?php echo $info['voicem'] == '36months' ? "selected=\"selected\"":""; ?>>36 Months</option>
+                  <option value="48months" <?php echo $info['voicem'] == '48months' ? "selected=\"selected\"":""; ?>>48 Months</option>
+                  <option value="60months" <?php echo $info['voicem'] == '60months' ? "selected=\"selected\"":""; ?>>60 Months</option>
+                  <option value="72months" <?php echo $info['voicem'] == '72months' ? "selected=\"selected\"":""; ?>>72 Months</option>
                 </select>&nbsp;&nbsp;
                 <?php
                 $inputDate = isset($info['voice']) ? $info['voice'] : date('Y-m-d');
@@ -795,7 +797,7 @@ if(!$_REQUEST['id']) {
                     $percentage = ($elapsedTime / $totalTime) * 100;
                     echo '<progress id="progress-bar" value="' . (100 - $percentage) . '" max="100"></progress>';
                 } else {
-                    echo '<progress id="progress-bar" value="0" max="100"></progress>';
+                    echo '<progress id="progress-bar" value="0" max="100></progress>';
                 }
                 ?>
        
@@ -809,10 +811,12 @@ if(!$_REQUEST['id']) {
                     &nbsp;&nbsp;&nbsp;&nbsp;<input type="date" size="10" name="mobile1" id="mobile1" value="<?php echo $info['mobile1']; ?>" >&nbsp;&nbsp;
                     <select name="mobile1m" id="mobile1m" style="width:25%;">
                   <option value=""></option>
-                  <option value="12months" <?php echo $info['mobile1m'] == '12months' ? "selected=\"selected\"":""; ?>>12months</option>
-                  <option value="24months" <?php echo $info['mobile1m'] == '24months' ? "selected=\"selected\"":""; ?>>24months</option>
-                  <option value="36months" <?php echo $info['mobile1m'] == '36months' ? "selected=\"selected\"":""; ?>>36months</option>
-                  <option value="48months" <?php echo $info['mobile1m'] == '48months' ? "selected=\"selected\"":""; ?>>48months</option>
+                  <option value="12months" <?php echo $info['mobile1m'] == '12months' ? "selected=\"selected\"":""; ?>>12 Months</option>
+                  <option value="24months" <?php echo $info['mobile1m'] == '24months' ? "selected=\"selected\"":""; ?>>24 Months</option>
+                  <option value="36months" <?php echo $info['mobile1m'] == '36months' ? "selected=\"selected\"":""; ?>>36 Months</option>
+                  <option value="48months" <?php echo $info['mobile1m'] == '48months' ? "selected=\"selected\"":""; ?>>48 Months</option>
+                  <option value="60months" <?php echo $info['mobile1m'] == '60months' ? "selected=\"selected\"":""; ?>>60 Months</option>
+                  <option value="72months" <?php echo $info['mobile1m'] == '72months' ? "selected=\"selected\"":""; ?>>72 Months</option>
                 </select>&nbsp;&nbsp;
                 <?php
                 $inputDate = isset($info['mobile1']) ? $info['mobile1'] : date('Y-m-d');
@@ -838,10 +842,12 @@ if(!$_REQUEST['id']) {
                     &nbsp;&nbsp;&nbsp;&nbsp;<input type="date" size="10" name="ints1" id="ints1" value="<?php echo $info['ints1']; ?>" >&nbsp;&nbsp;
                     <select name="ints1m" id="ints1m" style="width:25%;">
                   <option value=""></option>
-                  <option value="12months" <?php echo $info['ints1m'] == '12months' ? "selected=\"selected\"":""; ?>>12months</option>
-                  <option value="24months" <?php echo $info['ints1m'] == '24months' ? "selected=\"selected\"":""; ?>>24months</option>
-                  <option value="36months" <?php echo $info['ints1m'] == '36months' ? "selected=\"selected\"":""; ?>>36months</option>
-                  <option value="48months" <?php echo $info['ints1m'] == '48months' ? "selected=\"selected\"":""; ?>>48months</option>
+                  <option value="12months" <?php echo $info['ints1m'] == '12months' ? "selected=\"selected\"":""; ?>>12 Months</option>
+                  <option value="24months" <?php echo $info['ints1m'] == '24months' ? "selected=\"selected\"":""; ?>>24 Months</option>
+                  <option value="36months" <?php echo $info['ints1m'] == '36months' ? "selected=\"selected\"":""; ?>>36 Months</option>
+                  <option value="48months" <?php echo $info['ints1m'] == '48months' ? "selected=\"selected\"":""; ?>>48 Months</option>
+                  <option value="60months" <?php echo $info['ints1m'] == '60months' ? "selected=\"selected\"":""; ?>>60 Months</option>
+                  <option value="72months" <?php echo $info['ints1m'] == '72months' ? "selected=\"selected\"":""; ?>>72 Months</option>
                 </select>&nbsp;&nbsp;
                 <?php
                 $inputDate = isset($info['ints1']) ? $info['ints1'] : date('Y-m-d');
@@ -867,10 +873,12 @@ if(!$_REQUEST['id']) {
                     &nbsp;&nbsp;&nbsp;&nbsp;<input type="date" size="10" name="ints2" id="ints2" value="<?php echo $info['ints2']; ?>" >&nbsp;&nbsp;
                     <select name="ints2m" id="ints2m" style="width:25%;">
                   <option value=""></option>
-                  <option value="12months" <?php echo $info['ints2m'] == '12months' ? "selected=\"selected\"":""; ?>>12months</option>
-                  <option value="24months" <?php echo $info['ints2m'] == '24months' ? "selected=\"selected\"":""; ?>>24months</option>
-                  <option value="36months" <?php echo $info['ints2m'] == '36months' ? "selected=\"selected\"":""; ?>>36months</option>
-                  <option value="48months" <?php echo $info['ints2m'] == '48months' ? "selected=\"selected\"":""; ?>>48months</option>
+                  <option value="12months" <?php echo $info['ints2m'] == '12months' ? "selected=\"selected\"":""; ?>>12 Months</option>
+                  <option value="24months" <?php echo $info['ints2m'] == '24months' ? "selected=\"selected\"":""; ?>>24 Months</option>
+                  <option value="36months" <?php echo $info['ints2m'] == '36months' ? "selected=\"selected\"":""; ?>>36 Months</option>
+                  <option value="48months" <?php echo $info['ints2m'] == '48months' ? "selected=\"selected\"":""; ?>>48 Months</option>
+                  <option value="60months" <?php echo $info['ints2m'] == '60months' ? "selected=\"selected\"":""; ?>>60 Months</option>
+                  <option value="72months" <?php echo $info['ints2m'] == '72months' ? "selected=\"selected\"":""; ?>>72 months</option>
                 </select>&nbsp;&nbsp;
                 <?php
                 $inputDate = isset($info['ints2']) ? $info['ints2'] : date('Y-m-d');
@@ -896,10 +904,12 @@ if(!$_REQUEST['id']) {
                     &nbsp;&nbsp;&nbsp;&nbsp;<input type="date" size="10" name="webhosting" id="webhosting" value="<?php echo $info['webhosting']; ?>" >&nbsp;&nbsp;
                     <select name="webhostingm" id="webhostingm" style="width:25%;">
                   <option value=""></option>
-                  <option value="12months" <?php echo $info['webhostingm'] == '12months' ? "selected=\"selected\"":""; ?>>12months</option>
-                  <option value="24months" <?php echo $info['webhostingm'] == '24months' ? "selected=\"selected\"":""; ?>>24months</option>
-                  <option value="36months" <?php echo $info['webhostingm'] == '36months' ? "selected=\"selected\"":""; ?>>36months</option>
-                  <option value="48months" <?php echo $info['webhostingm'] == '48months' ? "selected=\"selected\"":""; ?>>48months</option>
+                  <option value="12months" <?php echo $info['webhostingm'] == '12months' ? "selected=\"selected\"":""; ?>>12 Months</option>
+                  <option value="24months" <?php echo $info['webhostingm'] == '24months' ? "selected=\"selected\"":""; ?>>24 Months</option>
+                  <option value="36months" <?php echo $info['webhostingm'] == '36months' ? "selected=\"selected\"":""; ?>>36 Months</option>
+                  <option value="48months" <?php echo $info['webhostingm'] == '48months' ? "selected=\"selected\"":""; ?>>48 Months</option>
+                  <option value="60months" <?php echo $info['webhostingm'] == '60months' ? "selected=\"selected\"":""; ?>>60 Months</option>
+                  <option value="72months" <?php echo $info['webhostingm'] == '72months' ? "selected=\"selected\"":""; ?>>72 Months</option>
                 </select>&nbsp;&nbsp;
                 <?php
                 $inputDate = isset($info['webhosting']) ? $info['webhosting'] : date('Y-m-d');
@@ -925,10 +935,12 @@ if(!$_REQUEST['id']) {
                     &nbsp;&nbsp;&nbsp;&nbsp;<input type="date" size="10" name="security" id="security" value="<?php echo $info['security']; ?>" >&nbsp;&nbsp;
                     <select name="securitym" id="securitym" style="width:25%;">
                   <option value=""></option>
-                  <option value="12months" <?php echo $info['securitym'] == '12months' ? "selected=\"selected\"":""; ?>>12months</option>
-                  <option value="24months" <?php echo $info['securitym'] == '24months' ? "selected=\"selected\"":""; ?>>24months</option>
-                  <option value="36months" <?php echo $info['securitym'] == '36months' ? "selected=\"selected\"":""; ?>>36months</option>
-                  <option value="48months" <?php echo $info['securitym'] == '48months' ? "selected=\"selected\"":""; ?>>48months</option>
+                  <option value="12months" <?php echo $info['securitym'] == '12months' ? "selected=\"selected\"":""; ?>>12 Months</option>
+                  <option value="24months" <?php echo $info['securitym'] == '24months' ? "selected=\"selected\"":""; ?>>24 Months</option>
+                  <option value="36months" <?php echo $info['securitym'] == '36months' ? "selected=\"selected\"":""; ?>>36 Months</option>
+                  <option value="48months" <?php echo $info['securitym'] == '48months' ? "selected=\"selected\"":""; ?>>48 Months</option>
+                  <option value="60months" <?php echo $info['securitym'] == '60months' ? "selected=\"selected\"":""; ?>>60 Months</option>
+                  <option value="72months" <?php echo $info['securitym'] == '72months' ? "selected=\"selected\"":""; ?>>72 Months</option>
                 </select>&nbsp;&nbsp;
                 <?php
                 $inputDate = isset($info['security']) ? $info['security'] : date('Y-m-d');
