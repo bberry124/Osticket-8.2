@@ -4,6 +4,19 @@ if (!defined('OSTSCPINC') || !$thisstaff
         die('Access Denied');
 
 $info=array();
+if($_REQUEST['cid'])
+{
+  $tes = db_query('select * from '.TABLE_PREFIX.'customer1 where id =  '.intval($_REQUEST['cid']));
+  if( db_num_rows($tes))
+	{
+	  $info = db_fetch_array($tes);
+	}
+	//wipage
+					
+		
+					
+					//wipage
+}
 $info=Format::htmlchars(($errors && $_POST)?$_POST:$info, true);
 
 if ($_SESSION[':form-data'] && !$_GET['tid'])
@@ -11,28 +24,28 @@ if ($_SESSION[':form-data'] && !$_GET['tid'])
 
 //  Use thread entry to seed the ticket
 if (!$user && $_GET['tid'] && ($entry = ThreadEntry::lookup($_GET['tid']))) {
-    if ($entry->getThread()->getObjectType() == 'T')
-      $oldTicketId = $entry->getThread()->getObjectId();
-    if ($entry->getThread()->getObjectType() == 'A')
-      $oldTaskId = $entry->getThread()->getObjectId();
+if ($entry->getThread()->getObjectType() == 'T')
+$oldTicketId = $entry->getThread()->getObjectId();
+if ($entry->getThread()->getObjectType() == 'A')
+$oldTaskId = $entry->getThread()->getObjectId();
 
-    $_SESSION[':form-data']['message'] = Format::htmlchars($entry->getBody());
-    $_SESSION[':form-data']['ticketId'] = $oldTicketId;
-    $_SESSION[':form-data']['taskId'] = $oldTaskId;
-    $_SESSION[':form-data']['eid'] = $entry->getId();
-    $_SESSION[':form-data']['timestamp'] = $entry->getCreateDate();
+$_SESSION[':form-data']['message'] = Format::htmlchars($entry->getBody());
+$_SESSION[':form-data']['ticketId'] = $oldTicketId;
+$_SESSION[':form-data']['taskId'] = $oldTaskId;
+$_SESSION[':form-data']['eid'] = $entry->getId();
+$_SESSION[':form-data']['timestamp'] = $entry->getCreateDate();
 
-    if ($entry->user_id)
-       $user = User::lookup($entry->user_id);
+if ($entry->user_id)
+$user = User::lookup($entry->user_id);
 
-     if (($m= TicketForm::getInstance()->getField('message'))) {
-         $k = 'attach:'.$m->getId();
-         unset($_SESSION[':form-data'][$k]);
-        foreach ($entry->getAttachments() as $a) {
-          if (!$a->inline && $a->file) {
-            $_SESSION[':form-data'][$k][$a->file->getId()] = $a->getFilename();
-            $_SESSION[':uploadedFiles'][$a->file->getId()] = $a->getFilename();
-          }
+if (($m= TicketForm::getInstance()->getField('message'))) {
+$k = 'attach:'.$m->getId();
+unset($_SESSION[':form-data'][$k]);
+foreach ($entry->getAttachments() as $a) {
+if (!$a->inline && $a->file) {
+$_SESSION[':form-data'][$k][$a->file->getId()] = $a->getFilename();
+$_SESSION[':uploadedFiles'][$a->file->getId()] = $a->getFilename();
+}
         }
      }
 }
@@ -746,17 +759,17 @@ $(function() {
         property: "/bin/true"
     });
 
-   <?php
-    // Popup user lookup on the initial page load (not post) if we don't have a
-    // user selected
-    if (!$_POST && !$user) {?>
-    setTimeout(function() {
-      $.userLookup('ajax.php/users/lookup/form', function (user) {
-        window.location.href = window.location.href+'&uid='+user.id;
-      });
-    }, 100);
-    <?php
-    } ?>
+//    <?php
+//     // Popup user lookup on the initial page load (not post) if we don't have a
+//     // user selected
+//     if (!$_POST && !$user) {?>
+//     setTimeout(function() {
+//       $.userLookup('ajax.php/users/lookup/form', function (user) {
+//         window.location.href = window.location.href+'&uid='+user.id;
+//       });
+//     }, 100);
+//     <?php
+//     } ?>
 });
 
 $(function() {

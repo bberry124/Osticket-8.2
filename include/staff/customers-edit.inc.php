@@ -691,7 +691,7 @@ if(!$_REQUEST['id']) {
         <thead>
             <tr>
                 <th colspan="3">
-                    <strong>Support</strong>
+                    <strong>SLA Support Agreements</strong>
                 </th>
             </tr>
         </thead>
@@ -752,26 +752,6 @@ if(!$_REQUEST['id']) {
                     Seats: <input type="text" size="10" name="network_seats" id="network_seats" value="<?php echo $info['network_seats']; ?>" >
                 </td>
             </tr>
-        </tbody>
-        <thead>
-            <tr>
-                <th colspan="3">
-                    <strong>Other Contacts</strong>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td id="contacts" colspan="4" style="border:none;">
-                <table width="100%" border="0" id="myTable4">
-                </table>
-            </td>
-          </tr>
-          <tr>
-            <td colspan="4" style="padding-left:25px;">
-                <button type="button" onclick="addContact()">Add Contact</button>
-            </td>
-          </tr>
         </tbody>
         <thead>
         <tr>
@@ -977,6 +957,27 @@ if(!$_REQUEST['id']) {
                 ?>
                     </td>
         </tr>
+        </tbody>
+        <thead>
+            <tr>
+                <th colspan="3">
+                    <strong>Other Contacts</strong>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td id="contacts" colspan="4" style="border:none;">
+                <table width="100%" border="0" id="myTable4">
+                </table>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4" style="padding-left:25px;">
+                <button type="button" onclick="addContact()">Add Contact</button>
+            </td>
+          </tr>
+        </tbody>
     </table>
     </td>
 
@@ -995,7 +996,7 @@ if(!$_REQUEST['id']) {
                         <td>
                             <!-- <br/> -->
                             <br/>
-                            <input type="button" onclick="document.location='tickets.php?a=open&cid=<?php echo $_REQUEST['id']; ?>';" value="Create New Ticket" style="width:80%;"><br/>
+                            <input type="button" onclick="document.location='tickets.php?a=open&cid=<?php echo $_REQUEST['id']; ?>';" value="Create New Ticket" style="width:80%;background-color:#f45511;"><br/>
                         </td>
                     </tr>
                     <tr style="text-align: center;">
