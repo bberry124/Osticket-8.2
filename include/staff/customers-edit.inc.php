@@ -230,21 +230,40 @@ if(!$_REQUEST['id']) {
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date Established
                 </td>
                 <td>
-                <input type="date" size="18" name="establ" id="establ" class="typeahead" value="<?php echo $info['establ']; ?>"
-                        autocomplete="off" autocorrect="off" autocapitalize="off">
-                        &nbsp;&nbsp;Time in business&nbsp;&nbsp;&nbsp;<strong>5 Years, 2 Months, 7 Days</strong>
-                </td>
+            <?php
+            $establ = $info['establ'];
+            $currentDate = new DateTime();
+            $selectedDateTime = new DateTime($establ);
+            $interval = $currentDate->diff($selectedDateTime);
+            $years = $interval->y;
+            $months = $interval->m;
+            $days = $interval->d;
+            ?>
+    <input type="date" size="18" name="establ" id="establ" class="typeahead" value="<?php echo $establ; ?>"
+           autocomplete="off" autocorrect="off" autocapitalize="off">
+    &nbsp;&nbsp;Time in business&nbsp;&nbsp;&nbsp;
+    <?php
+    if ($years > 0) {
+        echo "<strong>{$years} Years";
+        if ($months > 0) {
+            echo ", {$months} Months";
+        }
+        if ($days > 0) {
+            echo ", {$days} Days";
+        }
+        echo "</strong>";
+    } elseif ($months > 0) {
+        echo "<strong>{$months} Months";
+        if ($days > 0) {
+            echo ", {$days} Days";
+        }
+        echo "</strong>";
+    } elseif ($days>0) {
+        echo "<strong>{$days} Days</strong>";
+    }
+    ?>
+</td>
             </tr>
-            <!-- <tr>
-                <td width="160">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Web URL
-                </td>
-                <td>
-                    <input type="text" size="59" name="website" id="website" class="typeahead" value="<?php echo $info['website']; ?>"
-                        autocomplete="off" autocorrect="off" autocapitalize="off">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button style="margin-top:5px" type="button" onclick="gotoCustomerUrl();">Click Here</button>
-                </td>
-            </tr> -->
         </tbody>
         <thead>
          <tr>
@@ -5044,6 +5063,7 @@ if(!$_REQUEST['id']) {
 </table>
 
 <input type="hidden" id="customers_internet_status" value="customers_internet_status"/>
+
 <script type="text/javascript">
     function interact(index, isup) {
         var value=0;
