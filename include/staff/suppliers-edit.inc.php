@@ -3,7 +3,11 @@
     || !$thisstaff->hasPerm(Ticket::PERM_CREATE, false))
     die('Access Denied');
     $info=array();
-	$info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
+    if(!$_REQUEST['id']){
+        $info=Format::htmlchars(($errors && $_POST)?$_POST:$info);
+    } else {
+        $info=Format::htmlchars(($errors && $_POST)?$_POST:$sup_info);
+    }	
 ?>
 
 <form action="suppliers.php" method="post" id="save"  enctype="multipart/form-data">

@@ -163,7 +163,7 @@ if ($_POST)
                 &nbsp;<span class="error">&nbsp;<?php echo $errors['email2']; ?></span>
             <?php 
             if($cfg->notifyONNewStaffTicket()) { ?>
-               &nbsp;&nbsp;&nbsp;
+               &nbsp;&nbsp;&nbsp;&nbsp;
                <input type="checkbox" name="alertuser2" <?php echo (!$errors || $info['alertuser2'])? 'checked="checked"': ''; ?>>Send alert to user.
             <?php 
              } ?>
@@ -470,6 +470,12 @@ if ($_POST)
             }
         ?>
         </tbody>
+        <tbody> <?php
+        $tform = TicketForm::getInstance();
+        if ($_POST && !$tform->errors())
+            $tform1->isValidForStaff();
+        $tform->render(true);
+        ?>
         </tbody>
         <tbody>
         <?php
@@ -485,7 +491,7 @@ if ($_POST)
             <?php
             if($cfg->isCannedResponseEnabled() && ($cannedResponses=Canned::getCannedResponses())) {
                 ?>
-                <div style="margin-top:0.3em;margin-bottom:0.5em">
+                <div style="margin-top:0.3em;margin-bottom:0.5em;margin-left:15px">
                     <?php echo __('Canned Response');?>:&nbsp;
                     <select id="cannedResp" name="cannedResp">
                         <option value="0" selected="selected">&mdash; <?php echo __('Select a canned response');?> &mdash;</option>
@@ -520,7 +526,7 @@ print $response_form->getField('attachments')->render();
 ?>
                     </div>
 
-                <table border="0" cellspacing="0" cellpadding="2" width="100%">
+                <table border="0" cellspacing="0" cellpadding="2" width="100%" style="margin-left:15px;">
             <tr>
                 <td width="100"><?php echo __('Ticket Status');?>:</td>
                 <td>
@@ -758,18 +764,6 @@ $(function() {
         },
         property: "/bin/true"
     });
-
-//    <?php
-//     // Popup user lookup on the initial page load (not post) if we don't have a
-//     // user selected
-//     if (!$_POST && !$user) {?>
-//     setTimeout(function() {
-//       $.userLookup('ajax.php/users/lookup/form', function (user) {
-//         window.location.href = window.location.href+'&uid='+user.id;
-//       });
-//     }, 100);
-//     <?php
-//     } ?>
 });
 
 $(function() {

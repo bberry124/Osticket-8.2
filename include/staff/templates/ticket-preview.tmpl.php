@@ -204,6 +204,12 @@ if($ticket->getNumNotes())
 if($ticket->isOpen())
     $options[]=array('action'=>__('Reply'),'url'=>"tickets.php?id=$tid#reply");
 
+if($thisstaff->canAssignTickets())
+    $options[]=array('action'=>($ticket->isAssigned()?__('Reassign'):__('Assign')),'url'=>"tickets.php?id=$tid#assign");
+
+if($thisstaff->canTransferTickets())
+    $options[]=array('action'=>'Transfer','url'=>"tickets.php?id=$tid#transfer");
+
 if ($role->hasPerm(Ticket::PERM_ASSIGN))
     $options[]=array('action'=>($ticket->isAssigned()?__('Reassign'):__('Assign')),'url'=>"tickets.php?id=$tid#assign");
 

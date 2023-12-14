@@ -268,6 +268,9 @@ foreach ($tickets as $T) {
             echo "<td $style><div $style>$contents</div></td>";
         }
         else {
+            if (strtotime($contents)) { // Check if $contents is a valid date
+                $contents = date('d/m/Y', strtotime($contents)); // Format the date to DD/MM/YYYY
+            }
             echo "<td>$contents</td>";
         }
     }
