@@ -19,6 +19,7 @@ include_once(INCLUDE_DIR . 'class.dept.php');
 include_once(INCLUDE_DIR . 'class.error.php');
 include_once(INCLUDE_DIR . 'class.team.php');
 include_once(INCLUDE_DIR . 'class.role.php');
+include_once(INCLUDE_DIR . 'class.group.php');
 include_once(INCLUDE_DIR . 'class.passwd.php');
 include_once(INCLUDE_DIR . 'class.user.php');
 include_once(INCLUDE_DIR . 'class.auth.php');
@@ -752,7 +753,12 @@ implements AuthenticatedUser, EmailContact, TemplateVariable, Searchable
     {
         return $this->isActive() ? __('Active') : __('Locked');
     }
-
+    function canTransferTickets() {
+        return $this->can_transfer_tickets;
+    }
+    function canAssignTickets() {
+        return $this->can_assign_tickets;
+    }
     function isVisible()
     {
         return $this->isvisible;

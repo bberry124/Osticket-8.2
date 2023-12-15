@@ -326,13 +326,11 @@ case 'postnote': /* Post Internal Note */
             $errors['postnote'] = sprintf('%s %s',
                 __('Unable to post the note.'),
                 __('Correct any errors below and try again.'));
-        }
+        }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
         break;
     case 'transfer':/** Transfer ticket **/
-        //Check permission
-        if (!$thisstaff->canTransferTickets()) {
-            $errors['err'] = $errors['transfer'] = 'Action Denied. You are not allowed to transfer tickets.';
-        } else {
+                                        //Check permission
+    
 
             //Check target dept.
             if (!$_POST['deptId']) {
@@ -362,8 +360,43 @@ case 'postnote': /* Post Internal Note */
             $errors['err'] = 'Unable to complete the ticket transfer';
             $errors['transfer'] = 'Correct the error(s) below and try again!';
         }
-    }
     break;
+    case 'assign':
+            $id = preg_replace("/[^0-9]/", "",$_POST['assignId']);
+            $claim = (is_numeric($_POST['assignId']) && $_POST['assignId']==$thisstaff->getId()); 
+
+            if(!$_POST['assignId'] || !$id)
+                $errors['assignId'] = 'Select assignee';
+            elseif($_POST['assignId'][0]!='s' && $_POST['assignId'][0]!='t' && !$claim)
+                $errors['assignId']='Invalid assignee ID - get technical support';
+            elseif($ticket->isAssigned()) {
+                if($_POST['assignId'][0]=='s' && $id==$ticket->getStaffId())
+                    $errors['assignId']='Ticket already assigned to the staff.';
+                elseif($_POST['assignId'][0]=='t' && $id==$ticket->getTeamId())
+                    $errors['assignId']='Ticket already assigned to the team.';
+            }
+
+            //Comments are not required on self-assignment (claim)
+            if($claim && !$_POST['assign_comments'])
+                $_POST['assign_comments'] = 'Ticket claimed by '.$thisstaff->getName();
+            elseif(!$_POST['assign_comments'])
+                $errors['assign_comments'] = 'Assignment comments required';
+            elseif(strlen($_POST['assign_comments'])<5)
+                    $errors['assign_comments'] = 'Comment too short';
+            
+            if(!$errors && $ticket->assign($_POST['assignId'], $_POST['assign_comments'], !$claim)) {
+                if($claim) {
+                    $msg = 'Ticket is NOW assigned to you!';
+                } else {
+                    $msg='Ticket assigned successfully to '.$ticket->getAssigned();
+                    Lock::removeStaffLocks($thisstaff->getId(), $ticket->getId());
+                    $ticket=null;
+                }
+            } elseif(!$errors['assign']) {
+                $errors['err'] = 'Unable to complete the ticket assignment';
+                $errors['assign'] = 'Correct the error(s) below and try again!';
+            }
+       break; 
 case 'edit':
 case 'update':
     if (!$ticket || !$role->hasPerm(Ticket::PERM_EDIT)) {

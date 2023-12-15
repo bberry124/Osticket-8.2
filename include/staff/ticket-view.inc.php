@@ -1009,11 +1009,7 @@ $tcount = $ticket->getThreadEntries($types) ? $ticket->getThreadEntries($types)-
                 }
                 ?>
                 <li><a href="#transfer" id="transfer_tab"><?php echo __('Department transfer'); ?></a></li>
-
-
                 <li><a id="assign_tab" href="#assign"><?php echo $ticket->isAssigned() ? __('Reassign Ticket') : __('Assign Ticket'); ?></a></li>
-
-
                 <li><a id="signature_tab" href="#signature"><?php echo $ticket->isAssigned() ? __('Signature Ticket') : __('Signature Ticket'); ?></a></li>
             </ul>
             <?php
@@ -1055,93 +1051,93 @@ $tcount = $ticket->getThreadEntries($types) ? $ticket->getThreadEntries($types)-
                         if (1) { //Make CC optional feature? NO, for now.
                         ?>
                             <tbody id="recipients">
-                            <tr id="user-row">
-                                <td width="120">
-                                    <label><strong><?php echo __('Collaborators'); ?>:</strong></label>
-                                </td>
-                                <td>
-                                    <div style="margin-bottom:2px;">
-                                        <?php
-                                        if ($ticket->getThread()->getNumCollaborators()) {
-                                            $recipients = sprintf(
-                                                __('(%d of %d)'),
-                                                $ticket->getThread()->getNumActiveCollaborators(),
-                                                $ticket->getThread()->getNumCollaborators()
-                                            );
-                                        }
+                                <tr id="user-row">
+                                    <td width="120">
+                                        <label><strong><?php echo __('Collaborators'); ?>:</strong></label>
+                                    </td>
+                                    <td>
+                                        <div style="margin-bottom:2px;">
+                                            <?php
+                                            if ($ticket->getThread()->getNumCollaborators()) {
+                                                $recipients = sprintf(
+                                                    __('(%d of %d)'),
+                                                    $ticket->getThread()->getNumActiveCollaborators(),
+                                                    $ticket->getThread()->getNumCollaborators()
+                                                );
+                                            }
 
-                                        echo sprintf(
-                                            '<span"><a id="show_ccs">
+                                            echo sprintf(
+                                                '<span"><a id="show_ccs">
                                  <i id="arrow-icon" class="icon-caret-right"></i>&nbsp;%s </a>
                                  &nbsp;
                                  <a class="manage-collaborators
                                  collaborators preview noclick %s"
                                   href="#thread/%d/collaborators/1">
                                  %s</a></span>',
-                                            __('Add Recipients'),
-                                            $ticket->getNumCollaborators()
-                                                ? '' : 'hidden',
-                                            $ticket->getThreadId(),
-                                            sprintf(
-                                                '<span id="t%d-recipients">%s</span></a></span>',
+                                                __('Add Recipients'),
+                                                $ticket->getNumCollaborators()
+                                                    ? '' : 'hidden',
                                                 $ticket->getThreadId(),
-                                                $recipients
-                                            )
-                                        );
-                                        ?>
-                                    </div>
-                                    <div id="ccs" class="hidden">
-                                        <div>
-                                            <span style="margin: 10px 5px 1px 0;" class="faded pull-left"><?php echo __('Select or Add New Collaborators'); ?>&nbsp;</span>
+                                                sprintf(
+                                                    '<span id="t%d-recipients">%s</span></a></span>',
+                                                    $ticket->getThreadId(),
+                                                    $recipients
+                                                )
+                                            );
+                                            ?>
+                                        </div>
+                                        <div id="ccs" class="hidden">
+                                            <div>
+                                                <span style="margin: 10px 5px 1px 0;" class="faded pull-left"><?php echo __('Select or Add New Collaborators'); ?>&nbsp;</span>
+                                                <?php
+                                                if ($role->hasPerm(Ticket::PERM_REPLY) && $thread && $ticket->getId() == $thread->getObjectId()) { ?>
+                                                    <span class="action-button pull-left" style="margin: 2px  0 5px 20px;" data-dropdown="#action-dropdown-collaborators" data-placement="bottom" data-toggle="tooltip" title="<?php echo __('Manage Collaborators'); ?>">
+                                                        <i class="icon-caret-down pull-right"></i>
+                                                        <a class="ticket-action" id="collabs-button" data-redirect="tickets.php?id=<?php echo
+                                                                                                                                    $ticket->getId(); ?>" href="#thread/<?php echo
+                                                                                                                                                                    $ticket->getThreadId(); ?>/collaborators/1">
+                                                            <i class="icon-group"></i></a>
+                                                    </span>
+                                                <?php
+                                                } ?>
+                                                <span class="error">&nbsp;&nbsp;<?php echo $errors['ccs']; ?></span>
+                                            </div>
                                             <?php
                                             if ($role->hasPerm(Ticket::PERM_REPLY) && $thread && $ticket->getId() == $thread->getObjectId()) { ?>
-                                                <span class="action-button pull-left" style="margin: 2px  0 5px 20px;" data-dropdown="#action-dropdown-collaborators" data-placement="bottom" data-toggle="tooltip" title="<?php echo __('Manage Collaborators'); ?>">
-                                                    <i class="icon-caret-down pull-right"></i>
-                                                    <a class="ticket-action" id="collabs-button" data-redirect="tickets.php?id=<?php echo
-                                                                                                                                $ticket->getId(); ?>" href="#thread/<?php echo
-                                                                                                                                                                    $ticket->getThreadId(); ?>/collaborators/1">
-                                                        <i class="icon-group"></i></a>
-                                                </span>
+                                                <div id="action-dropdown-collaborators" class="action-dropdown anchor-right">
+                                                    <ul>
+                                                        <li><a class="manage-collaborators" href="#thread/<?php echo
+                                                                                                            $ticket->getThreadId(); ?>/add-collaborator/addcc"><i class="icon-plus"></i> <?php echo __('Add New'); ?></a>
+                                                        <li><a class="manage-collaborators" href="#thread/<?php echo
+                                                                                                            $ticket->getThreadId(); ?>/collaborators/1"><i class="icon-cog"></i> <?php echo __('Manage Collaborators'); ?></a>
+                                                    </ul>
+                                                </div>
                                             <?php
                                             } ?>
-                                            <span class="error">&nbsp;&nbsp;<?php echo $errors['ccs']; ?></span>
-                                        </div>
-                                        <?php
-                                        if ($role->hasPerm(Ticket::PERM_REPLY) && $thread && $ticket->getId() == $thread->getObjectId()) { ?>
-                                            <div id="action-dropdown-collaborators" class="action-dropdown anchor-right">
-                                                <ul>
-                                                    <li><a class="manage-collaborators" href="#thread/<?php echo
-                                                                                                        $ticket->getThreadId(); ?>/add-collaborator/addcc"><i class="icon-plus"></i> <?php echo __('Add New'); ?></a>
-                                                    <li><a class="manage-collaborators" href="#thread/<?php echo
-                                                                                                        $ticket->getThreadId(); ?>/collaborators/1"><i class="icon-cog"></i> <?php echo __('Manage Collaborators'); ?></a>
-                                                </ul>
-                                            </div>
-                                        <?php
-                                        } ?>
-                                        <div class="clear">
-                                            <select id="collabselection" name="ccs[]" multiple="multiple" data-placeholder="<?php
-                                                                                                                            echo __('Select Active Collaborators'); ?>">
-                                                <?php
-                                                if ($collabs = $ticket->getCollaborators()) {
-                                                    foreach ($collabs as $c) {
-                                                        echo sprintf(
-                                                            '<option value="%s" %s class="%s">%s</option>',
-                                                            $c->getUserId(),
-                                                            $c->isActive() ?
-                                                                'selected="selected"' : '',
-                                                            $c->isActive() ?
-                                                                'active' : 'disabled',
-                                                            $c->getName()
-                                                        );
+                                            <div class="clear">
+                                                <select id="collabselection" name="ccs[]" multiple="multiple" data-placeholder="<?php
+                                                                                                                                echo __('Select Active Collaborators'); ?>">
+                                                    <?php
+                                                    if ($collabs = $ticket->getCollaborators()) {
+                                                        foreach ($collabs as $c) {
+                                                            echo sprintf(
+                                                                '<option value="%s" %s class="%s">%s</option>',
+                                                                $c->getUserId(),
+                                                                $c->isActive() ?
+                                                                    'selected="selected"' : '',
+                                                                $c->isActive() ?
+                                                                    'active' : 'disabled',
+                                                                $c->getName()
+                                                            );
+                                                        }
                                                     }
-                                                }
-                                                ?>
-                                            </select>
+                                                    ?>
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
+                                    </td>
+                                </tr>
+                            </tbody>
                         <?php
                         } ?>
                         <tbody id="resp_sec">
@@ -1204,7 +1200,7 @@ $tcount = $ticket->getThreadEntries($types) ? $ticket->getThreadEntries($types)-
                                                                                                                                                                                                                                                                                                     ?> draft draft-delete fullscreen" <?php
                                                                                                                                                                                                                                                                                                                                         list($draft, $attrs) = Draft::getDraftAndDataAttrs('ticket.response', $ticket->getId(), $info['response']);
                                                                                                                                                                                                                                                                                                                                         echo $attrs; ?>><?php echo ThreadEntryBody::clean($_POST ? $info['response'] : $draft);
-                                                                                                                                                                        ?></textarea>
+                                                                                                                                                                                                                                                                                                                                                        ?></textarea>
                                 <div id="reply_form_attachments" class="attachments">
                                     <?php
                                     print $response_form->getField('attachments')->render();
@@ -1445,7 +1441,7 @@ $tcount = $ticket->getThreadEntries($types) ? $ticket->getThreadEntries($types)-
                 </table>
                 <p style="text-align:center;">
                     <input class="save pending" type="submit" value="<?php echo __('Transfer'); ?>">
-                    <input class="reset" type="reset" value="<?php echo __('Reset'); ?>">
+                    <input class="" type="reset" value="<?php echo __('Reset'); ?>">
                 </p>
             </form>
 
@@ -1554,7 +1550,7 @@ $tcount = $ticket->getThreadEntries($types) ? $ticket->getThreadEntries($types)-
                 </table>
                 <p style="text-align:center;">
                     <input class="save pending" type="submit" value="<?php echo $ticket->isAssigned() ? __('Reassign') : __('Assign'); ?>">
-                    <input class="reset" type="reset" value="<?php echo __('Reset'); ?>">
+                    <input class="" type="reset" value="<?php echo __('Reset'); ?>">
                 </p>
             </form>
             <form id="signature" class="tab_content spellcheck exclusive save" data-lock-object-id="ticket/<?php echo $ticket->getId(); ?>" data-lock-id="<?php echo $mylock ? $mylock->getId() : ''; ?>" action="tickets.php?id=<?php echo $ticket->getId(); ?>#signature" name="signature" method="post" enctype="multipart/form-data">
@@ -1562,8 +1558,8 @@ $tcount = $ticket->getThreadEntries($types) ? $ticket->getThreadEntries($types)-
                 <input type="hidden" name="id" value="<?php echo $ticket->getId(); ?>">
                 <input type="hidden" name="a" value="assign">
                 <table style="width:100%" border="0" cellspacing="0" cellpadding="3">
-                    
-                <tbody>
+
+                    <tbody>
                         <tr>
                             <div class="grid-container">
                                 <div class="item1">Signature:</div>
@@ -1610,7 +1606,7 @@ $tcount = $ticket->getThreadEntries($types) ? $ticket->getThreadEntries($types)-
                 </table>
                 <p style="text-align:center;">
                     <input class="save pending" type="submit" value="<?php echo __('Post Reply'); ?>">
-                    <input class="reset" type="reset" value="<?php echo __('Reset'); ?>">
+                    <input class="" type="reset" value="<?php echo __('Reset'); ?>">
                 </p>
             </form>
         </div>

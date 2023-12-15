@@ -2442,7 +2442,7 @@ ul.tabs.alt li.active {
     display: block;
 }
 
-table {
+#contacts table {
     border-collapse: collapse;
 }
 
