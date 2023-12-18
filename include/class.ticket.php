@@ -329,7 +329,9 @@ class Ticket extends VerySimpleModel implements RestrictedAccess, Threadable, Se
     {
         return strcasecmp($this->getState(), $state) == 0;
     }
-
+    public function reload() {
+        return $this->load();
+    }
     public function isOpen()
     {
         return $this->hasState('open');
@@ -3065,7 +3067,9 @@ class Ticket extends VerySimpleModel implements RestrictedAccess, Threadable, Se
             return false;
 
         // Reopen ticket if closed
-        if($this->isClosed()) $this->reopen();
+        if($this->isClosed())
+        
+        $this->reopen();
 
         $this->reload();
         $dept = $this->getDept();

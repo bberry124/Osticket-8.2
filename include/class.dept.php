@@ -193,6 +193,14 @@ implements TemplateVariable, Searchable {
     function getAlertEmail() {
         global $cfg;
 
+        if (!$this->email && ($id = $this->getEmailId())) {
+            $this->email = Email::lookup($id);
+        }
+        if (!$this->email && $cfg) {
+            $this->email = $cfg->getAlertEmail();
+        }
+        return $this->email;global $cfg;
+
         if ($this->email)
             return $this->email;
 

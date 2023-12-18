@@ -74,6 +74,34 @@ if($_POST && !$errors):
                     __('Correct any errors below and try again.'));
             }
             break;
+            case 'postnote': /* Post Internal Note */
+                $vars = $_POST;
+                $vars['files'] = $note_attachments_form->getField('attachments')->getFiles();
+    
+                $wasOpen = ($task->isOpen());
+                if(($note=$task->postNote($vars, $errors, $thisstaff))) {
+    
+                    $msg=__('Internal note posted successfully');
+                    // Clear attachment list
+                    $note_attachments_form->setSource(array());
+                    $note_attachments_form->getField('attachments')->reset();
+    
+                    if($wasOpen && $task->isClosed())
+                        $task = null; //Going back to main listing.
+                    else
+                        // Task is still open -- clear draft for the note
+                        Draft::deleteForNamespace('task.note.'.$task->getId(),
+                            $thisstaff->getId());
+    
+                } else {
+                    if(!$errors['err'])
+                        $errors['err'] = __('Unable to post internal note - missing or invalid data.');
+    
+                    $errors['postnote'] = sprintf('%s %s',
+                        __('Unable to post the note.'),
+                        __('Correct any errors below and try again.'));
+                }
+                break;
         case 'postreply': /* Post an update */
             $vars = $_POST;
             $vars['files'] = $reply_attachments_form->getField('attachments')->getFiles();
