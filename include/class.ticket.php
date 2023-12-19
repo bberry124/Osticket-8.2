@@ -771,6 +771,7 @@ class Ticket extends VerySimpleModel implements RestrictedAccess, Threadable, Se
             'state' => $this->getExtraData('state'),
             'postcode' => $this->getExtraData('postcode'),
             'email2' => $this->getExtraData('email2'),
+            'issue_sum' => $this->getExtraData('issue_sum'),
             'company' => $this->getExtraData('company'),
             'vip' => $this->getExtraData('vip'),
             'address2' => $this->getExtraData('address2'),

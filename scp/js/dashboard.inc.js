@@ -12,6 +12,7 @@
             data:       $(this).serialize(),
             dataType:   'json',
             success:    function(json) {
+                console.log(json);
                 var times = [],
                     smtimes = Array.prototype.concat.apply([], json.times),
                     plots = [],

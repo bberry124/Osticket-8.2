@@ -313,9 +313,9 @@ if ($ticket->isOverdue()) {
         </div>
         <?php
         if (count($children) != 0) {
-          echo sprintf('<span style="font-weight: 700; line-height: 26px;">%s</span>', __('PARENT'));
+          echo sprintf('<span style="font-weight: 700; line-height: 1.625rem;">%s</span>', __('PARENT'));
         } elseif ($ticket->isChild()) {
-          echo sprintf('<span style="font-weight: 700; line-height: 26px;">%s</span>', __('CHILD'));
+          echo sprintf('<span style="font-weight: 700; line-height: 1.625rem;">%s</span>', __('CHILD'));
         }
 
         if ($role->hasPerm(Ticket::PERM_REPLY)) { ?>
@@ -702,7 +702,8 @@ if ($ticket->isOverdue()) {
 </table>
 <br>
 <div class="clear"></div>
-<h2 style="padding:10px 0 5px 0; font-size:11pt;">Subject: <?php echo Format::htmlchars($ticket->getSubject()); ?></h2>
+<h2 style="padding:.625rem 0 .3125rem 0; font-size:11pt;">Subject:
+  <?php echo Format::htmlchars($ticket->getSubject()); ?></h2>
 
 <!-- for new ticket bottom labelling -->
 
@@ -848,7 +849,7 @@ if ($ticket->isOverdue()) {
         <td bgcolor="#F5FFFF" align="right" width="50%">
           <font color="#0066CC">Net</font>
         </td>
-        <td style="border: 1px solid black;" align="right" width="50%" bgcolor="#DDDDDD">
+        <td style="border: .0625rem solid black;" align="right" width="50%" bgcolor="#DDDDDD">
           <font color="#0066CC">
             <table width='100%' align='center'>
               <tr>
@@ -864,7 +865,7 @@ if ($ticket->isOverdue()) {
         <td bgcolor="#F5FFFF" align="right" width="50%">
           <font color="#0066CC">GST</font>
         </td>
-        <td style="border: 1px solid black;" align="right" width="50%" bgcolor="#DDDDDD">
+        <td style="border: .0625rem solid black;" align="right" width="50%" bgcolor="#DDDDDD">
           <font color="#0066CC">
             <table width='100%' align='center'>
               <tr>
@@ -880,7 +881,7 @@ if ($ticket->isOverdue()) {
         <td bgcolor="#F5FFFF" align="right" width="50%">
           <font color="#00CCCC">Total</font>
         </td>
-        <td style="border: 1px solid black;" align="right" width="50%" bgcolor="#DDDDDD">
+        <td style="border: .0625rem solid black;" align="right" width="50%" bgcolor="#DDDDDD">
           <font color="#0099CC">
             <table align='center' width='100%'>
               <tr>
@@ -1078,6 +1079,9 @@ $tcount = $ticket->getThreadEntries($types) ? $ticket->getThreadEntries($types)-
         <?php
         }
         ?>
+        <li><a href="#transfer" id="transfer_tab"><?php echo __('Department transfer'); ?></a></li>
+        <li><a id="assign_tab"
+            href="#assign"><?php echo $ticket->isAssigned() ? __('Reassign Ticket') : __('Assign Ticket'); ?></a></li>
         <li><a id="signature_tab"
             href="#signature"><?php echo $ticket->isAssigned() ? __('Signature Ticket') : __('Signature Ticket'); ?></a>
         </li>
@@ -1131,7 +1135,7 @@ $tcount = $ticket->getThreadEntries($types) ? $ticket->getThreadEntries($types)-
                 <label><strong><?php echo __('Collaborators'); ?>:</strong></label>
               </td>
               <td>
-                <div style="margin-bottom:2px;">
+                <div style="margin-bottom:.125rem;">
                   <?php
                       if ($ticket->getThread()->getNumCollaborators()) {
                         $recipients = sprintf(
@@ -1163,11 +1167,11 @@ $tcount = $ticket->getThreadEntries($types) ? $ticket->getThreadEntries($types)-
                 </div>
                 <div id="ccs" class="hidden">
                   <div>
-                    <span style="margin: 10px 5px 1px 0;"
+                    <span style="margin: .625rem .3125rem .0625rem 0;"
                       class="faded pull-left"><?php echo __('Select or Add New Collaborators'); ?>&nbsp;</span>
                     <?php
                         if ($role->hasPerm(Ticket::PERM_REPLY) && $thread && $ticket->getId() == $thread->getObjectId()) { ?>
-                    <span class="action-button pull-left" style="margin: 2px  0 5px 20px;"
+                    <span class="action-button pull-left" style="margin: .125rem  0 .3125rem 1.25rem;"
                       data-dropdown="#action-dropdown-collaborators" data-placement="bottom" data-toggle="tooltip"
                       title="<?php echo __('Manage Collaborators'); ?>">
                       <i class="icon-caret-down pull-right"></i>
@@ -1483,6 +1487,174 @@ $tcount = $ticket->getThreadEntries($types) ? $ticket->getThreadEntries($types)-
       }
       ?>
       </form>
+      <form id="transfer" class="tab_content spellcheck exclusive save"
+        data-lock-object-id="ticket/<?php echo $ticket->getId(); ?>"
+        data-lock-id="<?php echo $mylock ? $mylock->getId() : ''; ?>"
+        action="tickets.php?id=<?php echo $ticket->getId(); ?>#transfer" name="transfer" method="post"
+        enctype="multipart/form-data">
+        <?php csrf_token(); ?>
+        <input type="hidden" name="ticket_id" value="<?php echo $ticket->getId(); ?>">
+        <input type="hidden" name="locktime" value="<?php echo $cfg->getLockTime() * 60; ?>">
+        <input type="hidden" name="a" value="transfer">
+        <input type="hidden" name="lockCode" value="<?php echo $mylock ? $mylock->getCode() : ''; ?>">
+        <table width="100%" border="0" cellspacing="0" cellpadding="3">
+          <?php
+                    if ($errors['transfer']) {
+                    ?>
+          <tr>
+            <td width="120">&nbsp;</td>
+            <td class="error"><?php echo $errors['transfer']; ?></td>
+          </tr>
+          <?php
+                    } ?>
+          <tr>
+            <td width="120">
+              <label for="deptId"><strong><?php echo __('Department'); ?>:</strong></label>
+            </td>
+            <td>
+              <?php
+                            echo sprintf('<span class="faded">' . __('Ticket is currently in <b>%s</b> department.') . '</span>', $ticket->getDeptName());
+                            ?>
+              <br>
+              <select id="deptId" name="deptId">
+                <option value="0" selected="selected">&mdash; <?php echo __('Select Target Department'); ?> &mdash;
+                </option>
+                <?php
+                                if ($depts = Dept::getDepartments()) {
+                                    foreach ($depts as $id => $name) {
+                                        if ($id == $ticket->getDeptId()) {
+                                            continue;
+                                        }
+
+                                        echo sprintf(
+                                            '<option value="%d" %s>%s</option>',
+                                            $id,
+                                            ($info['deptId'] == $id) ? 'selected="selected"' : '',
+                                            $name
+                                        );
+                                    }
+                                }
+                                ?>
+              </select>&nbsp;<span class='error'>*&nbsp;<?php echo $errors['deptId']; ?></span>
+            </td>
+          </tr>
+          <tr>
+            <td width="120" style="vertical-align:top">
+              <label><strong><?php echo __('Comments'); ?>:</strong><span class='error'>&nbsp;*</span></label>
+            </td>
+            <td>
+              <textarea name="transfer_comments" id="transfer_comments"
+                placeholder="<?php echo __('Enter reasons for the transfer'); ?>" class="richtext ifhtml no-bar"
+                cols="80" rows="7"
+                wrap="soft"><?php
+                                                                                                                                                                                                                        echo $info['transfer_comments']; ?></textarea>
+              <span class="error"><?php echo $errors['transfer_comments']; ?></span>
+            </td>
+          </tr>
+        </table>
+        <p style="text-align:center;">
+          <input class="save pending" type="submit" value="<?php echo __('Transfer'); ?>">
+          <input class="" type="reset" value="<?php echo __('Reset'); ?>">
+        </p>
+      </form>
+      <form id="assign" action="tickets.php?id=<?php echo $ticket->getId(); ?>#assign" name="assign" method="post"
+        enctype="multipart/form-data">
+        <?php csrf_token(); ?>
+        <input type="hidden" name="id" value="<?php echo $ticket->getId(); ?>">
+        <input type="hidden" name="locktime" value="<?php echo $cfg->getLockTime() * 60; ?>">
+        <input type="hidden" name="a" value="assign">
+        <input type="hidden" name="lockCode" value="<?php echo $mylock ? $mylock->getCode() : ''; ?>">
+        <table style="width:100%" border="0" cellspacing="0" cellpadding="3">
+
+          <?php
+            if($errors['assign']) {
+                ?>
+          <tr>
+            <td width="120">&nbsp;</td>
+            <td class="error"><?php echo $errors['assign']; ?></td>
+          </tr>
+          <?php
+            } ?>
+          <tr>
+            <td width="120" style="vertical-align:top">
+              <label for="assignId"><strong><?php echo __('Assignee');?>:</strong></label>
+            </td>
+            <td>
+              <select id="assignId" name="assignId">
+                <option value="0" selected="selected">&mdash; <?php echo __('Select an Agent OR a Team');?> &mdash;
+                </option>
+                <?php
+                        if ($ticket->isOpen()
+                                && !$ticket->isAssigned()
+                                && $ticket->getDept()->isMember($thisstaff))
+                            echo sprintf('<option value="%d">'.__('Claim Ticket (comments optional)').'</option>', $thisstaff->getId());
+
+                        $sid=$tid=0;
+
+                        if ($dept->assignMembersOnly())
+                            $users = $dept->getAvailableMembers();
+                        else
+                            $users = Staff::getAvailableStaffMembers();
+
+                        if ($users) {
+                            echo '<OPTGROUP label="'.sprintf(__('Agents (%d)'), count($users)).'">';
+                            $staffId=$ticket->isAssigned()?$ticket->getStaffId():0;
+                            foreach($users as $id => $name) {
+                                if($staffId && $staffId==$id)
+                                    continue;
+
+                                if (!is_object($name))
+                                    $name = new PersonsName($name);
+
+                                $k="s$id";
+                                echo sprintf('<option value="%s" %s>%s</option>',
+                                        $k,(($info['assignId']==$k)?'selected="selected"':''), $name);
+                            }
+                            echo '</OPTGROUP>';
+                        }
+
+                        if(($teams=Team::getActiveTeams())) {
+                            echo '<OPTGROUP label="'.sprintf(__('Teams (%d)'), count($teams)).'">';
+                            $teamId=(!$sid && $ticket->isAssigned())?$ticket->getTeamId():0;
+                            foreach($teams as $id => $name) {
+                                if($teamId && $teamId==$id)
+                                    continue;
+
+                                $k="t$id";
+                                echo sprintf('<option value="%s" %s>%s</option>',
+                                        $k,(($info['assignId']==$k)?'selected="selected"':''),$name);
+                            }
+                            echo '</OPTGROUP>';
+                        }
+                        ?>
+              </select>&nbsp;<span class='error'>*&nbsp;<?php echo $errors['assignId']; ?></span>
+              <?php
+                    if ($ticket->isAssigned() && $ticket->isOpen()) { ?>
+              <div class="faded"><?php echo sprintf(__('Ticket is currently assigned to %s'),
+                            sprintf('<b>%s</b>', $ticket->getAssignee())); ?></div> <?php
+                    } elseif ($ticket->isClosed()) { ?>
+              <div class="faded"><?php echo __('Assigning a closed ticket will <b>reopen</b> it!'); ?></div>
+              <?php } ?>
+            </td>
+          </tr>
+          <tr>
+            <td width="120" style="vertical-align:top">
+              <label><strong><?php echo __('Comments');?>:</strong><span class='error'>&nbsp;</span></label>
+            </td>
+            <td>
+              <textarea name="assign_comments" id="assign_comments" cols="80" rows="7" wrap="soft"
+                placeholder="<?php echo __('Enter reasons for the assignment or instructions for assignee'); ?>"
+                class="richtext ifhtml no-bar"><?php echo $info['assign_comments']; ?></textarea>
+              <span class="error"><?php echo $errors['assign_comments']; ?></span><br>
+            </td>
+          </tr>
+        </table>
+        <p style="padding-left:10.3125rem;">
+          <input class="save pending" type="submit"
+            value="<?php echo $ticket->isAssigned()?__('Reassign'):__('Assign'); ?>">
+          <input class="" type="reset" value="<?php echo __('Reset');?>">
+        </p>
+      </form>
       <form id="signature" action="tickets.php?id=<?php echo $ticket->getId(); ?>#signature" name="signature"
         method="POST">
         <?php csrf_token(); ?>
@@ -1497,19 +1669,19 @@ $tcount = $ticket->getThreadEntries($types) ? $ticket->getThreadEntries($types)-
               <div class="item2">
                 <input type="hidden" id="signatureData" name="signatureData" enctype="multipart/form-data">
                 <canvas id="signatureCanvas" width="500" height="80"></canvas>
-                <div style="margin-left:30px;">
+                <div style="margin-left:1.875rem;">
                   <button id="clearButton">Clear</button>
                   <button type="submit" name="submit">Upload</button>
                 </div>
               </div>
               <div class="item3"><strong>Name:</strong></div>
               <div class="item4"><input type="name" id="signature_name" name="signature_name" required
-                  style="height:25px;width:100%;background-color:#f9f9f9"></div>
+                  style="height:1.5625rem;width:100%;background-color:#f9f9f9"></div>
               <div class=" item5" style="justify-content:center;"><strong>Date/Time:</strong></div>
               <div class="item6"><input type="date" id="signature_date" name="signature_date" required
-                  style="height:25px;background-color:#f9f9f9">
+                  style="height:1.5625rem;background-color:#f9f9f9">
               </div>
-              <div class=" item7" style="padding: 20px;font-size:14px">I confirm that the engineer
+              <div class=" item7" style="padding: 1.25rem;font-size:.875rem">I confirm that the engineer
                 from Integra Corporation Pty Ltd has attended site as per the address detailed above.
                 The engineer has completed the work and/or resolved the fault and/or delivered the products as
                 services
@@ -1696,7 +1868,7 @@ $tcount = $ticket->getThreadEntries($types) ? $ticket->getThreadEntries($types)-
           if (resp.user && !resp.users)
             resp.users.push(resp.user);
           // TODO: Process resp.users
-          $('.tip_box').remove();
+          $('.tip_box') NaNpxove();
         }, {
           onshow: function() {
             $('#user-search').focus();
@@ -1737,10 +1909,10 @@ $tcount = $ticket->getThreadEntries($types) ? $ticket->getThreadEntries($types)-
         $('#ccs').slideToggle('fast', function() {
           if ($(this).is(":hidden")) {
             collabs.hide();
-            show.removeClass('icon-caret-down').addClass('icon-caret-right');
+            showNaNpxoveClass('icon-caret-down').addClass('icon-caret-right');
           } else {
             collabs.show();
-            show.removeClass('icon-caret-right').addClass('icon-caret-down');
+            showNaNpxoveClass('icon-caret-right').addClass('icon-caret-down');
           }
         });
         return false;
@@ -1751,7 +1923,7 @@ $tcount = $ticket->getThreadEntries($types) ? $ticket->getThreadEntries($types)-
       });
 
       $('#collabselection').select2({
-        width: '350px',
+        width: '21.875rem',
         allowClear: true,
         sorter: function(data) {
           return data.filter(function(item) {

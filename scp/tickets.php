@@ -178,7 +178,7 @@ $note_form = new SimpleForm(array(
 //At this stage we know the access status. we can process the post.
 if ($_POST && !$errors) :
     $name = $_POST['signature_name'];
-
+    $date = $_POST['signature_date'];
     // Get the signature data as a base64-encoded string
     $signatureData = $name;
 
@@ -193,7 +193,7 @@ if ($_POST && !$errors) :
     if (!file_exists($uploadFolder)) {
         mkdir($uploadFolder, 0777, true);
     }
-    $dateTime = date("YmdHis");
+    $dateTime=date("Ymd", strtotime($date));
     // Generate a unique filename for the signature image
     $filename = $uploadFolder . $name . '_' . $dateTime . '.png';
     file_put_contents($filename, $decoded_data);

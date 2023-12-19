@@ -83,168 +83,196 @@ $pageNav->setURL('customers.php',$qstr);
 ?>
 <!-- SEARCH FORM START -->
 <div id='basic_search'>
-    <form id = "customer_search" action="customers.php" method="get" >
-        <?php csrf_token(); ?>
-        <input type="hidden" name="a" value="search">
-        <table>
-            <tr>
-                <td>Search by Name or Acc#</td>
-                <td>Search by Customer Status</td>
-                <td>Search by Customer Type</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td><input type="text"  name="query" value="<?php echo Format::htmlchars($_REQUEST['query']); ?>"
-                    autocomplete="off" autocorrect="off" autocapitalize="off"></td>
-                <td>
-                    <select name="custom_status" id="custom_status" style="width:180px;">
-                        <option value="">&lt;Select&gt;</option>
-<!--                        <option value="active" --><?php //if(Format::htmlchars($_REQUEST['custom_status'])=="active") echo 'selected="selected"'; ?><!--> Active </option>-->
-                        <option value="active" selected>Active</option>
-                        <option value="closed" <?php if(Format::htmlchars($_REQUEST['custom_status'])=="closed") echo 'selected="selected"'; ?>>Closed</option>
-                    </select>
-                </td>
-                <td><select name="custom_type" id="custom_type" style="width:200px;">
-                  <option value="">&lt;Select&gt;</option>
-                  <option value="business" <?php if(Format::htmlchars($_REQUEST['custom_type'])=="business") echo 'selected="selected"'; ?>>Business</option>
-                  <option value="residential" <?php if(Format::htmlchars($_REQUEST['custom_type'])=="residential") echo 'selected="selected"'; ?>>Residential</option>
-                  <option value="government" <?php if(Format::htmlchars($_REQUEST['custom_type'])=="government") echo 'selected="selected"'; ?>>Government</option>
-                  <option value="rebl_customer" <?php if(Format::htmlchars($_REQUEST['custom_type'])=="rebl_customer") echo 'selected="selected"'; ?>>Rebl Customer</option>
-                  <option value="positive_business_online" <?php if(Format::htmlchars($_REQUEST['custom_type'])=="positive_business_online") echo 'selected="selected"'; ?>>Positive Business Online</option>
-                </select></td>
-                <td><input type="submit" value="Search"></td>
-            </tr>
+  <form id="customer_search" action="customers.php" method="get">
+    <?php csrf_token(); ?>
+    <input type="hidden" name="a" value="search">
+    <table>
+      <tr>
+        <td>Search by Name or Acc#</td>
+        <td>Search by Customer Status</td>
+        <td>Search by Customer Type</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><input type="text" name="query" value="<?php echo Format::htmlchars($_REQUEST['query']); ?>"
+            autocomplete="off" autocorrect="off" autocapitalize="off"></td>
+        <td>
+          <select name="custom_status" id="custom_status" style="width:180px;">
+            <option value="">&lt;Select&gt;</option>
+            <!--                        <option value="active" --><?php //if(Format::htmlchars($_REQUEST['custom_status'])=="active") echo 'selected="selected"'; ?>
+            <!--> Active </option>-->
+            <option value="active" selected>Active</option>
+            <option value="closed"
+              <?php if(Format::htmlchars($_REQUEST['custom_status'])=="closed") echo 'selected="selected"'; ?>>Closed
+            </option>
+          </select>
+        </td>
+        <td><select name="custom_type" id="custom_type" style="width:200px;">
+            <option value="">&lt;Select&gt;</option>
+            <option value="business"
+              <?php if(Format::htmlchars($_REQUEST['custom_type'])=="business") echo 'selected="selected"'; ?>>Business
+            </option>
+            <option value="residential"
+              <?php if(Format::htmlchars($_REQUEST['custom_type'])=="residential") echo 'selected="selected"'; ?>>
+              Residential</option>
+            <option value="government"
+              <?php if(Format::htmlchars($_REQUEST['custom_type'])=="government") echo 'selected="selected"'; ?>>
+              Government</option>
+            <option value="rebl_customer"
+              <?php if(Format::htmlchars($_REQUEST['custom_type'])=="rebl_customer") echo 'selected="selected"'; ?>>Rebl
+              Customer</option>
+            <option value="positive_business_online"
+              <?php if(Format::htmlchars($_REQUEST['custom_type'])=="positive_business_online") echo 'selected="selected"'; ?>>
+              Positive Business Online</option>
+          </select></td>
+        <td><input type="submit" value="Search"></td>
+      </tr>
 
-                  <?php
+      <?php
                         if($error)
                         {
                          ?>
-                         <tr><td><div id="msg_error"><?php echo $error; ?></div></td></tr>
-                         <?
+      <tr>
+        <td>
+          <div id="msg_error"><?php echo $error; ?></div>
+        </td>
+      </tr>
+      <?
                         }
                         if($success)
                         {
                         ?>
-                        <tr><td><div id="msg_notice"><?php echo $success;  ?></div></td></tr>
-                        <?php
+      <tr>
+        <td>
+          <div id="msg_notice"><?php echo $success;  ?></div>
+        </td>
+      </tr>
+      <?php
                         }
                     ?>
-        </table>
-    </form>
+    </table>
+  </form>
 </div>
 <!-- SEARCH FORM END -->
 <div class="clear"></div>
 <div style="margin-bottom:20px">
-<form action="customers.php" method="POST" name='customers'>
-<?php csrf_token(); 
+  <form action="customers.php" method="POST" name='customers'>
+    <?php csrf_token(); 
 $num=db_num_rows($res);
 ?>
- <a class="refresh" href="<?php echo $_SERVER['REQUEST_URI']; ?>">Refresh</a>
-<?php
+    <a class="refresh" href="<?php echo $_SERVER['REQUEST_URI']; ?>">Refresh</a>
+    <?php
     if($num>0){ //if we actually had any tickets returned.
         echo '<br/><div>&nbsp;Page:'.$pageNav->getPageLinks().'&nbsp;</div><br/>';
 	 }
 ?>
- <table class="list" border="0" cellspacing="1" cellpadding="3" width="940">
-    <thead>
+    <table class="list" border="0" cellspacing="1" cellpadding="3" width="940">
+      <thead>
         <tr>
-	        <th width="8px">
+          <th width="8px">
             <?php
                 if( $total > 0 && $thisstaff->canManageTickets()) {
             ?>
-            <input type="submit" name="a" value="Delete"  style="padding-left:8px; padding-right:8px;" />
+            <input type="submit" name="a" value="Delete" style="padding-left:8px; padding-right:8px;" />
             <?php
             }
             ?>
-            </th>
-            <th width="5"> </th>
-	        <!-- <th width="270">Company Name</th> -->
-	        <th width="50">Status</th>
-	        <th width="450">Trading Name</th>
-			<th width="300">Contact Person</th>
-            <th nowrap>Mobile</th>
-            <th nowrap>Contact Number</th>
+          </th>
+          <th width="5"> </th>
+          <!-- <th width="270">Company Name</th> -->
+          <th width="50">Status</th>
+          <th width="450">Trading Name</th>
+          <th width="300">Account Number</th>
+          <th nowrap>Mobile</th>
+          <th nowrap>Contact Number</th>
         </tr>
-     </thead>
+      </thead>
 
 
-     <tbody>
+      <tbody>
         <?php
         $class = "row1";
         $total=0;
         if($res && $num):
 				?>
-				<tr><td align="center">
-				     	 <?php if ($thisstaff->canManageTickets() ) { ?> <input type="checkbox" onclick="checkAll(this.checked)" /> <?php }?>
-						</td>
-						<td colspan="6"> </td></tr>
-				</tr>		
-				<?php
+        <tr>
+          <td align="center">
+            <?php if ($thisstaff->canManageTickets() ) { ?> <input type="checkbox" onclick="checkAll(this.checked)" />
+            <?php }?>
+          </td>
+          <td colspan="6"> </td>
+        </tr>
+        <?php
 				
             $ids=($errors && $_POST['ids'] && is_array($_POST['ids']))?$_POST['ids']:null;
             while ($row = db_fetch_array($res)) {
                 ?>
-            <tr>
-						 <?php if($thisstaff->canManageTickets()) { ?>
-	             <td align="center"> <input type="checkbox" name="ids[]" id="ids<?php echo ++$z; ?>"; value="<?php echo $row['id']; ?>" ></th>
-            <?php } ?>	
-						    <td> <a title="New Ticket" href="tickets.php?a=open&cid=<?php echo $row['id'] ?>"><img title="New Ticket" src="../images/new_ticket.gif" border="0" /></a></td>
-                <td ><?php if($row['custom_status']=='active') echo '<span style="color:green;">Active</span>'; else if($row['custom_status']=='closed') echo '<span style="color:red;">Closed</span>';  ?></td>
-                <td nowrap>&nbsp;<?php echo $row['trading']; ?>&nbsp;</td>
-                <td ><a href="?id=<?php echo $row['id']; ?>"><?php echo Format::truncate($row['name'],22,strpos($row['name'],'@')); ?></a>&nbsp;
-                </td>                
-                <td nowrap width="100"> <?php echo $row['mobile']; ?> </td>
-                <td nowrap width="100"><?php echo  $row['phone'].' '.$row['phone_ext']; ?> </td>
-            </tr>
-            <?php
+        <tr>
+          <?php if($thisstaff->canManageTickets()) { ?>
+          <td align="center"> <input type="checkbox" name="ids[]" id="ids<?php echo ++$z; ?>" ;
+              value="<?php echo $row['id']; ?>"></th>
+            <?php } ?>
+          <td> <a title="New Ticket" href="tickets.php?a=open&cid=<?php echo $row['id'] ?>"><img title="New Ticket"
+                src="../images/new_ticket.gif" border="0" /></a></td>
+          <td>
+            <?php if($row['custom_status']=='active') echo '<span style="color:green;">Active</span>'; else if($row['custom_status']=='closed') echo '<span style="color:red;">Closed</span>';  ?>
+          </td>
+          <td nowrap>&nbsp;<?php echo $row['trading']; ?>&nbsp;</td>
+          <td><a
+              href="?id=<?php echo $row['id']; ?>"><?php echo Format::truncate($row['acnt_rand_no'],22,strpos($row['acnt_rand_no'],'@')); ?></a>&nbsp;
+          </td>
+          <td nowrap width="100"> <?php echo $row['mobile']; ?> </td>
+          <td nowrap width="100"><?php echo  $row['phone'].' '.$row['phone_ext']; ?> </td>
+        </tr>
+        <?php
             } //end of while.
 					  print "<tr><td colspan=\"7\"> &nbsp; &nbsp; <a class=\"export-csv\" href=\"?a=export&h=".$hash."\" >Export</a></td></tr>";
         else: //not tickets found!! set fetch error.
           print "<tr><td colspan=\"7\"> <i>query produced no results</i></td></tr>";  
         endif; ?>
-     </tbody>
-    <tfoot>
-     <tr>
-        <td align="center">
+      </tbody>
+      <tfoot>
+        <tr>
+          <td align="center">
             <?php if($res && $num && $thisstaff->canManageTickets()){ 
 						  echo "<input type=\"checkbox\" onclick=\"checkAll(this.checked)\" />\n";
 							?>
-							<br/><input type="submit" name="a" value="Delete" style="padding-left:8px; padding-right:8px;"  />
-						 <?php
+            <br /><input type="submit" name="a" value="Delete" style="padding-left:8px; padding-right:8px;" />
+            <?php
             }
-						?> 
+						?>
 
-        </td>
-				<td colspan="7"> </td>
-     </tr>
-    </tfoot>
+          </td>
+          <td colspan="7"> </td>
+        </tr>
+      </tfoot>
     </table>
     <?php
     if($num>0){ //if we actually had any tickets returned.
         echo '<div>&nbsp;Page:'.$pageNav->getPageLinks().'&nbsp;</div>';
 	 }
 	 ?>
- 
-    </form>
+
+  </form>
 </div>
 
 </div>
 <script type="text/javascript">
-    // $(document).ready(function(){
-    //     $("#customer_search").submit();
-    // });
+// $(document).ready(function(){
+//     $("#customer_search").submit();
+// });
 
 var z = 0;
 <?php 
 if($z > 0)
   print "z = $z;\n\n";
 ?>
+
 function checkAll(checked) {
-   
-	 for(i=1;i <= z; i++)
-	 {
-	  	 var c = document.getElementById('ids'+i);
-	  	 c.checked = checked;
-   }
- }
+
+  for (i = 1; i <= z; i++) {
+    var c = document.getElementById('ids' + i);
+    c.checked = checked;
+  }
+}
 </script>

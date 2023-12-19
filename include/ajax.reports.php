@@ -318,6 +318,7 @@ class OverviewReportAjaxAPI extends AjaxController {
 
 // this array diff is the issye , need to figure out how these two array are generated and fix 
 // Not possible in 30 mins , please seek help help me
+
         foreach (array_diff($events, $slots) as $slot)
             $plots[$slot][] = 0;
         return $this->encode(array("times" => $times, "plots" => $plots,

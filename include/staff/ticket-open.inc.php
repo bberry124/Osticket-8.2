@@ -69,35 +69,40 @@ if ($info['topicId'] && ($topic=Topic::lookup($info['topicId']))) {
 if ($_POST)
     $info['duedate'] = Format::date(strtotime($info['duedate']), false, false, 'UTC');
 ?>
-<form action="tickets.php?a=open" method="post" class="save"  enctype="multipart/form-data">
- <?php csrf_token(); ?>
- <input type="hidden" name="do" value="create">
- <input type="hidden" name="a" value="open">
- <h2><?php echo __('Open a New Ticket');?></h2>
- <table class="form_table fixed" width="940" border="0" cellspacing="0" cellpadding="2">
- <thead>
-    <!-- This looks empty - but beware, with fixed table layout, the user
+<form action="tickets.php?a=open" method="post" class="save" enctype="multipart/form-data">
+  <?php csrf_token(); ?>
+  <input type="hidden" name="do" value="create">
+  <input type="hidden" name="a" value="open">
+  <h2><?php echo __('Open a New Ticket');?></h2>
+  <table class="form_table fixed" width="940" border="0" cellspacing="0" cellpadding="2">
+    <thead>
+      <!-- This looks empty - but beware, with fixed table layout, the user
          agent will usually only consult the cells in the first row to
          construct the column widths of the entire toable. Therefore, the
          first row needs to have two cells -->
-        <tr><td></td><td></td></tr>
-        <tr>
-            <th colspan="2">
-                <h4><?php echo __('New Ticket');?></h4>
-            </th>
-        </tr>
+      <tr>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <th colspan="2">
+          <h4><?php echo __('New Ticket');?></h4>
+        </th>
+      </tr>
     </thead>
     <tbody>
-        <tr>
-            <th colspan="2">
-                <strong><?php echo __('User Information'); ?></strong>:
-            </th>
-        </tr>
-        <?php
+      <tr>
+        <th colspan="2">
+          <strong><?php echo __('User Information'); ?></strong>:
+        </th>
+      </tr>
+      <?php
         if ($user) { ?>
-        <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('User'); ?>:</td><td>
-            <div id="user-info">
-                <input type="hidden" name="uid" id="uid" value="<?php echo $user->getId(); ?>" />
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('User'); ?>:</td>
+        <td>
+          <div id="user-info">
+            <input type="hidden" name="uid" id="uid" value="<?php echo $user->getId(); ?>" />
             <a href="#" onclick="javascript:
                 $.userLookup('ajax.php/users/<?php echo $user->getId(); ?>/edit',
                         function (user) {
@@ -106,11 +111,10 @@ if ($_POST)
                         });
                 return false;
                 "><i class="icon-user"></i>
-                <span id="user-name"><?php echo Format::htmlchars($user->getName()); ?></span>
-                &lt;<span id="user-email"><?php echo $user->getEmail(); ?></span>&gt;
-                </a>
-                <a class="action-button" style="overflow:inherit" href="#"
-                    onclick="javascript:
+              <span id="user-name"><?php echo Format::htmlchars($user->getName()); ?></span>
+              &lt;<span id="user-email"><?php echo $user->getEmail(); ?></span>&gt;
+            </a>
+            <a class="action-button" style="overflow:inherit" href="#" onclick="javascript:
                         $.userLookup('ajax.php/users/select/'+$('input#uid').val(),
                             function(user) {
                                 $('input#uid').val(user.id);
@@ -119,177 +123,183 @@ if ($_POST)
                         });
                         return false;
                     "><i class="icon-edit"></i> <?php echo __('Change'); ?></a>
-            </div>
-        </td></tr>
-              <?php
+          </div>
+        </td>
+      </tr>
+      <?php
             } else { //Fallback: Just ask for email and name
               ?>
-        <tr>
-            <td width="160" class="required">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Company:
-            </td>
-            <td>
+      <tr>
+        <td width="160" class="required">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Company:
+        </td>
+        <td>
 
-                <input type="text" size="50" name="company" id="company" class="typeahead" value="<?php echo $info['company']; ?>"
-                    autocomplete="off" autocorrect="off" autocapitalize="off">
-                &nbsp;<span class="error">*&nbsp;<?php echo $errors['company']; ?></span>
-            </td>
-        </tr>	
-        <tr>
-            <td width="160" class="required">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email:
-            </td>
-            <td>
+          <input type="text" size="50" name="company" id="company" class="typeahead"
+            value="<?php echo $info['company']; ?>" autocomplete="off" autocorrect="off" autocapitalize="off">
+          &nbsp;<span class="error">*&nbsp;<?php echo $errors['company']; ?></span>
+        </td>
+      </tr>
+      <tr>
+        <td width="160" class="required">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email:
+        </td>
+        <td>
 
-                <input type="text" size="50" name="email" id="email" class="typeahead" value="<?php echo $info['email']; ?>"
-                    autocomplete="off" autocorrect="off" autocapitalize="off">
-                &nbsp;<span class="error">*&nbsp;<?php echo $errors['email']; ?></span>
-            <?php 
+          <input type="text" size="50" name="email" id="email" class="typeahead" value="<?php echo $info['email']; ?>"
+            autocomplete="off" autocorrect="off" autocapitalize="off">
+          &nbsp;<span class="error">*&nbsp;<?php echo $errors['email']; ?></span>
+          <?php 
             if($cfg->notifyONNewStaffTicket()) { ?>
-               &nbsp;&nbsp;&nbsp;
-               <input type="checkbox" name="alertuser" <?php echo (!$errors || $info['alertuser'])? 'checked="checked"': ''; ?>>Send alert to user.
-            <?php 
+          &nbsp;&nbsp;&nbsp;
+          <input type="checkbox" name="alertuser"
+            <?php echo (!$errors || $info['alertuser'])? 'checked="checked"': ''; ?>>Send alert to user.
+          <?php 
              } ?>
-            </td>
-        </tr>
-        <tr>
-            <td width="160">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email BCC:
-            </td>
-            <td>
+        </td>
+      </tr>
+      <tr>
+        <td width="160">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email BCC:
+        </td>
+        <td>
 
-                <input type="text" size="50" name="email2" id="email2" class="typeahead" value="<?php echo $info['email2']; ?>"
-                    autocomplete="off" autocorrect="off" autocapitalize="off">
-                &nbsp;<span class="error">&nbsp;<?php echo $errors['email2']; ?></span>
-            <?php 
+          <input type="text" size="50" name="email2" id="email2" class="typeahead"
+            value="<?php echo $info['email2']; ?>" autocomplete="off" autocorrect="off" autocapitalize="off">
+          &nbsp;<span class="error">&nbsp;<?php echo $errors['email2']; ?></span>
+          <?php 
             if($cfg->notifyONNewStaffTicket()) { ?>
-               &nbsp;&nbsp;&nbsp;&nbsp;
-               <input type="checkbox" name="alertuser2" <?php echo (!$errors || $info['alertuser2'])? 'checked="checked"': ''; ?>>Send alert to user.
-            <?php 
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <input type="checkbox" name="alertuser2"
+            <?php echo (!$errors || $info['alertuser2'])? 'checked="checked"': ''; ?>>Send alert to user.
+          <?php 
              } ?>
-            </td>
-        </tr>				
-<!-- end coderXO mod -->
+        </td>
+      </tr>
+      <!-- end coderXO mod -->
 
-        <tr>
-            <td width="160" class="required"> 
-            <!-- start coderXO mod --> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Contact Person'); ?>: <!-- end coderXO mod -->
-            </td>
-            <td>
-                <span style="display:inline-block;">
-                    <input type="text" size=45 name="name" id="user-name" value="<?php echo $info['name']; ?>" /> </span>
-                <font class="error">* <?php echo $errors['name']; ?></font>
-            </td>
-        </tr>
-        <tr>
-            <td width="160">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Phone Number:
-            </td>
-            <td>
-                <input type="text" size="20" name="phone" id="phone" value="<?php echo $info['phone']; ?>">
-                &nbsp;<span class="error">&nbsp;<?php echo $errors['phone']; ?></span>
-                Ext <input type="text" size="6" name="phone_ext" id="phone_ext" value="<?php echo $info['phone_ext']; ?>">
-                &nbsp;<span class="error">&nbsp;<?php echo $errors['phone_ext']; ?></span>
-			</td>
-        </tr>
-        <!-- start coderXO mod -->
-        <tr>
-            <td width="160">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mobile: 
-            </td>
-            <td>
-                <input type="text" size="20" name="mobile" id="mobile" value="<?php echo $info['mobile']; ?>">
-            </td>
-        </tr>
-        <tr>
-            <td width="160" valign="top">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Site Address:
-            </td>
-            <td>
+      <tr>
+        <td width="160" class="required">
+          <!-- start coderXO mod --> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Contact Person'); ?>:
+          <!-- end coderXO mod -->
+        </td>
+        <td>
+          <span style="display:inline-block;">
+            <input type="text" size=45 name="name" id="user-name" value="<?php echo $info['name']; ?>" /> </span>
+          <font class="error">* <?php echo $errors['name']; ?></font>
+        </td>
+      </tr>
+      <tr>
+        <td width="160">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Phone Number:
+        </td>
+        <td>
+          <input type="text" size="20" name="phone" id="phone" value="<?php echo $info['phone']; ?>">
+          &nbsp;<span class="error">&nbsp;<?php echo $errors['phone']; ?></span>
+          Ext <input type="text" size="6" name="phone_ext" id="phone_ext" value="<?php echo $info['phone_ext']; ?>">
+          &nbsp;<span class="error">&nbsp;<?php echo $errors['phone_ext']; ?></span>
+        </td>
+      </tr>
+      <!-- start coderXO mod -->
+      <tr>
+        <td width="160">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mobile:
+        </td>
+        <td>
+          <input type="text" size="20" name="mobile" id="mobile" value="<?php echo $info['mobile']; ?>">
+        </td>
+      </tr>
+      <tr>
+        <td width="160" valign="top">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Site Address:
+        </td>
+        <td>
 
-                <input type="text" size="50" name="address" id="address" value="<?php echo $info['address']; ?>" >
-                &nbsp;
-								<br/>
-							  <input type="text" size="50" name="address2" id="address2" value="<?php echo $info['address2']; ?>" >
-                &nbsp;
-            </td>
-        </tr>		
-        <tr>
-            <td width="160">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Suburb:
-            </td>
-            <td>
+          <input type="text" size="50" name="address" id="address" value="<?php echo $info['address']; ?>">
+          &nbsp;
+          <br />
+          <input type="text" size="50" name="address2" id="address2" value="<?php echo $info['address2']; ?>">
+          &nbsp;
+        </td>
+      </tr>
+      <tr>
+        <td width="160">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Suburb:
+        </td>
+        <td>
 
-                <input type="text" size="20" name="suburb" id="suburb" value="<?php echo $info['suburb']; ?>" >
-                &nbsp;
-								&nbsp;
-								&nbsp;
-								State:
-							  <select name="state" id="state" >
-									<option value=""></option>										
-									<option value="ACT" <?php echo $info['state'] == 'ACT' ? "selected=\"selected\"":""; ?>>ACT</option>
-									<option value="NSW" <?php echo $info['state'] == 'NSW' ? "selected=\"selected\"":""; ?>>NSW</option>
-									<option value="NT" <?php echo $info['state'] == 'NT' ? "selected=\"selected\"":""; ?>>NT</option>
-									<option value="SA" <?php echo $info['state'] == 'SA' ? "selected=\"selected\"":""; ?>>SA</option>	
-									<option value="TAS" <?php echo $info['state'] == 'TAS' ? "selected=\"selected\"":""; ?>>TAS</option>
-									<option value="VIC" <?php echo $info['state'] == 'VIC' ? "selected=\"selected\"":""; ?>>VIC</option>
-									<option value="QLD" <?php echo $info['state'] == 'QLD' ? "selected=\"selected\"":""; ?>>QLD</option>											
-									<option value="WA" <?php echo $info['state'] == 'WA' ? "selected=\"selected\"":""; ?>>WA</option>																									
-								</select>
-								&nbsp;
-								&nbsp;
-								
-                Postcode: <input type="text" size="5" name="postcode" id="postcode" value="<?php echo $info['postcode']; ?>" >
-                &nbsp;								
-            </td>
-        </tr>		
-        <tr>
-            <td width="160">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VIP Support:
-            </td>
-            <td>
-						
-							  <select name="vip" id="vip" >
-								  <option value="No">No</option>
-									<option value="Yes" <?php echo $info['vip'] == 'Yes' ? "selected=\"selected\"":""; ?>>Yes</option>
-								</select>
-								&nbsp;
-								&nbsp;
-								
-                Contract Number: <input type="text" size="10" name="contract" id="contract" value="<?php echo $info['contract']; ?>" >
-                &nbsp;								
-            </td>
-        </tr>								
-<!-- end coderXO mod -->
-        <?php
+          <input type="text" size="20" name="suburb" id="suburb" value="<?php echo $info['suburb']; ?>">
+          &nbsp;
+          &nbsp;
+          &nbsp;
+          State:
+          <select name="state" id="state">
+            <option value=""></option>
+            <option value="ACT" <?php echo $info['state'] == 'ACT' ? "selected=\"selected\"":""; ?>>ACT</option>
+            <option value="NSW" <?php echo $info['state'] == 'NSW' ? "selected=\"selected\"":""; ?>>NSW</option>
+            <option value="NT" <?php echo $info['state'] == 'NT' ? "selected=\"selected\"":""; ?>>NT</option>
+            <option value="SA" <?php echo $info['state'] == 'SA' ? "selected=\"selected\"":""; ?>>SA</option>
+            <option value="TAS" <?php echo $info['state'] == 'TAS' ? "selected=\"selected\"":""; ?>>TAS</option>
+            <option value="VIC" <?php echo $info['state'] == 'VIC' ? "selected=\"selected\"":""; ?>>VIC</option>
+            <option value="QLD" <?php echo $info['state'] == 'QLD' ? "selected=\"selected\"":""; ?>>QLD</option>
+            <option value="WA" <?php echo $info['state'] == 'WA' ? "selected=\"selected\"":""; ?>>WA</option>
+          </select>
+          &nbsp;
+          &nbsp;
+
+          Postcode: <input type="text" size="5" name="postcode" id="postcode" value="<?php echo $info['postcode']; ?>">
+          &nbsp;
+        </td>
+      </tr>
+      <tr>
+        <td width="160">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VIP Support:
+        </td>
+        <td>
+
+          <select name="vip" id="vip">
+            <option value="No">No</option>
+            <option value="Yes" <?php echo $info['vip'] == 'Yes' ? "selected=\"selected\"":""; ?>>Yes</option>
+          </select>
+          &nbsp;
+          &nbsp;
+
+          Contract Number: <input type="text" size="10" name="contract" id="contract"
+            value="<?php echo $info['contract']; ?>">
+          &nbsp;
+        </td>
+      </tr>
+      <!-- end coderXO mod -->
+      <?php
         } ?>
-        </tr>
-        <?php
+      </tr>
+      <?php
         if ($cfg->notifyONNewStaffTicket()) {
          ?>
-        <tr>
-            <td width="160">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Ticket Notice'); ?>:</td>
-            <td>
-            <input type="checkbox" name="alertuser" <?php echo (!$errors || $info['alertuser'])? 'checked="checked"': ''; ?>><?php
+      <tr>
+        <td width="160">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Ticket Notice'); ?>:</td>
+        <td>
+          <input type="checkbox" name="alertuser"
+            <?php echo (!$errors || $info['alertuser'])? 'checked="checked"': ''; ?>><?php
                 echo __('Send alert to user.'); ?>
-            </td>
-        </tr>
-        <?php
+        </td>
+      </tr>
+      <?php
         } ?>
     </tbody>
     <tbody>
-        <tr>
-            <th colspan="2">
-                <em><strong><?php echo __('Ticket Information and Options');?></strong>:</em>
-            </th>
-        </tr>
-        <tr>
-            <td width="160" class="required">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Ticket Source');?>:
-            </td>
-            <td>
-                <select name="source">
-                    <?php
+      <tr>
+        <th colspan="2">
+          <em><strong><?php echo __('Ticket Information and Options');?></strong>:</em>
+        </th>
+      </tr>
+      <tr>
+        <td width="160" class="required">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Ticket Source');?>:
+        </td>
+        <td>
+          <select name="source">
+            <?php
                     $source = $info['source'] ?: 'Phone';
                     $sources = Ticket::getSources();
                     unset($sources['Web'], $sources['API']);
@@ -299,19 +309,20 @@ if ($_POST)
                                 ($source == $k ) ? 'selected="selected"' : '',
                                 $v);
                     ?>
-                </select>
-                &nbsp;<font class="error"><b>*</b>&nbsp;<?php echo $errors['source']; ?></font>
-                Other:&nbsp;<input type="text" size="20" name="source_other" id="source_other" value="<?php echo $info['source_other']; ?>" >
-            </td>
-        </tr>
-        <tr>
+          </select>
+          &nbsp;<font class="error"><b>*</b>&nbsp;<?php echo $errors['source']; ?></font>
+          Other:&nbsp;<input type="text" size="20" name="source_other" id="source_other"
+            value="<?php echo $info['source_other']; ?>">
+        </td>
+      </tr>
+      <tr>
         <td width="160">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Department'); ?>:
-            </td>
-            <td>
-                <select name="deptId">
-                    <option value="" selected >&mdash; <?php echo __('Select Department'); ?>&mdash;</option>
-                    <?php
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Department'); ?>:
+        </td>
+        <td>
+          <select name="deptId">
+            <option value="" selected>&mdash; <?php echo __('Select Department'); ?>&mdash;</option>
+            <?php
                     if($depts=Dept::getDepartments()) {
                         foreach($depts as $id =>$name) {
                             echo sprintf('<option value="%d" %s>%s</option>',
@@ -319,16 +330,16 @@ if ($_POST)
                         }
                     }
                     ?>
-                </select>
-                &nbsp;<font class="error"><?php echo $errors['deptId']; ?></font>
-            </td>
-        </tr>
-        <tr>
-            <td width="160" class="required">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Help Topic'); ?>:
-            </td>
-            <td>
-                <select name="topicId" onchange="javascript:
+          </select>
+          &nbsp;<font class="error"><?php echo $errors['deptId']; ?></font>
+        </td>
+      </tr>
+      <tr>
+        <td width="160" class="required">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Help Topic'); ?>:
+        </td>
+        <td>
+          <select name="topicId" onchange="javascript:
                         var data = $(':input[name]', '#dynamic-form').serialize();
                         $.ajax(
                           'ajax.php/form/help-topic/' + this.value,
@@ -340,13 +351,13 @@ if ($_POST)
                               $(document.head).append(json.media);
                             }
                           });">
-                    <?php
+            <?php
                     if ($topics=Topic::getHelpTopics()) {
                         if (count($topics) == 1)
                             $selected = 'selected="selected"';
                         else { ?>
-                        <option value="" selected >&mdash; <?php echo __('Select Help Topic'); ?> &mdash;</option>
-					<?php }
+            <option value="" selected>&mdash; <?php echo __('Select Help Topic'); ?> &mdash;</option>
+            <?php }
                         foreach($topics as $id =>$name) {
                             echo sprintf('<option value="%d" %s %s>%s</option>',
                                 $id, ($info['topicId']==$id)?'selected="selected"':'',
@@ -358,18 +369,18 @@ if ($_POST)
                         }
                     }
                     ?>
-                </select>
-                &nbsp;<font class="error"><b>*</b>&nbsp;<?php echo $errors['topicId']; ?></font>
-            </td>
-        </tr>
-        <tr>
-            <td width="160">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Priority');?>:
-            </td>
-            <td>
-                <select name="priorityId">
-                    <option value="0" selected >&mdash; System Default &mdash;</option>
-                    <?php
+          </select>
+          &nbsp;<font class="error"><b>*</b>&nbsp;<?php echo $errors['topicId']; ?></font>
+        </td>
+      </tr>
+      <tr>
+        <td width="160">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Priority');?>:
+        </td>
+        <td>
+          <select name="priorityId">
+            <option value="0" selected>&mdash; System Default &mdash;</option>
+            <?php
                     if($priorities=Priority::getPriorities()) {
                         foreach($priorities as $id =>$name) {
                             echo sprintf('<option value="%d" %s>%s</option>',
@@ -377,18 +388,18 @@ if ($_POST)
                         }
                     }
                     ?>
-                </select>
-                &nbsp;<font class="error">&nbsp;<?php echo $errors['priorityId']; ?></font>
-            </td>
-         </tr>
-         <tr>
-            <td width="160">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('SLA Plan');?>:
-            </td>
-            <td>
-                <select name="slaId">
-                    <option value="0" selected="selected" >&mdash; <?php echo __('System Default');?> &mdash;</option>
-                    <?php
+          </select>
+          &nbsp;<font class="error">&nbsp;<?php echo $errors['priorityId']; ?></font>
+        </td>
+      </tr>
+      <tr>
+        <td width="160">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('SLA Plan');?>:
+        </td>
+        <td>
+          <select name="slaId">
+            <option value="0" selected="selected">&mdash; <?php echo __('System Default');?> &mdash;</option>
+            <?php
                     if($slas=SLA::getSLAs()) {
                         foreach($slas as $id =>$name) {
                             echo sprintf('<option value="%d" %s>%s</option>',
@@ -396,33 +407,33 @@ if ($_POST)
                         }
                     }
                     ?>
-                </select>
-                &nbsp;<font class="error">&nbsp;<?php echo $errors['slaId']; ?></font>
-            </td>
-         </tr>
-         <tr>
-            <td width="160">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Due Date');?>:
-            </td>
-            <td>
-                <?php
+          </select>
+          &nbsp;<font class="error">&nbsp;<?php echo $errors['slaId']; ?></font>
+        </td>
+      </tr>
+      <tr>
+        <td width="160">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Due Date');?>:
+        </td>
+        <td>
+          <?php
                 $duedateField = Ticket::duedateField('duedate', $info['duedate']);
                 $duedateField->render();
                 ?>
-                &nbsp;<font class="error">&nbsp;<?php echo $errors['duedate']; ?> &nbsp; <?php echo $errors['time']; ?></font>
-                <em><?php echo __('Time is based on your time
+          &nbsp;<font class="error">&nbsp;<?php echo $errors['duedate']; ?> &nbsp; <?php echo $errors['time']; ?></font>
+          <em><?php echo __('Time is based on your time
                         zone');?>&nbsp;(<?php echo $cfg->getTimezone($thisstaff); ?>)</em>
-            </td>
-        </tr>
+        </td>
+      </tr>
 
-        <?php
+      <?php
         if($thisstaff->hasPerm(Ticket::PERM_ASSIGN, false)) { ?>
-        <tr>
-            <td width="160">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Assign To');?>:</td>
-            <td>
-                <select id="assignId" name="assignId">
-                    <option value="0" selected="selected">&mdash; <?php echo __('Select an Agent OR a Team');?> &mdash;</option>
-                    <?php
+      <tr>
+        <td width="160">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Assign To');?>:</td>
+        <td>
+          <select id="assignId" name="assignId">
+            <option value="0" selected="selected">&mdash; <?php echo __('Select an Agent OR a Team');?> &mdash;</option>
+            <?php
                     $users = Staff::getStaffMembers(array(
                                 'available' => true,
                                 'staff' => $thisstaff,
@@ -447,91 +458,101 @@ if ($_POST)
                         echo '</OPTGROUP>';
                     }
                     ?>
-                </select>&nbsp;<span class='error'>&nbsp;<?php echo $errors['assignId']; ?></span>
-            </td>
-        </tr>
-        <tr>
-				<td width='160'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Carrier:</td>
-				<td><input type="text" size="50" name="carrier" id="carrier" value="<?php echo $carrier; ?>" ></td>
-			</tr>
-			
-			<tr>
-				<td width='160'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Carrier Ref:</td>
-				<td><input type="text" size="50" name="carrier_ref" id="carrier_ref" value="<?php echo $carrier_ref; ?>" ></td>
-			</tr>
-        <?php } ?>
-        </tbody>
-        <tbody id="dynamic-form">
-        <?php
-            $options = array('mode' => 'create');
-            foreach ($forms as $form) {
-                print $form->getForm($_SESSION[':form-data'])->getMedia();
-                include(STAFFINC_DIR .  'templates/dynamic-form.tmpl.php');
-            }
-        ?>
-        </tbody>
-        <tbody> <?php
-        $tform = TicketForm::getInstance();
-        if ($_POST && !$tform->errors())
-            $tform1->isValidForStaff();
-        $tform->render(true);
-        ?>
-        </tbody>
-        <tbody>
-        <?php
+          </select>&nbsp;<span class='error'>&nbsp;<?php echo $errors['assignId']; ?></span>
+        </td>
+      </tr>
+      <tr>
+        <td width='160'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Carrier:</td>
+        <td><input type="text" size="50" name="carrier" id="carrier" value="<?php echo $carrier; ?>"></td>
+      </tr>
+
+      <tr>
+        <td width='160'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Carrier Ref:</td>
+        <td><input type="text" size="50" name="carrier_ref" id="carrier_ref" value="<?php echo $carrier_ref; ?>"></td>
+      </tr>
+      <tr>
+        <td width='160'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Issue Summary:</td>
+        <td><input type="text" size="50" name="issue" id="issue" value="<?php echo $issue_sum; ?>"></td>
+      </tr>
+      <?php } ?>
+    </tbody>
+    <tbody>
+      <tr>
+        <th colspan="2">
+          <em><strong><?php echo __('Ticket Details:');?></strong>
+            <?php echo __('Please Describe Your Issue');?>
+          </em>
+        </th>
+      </tr>
+      <tr>
+        <td colspan=2>
+          <textarea class="<?php if ($cfg->isRichTextEnabled()) echo 'richtext';
+                        ?> draft draft-delete"
+            placeholder="<?php echo __('Details on the reason(s) for opening the ticket'); ?>" name="note" cols="21"
+            rows="6" style="width:80%;" <?php
+    list($draft, $attrs) = Draft::getDraftAndDataAttrs('ticket.staff.note', false, $info['note']);
+    echo $attrs; ?>><?php echo ThreadEntryBody::clean($_POST ? $info['note'] : $draft);
+                ?></textarea>
+        </td>
+      </tr>
+    </tbody>
+
+    <tbody>
+      <?php
         //is the user allowed to post replies??
         if ($thisstaff->getRole()->hasPerm(Ticket::PERM_REPLY)) { ?>
-        <tr>
-            <th colspan="2">
-                <em><strong><?php echo __('Response');?></strong>: <?php echo __('Optional response to the above issue.');?></em>
-            </th>
-        </tr>
-        <tr>
-            <td colspan=2>
-            <?php
+      <tr>
+        <th colspan="2">
+          <em><strong><?php echo __('Response');?></strong>:
+            <?php echo __('Optional response to the above issue.');?></em>
+        </th>
+      </tr>
+      <tr>
+        <td colspan=2>
+          <?php
             if($cfg->isCannedResponseEnabled() && ($cannedResponses=Canned::getCannedResponses())) {
                 ?>
-                <div style="margin-top:0.3em;margin-bottom:0.5em;margin-left:15px">
-                    <?php echo __('Canned Response');?>:&nbsp;
-                    <select id="cannedResp" name="cannedResp">
-                        <option value="0" selected="selected">&mdash; <?php echo __('Select a canned response');?> &mdash;</option>
-                        <?php
+          <div style="margin-top:0.3em;margin-bottom:0.5em;margin-left:15px">
+            <?php echo __('Canned Response');?>:&nbsp;
+            <select id="cannedResp" name="cannedResp">
+              <option value="0" selected="selected">&mdash; <?php echo __('Select a canned response');?> &mdash;
+              </option>
+              <?php
                         foreach($cannedResponses as $id =>$title) {
                             echo sprintf('<option value="%d">%s</option>',$id,$title);
                         }
                         ?>
-                    </select>
-                    &nbsp;&nbsp;
-                    <label class="checkbox inline"><input type='checkbox' value='1' name="append" id="append" checked="checked"><?php echo __('Append');?></label>
-                </div>
-            <?php
+            </select>
+            &nbsp;&nbsp;
+            <label class="checkbox inline"><input type='checkbox' value='1' name="append" id="append"
+                checked="checked"><?php echo __('Append');?></label>
+          </div>
+          <?php
             }
                 $signature = '';
                 if ($thisstaff->getDefaultSignatureType() == 'mine')
                     $signature = $thisstaff->getSignature(); ?>
-                <textarea
-                    class="<?php if ($cfg->isRichTextEnabled()) echo 'richtext';
+          <textarea class="<?php if ($cfg->isRichTextEnabled()) echo 'richtext';
                         ?> draft draft-delete" data-signature="<?php
                         echo Format::viewableImages(Format::htmlchars($signature, true)); ?>"
-                    data-signature-field="signature" data-dept-field="deptId"
-                    placeholder="<?php echo __('Initial response for the ticket'); ?>"
-                    name="response" id="response" cols="21" rows="8"
-                    style="width:80%;" <?php
+            data-signature-field="signature" data-dept-field="deptId"
+            placeholder="<?php echo __('Initial response for the ticket'); ?>" name="response" id="response" cols="21"
+            rows="8" style="width:80%;" <?php
     list($draft, $attrs) = Draft::getDraftAndDataAttrs('ticket.staff.response', false, $info['response']);
     echo $attrs; ?>><?php echo ThreadEntryBody::clean($_POST ? $info['response'] : $draft);
                 ?></textarea>
-                    <div class="attachments">
-<?php
+          <div class="attachments">
+            <?php
 print $response_form->getField('attachments')->render();
 ?>
-                    </div>
+          </div>
 
-                <table border="0" cellspacing="0" cellpadding="2" width="100%" style="margin-left:15px;">
+          <table border="0" cellspacing="0" cellpadding="2" width="100%" style="margin-left:15px;">
             <tr>
-                <td width="100"><?php echo __('Ticket Status');?>:</td>
-                <td>
-                    <select name="statusId">
-                    <?php
+              <td width="100"><?php echo __('Ticket Status');?>:</td>
+              <td>
+                <select name="statusId">
+                  <?php
                     $statusId = $info['statusId'] ?: $cfg->getDefaultTicketStatusId();
                     $states = array('open');
                     if ($thisstaff->hasPerm(Ticket::PERM_CLOSE, false))
@@ -547,303 +568,631 @@ print $response_form->getField('attachments')->render();
                                 __($s->getName()));
                     }
                     ?>
-                    </select>
-                </td>
+                </select>
+              </td>
             </tr>
-             <tr>
-                <td width="100"><?php echo __('Signature');?>:</td>
-                <td>
-                    <?php
+            <tr>
+              <td width="100"><?php echo __('Signature');?>:</td>
+              <td>
+                <?php
                     $info['signature']=$info['signature']?$info['signature']:$thisstaff->getDefaultSignatureType();
                     ?>
-                    <label><input type="radio" name="signature" value="none" checked="checked"> <?php echo __('None');?></label>
-                    <?php
+                <label><input type="radio" name="signature" value="none" checked="checked">
+                  <?php echo __('None');?></label>
+                <?php
                     if($thisstaff->getSignature()) { ?>
-                        <label><input type="radio" name="signature" value="mine"
-                            <?php echo ($info['signature']=='mine')?'checked="checked"':''; ?>> <?php echo __('My Signature');?></label>
-                    <?php
+                <label><input type="radio" name="signature" value="mine"
+                    <?php echo ($info['signature']=='mine')?'checked="checked"':''; ?>>
+                  <?php echo __('My Signature');?></label>
+                <?php
                     } ?>
-                    <label><input type="radio" name="signature" value="dept"
-                        <?php echo ($info['signature']=='dept')?'checked="checked"':''; ?>> <?php echo sprintf(__('Department Signature (%s)'), __('if set')); ?></label>
-                </td>
-             </tr>
-            </table>
-            </td>
-        </tr>
-        <?php
+                <label><input type="radio" name="signature" value="dept"
+                    <?php echo ($info['signature']=='dept')?'checked="checked"':''; ?>>
+                  <?php echo sprintf(__('Department Signature (%s)'), __('if set')); ?></label>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <?php
         } //end canPostReply
         ?>
-        <tr>
-            <th colspan="2">
-                <em><strong><?php echo __('Internal Note');?></strong>
-                <font class="error">&nbsp;<?php echo $errors['note']; ?></font></em>
-            </th>
-        </tr>
-        <tr>
-            <td colspan=2>
-                <textarea
-                    class="<?php if ($cfg->isRichTextEnabled()) echo 'richtext';
+      <tr>
+        <th colspan="2">
+          <em><strong><?php echo __('Internal Note');?></strong>
+            <font class="error">&nbsp;<?php echo $errors['note']; ?></font>
+          </em>
+        </th>
+      </tr>
+      <tr>
+        <td colspan=2>
+          <textarea class="<?php if ($cfg->isRichTextEnabled()) echo 'richtext';
                         ?> draft draft-delete"
-                    placeholder="<?php echo __('Optional internal note (recommended on assignment)'); ?>"
-                    name="note" cols="21" rows="6" style="width:80%;" <?php
+            placeholder="<?php echo __('Optional internal note (recommended on assignment)'); ?>" name="note" cols="21"
+            rows="6" style="width:80%;" <?php
     list($draft, $attrs) = Draft::getDraftAndDataAttrs('ticket.staff.note', false, $info['note']);
     echo $attrs; ?>><?php echo ThreadEntryBody::clean($_POST ? $info['note'] : $draft);
                 ?></textarea>
-            </td>
-        </tr>
+        </td>
+      </tr>
     </tbody>
-</table>
-<br/>
+  </table>
+  <br />
 
-		<ul id="threads">
-			<li ><a class="active" id="toggle_ticket_thread">Billing & Parts</a></li>
-		</ul>	
-		
-		<br/>
-		<div id="div_style">
-			<table id="myTable" bgcolor="#F8F8F8" width="100%" border="1" cellspacing="0">
-			  <tr>
-				<th align="center" width="10%"><font color="#0066CC">Code</font></th>
-				<th align="center" width="5%"><font color="#0066CC">Qty</font></th>
-				<th align="center" width="65%"><font color="#0066CC">Description</font></th>
-				<th align="center" width="10%"><font color="#0066CC">Unit Price</font></th>
-				<th align="center" width="10%"><font color="#0066CC">Total</font></th>
-			  </tr>
-			  <tr>
-				<td align="center"><div contenteditable>&nbsp;</div></td>
-				<td align="center"><div contenteditable>&nbsp;</div></td>
-				<td align="left"><div contenteditable>&nbsp;</div></td>
-				<td><table width="100%"><tr><td width="1%" align="left">$</td><td width="9%" align="right"><div contenteditable>&nbsp;</div></td></tr></table></td>
-				<td align="center" bgcolor="#CCCCCC"><table width='100%'><tr><td width='1%' align='left'>$</td><td width="9%" align="right">&nbsp;</td></tr></table></td>
-			  </tr>
-			  <tr>
-				<td align="center"><div contenteditable>&nbsp;</div></td>
-				<td align="center"><div contenteditable>&nbsp;</div></td>
-				<td align="left"><div contenteditable>&nbsp;</div></td>
-				<td><table width="100%"><tr><td width="1%" align="left">$</td><td width="9%" align="right"><div contenteditable>&nbsp;</div></td></tr></table></td>
-				<td align="center" bgcolor="#CCCCCC"><table width='100%'><tr><td width='1%' align='left'>$</td><td width="9%" align="right">&nbsp;</td></tr></table></td>
-			  </tr>
-			  <tr>
-				<td align="center"><div contenteditable>&nbsp;</div></td>
-				<td align="center"><div contenteditable>&nbsp;</div></td>
-				<td align="left"><div contenteditable>&nbsp;</div></td>
-				<td><table width="100%"><tr><td width="1%" align="left">$</td><td width="9%" align="right"><div contenteditable>&nbsp;</div></td></tr></table></td>
-				<td align="center" bgcolor="#CCCCCC"><table width='100%'><tr><td width='1%' align='left'>$</td><td width="9%" align="right">&nbsp;</td></tr></table></td>
-			  </tr>
-			  <tr>
-				<td align="center"><div contenteditable>&nbsp;</div></td>
-				<td align="center"><div contenteditable>&nbsp;</div></td>
-				<td align="left"><div contenteditable>&nbsp;</div></td>
-				<td><table width="100%"><tr><td width="1%" align="left">$</td><td width="9%" align="right"><div contenteditable>&nbsp;</div></td></tr></table></td>
-				<td align="center" bgcolor="#CCCCCC"><table width='100%'><tr><td width='1%' align='left'>$</td><td width="9%" align="right">&nbsp;</td></tr></table></td>
-			  </tr>
-			  <tr>
-				<td align="center"><div contenteditable>&nbsp;</div></td>
-				<td align="center"><div contenteditable>&nbsp;</div></td>
-				<td align="left"><div contenteditable>&nbsp;</div></td>
-				<td><table width="100%"><tr><td width="1%" align="left">$</td><td width="9%" align="right"><div contenteditable>&nbsp;</div></td></tr></table></td>
-				<td align="center" bgcolor="#CCCCCC"><table width='100%'><tr><td width='1%' align='left'>$</td><td width="9%" align="right">&nbsp;</td></tr></table></td>
-			  </tr>
-			  <tr>
-				<td align="center"><div contenteditable>&nbsp;</div></td>
-				<td align="center"><div contenteditable>&nbsp;</div></td>
-				<td align="left"><div contenteditable>&nbsp;</div></td>
-				<td><table width="100%"><tr><td width="1%" align="left">$</td><td width="9%" align="right"><div contenteditable>&nbsp;</div></td></tr></table></td>
-				<td align="center" bgcolor="#CCCCCC"><table width='100%'><tr><td width='1%' align='left'>$</td><td width="9%" align="right">&nbsp;</td></tr></table></td>
-			  </tr>
-			  <tr>
-				<td align="center"><div contenteditable>&nbsp;</div></td>
-				<td align="center"><div contenteditable>&nbsp;</div></td>
-				<td align="left"><div contenteditable>&nbsp;</div></td>
-				<td><table width="100%"><tr><td width="1%" align="left">$</td><td width="9%" align="right"><div contenteditable>&nbsp;</div></td></tr></table></td>
-				<td align="center" bgcolor="#CCCCCC"><table width='100%'><tr><td width='1%' align='left'>$</td><td width="9%" align="right">&nbsp;</td></tr></table></td>
-			  </tr>
-			  <tr>
-				<td align="center"><div contenteditable>&nbsp;</div></td>
-				<td align="center"><div contenteditable>&nbsp;</div></td>
-				<td align="left"><div contenteditable>&nbsp;</div></td>
-				<td><table width="100%"><tr><td width="1%" align="left">$</td><td width="9%" align="right"><div contenteditable>&nbsp;</div></td></tr></table></td>
-				<td align="center" bgcolor="#CCCCCC"><table width='100%'><tr><td width='1%' align='left'>$</td><td width="9%" align="right">&nbsp;</td></tr></table></td>
-			  </tr>
-			  <tr>
-				<td align="center"><div contenteditable>&nbsp;</div></td>
-				<td align="center"><div contenteditable>&nbsp;</div></td>
-				<td align="left"><div contenteditable>&nbsp;</div></td>
-				<td><table width="100%"><tr><td width="1%" align="left">$</td><td width="9%" align="right"><div contenteditable>&nbsp;</div></td></tr></table></td>
-				<td align="center" bgcolor="#CCCCCC"><table width='100%'><tr><td width='1%' align='left'>$</td><td width="9%" align="right">&nbsp;</td></tr></table></td>
-			  </tr>
-			  <tr>
-				<td align="center"><div contenteditable>&nbsp;</div></td>
-				<td align="center"><div contenteditable>&nbsp;</div></td>
-				<td align="left"><div contenteditable>&nbsp;</div></td>
-				<td><table width="100%"><tr><td width="1%" align="left">$</td><td width="9%" align="right"><div contenteditable>&nbsp;</div></td></tr></table></td>
-				<td align="center" bgcolor="#CCCCCC"><table width='100%'><tr><td width='1%' align='left'>$</td><td width="9%" align="right">&nbsp;</td></tr></table></td>
-			  </tr>
-			  <tr>
-				<td align="center"><div contenteditable>&nbsp;</div></td>
-				<td align="center"><div contenteditable>&nbsp;</div></td>
-				<td align="left"><div contenteditable>&nbsp;</div></td>
-				<td><table width="100%"><tr><td width="1%" align="left">$</td><td width="9%" align="right"><div contenteditable>&nbsp;</div></td></tr></table></td>
-				<td align="center" bgcolor="#CCCCCC"><table width='100%'><tr><td width='1%' align='left'>$</td><td width="9%" align="right">&nbsp;</td></tr></table></td>
-			  </tr>
-			</table>
-			
-			<table id='fixed_table' bgcolor="#F8F8F8" width="100%" border="1" cellspacing="0">
-			<tr>
-				<td align="center" width="10%" bgcolor="#DDDDDD">&nbsp;</td>
-				<td align="center" width="5%" ><div contenteditable>1</div></td>
-				<td align="right" width="65%" bgcolor="#DDDDDD"><font color="#0066CC">Labour Charge</font></td>
-				<td ><table width="100%"><tr><td width="1%" align="left">$</td><td width="9%" align="right"><div contenteditable>132.00</div></td></tr></table></td>
-				<td align="center" width="10%" bgcolor="#DDDDDD"><table width='100%'><tr><td width='1%' align='left'>$</td><td width="9%" align="right">&nbsp;</td></tr></table></td>
-			</tr>
-			
-			<tr>
-				<td align="center" width="10%" bgcolor="#DDDDDD">&nbsp;</td>
-				<td align="center" width="5%"><div contenteditable>1</div></td>
-				<td align="right" width="65%" bgcolor="#DDDDDD"><font color="#0066CC">Onsite Call Out Fee</font></td>
-				<td ><table width="100%"><tr><td width="1%" align="left">$</td><td width="9%" align="right"><div contenteditable>198.00</div></td></tr></table></td>
-				<td align="center" width="10%" bgcolor="#DDDDDD"><table width='100%'><tr><td width='1%' align='left'>$</td><td width="9%" align="right">&nbsp;</td></tr></table></td>
-			</tr>
-		</table>
-			
-			<div align="right">
-		<table id='final_table' bgcolor="#F8F8F8" width="20%">
-			<tr>
-				<td bgcolor="#F5FFFF" align="right" width="50%"><font color="#0066CC">Net</font></td>
-				<td style="border: 1px solid black;" align="right" width="50%" bgcolor="#DDDDDD"><font color="#0066CC"><table width='100%' align='center'><tr><td width='1%' align='left'>$</td><td width='9%' align='right'>&nbsp;</td></tr></table></font></td>
-			</tr>
-			
-			<tr>
-				<td bgcolor="#F5FFFF" align="right" width="50%"><font color="#0066CC">GST</font></td>
-				<td style="border: 1px solid black;" align="right" width="50%" bgcolor="#DDDDDD"><font color="#0066CC"><table width='100%' align='center'><tr><td width='1%' align='left'>$</td><td width='9%' align='right'>&nbsp;</td></tr></table></font></td>
-			</tr>
-			
-			<tr>
-				<td bgcolor="#F5FFFF" align="right" width="50%"><font color="#00CCCC">Total</font></td>
-				<td style="border: 1px solid black;" align="right" width="50%" bgcolor="#DDDDDD"><font color="#0099CC"><table align='center' width='100%'><tr><td width='1%' align='left'>$</td><td align='right' width='9%'>&nbsp;</td></tr></table></font></td>
-			</tr>
-			
-			
-		</table>
-	</div>
-			
-			</div>
-		
-		
-		<br/>
-<div align="right">
-<button type="button" onclick="window.location.reload()">Reload</button>
-<button type="button" onclick="displayResult()">Add row</button>
-<button type="button" onClick="updateTable()">Update</button>
-</div>
-<p style="text-align:center;">
+  <ul id="threads">
+    <li><a class="active" id="toggle_ticket_thread">Billing & Parts</a></li>
+  </ul>
+
+  <br />
+  <div id="div_style">
+    <table id="myTable" bgcolor="#F8F8F8" width="100%" border="1" cellspacing="0">
+      <tr>
+        <th align="center" width="10%">
+          <font color="#0066CC">Code</font>
+        </th>
+        <th align="center" width="5%">
+          <font color="#0066CC">Qty</font>
+        </th>
+        <th align="center" width="65%">
+          <font color="#0066CC">Description</font>
+        </th>
+        <th align="center" width="10%">
+          <font color="#0066CC">Unit Price</font>
+        </th>
+        <th align="center" width="10%">
+          <font color="#0066CC">Total</font>
+        </th>
+      </tr>
+      <tr>
+        <td align="center">
+          <div contenteditable>&nbsp;</div>
+        </td>
+        <td align="center">
+          <div contenteditable>&nbsp;</div>
+        </td>
+        <td align="left">
+          <div contenteditable>&nbsp;</div>
+        </td>
+        <td>
+          <table width="100%">
+            <tr>
+              <td width="1%" align="left">$</td>
+              <td width="9%" align="right">
+                <div contenteditable>&nbsp;</div>
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td align="center" bgcolor="#CCCCCC">
+          <table width='100%'>
+            <tr>
+              <td width='1%' align='left'>$</td>
+              <td width="9%" align="right">&nbsp;</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td align="center">
+          <div contenteditable>&nbsp;</div>
+        </td>
+        <td align="center">
+          <div contenteditable>&nbsp;</div>
+        </td>
+        <td align="left">
+          <div contenteditable>&nbsp;</div>
+        </td>
+        <td>
+          <table width="100%">
+            <tr>
+              <td width="1%" align="left">$</td>
+              <td width="9%" align="right">
+                <div contenteditable>&nbsp;</div>
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td align="center" bgcolor="#CCCCCC">
+          <table width='100%'>
+            <tr>
+              <td width='1%' align='left'>$</td>
+              <td width="9%" align="right">&nbsp;</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td align="center">
+          <div contenteditable>&nbsp;</div>
+        </td>
+        <td align="center">
+          <div contenteditable>&nbsp;</div>
+        </td>
+        <td align="left">
+          <div contenteditable>&nbsp;</div>
+        </td>
+        <td>
+          <table width="100%">
+            <tr>
+              <td width="1%" align="left">$</td>
+              <td width="9%" align="right">
+                <div contenteditable>&nbsp;</div>
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td align="center" bgcolor="#CCCCCC">
+          <table width='100%'>
+            <tr>
+              <td width='1%' align='left'>$</td>
+              <td width="9%" align="right">&nbsp;</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td align="center">
+          <div contenteditable>&nbsp;</div>
+        </td>
+        <td align="center">
+          <div contenteditable>&nbsp;</div>
+        </td>
+        <td align="left">
+          <div contenteditable>&nbsp;</div>
+        </td>
+        <td>
+          <table width="100%">
+            <tr>
+              <td width="1%" align="left">$</td>
+              <td width="9%" align="right">
+                <div contenteditable>&nbsp;</div>
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td align="center" bgcolor="#CCCCCC">
+          <table width='100%'>
+            <tr>
+              <td width='1%' align='left'>$</td>
+              <td width="9%" align="right">&nbsp;</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td align="center">
+          <div contenteditable>&nbsp;</div>
+        </td>
+        <td align="center">
+          <div contenteditable>&nbsp;</div>
+        </td>
+        <td align="left">
+          <div contenteditable>&nbsp;</div>
+        </td>
+        <td>
+          <table width="100%">
+            <tr>
+              <td width="1%" align="left">$</td>
+              <td width="9%" align="right">
+                <div contenteditable>&nbsp;</div>
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td align="center" bgcolor="#CCCCCC">
+          <table width='100%'>
+            <tr>
+              <td width='1%' align='left'>$</td>
+              <td width="9%" align="right">&nbsp;</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td align="center">
+          <div contenteditable>&nbsp;</div>
+        </td>
+        <td align="center">
+          <div contenteditable>&nbsp;</div>
+        </td>
+        <td align="left">
+          <div contenteditable>&nbsp;</div>
+        </td>
+        <td>
+          <table width="100%">
+            <tr>
+              <td width="1%" align="left">$</td>
+              <td width="9%" align="right">
+                <div contenteditable>&nbsp;</div>
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td align="center" bgcolor="#CCCCCC">
+          <table width='100%'>
+            <tr>
+              <td width='1%' align='left'>$</td>
+              <td width="9%" align="right">&nbsp;</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td align="center">
+          <div contenteditable>&nbsp;</div>
+        </td>
+        <td align="center">
+          <div contenteditable>&nbsp;</div>
+        </td>
+        <td align="left">
+          <div contenteditable>&nbsp;</div>
+        </td>
+        <td>
+          <table width="100%">
+            <tr>
+              <td width="1%" align="left">$</td>
+              <td width="9%" align="right">
+                <div contenteditable>&nbsp;</div>
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td align="center" bgcolor="#CCCCCC">
+          <table width='100%'>
+            <tr>
+              <td width='1%' align='left'>$</td>
+              <td width="9%" align="right">&nbsp;</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td align="center">
+          <div contenteditable>&nbsp;</div>
+        </td>
+        <td align="center">
+          <div contenteditable>&nbsp;</div>
+        </td>
+        <td align="left">
+          <div contenteditable>&nbsp;</div>
+        </td>
+        <td>
+          <table width="100%">
+            <tr>
+              <td width="1%" align="left">$</td>
+              <td width="9%" align="right">
+                <div contenteditable>&nbsp;</div>
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td align="center" bgcolor="#CCCCCC">
+          <table width='100%'>
+            <tr>
+              <td width='1%' align='left'>$</td>
+              <td width="9%" align="right">&nbsp;</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td align="center">
+          <div contenteditable>&nbsp;</div>
+        </td>
+        <td align="center">
+          <div contenteditable>&nbsp;</div>
+        </td>
+        <td align="left">
+          <div contenteditable>&nbsp;</div>
+        </td>
+        <td>
+          <table width="100%">
+            <tr>
+              <td width="1%" align="left">$</td>
+              <td width="9%" align="right">
+                <div contenteditable>&nbsp;</div>
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td align="center" bgcolor="#CCCCCC">
+          <table width='100%'>
+            <tr>
+              <td width='1%' align='left'>$</td>
+              <td width="9%" align="right">&nbsp;</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td align="center">
+          <div contenteditable>&nbsp;</div>
+        </td>
+        <td align="center">
+          <div contenteditable>&nbsp;</div>
+        </td>
+        <td align="left">
+          <div contenteditable>&nbsp;</div>
+        </td>
+        <td>
+          <table width="100%">
+            <tr>
+              <td width="1%" align="left">$</td>
+              <td width="9%" align="right">
+                <div contenteditable>&nbsp;</div>
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td align="center" bgcolor="#CCCCCC">
+          <table width='100%'>
+            <tr>
+              <td width='1%' align='left'>$</td>
+              <td width="9%" align="right">&nbsp;</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td align="center">
+          <div contenteditable>&nbsp;</div>
+        </td>
+        <td align="center">
+          <div contenteditable>&nbsp;</div>
+        </td>
+        <td align="left">
+          <div contenteditable>&nbsp;</div>
+        </td>
+        <td>
+          <table width="100%">
+            <tr>
+              <td width="1%" align="left">$</td>
+              <td width="9%" align="right">
+                <div contenteditable>&nbsp;</div>
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td align="center" bgcolor="#CCCCCC">
+          <table width='100%'>
+            <tr>
+              <td width='1%' align='left'>$</td>
+              <td width="9%" align="right">&nbsp;</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+
+    <table id='fixed_table' bgcolor="#F8F8F8" width="100%" border="1" cellspacing="0">
+      <tr>
+        <td align="center" width="10%" bgcolor="#DDDDDD">&nbsp;</td>
+        <td align="center" width="5%">
+          <div contenteditable>1</div>
+        </td>
+        <td align="right" width="65%" bgcolor="#DDDDDD">
+          <font color="#0066CC">Labour Charge</font>
+        </td>
+        <td>
+          <table width="100%">
+            <tr>
+              <td width="1%" align="left">$</td>
+              <td width="9%" align="right">
+                <div contenteditable>132.00</div>
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td align="center" width="10%" bgcolor="#DDDDDD">
+          <table width='100%'>
+            <tr>
+              <td width='1%' align='left'>$</td>
+              <td width="9%" align="right">&nbsp;</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+
+      <tr>
+        <td align="center" width="10%" bgcolor="#DDDDDD">&nbsp;</td>
+        <td align="center" width="5%">
+          <div contenteditable>1</div>
+        </td>
+        <td align="right" width="65%" bgcolor="#DDDDDD">
+          <font color="#0066CC">Onsite Call Out Fee</font>
+        </td>
+        <td>
+          <table width="100%">
+            <tr>
+              <td width="1%" align="left">$</td>
+              <td width="9%" align="right">
+                <div contenteditable>198.00</div>
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td align="center" width="10%" bgcolor="#DDDDDD">
+          <table width='100%'>
+            <tr>
+              <td width='1%' align='left'>$</td>
+              <td width="9%" align="right">&nbsp;</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+
+    <div align="right">
+      <table id='final_table' bgcolor="#F8F8F8" width="20%">
+        <tr>
+          <td bgcolor="#F5FFFF" align="right" width="50%">
+            <font color="#0066CC">Net</font>
+          </td>
+          <td style="border: 1px solid black;" align="right" width="50%" bgcolor="#DDDDDD">
+            <font color="#0066CC">
+              <table width='100%' align='center'>
+                <tr>
+                  <td width='1%' align='left'>$</td>
+                  <td width='9%' align='right'>&nbsp;</td>
+                </tr>
+              </table>
+            </font>
+          </td>
+        </tr>
+
+        <tr>
+          <td bgcolor="#F5FFFF" align="right" width="50%">
+            <font color="#0066CC">GST</font>
+          </td>
+          <td style="border: 1px solid black;" align="right" width="50%" bgcolor="#DDDDDD">
+            <font color="#0066CC">
+              <table width='100%' align='center'>
+                <tr>
+                  <td width='1%' align='left'>$</td>
+                  <td width='9%' align='right'>&nbsp;</td>
+                </tr>
+              </table>
+            </font>
+          </td>
+        </tr>
+
+        <tr>
+          <td bgcolor="#F5FFFF" align="right" width="50%">
+            <font color="#00CCCC">Total</font>
+          </td>
+          <td style="border: 1px solid black;" align="right" width="50%" bgcolor="#DDDDDD">
+            <font color="#0099CC">
+              <table align='center' width='100%'>
+                <tr>
+                  <td width='1%' align='left'>$</td>
+                  <td align='right' width='9%'>&nbsp;</td>
+                </tr>
+              </table>
+            </font>
+          </td>
+        </tr>
+
+
+      </table>
+    </div>
+
+  </div>
+
+
+  <br />
+  <div align="right">
+    <button type="button" onclick="window.location.reload()">Reload</button>
+    <button type="button" onclick="displayResult()">Add row</button>
+    <button type="button" onClick="updateTable()">Update</button>
+  </div>
+  <p style="text-align:center;">
     <input type="submit" name="submit" value="<?php echo _P('action-button', 'Open');?>">
-    <input type="reset"  name="reset"  value="<?php echo __('Reset');?>">
+    <input type="reset" name="reset" value="<?php echo __('Reset');?>">
     <input type="button" name="cancel" value="<?php echo __('Cancel');?>" onclick="javascript:
         $(this.form).find('textarea.richtext')
           .redactor('plugin.draft.deleteDraft');
         window.location.href='tickets.php'; " />
-</p>
+  </p>
 </form>
 <script type="text/javascript">
 $(function() {
-    $('input#user-email').typeahead({
-        source: function (typeahead, query) {
-            $.ajax({
-                url: "ajax.php/users?q="+query,
-                dataType: 'json',
-                success: function (data) {
-                    typeahead.process(data);
-                }
-            });
-        },
-        onselect: function (obj) {
-            $('#uid').val(obj.id);
-            $('#user-name').val(obj.name);
-            $('#user-email').val(obj.email);
-        },
-        property: "/bin/true"
-    });
+  $('input#user-email').typeahead({
+    source: function(typeahead, query) {
+      $.ajax({
+        url: "ajax.php/users?q=" + query,
+        dataType: 'json',
+        success: function(data) {
+          typeahead.process(data);
+        }
+      });
+    },
+    onselect: function(obj) {
+      $('#uid').val(obj.id);
+      $('#user-name').val(obj.name);
+      $('#user-email').val(obj.email);
+    },
+    property: "/bin/true"
+  });
 });
 
 $(function() {
-    $('a#editorg').click( function(e) {
-        e.preventDefault();
-        $('div#org-profile').hide();
-        $('div#org-form').fadeIn();
-        return false;
-     });
-
-    $(document).on('click', 'form.org input.cancel', function (e) {
-        e.preventDefault();
-        $('div#org-form').hide();
-        $('div#org-profile').fadeIn();
-        return false;
-    });
-
-    $('.userSelection').select2({
-      width: '450px',
-      minimumInputLength: 3,
-      ajax: {
-        url: "ajax.php/users/local",
-        dataType: 'json',
-        data: function (params) {
-          return {
-            q: params.term,
-          };
-        },
-        processResults: function (data) {
-          return {
-            results: $.map(data, function (item) {
-              return {
-                text: item.email + ' - ' + item.name,
-                slug: item.slug,
-                email: item.email,
-                id: item.id
-              }
-            })
-          };
-          $('#user-email').val(item.name);
-        }
-      }
-    });
-
-    $('.userSelection').on('select2:select', function (e) {
-      var data = e.params.data;
-      $('#user-email').val(data.email);
-    });
-
-    $('.userSelection').on("change", function (e) {
-      var data = $('.userSelection').select2('data');
-      var data = data[0].text;
-      var email = data.substr(0,data.indexOf(' '));
-      $('#user-email').val(data.substr(0,data.indexOf(' ')));
-     });
-
-    $('.collabSelections').select2({
-      width: '450px',
-      minimumInputLength: 3,
-      ajax: {
-        url: "ajax.php/users/local",
-        dataType: 'json',
-        data: function (params) {
-          return {
-            q: params.term,
-          };
-        },
-        processResults: function (data) {
-          return {
-            results: $.map(data, function (item) {
-              return {
-                text: item.name,
-                slug: item.slug,
-                id: item.id
-              }
-            })
-          };
-        }
-      }
-    });
-
+  $('a#editorg').click(function(e) {
+    e.preventDefault();
+    $('div#org-profile').hide();
+    $('div#org-form').fadeIn();
+    return false;
   });
+
+  $(document).on('click', 'form.org input.cancel', function(e) {
+    e.preventDefault();
+    $('div#org-form').hide();
+    $('div#org-profile').fadeIn();
+    return false;
+  });
+
+  $('.userSelection').select2({
+    width: '450px',
+    minimumInputLength: 3,
+    ajax: {
+      url: "ajax.php/users/local",
+      dataType: 'json',
+      data: function(params) {
+        return {
+          q: params.term,
+        };
+      },
+      processResults: function(data) {
+        return {
+          results: $.map(data, function(item) {
+            return {
+              text: item.email + ' - ' + item.name,
+              slug: item.slug,
+              email: item.email,
+              id: item.id
+            }
+          })
+        };
+        $('#user-email').val(item.name);
+      }
+    }
+  });
+
+  $('.userSelection').on('select2:select', function(e) {
+    var data = e.params.data;
+    $('#user-email').val(data.email);
+  });
+
+  $('.userSelection').on("change", function(e) {
+    var data = $('.userSelection').select2('data');
+    var data = data[0].text;
+    var email = data.substr(0, data.indexOf(' '));
+    $('#user-email').val(data.substr(0, data.indexOf(' ')));
+  });
+
+  $('.collabSelections').select2({
+    width: '450px',
+    minimumInputLength: 3,
+    ajax: {
+      url: "ajax.php/users/local",
+      dataType: 'json',
+      data: function(params) {
+        return {
+          q: params.term,
+        };
+      },
+      processResults: function(data) {
+        return {
+          results: $.map(data, function(item) {
+            return {
+              text: item.name,
+              slug: item.slug,
+              id: item.id
+            }
+          })
+        };
+      }
+    }
+  });
+
+});
 </script>
