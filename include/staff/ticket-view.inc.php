@@ -1678,7 +1678,7 @@ $tcount = $ticket->getThreadEntries($types) ? $ticket->getThreadEntries($types)-
               <div class="item4"><input type="name" id="signature_name" name="signature_name" required
                   style="height:1.5625rem;width:100%;background-color:#f9f9f9"></div>
               <div class=" item5" style="justify-content:center;"><strong>Date/Time:</strong></div>
-              <div class="item6"><input type="date" id="signature_date" name="signature_date" required
+              <div class="item6"><input type="datetime-local" id="signature_date" name="signature_date" required
                   style="height:1.5625rem;background-color:#f9f9f9">
               </div>
               <div class=" item7" style="padding: 1.25rem;font-size:.875rem">I confirm that the engineer

@@ -193,7 +193,7 @@ if ($_POST && !$errors) :
     if (!file_exists($uploadFolder)) {
         mkdir($uploadFolder, 0777, true);
     }
-    $dateTime=date("Ymd", strtotime($date));
+    $dateTime=date("YmdHis", strtotime($date));
     // Generate a unique filename for the signature image
     $filename = $uploadFolder . $name . '_' . $dateTime . '.png';
     file_put_contents($filename, $decoded_data);
