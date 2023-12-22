@@ -1031,16 +1031,16 @@ function displayContacts(person, position, department, phone, mobile, email)
 	var table=document.getElementById("myTable4");
 	
 	var row=table.insertRow(-1);
-	row.innerHTML="<td width='160'>&nbsp;&nbsp;&nbsp;&nbsp;Contact Person :</td><td><input type='text' size='50' value='" + person + "' name='cont[person][]' style='width:92%;'></td>";
+	row.innerHTML="<td width='160' style='border:0px'>&nbsp;&nbsp;&nbsp;&nbsp;Contact Person :</td><td style='border:0px;border-right:1px solid #ddd;'><input type='text' size='50' value='" + person + "' name='cont[person][]' style='width:92%;'></td>";
 	
 	var row=table.insertRow(-1);
-	row.innerHTML="<td width='160'>&nbsp;&nbsp;&nbsp;&nbsp;Position :</td><td><input type='text' size='20'  value='" + position + "' name='cont[position][]'>&nbsp;&nbsp;Department :  <input type='text' size='20'  value='"+ department + "' name='cont[department][]' style='width:33%;'></td>";
+	row.innerHTML="<td width='160' style='border:0px'>&nbsp;&nbsp;&nbsp;&nbsp;Position :</td><td style='border:0px;border-right:1px solid #ddd;'><input type='text' size='20'  value='" + position + "' name='cont[position][]'>&nbsp;&nbsp;Department :  <input type='text' size='20'  value='"+ department + "' name='cont[department][]' style='width:34%;'></td>";
 	
 	var row=table.insertRow(-1);
-	row.innerHTML="<td width='160'>&nbsp;&nbsp;&nbsp;&nbsp;Phone Number :</td><td><input type='text' size='20'  value='" + phone + "' name='cont[phone][]'>&nbsp;&nbsp;Mobile :  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' size='20'  value='"+mobile+"' name='cont[mobile][]' style='width:33%;'></td>";
+	row.innerHTML="<td width='160' style='border:0px'>&nbsp;&nbsp;&nbsp;&nbsp;Phone Number :</td><td style='border:0px;border-right:1px solid #ddd;'><input type='text' size='20'  value='" + phone + "' name='cont[phone][]'>&nbsp;&nbsp;Mobile :  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' size='20'  value='"+mobile+"' name='cont[mobile][]' style='width:34%;'></td>";
 	
 	var row=table.insertRow(-1);
-	row.innerHTML="<td width='160' style='border-bottom:2px solid #0094B3;'>&nbsp;&nbsp;&nbsp;&nbsp;Email Address :</td><td style='border-bottom:2px solid #0094B3;'><input type='text' size='50'  value='"+ email + "' name='cont[email][]' style='width:92%;'></td>";
+	row.innerHTML="<td width='160' style='border-bottom:2px solid #0094B3;'>&nbsp;&nbsp;&nbsp;&nbsp;Email Address :</td><td style='border-bottom:2px solid #0094B3;border-right:1px solid #ddd;'><input type='text' size='50'  value='"+ email + "' name='cont[email][]' style='width:92%;'></td>";
 }
 
 function addContact()
@@ -1048,16 +1048,16 @@ function addContact()
 	var table=document.getElementById("myTable4");
 	
 	var row=table.insertRow(-1);
-	row.innerHTML="<td width='160'>&nbsp;&nbsp;&nbsp;&nbsp;Contact Person :</td><td><input type='text' size='50' name='cont[person][]' style='width:92%;'></td>";
+	row.innerHTML="<td width='160'>&nbsp;&nbsp;&nbsp;&nbsp;Contact Person :</td><td style='border-right:1px solid #ddd;'><input type='text' size='50' name='cont[person][]' style='width:92%;'></td>";
 	
 	var row=table.insertRow(-1);
-	row.innerHTML="<td width='160'>&nbsp;&nbsp;&nbsp;&nbsp;Position :</td><td><input type='text' size='20' name='cont[position][]'>&nbsp;&nbsp;Department :  <input type='text' size='20' name='cont[department][]' style='width:33%;'></td>";
+	row.innerHTML="<td width='160'>&nbsp;&nbsp;&nbsp;&nbsp;Position :</td><td style='border-right:1px solid #ddd;'><input type='text' size='20' name='cont[position][]'>&nbsp;&nbsp;Department :  <input type='text' size='20' name='cont[department][]' style='width:34%;'></td>";
 	
 	var row=table.insertRow(-1);
-	row.innerHTML="<td width='160'>&nbsp;&nbsp;&nbsp;&nbsp;Phone Number :</td><td><input type='text' size='20' name='cont[phone][]'>&nbsp;&nbsp;Mobile :  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' size='20' name='cont[mobile][]' style='width:33%;'></td>";
+	row.innerHTML="<td width='160'>&nbsp;&nbsp;&nbsp;&nbsp;Phone Number :</td><td style='border-right:1px solid #ddd;'><input type='text' size='20' name='cont[phone][]'>&nbsp;&nbsp;Mobile :  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' size='20' name='cont[mobile][]' style='width:34%;'></td>";
 	
 	var row=table.insertRow(-1);
-	row.innerHTML="<td width='160'style='border-bottom:2px solid #0094B3;'>&nbsp;&nbsp;&nbsp;&nbsp;Email Address :</td><td style='border-bottom:2px solid #0094B3;'><input type='text' size='50' name='cont[email][]' style='width:92%;'></td>";
+	row.innerHTML="<td width='160'style='border-bottom:2px solid #0094B3;'>&nbsp;&nbsp;&nbsp;&nbsp;Email Address :</td><td style='border-bottom:2px solid #0094B3;    border-right: 1px solid #ddd;'><input type='text' size='50' name='cont[email][]' style='width:92%;'></td>";
 
 }
 

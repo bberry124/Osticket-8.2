@@ -82,12 +82,17 @@ $(document).on("pageshow", "#cust_auth_table", function() {
   <h2>Customers</h2>
   <table cellpadding="0" width="940" cellspacing="2" border="0">
     <tr>
-      <td width="75%">
+      <td>
         <table class="form_table" style="width:100%" border="0" cellspacing="0" cellpadding="2">
           <thead>
             <tr>
-              <th colspan="3">
+              <th>
                 <strong> Account Type</strong>
+              </th>
+              <th style="border-right:1px solid #ddd;">
+              </th>
+              <th style="text-align:center;width:30%">
+                <strong> Tools</strong>
               </th>
             </tr>
           </thead>
@@ -115,11 +120,11 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                         }
                         ?>
             <tr>
-              <td style="width:23%;">
+              <td style="width:17%;">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Account Status
               </td>
-              <td>
-                <select name="custom_status" style="width: 166px;" id="custom_status"
+              <td style="border-right:1px solid #ddd;">
+                <select name="custom_status" id="textInput" oninput="checkInput()" style="width: 166px;" id="custom_status"
                   onchange="this.className=this.options[this.selectedIndex].className">
                   <option value=""></option>
                   <option value="active" class="greenText"
@@ -128,19 +133,23 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                     <?php echo $info['custom_status'] == 'closed' ? "selected=\"selected\"" : ""; ?>>Closed</option>
                 </select>
                 &nbsp;&nbsp;&nbsp;&nbsp;Account Number&nbsp;&nbsp;&nbsp;
-                <input type="text" size="59" name="acnt_rand_no" id="acnt_rand_no" class="typeahead"
+                <input type="text" id="textInput" oninput="checkInput()" size="59" name="acnt_rand_no" id="acnt_rand_no" class="typeahead"
                   value="<?php if ($info['acnt_rand_no'] != "") echo $info['acnt_rand_no'];
                                                                                                                             else echo generateRandom(8); ?>" autocomplete="off" autocorrect="off"
                   autocapitalize="off" style="width: 30%;">
                 &nbsp;<span class="error">*&nbsp;</span>
               </td>
+              <td style="text-align:center;border:0">
+              <input type="button" onclick="document.location='tickets.php?a=open&cid=<?php echo $_REQUEST['id']; ?>';"
+                value="Create New Ticket" style="width:80%;background-color:#f45511;"><br />
+            </td>
             </tr>
             <tr>
               <td class="required">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Account Type
               </td>
-              <td>
-                <select name="custom_type" id="custom_type" style="width: 166px;">
+              <td style="border-right:1px solid #ddd;">
+                <select name="custom_type" id="textInput" oninput="checkInput()" id="custom_type" style="width: 166px;">
                   <option value=""></option>
                   <option value="business"
                     <?php echo $info['custom_type'] == 'business' ? "selected=\"selected\"" : ""; ?>>Business</option>
@@ -158,38 +167,49 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                     Positive Business Online</option>
                 </select>
                 &nbsp;&nbsp;&nbsp;&nbsp;Account Manager&nbsp;
-                <input type="text" size="59" name="acnt_rand_manager" id="acnt_rand_manager" class="typeahead"
+                <input type="text" id="textInput" oninput="checkInput()" size="59" name="acnt_rand_manager" id="acnt_rand_manager" class="typeahead"
                   value="<?php if ($info['acnt_rand_manager'] != "") echo $info['acnt_rand_manager']; ?>"
                   autocomplete="off" autocorrect="off" autocapitalize="off" style="width: 30%;">
                 &nbsp;<span class="error">*&nbsp;</span>
               </td>
+              <td style="text-align:center;border:0;">
+              <input type="button" onclick="document.location='tickets.php?<?php get_search_Query($info['email']); ?>'"
+                value="<?php echo __('View Ticket History'); ?>" style="width:80%;">
+            </td>
             </tr>
           </tbody>
           <thead>
             <tr>
-              <th colspan="3">
+              <th>
                 <strong>Company Details</strong>
+              </th>
+              <th style="border-right:1px solid #ddd;">
+              </th>
+              <th style="text-align:center; background:#f3f3f3;border:0;">
+              <input type="button"
+                onclick="window.open('customers.php?a=label&id=<?php echo $_REQUEST['id']; ?>','_blank','width=280,height=200,scrollbars=0,resizable=0');"
+                value="Print Shipping Label" style="width:80%;">
               </th>
             </tr>
           </thead>
-          <tbody></tbody>
+          <tbody>
           <tr>
-            <td width="160" class="required">
+            <td class="required">
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Company Name
             </td>
-            <td>
-              <input type="text" size="59" name="company" id="company" class="typeahead"
+            <td style="border-right:1px solid #ddd;">
+              <input type="text" id="textInput" oninput="checkInput()" size="59" name="company" id="company" class="typeahead"
                 value="<?php echo $info['company']; ?>" autocomplete="off" autocorrect="off" autocapitalize="off"
                 style="width:92.5%;">
               &nbsp;<span class="error">*&nbsp;</span>
             </td>
           </tr>
           <tr>
-            <td width="160">
+            <td>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trust Details
             </td>
-            <td>
-              <input type="text" size="59" name="trust" id="trust" class="typeahead"
+            <td style="border-right:1px solid #ddd;">
+              <input type="text" id="textInput" oninput="checkInput()" size="59" name="trust" id="trust" class="typeahead"
                 value="<?php echo $info['trust']; ?>" autocomplete="off" autocorrect="off" autocapitalize="off"
                 style="width:92.5%;">
             </td>
@@ -198,8 +218,8 @@ $(document).on("pageshow", "#cust_auth_table", function() {
             <td width="160" class="required">
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trading Name
             </td>
-            <td>
-              <input type="text" size="59" name="trading" id="trading" class="typeahead"
+            <td style="border-right:1px solid #ddd;">
+              <input type="text" id="textInput" oninput="checkInput()" size="59" name="trading" id="trading" class="typeahead"
                 value="<?php echo $info['trading']; ?>" autocomplete="off" autocorrect="off" autocapitalize="off"
                 style="width:92.5%;">
               &nbsp;<span class="error">*&nbsp;</span>
@@ -209,12 +229,12 @@ $(document).on("pageshow", "#cust_auth_table", function() {
             <td width="160">
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ABN Number
             </td>
-            <td>
-              <input type="text" size="18" name="abn" id="abn" class="typeahead" value="<?php echo $info['abn']; ?>"
+            <td style="border-right:1px solid #ddd;">
+              <input type="text" id="textInput" oninput="checkInput()" size="18" name="abn" id="abn" class="typeahead" value="<?php echo $info['abn']; ?>"
                 autocomplete="off" autocorrect="off" autocapitalize="off">
               &nbsp;<span class="error">&nbsp;<?php echo $errors['fax']; ?></span>
               &nbsp;&nbsp;ACN Number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <input type="text" size="18" name="acn" id="acn" class="typeahead" value="<?php echo $info['acn']; ?>"
+              <input type="text" id="textInput" oninput="checkInput()" size="18" name="acn" id="acn" class="typeahead" value="<?php echo $info['acn']; ?>"
                 autocomplete="off" autocorrect="off" autocapitalize="off">
             </td>
           </tr>
@@ -222,26 +242,26 @@ $(document).on("pageshow", "#cust_auth_table", function() {
             <td width="160">
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Business Type
             </td>
-            <td>
-              <input type="radio" name="busicat" value="1"
+            <td style="border-right:1px solid #ddd;">
+              <input type="radio" name="busicat" id="textInput" oninput="checkInput()" value="1"
                 <?php echo $info['busicat'] == '1' ? "checked=\"checked\"" : ""; ?> />
               Private (Pty Ltd)&nbsp;&nbsp;&nbsp;
-              <input type="radio" name="busicat" value="2"
+              <input type="radio" name="busicat" id="textInput" oninput="checkInput()" value="2"
                 <?php echo $info['busicat'] == '2' ? "checked=\"checked\"" : ""; ?> />
               Public (Ltd)&nbsp;&nbsp;&nbsp;
-              <input type="radio" name="busicat" value="3"
+              <input type="radio" name="busicat" id="textInput" oninput="checkInput()" value="3"
                 <?php echo $info['busicat'] == '3' ? "checked=\"checked\"" : ""; ?> />
               Sole Trader&nbsp;&nbsp;&nbsp;
-              <input type="radio" name="busicat" value="4"
+              <input type="radio" name="busicat" id="textInput" oninput="checkInput()" value="4"
                 <?php echo $info['busicat'] == '4' ? "checked=\"checked\"" : ""; ?> />
               Trust <br />
-              <input type="radio" name="busicat" value="5"
+              <input type="radio" name="busicat" id="textInput" oninput="checkInput()" value="5"
                 <?php echo $info['busicat'] == '5' ? "checked=\"checked\"" : ""; ?> />
               Partnership&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <input type="radio" name="busicat" value="6"
+              <input type="radio" name="busicat" id="textInput" oninput="checkInput()" value="6"
                 <?php echo $info['busicat'] == '6' ? "checked=\"checked\"" : ""; ?> />
               Union&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <input type="radio" name="busicat" value="7"
+              <input type="radio" name="busicat" id="textInput" oninput="checkInput()" value="7"
                 <?php echo $info['busicat'] == '7' ? "checked=\"checked\"" : ""; ?> />
               Association
             </td>
@@ -250,8 +270,8 @@ $(document).on("pageshow", "#cust_auth_table", function() {
             <td width="160">
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reigstered for GST
             </td>
-            <td>
-              <input type="radio" name="reggst" value="1"
+            <td style="border-right:1px solid #ddd;">
+              <input type="radio" id="textInput" oninput="checkInput()" name="reggst" value="1"
                 <?php echo $info['reggst'] == '1' ? "checked=\"checked\"" : ""; ?> />
               Yes&nbsp;&nbsp;&nbsp;
               <input type="radio" name="reggst" value="2"
@@ -263,7 +283,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
             <td width="160">
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date Established
             </td>
-            <td>
+            <td style="border-right:1px solid #ddd;">
               <?php
                             $establ = $info['establ'];
                             $currentDate = new DateTime();
@@ -273,7 +293,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                             $months = $interval->m;
                             $days = $interval->d;
                             ?>
-              <input type="date" size="18" name="establ" id="establ" class="typeahead" value="<?php echo $establ; ?>"
+              <input type="date" id="textInput" oninput="checkInput()" size="18" name="establ" id="establ" class="typeahead" value="<?php echo $establ; ?>"
                 autocomplete="off" autocorrect="off" autocapitalize="off">
               &nbsp;&nbsp;Time in business&nbsp;&nbsp;&nbsp;
               <?php
@@ -297,48 +317,56 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                             }
                             ?>
             </td>
+            <td style="display:flex;border:0;align-items:center;justify-content:space-around;">
+              <input type="submit" name="do" id="update" value="<?php echo ($info['id']) ? "Update" : "Add"; ?>" />
+              <input type="reset" name="reset" value="Reset" />
+              <input type="button" name="cancel" value="Cancel" onclick='window.location.href="customers.php"'>
+              <input type="hidden" name="id" value="<?php echo $info['id']; ?>" />
+          </td>
           </tr>
           </tbody>
           <thead>
             <tr>
-              <th colspan="3">
+              <th>
                 <strong>Business Market Sector</strong>
               </th>
+              <th style="border-right:1px solid #ddd;"></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>
-                &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="businesstype" value="1"
+                &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="businesstype" id="textInput" oninput="checkInput()" value="1"
                   <?php echo $info['businesstype'] == '1' ? "checked=\"checked\"" : ""; ?> />
                 &nbsp;&nbsp;Education
               </td>
-              <td>
-                <input type="radio" name="businesstype" value="2"
+              <td style="border-right:1px solid #ddd;">
+                <input type="radio" id="textInput" oninput="checkInput()" name="businesstype" value="2"
                   <?php echo $info['businesstype'] == '2' ? "checked=\"checked\"" : ""; ?> />
                 &nbsp;&nbsp;Health Care&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="radio" name="businesstype" value="3"
+                <input type="radio" id="textInput" oninput="checkInput()" name="businesstype" value="3"
                   <?php echo $info['businesstype'] == '3' ? "checked=\"checked\"" : ""; ?> />
                 &nbsp;&nbsp;Retail&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="radio" name="businesstype" value="4"
+                <input type="radio" id="textInput" oninput="checkInput()" name="businesstype" value="4"
                   <?php echo $info['businesstype'] == '4' ? "checked=\"checked\"" : ""; ?> />
                 Building
               </td>
             </tr>
             <tr>
               <td>
-                &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="businesstype" value="5"
+                &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="businesstype" id="textInput" oninput="checkInput()" value="5"
                   <?php echo $info['businesstype'] == '5' ? "checked=\"checked\"" : ""; ?> />
                 &nbsp;&nbsp;Government
               </td>
-              <td>
-                <input type="radio" name="businesstype" value="6"
+              <td style="border-right:1px solid #ddd;">
+                <input type="radio" id="textInput" oninput="checkInput()" name="businesstype" value="6"
                   <?php echo $info['businesstype'] == '6' ? "checked=\"checked\"" : ""; ?> />
                 &nbsp;&nbsp;Transport&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <input type="radio" name="businesstype" value="7"
                   <?php echo $info['businesstype'] == '7' ? "checked=\"checked\"" : ""; ?> />
                 &nbsp;&nbsp;Finance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="radio" name="businesstype" value="8"
+                <input type="radio" id="textInput" oninput="checkInput()" name="businesstype" value="8"
                   <?php echo $info['businesstype'] == '8' ? "checked=\"checked\"" : ""; ?> />
                 Emergency
               </td>
@@ -349,32 +377,32 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                   <?php echo $info['businesstype'] == '9' ? "checked=\"checked\"" : ""; ?> />
                 &nbsp;&nbsp;Hospitality
               </td>
-              <td>
-                <input type="radio" name="businesstype" value="10"
+              <td style="border-right:1px solid #ddd;">
+                <input type="radio" id="textInput" oninput="checkInput()" name="businesstype" value="10"
                   <?php echo $info['businesstype'] == '10' ? "checked=\"checked\"" : ""; ?> />
                 &nbsp;&nbsp;Legal&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="radio" name="businesstype" value="11"
+                <input type="radio" id="textInput" oninput="checkInput()" name="businesstype" value="11"
                   <?php echo $info['businesstype'] == '11' ? "checked=\"checked\"" : ""; ?> />
                 &nbsp;&nbsp;Advertising&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="radio" name="businesstype" value="12"
+                <input type="radio" id="textInput" oninput="checkInput()" name="businesstype" value="12"
                   <?php echo $info['businesstype'] == '12' ? "checked=\"checked\"" : ""; ?> />
                 Residential
               </td>
             </tr>
             <tr>
               <td>
-                &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="businesstype" value="13"
+                &nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="businesstype" id="textInput" oninput="checkInput()" value="13"
                   <?php echo $info['businesstype'] == '13' ? "checked=\"checked\"" : ""; ?> />
                 &nbsp;&nbsp;Entertainment
               </td>
-              <td>
-                <input type="radio" name="businesstype" value="14"
+              <td style="border-right:1px solid #ddd;">
+                <input type="radio" id="textInput" oninput="checkInput()" name="businesstype" value="14"
                   <?php echo $info['businesstype'] == '14' ? "checked=\"checked\"" : ""; ?> />
                 &nbsp;&nbsp;IT Industry&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="radio" name="businesstype" value="15"
+                <input type="radio" id="textInput" oninput="checkInput()" name="businesstype" value="15"
                   <?php echo $info['businesstype'] == '15' ? "checked=\"checked\"" : ""; ?> />
                 &nbsp;Manufacturing&nbsp;
-                <input type="radio" name="businesstype" value="16"
+                <input type="radio" id="textInput" oninput="checkInput()" name="businesstype" value="16"
                   <?php echo $info['businesstype'] == '16' ? "checked=\"checked\"" : ""; ?> />
                 Construction
               </td>
@@ -385,19 +413,28 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                   <?php echo $info['businesstype'] == '17' ? "checked=\"checked\"" : ""; ?> />
                 &nbsp;&nbsp;Other
               </td>
-              <td>
-                <input type="text" size="18" name="other1" id="other1" class="typeahead"
+              <td style="border-right:1px solid #ddd;">
+                <input type="text" size="18" id="textInput" oninput="checkInput()" name="other1" id="other1" class="typeahead"
                   value="<?php echo $info['other1']; ?>" autocomplete="off" autocorrect="off" autocapitalize="off"
                   style="width:92.5%;">
               </td>
+              <td style="display:flex;align-items:center;border:0px;justify-content:space-around;">
+              <input type="submit" name="do" id="update1" value="<?php echo ($info['id']) ? "Update" : "Add"; ?>"/>
+              <input type="reset" name="reset" value="Reset" />
+              <input type="button" name="cancel" value="Cancel" onclick='window.location.href="customers.php"'>
+              <input type="hidden" name="id" value="<?php echo $info['id']; ?>" />
+          </td>
+
             </tr>
           </tbody>
 
           <thead>
             <tr>
-              <th colspan="3">
+              <th>
                 <strong>Site Address</strong>
               </th>
+              <th style="border-right:1px solid #ddd;"></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -405,8 +442,8 @@ $(document).on("pageshow", "#cust_auth_table", function() {
               <td width="160">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Address Line 1
               </td>
-              <td>
-                <input type="text" size="50" name="address" id="address" value="<?php echo $info['address']; ?>"
+              <td style="border-right:1px solid #ddd;">
+                <input type="text" id="textInput" oninput="checkInput()" size="50" name="address" id="address" value="<?php echo $info['address']; ?>"
                   style="width:92.5%;">
               </td>
             </tr>
@@ -414,8 +451,8 @@ $(document).on("pageshow", "#cust_auth_table", function() {
               <td width="160">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Address Line 2
               </td>
-              <td>
-                <input style="margin-top:5px; width:92.5%;" type="text" size="50" name="address2" id="address2"
+              <td style="border-right:1px solid #ddd;">
+                <input style="margin-top:5px; width:92.5%;" type="text" size="50" id="textInput" oninput="checkInput()" name="address2" id="address2"
                   value="<?php echo $info['address2']; ?>">
               </td>
             </tr>
@@ -423,12 +460,12 @@ $(document).on("pageshow", "#cust_auth_table", function() {
               <td width="160">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Suburb
               </td>
-              <td>
+              <td style="border-right:1px solid #ddd;">
 
-                <input type="text" size="20" name="suburb" id="suburb" value="<?php echo $info['suburb']; ?>">
+                <input type="text" id="textInput" oninput="checkInput()" size="20" name="suburb" id="suburb" value="<?php echo $info['suburb']; ?>">
                 &nbsp;&nbsp;&nbsp;
                 State:
-                <select name="state" id="state">
+                <select name="state" id="textInput" oninput="checkInput()" id="state">
                   <option value=""></option>
                   <option value="ACT" <?php echo $info['state'] == 'ACT' ? "selected=\"selected\"" : ""; ?>>ACT</option>
                   <option value="NSW" <?php echo $info['state'] == 'NSW' ? "selected=\"selected\"" : ""; ?>>NSW</option>
@@ -450,23 +487,32 @@ $(document).on("pageshow", "#cust_auth_table", function() {
               <td width="160">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;City
               </td>
-              <td>
-                <input type="text" size="18" name="city" id="city" class="typeahead"
+              <td style="border-right:1px solid #ddd;">
+                <input type="text" id="textInput" oninput="checkInput()" size="18" name="city" id="city" class="typeahead"
                   value="<?php echo $info['city']; ?>" autocomplete="off" autocorrect="off" autocapitalize="off"
                   style="width:33%;">
                 &nbsp;<span class="error">&nbsp;<?php echo $errors['fax']; ?></span>
                 Country:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="text" size="18" name="country" id="country" class="typeahead"
+                <input type="text" id="textInput" oninput="checkInput()" size="18" name="country" id="country" class="typeahead"
                   value="<?php echo $info['country']; ?>" autocomplete="off" autocorrect="off" autocapitalize="off"
                   style="width:38%;">
               </td>
+              <td style="display:flex;align-items:center;boder:0px;justify-content:space-around;">
+              <input type="submit" name="do" id="update2" value="<?php echo ($info['id']) ? "Update" : "Add"; ?>" />
+              <input type="reset" name="reset" value="Reset" />
+              <input type="button" name="cancel" value="Cancel" onclick='window.location.href="customers.php"'>
+              <input type="hidden" name="id" value="<?php echo $info['id']; ?>" />
+          </td>
+
             </tr>
           </tbody>
           <thead>
             <tr>
-              <th colspan="3">
+              <th>
                 <strong>Company Contact Details</strong>
               </th>
+              <th style="border-right:1px solid #ddd;"></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -474,9 +520,9 @@ $(document).on("pageshow", "#cust_auth_table", function() {
               <td width="160" class="required">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Landline Number
               </td>
-              <td>
-                <input type="text" size="15" name="landline" id="landline" value="<?php echo $info['landline']; ?>">
-                &nbsp;1300/1800 Telephone&nbsp;<input type="text" size="15" name="telephone" id="telephone"
+              <td style="border-right:1px solid #ddd;">
+                <input type="text" id="textInput" oninput="checkInput()" size="15" name="landline" id="landline" value="<?php echo $info['landline']; ?>">
+                &nbsp;1300/1800 Telephone&nbsp;<input type="text" size="15" id="textInput" oninput="checkInput()" name="telephone" id="telephone"
                   value="<?php echo $info['telephone']; ?>" style="width:32%;">
               </td>
             </tr>
@@ -484,8 +530,8 @@ $(document).on("pageshow", "#cust_auth_table", function() {
               <td width="160" class="required">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fax Number
               </td>
-              <td>
-                <input type="text" size="15" name="fax" id="fax" value="<?php echo $info['fax']; ?>">
+              <td style="border-right:1px solid #ddd;">
+                <input type="text" id="textInput" oninput="checkInput()" size="15" name="fax" id="fax" value="<?php echo $info['fax']; ?>">
                 &nbsp;1300/1800 Fax&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <input type="text" size="15" name="faxn" id="faxn" value="<?php echo $info['faxn']; ?>"
                   style="width:32%;">
@@ -495,8 +541,8 @@ $(document).on("pageshow", "#cust_auth_table", function() {
               <td width="160" class="required">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Office Email
               </td>
-              <td>
-                <input type="text" size="50" name="officeemail" id="officeemail" class="typeahead"
+              <td style="border-right:1px solid #ddd;">
+                <input type="text" id="textInput" oninput="checkInput()" size="50" name="officeemail" id="officeemail" class="typeahead"
                   value="<?php echo $info['officeemail']; ?>" autocomplete="off" autocorrect="off" autocapitalize="off"
                   style="width:92%;">
               </td>
@@ -505,21 +551,29 @@ $(document).on("pageshow", "#cust_auth_table", function() {
               <td width="160">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Web URL
               </td>
-              <td>
-                <input type="text" size="59" name="website" id="website" class="typeahead"
+              <td style="border-right:1px solid #ddd;">
+                <input type="text" id="textInput" oninput="checkInput()" size="59" name="website" id="website" class="typeahead"
                   value="<?php echo $info['website']; ?>" autocomplete="off" autocorrect="off" autocapitalize="off"
                   style="width:65%;">
                 <button style="margin-top:5px" type="button" onclick="gotoCustomerUrl();">Click
                   Here</button>
-
               </td>
+              <td style="display:flex; align-items:center;border:0px;justify-content:space-around">
+              <input type="submit" id="update3" name="do" value="<?php echo ($info['id']) ? "Update" : "Add"; ?>" />
+              <input type="reset" name="reset" value="Reset" />
+              <input type="button" name="cancel" value="Cancel" onclick='window.location.href="customers.php"'>
+              <input type="hidden" name="id" value="<?php echo $info['id']; ?>" />
+          </td>
+
             </tr>
           </tbody>
           <thead>
             <tr>
-              <th colspan="3">
+              <th>
                 <strong>Primary Contact Person</strong>
               </th>
+              <th style="border-right:1px solid #ddd;"></th>
+              <th ></th>
             </tr>
           </thead>
           <tbody>
@@ -527,8 +581,8 @@ $(document).on("pageshow", "#cust_auth_table", function() {
               <td width="160">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Title
               </td>
-              <td>
-                <select name="title" id="title" style="width:100px;">
+              <td style="border-right:1px solid #ddd;">
+                <select name="title" id="textInput" oninput="checkInput()" id="title" style="width:100px;">
                   <option value=""></option>
                   <option value="mr" <?php echo $info['title'] == 'mr' ? "selected=\"selected\"" : ""; ?>>Mr</option>
                   <option value="dr" <?php echo $info['title'] == 'dr' ? "selected=\"selected\"" : ""; ?>>Dr</option>
@@ -543,8 +597,8 @@ $(document).on("pageshow", "#cust_auth_table", function() {
               <td width="160" class="required">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;First Name
               </td>
-              <td>
-                <input type="text" size="15" name="name" id="name" value="<?php echo $info['name']; ?>">
+              <td style="border-right:1px solid #ddd;">
+                <input type="text" size="15" id="textInput" oninput="checkInput()" name="name" id="name" value="<?php echo $info['name']; ?>">
                 &nbsp;<span class="error">*&nbsp;</span>&nbsp;&nbsp;
                 Preferred Name&nbsp;<input type="text" size="15" name="preferredname" id="preferredname"
                   value="<?php echo $info['preferredname']; ?>" style="width:35%;">
@@ -554,8 +608,8 @@ $(document).on("pageshow", "#cust_auth_table", function() {
               <td width="160">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Middle Name
               </td>
-              <td>
-                <input type="text" size="15" name="middlename" id="middlename"
+              <td style="border-right:1px solid #ddd;">
+                <input type="text" id="textInput" oninput="checkInput()" size="15" name="middlename" id="middlename"
                   value="<?php echo $info['middlename']; ?>" style="width:92.5%;">
               </td>
             </tr>
@@ -563,8 +617,8 @@ $(document).on("pageshow", "#cust_auth_table", function() {
               <td width="160">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sure Name
               </td>
-              <td>
-                <input type="text" size="15" name="surname" id="surname" value="<?php echo $info['surname']; ?>"
+              <td style="border-right:1px solid #ddd;">
+                <input type="text" id="textInput" oninput="checkInput()" size="15" name="surname" id="surname" value="<?php echo $info['surname']; ?>"
                   style="width:92.5%;">
               </td>
             </tr>
@@ -572,125 +626,47 @@ $(document).on("pageshow", "#cust_auth_table", function() {
               <td width="160">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Company Position
               </td>
-              <td>
-                <input type="text" size="50" name="position" id="position" class="typeahead"
+              <td style="border-right:1px solid #ddd;">
+                <input type="text" id="textInput" oninput="checkInput()" size="50" name="position" id="position" class="typeahead"
                   value="<?php echo $info['position']; ?>" autocomplete="off" autocorrect="off" autocapitalize="off"
                   style="width:92.5%;">
               </td>
             </tr>
-
-            <!-- <tr>
-                <td width="160" class="required">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Drivers License #
-                </td>
-                <td>
-                    <input type="text" size="15" name="license_id" id="license_id" value="<?php echo $info['license_id']; ?>">
-                    &nbsp;&nbsp;&nbsp; Passport ID:&nbsp;<input type="text" size="15" name="passport_id" id="passport_id" value="<?php echo $info['passport_id']; ?>">
-                </td>
-            </tr>
-
-            <tr>
-                <td width="160">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gender:
-                </td>
-                <td>
-                <select name="gender" id="gender">
-                  <option value="">&lt;Select&gt;</option>
-                  <option value="male" <?php echo $info['gender'] == 'male' ? "selected=\"selected\"" : ""; ?>>Male</option>
-                  <option value="female" <?php echo $info['gender'] == 'female' ? "selected=\"selected\"" : ""; ?>>Female</option>
-                  <option value="intersex" <?php echo $info['gender'] == 'intersex' ? "selected=\"selected\"" : ""; ?>>Intersex</option>
-                </select>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date of Birth:
-                    <input type="date" size="50" name="pri_birth" id="pri_birth" value="<?php echo $info['pri_birth']; ?>">
-                </td>
-            </tr> -->
-            <!--            <tr>-->
-            <!--                <td width="160">-->
-            <!--                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date of Birth:-->
-            <!--                </td>-->
-            <!--                <td>-->
-            <!--                    <input type="date" size="50" name="pri_birth" id="pri_birth" value="--><?php //echo $info['pri_birth']; 
-                                                                                                                        ?>
-            <!--">-->
-            <!--                </td>-->
-            <!--            </tr>-->
-
-            <!-- <tr>
-                <td width="160" class="required">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Phone Number
-                </td>
-                <td>
-                    <input type="text" size="20" name="phone" id="phone" value="<?php echo $info['phone']; ?>">
-                    &nbsp;<span class="error">*&nbsp;<?php echo $errors['phone']; ?></span>
-                    Ext&nbsp;&nbsp;  <input type="text" size="5" name="phone_ext" id="phone_ext" value="<?php echo $info['phone_ext']; ?>">
-                </td>
-            </tr>
-
-            <tr>
-                <td width="160" class="required">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inbound Tel
-                </td>
-                <td>
-                    <input type="text" size="18" name="bound_tel" id="bound_tel" value="<?php echo $info['bound_tel'];  ?>">
-                    &nbsp;Direct Number&nbsp;
-                    &nbsp;<input type="text" size="18" name="direct_phone" id="direct_phone" value="<?php echo $info['direct_phone']; ?>" style="width:25%;">
-                    &nbsp;EP
-                    &nbsp;<input type="checkbox" name="check1" value="1" <?php echo $info['check1'] == '1' ? "checked=\"checked\"" : ""; ?>/>
-                </td>
-            </tr>
-
-            <tr>
-                <td width="160">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inbound Fax
-                </td>
-                <td>
-                    <input type="text" size="18" name="bound_fax" id="bound_fax" value="<?php echo $info['bound_fax'];  ?>">
-                    &nbsp;Fax Number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;<input type="text" size="18" name="fax" id="fax" class="typeahead" value="<?php echo $info['fax']; ?>"
-                        autocomplete="off" autocorrect="off" autocapitalize="off" style="width:25%;">
-                    &nbsp;EP:
-                    &nbsp;<input type="checkbox" name="check2" value="1" <?php echo $info['check2'] == '1' ? "checked=\"checked\"" : ""; ?>/>
-                        <!--
-                        Ext:
-                    <input type="text" size="5" name="fax_ext" id="fax_ext" class="typeahead" value="<?php echo $info['fax_ext']; ?>"
-                        autocomplete="off" autocorrect="off" autocapitalize="off">
-                         -->
       </td>
     </tr>
     <tr>
       <td width"160">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mobile Number
       </td>
-      <td>
-        <input type="text" size="20" name="mobile" id="mobile" value="<?php echo $info['mobile']; ?>">
+      <td style="border-right:1px solid #ddd;">
+        <input type="text" id="textInput" oninput="checkInput()" size="20" name="mobile" id="mobile" value="<?php echo $info['mobile']; ?>">
       </td>
     </tr>
     <tr>
       <td width="160" class="required">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email
       </td>
-      <td>
-        <input type="text" size="50" name="email" id="email" class="typeahead" value="<?php echo $info['email']; ?>"
+      <td style="border-right:1px solid #ddd;">
+        <input type="text" id="textInput" oninput="checkInput()" size="50" name="email" id="email" class="typeahead" value="<?php echo $info['email']; ?>"
           autocomplete="off" autocorrect="off" autocapitalize="off" style="width:92%;">
         &nbsp;<span class="error">*&nbsp;<?php echo $errors['email']; ?></span>
       </td>
+      <td style="display:flex;align-items:center;border:0px;justify-content:space-around;">
+              <input type="submit" name="do" id="update4" value="<?php echo ($info['id']) ? "Update" : "Add"; ?>" <?php if ($success) { echo 'id="updateButton"'; } ?> />
+              <input type="reset" name="reset" value="Reset" />
+              <input type="button" name="cancel" value="Cancel" onclick='window.location.href="customers.php"'>
+              <input type="hidden" name="id" value="<?php echo $info['id']; ?>" />
+          </td>
+
     </tr>
-    <!-- <tr>
-                <td width="160">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email BCC:
-                </td>
-                <td>
-                    <input type="text" size="50" name="email2" id="email2" class="typeahead" value="<?php echo $info['email2']; ?>"
-                        autocomplete="off" autocorrect="off" autocapitalize="off" style="width:92%;">
-                    &nbsp;<span class="error">*&nbsp;<?php echo $errors['email2']; ?></span>
-                </td>
-            </tr> -->
     </tbody>
     <thead>
       <tr>
-        <th colspan="3">
+        <th>
           <strong>Primary Contact | Identification</strong>
         </th>
+        <th style="border-right:1px solid #ddd;"></th>
+        <th></th> 
       </tr>
     </thead>
     <tbody>
@@ -698,11 +674,11 @@ $(document).on("pageshow", "#cust_auth_table", function() {
         <td width="160" class="required">
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Drivers License #
         </td>
-        <td>
-          <input type="text" size="15" name="license_id" id="license_id" value="<?php echo $info['license_id']; ?>">
-          Expiry Date <input type="date" size="5" name="exdate" id="exdate" value="<?php echo $info['exdate']; ?>">
+        <td style="border-right:1px solid #ddd;">
+          <input type="text" id="textInput" oninput="checkInput()" size="15" name="license_id" id="license_id" value="<?php echo $info['license_id']; ?>">
+          Expiry Date <input type="date" id="textInput" oninput="checkInput()" size="5" name="exdate" id="exdate" value="<?php echo $info['exdate']; ?>">
           &nbsp;&nbsp;&nbsp;State
-          <select name="state1" id="state1">
+          <select name="state1" id="state1" id="textInput" oninput="checkInput()">
             <option value=""></option>
             <option value="ACT" <?php echo $info['state1'] == 'ACT' ? "selected=\"selected\"" : ""; ?>>ACT</option>
             <option value="NSW" <?php echo $info['state1'] == 'NSW' ? "selected=\"selected\"" : ""; ?>>NSW</option>
@@ -719,26 +695,26 @@ $(document).on("pageshow", "#cust_auth_table", function() {
         <td width="160" class="required">
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Passport #
         </td>
-        <td>
-          <input type="text" size="15" name="passport_id" id="passport_id" value="<?php echo $info['passport_id']; ?>">
-          Expiry Date <input type="date" size="5" name="exdate1" id="exdate1" value="<?php echo $info['exdate1']; ?>">
+        <td style="border-right:1px solid #ddd;">
+          <input type="text" id="textInput" oninput="checkInput()" size="15" name="passport_id" id="passport_id" value="<?php echo $info['passport_id']; ?>">
+          Expiry Date <input type="date" id="textInput" oninput="checkInput()" size="5" name="exdate1" id="exdate1" value="<?php echo $info['exdate1']; ?>">
 
         </td>
       </tr>
       <tr>
-        <td>
+        <td width="160">
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date of Birth
         </td>
-        <td>
-          <input type="date" size="50" name="pri_birth" id="pri_birth" value="<?php echo $info['pri_birth']; ?>">
+        <td style="border-right:1px solid #ddd;">
+          <input type="date" size="50" id="textInput" oninput="checkInput()" name="pri_birth" id="pri_birth" value="<?php echo $info['pri_birth']; ?>">
         </td>
       </tr>
       <tr>
         <td width="160">
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gender
         </td>
-        <td>
-          <select name="gender" id="gender">
+        <td style="border-right:1px solid #ddd;">
+          <select name="gender" id="textInput" oninput="checkInput()" id="gender">
             <option value=""></option>
             <option value="male" <?php echo $info['gender'] == 'male' ? "selected=\"selected\"" : ""; ?>>Male</option>
             <option value="female" <?php echo $info['gender'] == 'female' ? "selected=\"selected\"" : ""; ?>>Female
@@ -748,13 +724,22 @@ $(document).on("pageshow", "#cust_auth_table", function() {
             </option>
           </select>
         </td>
+        <td style="display:flex;align-items:center;border:0px;justify-content:space-around;">
+              <input type="submit" name="do" id="update5" value="<?php echo ($info['id']) ? "Update" : "Add"; ?>" <?php if ($success) { echo 'id="updateButton"'; } ?> />
+              <input type="reset" name="reset" value="Reset" />
+              <input type="button" name="cancel" value="Cancel" onclick='window.location.href="customers.php"'>
+              <input type="hidden" name="id" value="<?php echo $info['id']; ?>" />
+          </td>
+
       </tr>
     </tbody>
     <thead>
       <tr>
-        <th colspan="3">
+        <th>
           <strong>SLA Support Agreements</strong>
         </th>
+        <th style="border-right:1px solid #ddd;"></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -762,15 +747,14 @@ $(document).on("pageshow", "#cust_auth_table", function() {
         <td width="160">
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VIP Support
         </td>
-        <td>
-
-          <select name="vip" id="vip">
+        <td style="border-right:1px solid #ddd;">
+          <select name="vip" id="textInput" oninput="checkInput()" id="vip">
             <option value="No">No</option>
             <option value="Yes" <?php echo $info['vip'] == 'Yes' ? "selected=\"selected\"" : ""; ?>>Yes</option>
           </select>
-          Contract Number: <input type="text" size="10" name="contract" id="contract"
+          Contract Number: <input type="text" id="textInput" oninput="checkInput()" size="15" size="10" name="contract" id="contract"
             value="<?php echo $info['contract']; ?>">
-          Plan Code: <input type="text" size="10" name="plan_code" id="plan_code"
+          Plan Code: <input type="text" id="textInput" oninput="checkInput()" size="10" name="plan_code" id="plan_code"
             value="<?php echo $info['plan_code']; ?>" style='width:13%;'>
         </td>
       </tr>
@@ -779,8 +763,8 @@ $(document).on("pageshow", "#cust_auth_table", function() {
         <td width="160">
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VIP Club
         </td>
-        <td>
-          <select name="vip_club" id="vip_club">
+        <td style="border-right:1px solid #ddd;">
+          <select name="vip_club" id="textInput" oninput="checkInput()" id="vip_club">
             <option value="No">No</option>
             <option value="Yes" <?php echo $info['vip_club'] == 'Yes' ? "selected=\"selected\"" : ""; ?>>Yes</option>
           </select>
@@ -791,15 +775,14 @@ $(document).on("pageshow", "#cust_auth_table", function() {
         <td width="160">
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Voice SLA
         </td>
-        <td>
-
-          <select name="voice_sla" id="voice_sla">
+        <td style="border-right:1px solid #ddd;">
+          <select name="voice_sla" id="textInput" oninput="checkInput()" id="voice_sla">
             <option value="No">No</option>
             <option value="Yes" <?php echo $info['voice_sla'] == 'Yes' ? "selected=\"selected\"" : ""; ?>>Yes</option>
           </select>
-          Contract Number: <input type="text" size="10" name="voice_contract" id="voice_contract"
+          Contract Number: <input type="text" id="textInput" oninput="checkInput()" size="10" name="voice_contract" id="voice_contract"
             value="<?php echo $info['voice_contract']; ?>">
-          Seats: <input type="text" size="10" name="voice_seats" id="voice_seats"
+          Seats: <input type="text" size="10" id="textInput" oninput="checkInput()" name="voice_seats" id="voice_seats"
             value="<?php echo $info['voice_seats']; ?>">
         </td>
       </tr>
@@ -808,31 +791,38 @@ $(document).on("pageshow", "#cust_auth_table", function() {
         <td width="160">
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Network SLA
         </td>
-        <td>
-
-          <select name="network_sla" id="network_sla">
+        <td style="border-right:1px solid #ddd;">
+          <select name="network_sla" id="textInput" oninput="checkInput()" id="network_sla">
             <option value="No">No</option>
             <option value="Yes" <?php echo $info['network_sla'] == 'Yes' ? "selected=\"selected\"" : ""; ?>>Yes</option>
           </select>
-          Contract Number: <input type="text" size="10" name="network_contract" id="network_contract"
+          Contract Number: <input type="text" id="textInput" oninput="checkInput()" size="10" name="network_contract" id="network_contract"
             value="<?php echo $info['network_contract']; ?>">
-          Seats: <input type="text" size="10" name="network_seats" id="network_seats"
+          Seats: <input type="text" id="textInput" oninput="checkInput()" size="10" name="network_seats" id="network_seats"
             value="<?php echo $info['network_seats']; ?>">
         </td>
+        <td style="display:flex;align-items:center;border:0px;justify-content:space-around;">
+              <input type="submit" name="do" id="update6" value="<?php echo ($info['id']) ? "Update" : "Add"; ?>" <?php if ($success) { echo 'id="updateButton"'; } ?> />
+              <input type="reset" name="reset" value="Reset" />
+              <input type="button" name="cancel" value="Cancel" onclick='window.location.href="customers.php"'>
+              <input type="hidden" name="id" value="<?php echo $info['id']; ?>" />
+          </td>
       </tr>
     </tbody>
     <thead>
       <tr>
-        <th colspan="3">
+        <th>
           <strong>Contacts</strong>
         </th>
+        <th style="border-right:1px solid #ddd;"></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td>
         </td>
-        <td>
+        <td style="border-right:1px solid #ddd;">
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Start Date&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contact Term
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0%&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;25%&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50%&nbsp;&nbsp;&nbsp;&nbsp;75%&nbsp;&nbsp;&nbsp;&nbsp;100%
@@ -842,7 +832,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
         <td>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Voice
         </td>
-        <td style="display:flex; align-items:center">
+        <td style="display:flex; align-items:center;border-right:1px solid #ddd;">
           &nbsp;&nbsp;&nbsp;&nbsp;<input type="date" size="10" name="voice" id="voice"
             value="<?php echo $info['voice']; ?>">&nbsp;&nbsp;
           <select name="voicem" id="voicem" style="width:25%;">
@@ -887,7 +877,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
         <td>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mobile
         </td>
-        <td style="display:flex; align-items:center">
+        <td style="display:flex; align-items:center;border-right:1px solid #ddd;">
           &nbsp;&nbsp;&nbsp;&nbsp;<input type="date" size="10" name="mobile1" id="mobile1"
             value="<?php echo $info['mobile1']; ?>">&nbsp;&nbsp;
           <select name="mobile1m" id="mobile1m" style="width:25%;">
@@ -925,7 +915,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
         <td>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Internet S1
         </td>
-        <td style="display:flex; align-items:center">
+        <td style="display:flex; align-items:center;border-right:1px solid #ddd;">
           &nbsp;&nbsp;&nbsp;&nbsp;<input type="date" size="10" name="ints1" id="ints1"
             value="<?php echo $info['ints1']; ?>">&nbsp;&nbsp;
           <select name="ints1m" id="ints1m" style="width:25%;">
@@ -969,7 +959,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
         <td>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Internet S2
         </td>
-        <td style="display:flex; align-items:center">
+        <td style="display:flex; align-items:center;border-right:1px solid #ddd;">
           &nbsp;&nbsp;&nbsp;&nbsp;<input type="date" size="10" name="ints2" id="ints2"
             value="<?php echo $info['ints2']; ?>">&nbsp;&nbsp;
           <select name="ints2m" id="ints2m" style="width:25%;">
@@ -1013,7 +1003,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
         <td>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Web Hosting
         </td>
-        <td style="display:flex; align-items:center">
+        <td style="display:flex; align-items:center;border-right:1px solid #ddd;">
           &nbsp;&nbsp;&nbsp;&nbsp;<input type="date" size="10" name="webhosting" id="webhosting"
             value="<?php echo $info['webhosting']; ?>">&nbsp;&nbsp;
           <select name="webhostingm" id="webhostingm" style="width:25%;">
@@ -1051,7 +1041,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
         <td>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Security
         </td>
-        <td style="display:flex; align-items:center">
+        <td style="display:flex; align-items:center;border-right:1px solid #ddd;">
           &nbsp;&nbsp;&nbsp;&nbsp;<input type="date" size="10" name="security" id="security"
             value="<?php echo $info['security']; ?>">&nbsp;&nbsp;
           <select name="securitym" id="securitym" style="width:25%;">
@@ -1084,19 +1074,22 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                     }
                     ?>
         </td>
+        
       </tr>
     </tbody>
     <thead>
       <tr>
-        <th colspan="3">
+        <th>
           <strong>Other Contacts</strong>
         </th>
+        <th style="border-right:1px solid #ddd;"></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td id="contacts" colspan="4" style="border:none;">
-          <table width="100%" border="0" id="myTable4">
+          <table width="70%" border="0" id="myTable4">
           </table>
         </td>
       </tr>
@@ -1108,218 +1101,13 @@ $(document).on("pageshow", "#cust_auth_table", function() {
     </tbody>
   </table>
   </td>
-
-  <td valign="top" align="center" style="background-color:#f3f3f3; position:relative" width="33%" id="quick">
-    <table class="form_table" style="width:100%" border="0" cellspacing="0" cellpadding="2">
-      <thead>
-        <tr style="height: 27px; background: #0094b3;color:white;">
-          <th colspan="3" style="text-align:center;">
-            <strong> Tools </strong>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <form action="customers.php" method="get">
-          <?php
-                        if ($error) {
-                        ?>
-          <tr>
-            <td colspan="3" style="height: 40px;">
-            </td>
-          </tr>
-          <?php
-                        }
-                        if ($success) {
-                        ?>
-          <tr>
-            <td colspan="3" style="height: 40px;">
-            </td>
-          </tr>
-          <?php
-                        }
-                        ?>
-          <tr style=" text-align: center;">
-            <td>
-              <!-- <br/> -->
-              <br />
-              <input type="button" onclick="document.location='tickets.php?a=open&cid=<?php echo $_REQUEST['id']; ?>';"
-                value="Create New Ticket" style="width:80%;background-color:#f45511;"><br />
-            </td>
-          </tr>
-          <tr style="text-align: center;">
-            <td>
-              <input type="button" onclick="document.location='tickets.php?<?php get_search_Query($info['email']); ?>'"
-                value="<?php echo __('View Ticket History'); ?>" style="width:80%;"><br />
-            </td>
-          </tr>
-          <tr style="text-align: center;">
-            <td>
-              <input type="button"
-                onclick="window.open('customers.php?a=label&id=<?php echo $_REQUEST['id']; ?>','_blank','width=280,height=200,scrollbars=0,resizable=0');"
-                value="Print Shipping Label" style="width:80%;">
-            </td>
-          </tr>
-        </form>
-      </tbody>
-      <tbody>
-        <tr>
-          <td colspan=2 align='center'>
-            <div style="position:relative; top:212px; ">
-
-              <input type="submit" name="do" value="<?php echo ($info['id']) ? "Update" : "Add"; ?>" />
-              <input type="reset" name="reset" value="Reset" />
-              <input type="button" name="cancel" value="Cancel" onclick='window.location.href="customers.php"'>
-              <input type="hidden" name="id" value="<?php echo $info['id']; ?>" />
-            </div>
-          </td>
-        </tr>
-      </tbody>
-      <tbody>
-        <tr>
-          <td colspan=2 align='center'>
-            <div style="height: 28px; background: #0094b3;color:white;top:210px;position:relative;margin:-3px"></div>
-          </td>
-        </tr>
-      </tbody>
-      <tbody>
-        <tr>
-          <td colspan=2 align='center'>
-            <div style="position:relative; top:352px; ">
-
-              <input type="submit" name="do" value="<?php echo ($info['id']) ? "Update" : "Add"; ?>" />
-              <input type="reset" name="reset" value="Reset" />
-              <input type="button" name="cancel" value="Cancel" onclick='window.location.href="customers.php"'>
-              <input type="hidden" name="id" value="<?php echo $info['id']; ?>" />
-            </div>
-          </td>
-        </tr>
-      </tbody>
-      <tbody>
-        <tr>
-          <td colspan=2 align='center'>
-            <div style="height: 28px; background: #0094b3;color:white;top:350px;position:relative;margin:-3px"></div>
-          </td>
-        </tr>
-      </tbody>
-      <tbody>
-        <tr>
-          <td colspan=2 align='center'>
-            <div style="position:relative; top:456px; ">
-
-              <input type="submit" name="do" value="<?php echo ($info['id']) ? "Update" : "Add"; ?>" />
-              <input type="reset" name="reset" value="Reset" />
-              <input type="button" name="cancel" value="Cancel" onclick='window.location.href="customers.php"'>
-              <input type="hidden" name="id" value="<?php echo $info['id']; ?>" />
-            </div>
-          </td>
-        </tr>
-      </tbody>
-      <tbody>
-        <tr>
-          <td colspan=2 align='center'>
-            <div style="height: 28px; background: #0094b3;color:white;top:454px;position:relative;margin:-3px"></div>
-          </td>
-        </tr>
-      </tbody>
-      <tbody>
-        <tr>
-          <td colspan=2 align='center'>
-            <div style="position:relative; top:561px; ">
-
-              <input type="submit" name="do" value="<?php echo ($info['id']) ? "Update" : "Add"; ?>" />
-              <input type="reset" name="reset" value="Reset" />
-              <input type="button" name="cancel" value="Cancel" onclick='window.location.href="customers.php"'>
-              <input type="hidden" name="id" value="<?php echo $info['id']; ?>" />
-            </div>
-          </td>
-        </tr>
-      </tbody>
-      <tbody>
-        <tr>
-          <td colspan=2 align='center'>
-            <div style="height: 28px; background: #0094b3;color:white;top:558px;position:relative;margin:-3px"></div>
-          </td>
-        </tr>
-      </tbody>
-      <tbody>
-        <tr>
-          <td colspan=2 align='center'>
-            <div style="position:relative; top:772px; ">
-              <input type="submit" name="do" value="<?php echo ($info['id']) ? "Update" : "Add"; ?>" />
-              <input type="reset" name="reset" value="Reset" />
-              <input type="button" name="cancel" value="Cancel" onclick='window.location.href="customers.php"'>
-              <input type="hidden" name="id" value="<?php echo $info['id']; ?>" />
-            </div>
-          </td>
-        </tr>
-      </tbody>
-      <tbody>
-        <tr>
-          <td colspan=2 align='center'>
-            <div style="height: 28px; background: #0094b3;color:white;top:770px;position:relative;margin:-3px"></div>
-          </td>
-        </tr>
-      </tbody>
-      <tbody>
-        <tr>
-          <td colspan=2 align='center'>
-            <div style="position:relative; top:875px; ">
-
-              <input type="submit" name="do" value="<?php echo ($info['id']) ? "Update" : "Add"; ?>" />
-              <input type="reset" name="reset" value="Reset" />
-              <input type="button" name="cancel" value="Cancel" onclick='window.location.href="customers.php"'>
-              <input type="hidden" name="id" value="<?php echo $info['id']; ?>" />
-            </div>
-          </td>
-        </tr>
-      </tbody>
-      <tbody>
-        <tr>
-          <td colspan=2 align='center'>
-            <div style="height: 28px; background: #0094b3;color:white;top:874px;position:relative;margin:-3px;"></div>
-          </td>
-        </tr>
-      </tbody>
-      <tbody>
-        <tr>
-          <td colspan=2 align='center'>
-            <div style="position:relative; top:980px; ">
-              <input type="submit" name="do" value="<?php echo ($info['id']) ? "Update" : "Add"; ?>" />
-              <input type="reset" name="reset" value="Reset" />
-              <input type="button" name="cancel" value="Cancel" onclick='window.location.href="customers.php"'>
-              <input type="hidden" name="id" value="<?php echo $info['id']; ?>" />
-            </div>
-          </td>
-        </tr>
-      </tbody>
-      <tbody>
-        <tr>
-          <td colspan=2 align='center'>
-            <div style="height: 28px; background: #0094b3;color:white;top:978px;position:relative;margin:-3px"></div>
-          </td>
-        </tr>
-      </tbody>
-      <tbody>
-        <tr>
-          <td colspan=2 align='center'>
-            <div style="position:absolute; bottom:0px;margin-bottom:5px">
-              <input type="submit" name="do" value="<?php echo ($info['id']) ? "Update" : "Add"; ?>" />
-              <input type="reset" name="reset" value="Reset" />
-              <input type="button" name="cancel" value="Cancel" onclick='window.location.href="customers.php"'>
-              <input type="hidden" name="id" value="<?php echo $info['id']; ?>" />
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </td>
   <!-- wipage code -->
 
   <tr>
     <td colspan=2>
       <table style="width:950px;margin:-2px;">
         <thead>
-          <tr style="height: 27px; background: #0094b3;color:white;">
+          <tr style="height: 31px; background: #0094b3;color:white;">
             <th colspan="3" style="text-align:left;padding-left:10px;">
               <strong> Services </strong>
             </th>
@@ -6850,7 +6638,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
   <tr>
     <td colspan=2 align='center'>
       <p style="padding-left:650px;">
-        <input type="submit" name="do" value="<?php echo ($info['id']) ? "Update" : "Add"; ?>" />
+        <input type="submit" name="do" id="update7" value="<?php echo ($info['id']) ? "Update" : "Add"; ?>" <?php if ($success) { echo 'id="updateButton"'; } ?> />
         <input type="reset" name="reset" value="Reset" />
         <input type="button" name="cancel" value="Cancel" onclick='window.location.href="customers.php"'>
         <input type="hidden" name="id" value="<?php echo $info['id']; ?>" />
@@ -7446,4 +7234,32 @@ displayHardwarePC('<?php echo $pchwd_info['devtype']; ?>', '<?php echo $pchwd_in
     ?>
 displayNotes('<?php echo $newstring ?>');
 <?php } ?>
+</script>
+<script>
+
+  function checkInput() {
+    console.log("dfd");
+  var textInput = document.getElementById("textInput");
+    var submitButton = document.querySelector('input[id="update"]');
+    var submitButton1 = document.querySelector('input[id="update1"]');
+    var submitButton2 = document.querySelector('input[id="update2"]');
+    var submitButton3 = document.querySelector('input[id="update3"]');
+    var submitButton4 = document.querySelector('input[id="update4"]');
+    var submitButton5 = document.querySelector('input[id="update5"]');
+    var submitButton6 = document.querySelector('input[id="update6"]');
+    var submitButton7 = document.querySelector('input[id="update7"]');
+    
+    if (textInput.value.trim() !== "") {
+      submitButton.classList.add("has-text");
+      submitButton1.classList.add("has-text");
+      submitButton2.classList.add("has-text");
+      submitButton3.classList.add("has-text");
+      submitButton4.classList.add("has-text");
+      submitButton5.classList.add("has-text");
+      submitButton6.classList.add("has-text");
+      submitButton7.classList.add("has-text");
+    } else {
+      submitButton.classList.remove("has-text");
+    }
+  }
 </script>
