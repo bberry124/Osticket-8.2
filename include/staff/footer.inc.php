@@ -2,7 +2,7 @@
 </div>
 <?php if (!isset($_SERVER['HTTP_X_PJAX'])) { ?>
 <div id="footer">
-  <?php echo __('UC8 Australia  Pty Ltd © | 1994 - 2024 | Version 7.1'); ?>
+  <?php echo __('UC8 Australia  Pty Ltd © | 1994 - 2024 | Version 2.1'); ?>
 </div>
 <?php
 if(is_object($thisstaff) && $thisstaff->isStaff()) { ?>

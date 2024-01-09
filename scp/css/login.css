@@ -80,11 +80,14 @@ body {
     z-index: -1;
 }
 
-body, input {
+body {
     font-family: helvetica, arial, sans-serif;
     color: #0094B3;
 }
-
+input {
+    background-color: #fff3cd;
+    color: #5299A8;
+}
 #loginBox {
     border:1px solid #5299A8;
     border-right:2px solid #5299A8;
@@ -240,10 +243,11 @@ input.submit {
     height:24px;
     line-height:24px;
     font-weight:bold;
-    border:1px solid #0094B3;
+    border:1px solid #c8c8c8;
     padding:0 30px;
-    background: url('../images/grey_btn_bg.png?1312910883') top left repeat-x;
-    color: #0094B3;
+    background: #0094B3;
+    color: #fff;
+    width: 150px;
 }
 
 input.submit:hover, input.submit:active {
@@ -347,6 +351,10 @@ input[type=text],
 input[type=password] {
     border-radius: 4px;
     padding: 5px;
+    background-color: #fff3cd !important;
+}
+input::placeholder {
+    color: #5299A8;
 }
 .hidden {
     display: none;

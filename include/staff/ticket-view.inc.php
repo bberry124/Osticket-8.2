@@ -3,15 +3,12 @@
 if (!defined('OSTSCPINC') || !$thisstaff || !is_object($ticket) || !$ticket->getId()) {
   die('Invalid path');
 }
-
 //Make sure the staff is allowed to access the page.
 if (!@$thisstaff->isStaff() || !$ticket->checkStaffPerm($thisstaff)) {
   die('Access Denied');
 }
-
 //Re-use the post info on error...savekeyboards.org (Why keyboard? -> some people care about objects than users!!)
 $info = ($_POST && $errors) ? Format::input($_POST) : array();
-
 $type = array('type' => 'viewed');
 Signal::send('object.view', $ticket, $type);
 //Get the goodies.
@@ -27,14 +24,12 @@ $thread = $ticket->getThread();
 if (!$lock && $cfg->getTicketLockMode() == Lock::MODE_ON_VIEW) {
   $lock = $ticket->acquireLock($thisstaff->getId());
 }
-
 $mylock = ($lock && $lock->getStaffId() == $thisstaff->getId()) ? $lock : null;
 $id = $ticket->getId(); //Ticket ID.
 $isManager = $dept->isManager($thisstaff); //Check if Agent is Manager
 $canRelease = ($isManager || $role->hasPerm(Ticket::PERM_RELEASE)); //Check if Agent can release tickets
 $blockReply = $ticket->isChild() && $ticket->getMergeType() != 'visual';
 $canMarkAnswered = ($isManager || $role->hasPerm(Ticket::PERM_MARKANSWERED)); //Check if Agent can mark as answered/unanswered
-
 //Useful warnings and errors the user might want to know!
 if ($ticket->isClosed() && !$ticket->isReopenable()) {
   $warn = sprintf(
@@ -57,9 +52,7 @@ if ($ticket->isClosed() && !$ticket->isReopenable()) {
     )
   );
 }
-
 if (!$errors['err']) {
-
   if ($lock && $lock->getStaffId() != $thisstaff->getId()) {
     $errors['err'] = sprintf(
       __('%s is currently locked by %s'),
@@ -72,13 +65,10 @@ if (!$errors['err']) {
     $errors['err'] = __('EndUser email address is not valid! Consider updating it before responding');
   }
 }
-
 $unbannable = ($emailBanned) ? BanList::includes($ticket->getEmail()) : false;
-
 if ($ticket->isOverdue()) {
   $warn .= '&nbsp;&nbsp;<span class="Icon overdueTicket">' . __('Marked overdue!') . '</span>';
 }
-
 ?>
 <div>
   <div id="msg_notice" style="display: none;"><span id="msg-txt"><?php echo $msg ?: ''; ?></span></div>
@@ -98,7 +88,6 @@ if ($ticket->isOverdue()) {
         </span>
         <?php
         }
-
         if ($role->hasPerm(Ticket::PERM_EDIT)) { ?>
         <a class="action-button pull-right" data-placement="bottom" data-toggle="tooltip"
           title="<?php echo __('Edit'); ?>" href="tickets.php?id=<?php echo $ticket->getId(); ?>&a=edit"><i
@@ -141,7 +130,6 @@ if ($ticket->isOverdue()) {
           href="#tickets/<?php echo $ticket->getId(); ?>/transfer"><i class="icon-share"></i></a>
         <?php
         } ?>
-
         <?php
         // Assign
         if ($ticket->isOpen() && $role->hasPerm(Ticket::PERM_ASSIGN)) { ?>
@@ -186,7 +174,6 @@ if ($ticket->isOverdue()) {
                                                                 echo __('Change Owner'); ?></a></li>
             <?php
             }
-
             if ($role->hasPerm(Ticket::PERM_MERGE) && !$ticket->isChild()) { ?>
             <li><a href="#ajax.php/tickets/<?php echo $ticket->getId();
                                               ?>/merge" onclick="javascript:
@@ -194,7 +181,6 @@ if ($ticket->isOverdue()) {
                          return false"><i class="icon-code-fork"></i> <?php echo __('Merge Tickets'); ?></a></li>
             <?php
             }
-
             if ($role->hasPerm(Ticket::PERM_LINK) && $ticket->getMergeType() == 'visual') { ?>
             <li><a href="#ajax.php/tickets/<?php echo $ticket->getId();
                                               ?>/link" onclick="javascript:
@@ -202,7 +188,6 @@ if ($ticket->isOverdue()) {
                          return false"><i class="icon-link"></i> <?php echo __('Link Tickets'); ?></a></li>
             <?php
             }
-
             if ($ticket->isAssigned() && $canRelease) { ?>
             <li><a href="#tickets/<?php echo $ticket->getId();
                                     ?>/release" class="ticket-action"
@@ -238,7 +223,6 @@ if ($ticket->isOverdue()) {
             <?php
               }
             } ?>
-
             <?php
             if ($role->hasPerm(Ticket::PERM_REFER)) { ?>
             <li><a href="#tickets/<?php echo $ticket->getId();
@@ -255,14 +239,11 @@ if ($ticket->isOverdue()) {
                     return false"><i class="icon-paste"></i> <?php echo __('Manage Forms'); ?></a></li>
             <?php
             }
-
             if ($role->hasPerm(Ticket::PERM_REPLY) && $thread && $ticket->getId() == $thread->getObjectId()) {
             ?>
             <li>
-
               <?php
                 $recipients = __(' Manage Collaborators');
-
                 echo sprintf(
                   '<a class="collaborators manage-collaborators"
                             href="#thread/%d/collaborators/1"><i class="icon-group"></i>%s</a>',
@@ -273,8 +254,6 @@ if ($ticket->isOverdue()) {
             </li>
             <?php
             } ?>
-
-
             <?php if (
               $thisstaff->hasPerm(Email::PERM_BANLIST)
               && $role->hasPerm(Ticket::PERM_REPLY)
@@ -317,7 +296,6 @@ if ($ticket->isOverdue()) {
         } elseif ($ticket->isChild()) {
           echo sprintf('<span style="font-weight: 700; line-height: 1.625rem;">%s</span>', __('CHILD'));
         }
-
         if ($role->hasPerm(Ticket::PERM_REPLY)) { ?>
         <a href="#post-reply" class="post-response action-button" data-placement="bottom" data-toggle="tooltip"
           title="<?php echo __('Post Reply'); ?>"><i class="icon-mail-reply"></i></a>
@@ -439,7 +417,6 @@ if ($ticket->isOverdue()) {
                       sprintf(_N('%d Open Ticket', '%d Open Tickets', $open), $open)
                     );
                   }
-
                   if (($closed = $user->getNumClosedTickets())) {
                     echo sprintf(
                       '<li><a href="tickets.php?a=search&status=closed&uid=%d"><i
@@ -448,7 +425,6 @@ if ($ticket->isOverdue()) {
                       sprintf(_N('%d Closed Ticket', '%d Closed Tickets', $closed), $closed)
                     );
                   }
-
                   ?>
                 <li><a href="tickets.php?a=search&uid=<?php echo $ticket->getOwnerId(); ?>"><i
                       class="icon-double-angle-right icon-fixed-width"></i> <?php echo __('All Tickets'); ?></a></li>
@@ -472,7 +448,6 @@ if ($ticket->isOverdue()) {
                 } else {
                   $recipients = 0;
                 }
-
                 echo sprintf(
                   '<span><a class="manage-collaborators preview"
                                     href="#thread/%d/collaborators/1"><span id="t%d-recipients"><i class="icon-group"></i> (%s)</span></a></span>',
@@ -481,7 +456,7 @@ if ($ticket->isOverdue()) {
                   $recipients
                 );
               } ?>
-            <?php } # end if ($user) 
+            <?php } # end if ($user)
             ?>
           </td>
         </tr>
@@ -533,7 +508,7 @@ if ($ticket->isOverdue()) {
             </div>
           </td>
         </tr>
-        <?php } # end if (user->org) 
+        <?php } # end if (user->org)
         ?>
         <tr>
           <th><?php echo __('Source'); ?>:</th>
@@ -551,11 +526,9 @@ if ($ticket->isOverdue()) {
             } else {
               echo Format::htmlchars($ticket->getSource());
             }
-
             if (!strcasecmp($ticket->getSource(), 'Web') && $ticket->getIP()) {
               echo '&nbsp;&nbsp; <span class="faded">(' . Format::htmlchars($ticket->getIP()) . ')</span>';
             }
-
             ?>
           </td>
         </tr>
@@ -583,7 +556,6 @@ if ($ticket->isOverdue()) {
                     } else {
                       echo '<span class="faded">&mdash; ' . __('Unassigned') . ' &mdash;</span>';
                     }
-
                     ?></span>
             </a>
           </td>
@@ -596,7 +568,6 @@ if ($ticket->isOverdue()) {
                 } else {
                   echo '<span class="faded">&mdash; ' . __('Unassigned') . ' &mdash;</span>';
                 }
-
                 ?>
           </td>
           <?php
@@ -613,7 +584,6 @@ if ($ticket->isOverdue()) {
               } else {
                 echo '<span class="faded">&mdash; ' . __('Unknown') . ' &mdash;</span>';
               }
-
               ?>
           </td>
         </tr>
@@ -704,14 +674,11 @@ if ($ticket->isOverdue()) {
 <div class="clear"></div>
 <h2 style="padding:.625rem 0 .3125rem 0; font-size:11pt;">Subject:
   <?php echo Format::htmlchars($ticket->getSubject()); ?></h2>
-
 <!-- for new ticket bottom labelling -->
-
 <br />
 <ul id="threads">
   <li><a class="active" id="toggle_ticket_thread">Billing & Parts</a></li>
 </ul>
-
 <br />
 <div id="div_style">
   <table id="myTable" bgcolor="#F8F8F8" width="100%" border="1" cellspacing="0">
@@ -732,7 +699,6 @@ if ($ticket->isOverdue()) {
         <font color="#0066CC">Total</font>
       </th>
     </tr>
-
     <?php
     $rows = array();
     for ($j = 1; $j <= $bill_rows; $j++) {
@@ -746,9 +712,7 @@ if ($ticket->isOverdue()) {
       echo "</tr>";
     }
     ?>
-
   </table>
-
   <table id='fixed_table' bgcolor="#F8F8F8" width="100%" border="1" cellspacing="0">
     <tr>
       <td align="center" width="10%" bgcolor="#DDDDDD">&nbsp;</td>
@@ -773,9 +737,7 @@ if ($ticket->isOverdue()) {
         </table>
       </td>
     </tr>
-
     <tr>
-
       <td align="center" width="10%" bgcolor="#DDDDDD">&nbsp;</td>
       <td align="center" width="5%"><?php echo $rows['onsite_callout_fee_qty']; ?></td>
       <td align="right" width="65%" bgcolor="#DDDDDD">
@@ -800,9 +762,7 @@ if ($ticket->isOverdue()) {
       </td>
     </tr>
   </table>
-
   <div align='left'>
-
     <table align='left' width='80%'>
       <tr>
         <th width='20%'>&nbsp;</th>
@@ -835,14 +795,11 @@ if ($ticket->isOverdue()) {
           <?php
                           } ?>
         </td>
-
         <td>&nbsp;</td>
         <td>&nbsp;</td>
       </tr>
     </table>
-
   </div>
-
   <div align="right">
     <table id='final_table' bgcolor="#F8F8F8" width="20%">
       <tr>
@@ -860,7 +817,6 @@ if ($ticket->isOverdue()) {
           </font>
         </td>
       </tr>
-
       <tr>
         <td bgcolor="#F5FFFF" align="right" width="50%">
           <font color="#0066CC">GST</font>
@@ -876,7 +832,6 @@ if ($ticket->isOverdue()) {
           </font>
         </td>
       </tr>
-
       <tr>
         <td bgcolor="#F5FFFF" align="right" width="50%">
           <font color="#00CCCC">Total</font>
@@ -892,8 +847,6 @@ if ($ticket->isOverdue()) {
           </font>
         </td>
       </tr>
-
-
     </table>
   </div>
 </div>
@@ -903,11 +856,6 @@ foreach (DynamicFormEntry::forTicket($ticket->getId()) as $form) {
   $form->addMissingFields();
   //Find fields to exclude if disabled by help topic
   $disabled = Ticket::getMissingRequiredFields($ticket, true);
-
-  // Skip core fields shown earlier in the ticket view
-  // TODO: Rewrite getAnswers() so that one could write
-  //       ->getAnswers()->filter(not(array('field__name__in'=>
-  //           array('email', ...))));
   $answers = $form->getAnswers()->exclude(Q::any(array(
     'field__flags__hasbit' => DynamicFormField::FLAG_EXT_STORED,
     'field__name__in' => array('subject', 'priority'),
@@ -918,13 +866,11 @@ foreach (DynamicFormEntry::forTicket($ticket->getId()) as $form) {
     if (!$a->getField()->isVisibleToStaff()) {
       continue;
     }
-
     $displayed[] = $a;
   }
   if (count($displayed) == 0) {
     continue;
   }
-
 ?>
 <table class="ticket_info custom-data" cellspacing="0" cellpadding="0" width="940" border="0">
   <thead>
@@ -977,7 +923,6 @@ foreach (DynamicFormEntry::forTicket($ticket->getId()) as $form) {
                 } else {
                   echo sprintf('<span id="field_%s" %s >%s</span>', $id, $class, $clean);
                 }
-
                 $a = $field->getAnswer();
                 $hint = ($field->isRequiredForClose() && $a && !$a->getValue() && get_class($field) != 'BooleanField') ?
                   sprintf(
@@ -1000,7 +945,6 @@ foreach (DynamicFormEntry::forTicket($ticket->getId()) as $form) {
 </table>
 <?php } ?>
 <div class="clear"></div>
-
 <?php
 $tcount = $ticket->getThreadEntries($types) ? $ticket->getThreadEntries($types)->count() : 0;
 ?>
@@ -1015,7 +959,6 @@ $tcount = $ticket->getThreadEntries($types) ? $ticket->getThreadEntries($types)-
                                                                                                                   if ($ticket->getNumTasks()) {
                                                                                                                     echo sprintf('&nbsp;(<span id="ticket-tasks-count">%d</span>)', $ticket->getNumTasks());
                                                                                                                   }
-
                                                                                                                   ?></a></li>
   <?php
   if ((count($children) != 0 || $ticket->isChild())) { ?>
@@ -1027,18 +970,14 @@ $tcount = $ticket->getThreadEntries($types) ? $ticket->getThreadEntries($types)-
                                                                                                                                 } elseif ($ticket->isChild()) {
                                                                                                                                   echo sprintf('&nbsp;(<span id="ticket-relations-count">%d</span>)', 1);
                                                                                                                                 }
-
                                                                                                                                 ?></a>
   </li>
   <?php
   }
   ?>
-
 </ul>
-
 <div id="ticket_tabs_container">
   <div id="ticket_thread" class="tab_content">
-
     <?php
     // Render ticket thread
     if ($thread) {
@@ -1051,7 +990,6 @@ $tcount = $ticket->getThreadEntries($types) ? $ticket->getThreadEntries($types)-
         )
       );
     }
-
     ?>
     <div class="clear"></div>
     <?php
@@ -1062,7 +1000,6 @@ $tcount = $ticket->getThreadEntries($types) ? $ticket->getThreadEntries($types)-
     <div id="msg_warning"><?php echo $warn; ?></div>
     <?php
     } ?>
-
     <div class="sticky bar stop actions" id="response_options">
       <ul class="tabs" id="response-tabs">
         <?php
@@ -1144,7 +1081,6 @@ $tcount = $ticket->getThreadEntries($types) ? $ticket->getThreadEntries($types)-
                           $ticket->getThread()->getNumCollaborators()
                         );
                       }
-
                       echo sprintf(
                         '<span"><a id="show_ccs">
                                  <i id="arrow-icon" class="icon-caret-right"></i>&nbsp;%s </a>
@@ -1242,7 +1178,6 @@ $tcount = $ticket->getThreadEntries($types) ? $ticket->getThreadEntries($types)-
                       $errors['response']
                     );
                   }
-
                   if ($cfg->isCannedResponseEnabled()) { ?>
                 <div>
                   <select id="cannedResp" name="cannedResp">
@@ -1271,7 +1206,6 @@ $tcount = $ticket->getThreadEntries($types) ? $ticket->getThreadEntries($types)-
                       if ($dept && $dept->canAppendSignature()) {
                         $signature = $dept->getSignature();
                       }
-
                       break;
                     case 'mine':
                       $signature = $thisstaff->getSignature();
@@ -1348,14 +1282,12 @@ $tcount = $ticket->getThreadEntries($types) ? $ticket->getThreadEntries($types)-
                     if ($role->hasPerm(Ticket::PERM_CLOSE) && !$outstanding) {
                       $states = array_merge($states, array('closed'));
                     }
-
                     foreach (TicketStatusList::getStatuses(
                       array('states' => $states)
                     ) as $s) {
                       if (!$s->isEnabled()) {
                         continue;
                       }
-
                       $selected = ($statusId == $s->getId());
                       echo sprintf(
                         '<option value="%d" %s>%s%s</option>',
@@ -1454,14 +1386,12 @@ $tcount = $ticket->getThreadEntries($types) ? $ticket->getThreadEntries($types)-
                   ) {
                     $states = array_merge($states, array('closed'));
                   }
-
                   foreach (TicketStatusList::getStatuses(
                     array('states' => $states)
                   ) as $s) {
                     if (!$s->isEnabled()) {
                       continue;
                     }
-
                     $selected = $statusId == $s->getId();
                     echo sprintf(
                       '<option value="%d" %s>%s%s</option>',
@@ -1477,7 +1407,6 @@ $tcount = $ticket->getThreadEntries($types) ? $ticket->getThreadEntries($types)-
             </td>
           </tr>
         </table>
-
         <p style="text-align:center;">
           <input class="save pending" type="submit" value="<?php echo __('Post Note'); ?>">
           <input class="" type="reset" value="<?php echo __('Reset'); ?>">
@@ -1525,7 +1454,6 @@ $tcount = $ticket->getThreadEntries($types) ? $ticket->getThreadEntries($types)-
                                         if ($id == $ticket->getDeptId()) {
                                             continue;
                                         }
-
                                         echo sprintf(
                                             '<option value="%d" %s>%s</option>',
                                             $id,
@@ -1565,7 +1493,6 @@ $tcount = $ticket->getThreadEntries($types) ? $ticket->getThreadEntries($types)-
         <input type="hidden" name="a" value="assign">
         <input type="hidden" name="lockCode" value="<?php echo $mylock ? $mylock->getCode() : ''; ?>">
         <table style="width:100%" border="0" cellspacing="0" cellpadding="3">
-
           <?php
             if($errors['assign']) {
                 ?>
@@ -1588,38 +1515,31 @@ $tcount = $ticket->getThreadEntries($types) ? $ticket->getThreadEntries($types)-
                                 && !$ticket->isAssigned()
                                 && $ticket->getDept()->isMember($thisstaff))
                             echo sprintf('<option value="%d">'.__('Claim Ticket (comments optional)').'</option>', $thisstaff->getId());
-
                         $sid=$tid=0;
-
                         if ($dept->assignMembersOnly())
                             $users = $dept->getAvailableMembers();
                         else
                             $users = Staff::getAvailableStaffMembers();
-
                         if ($users) {
                             echo '<OPTGROUP label="'.sprintf(__('Agents (%d)'), count($users)).'">';
                             $staffId=$ticket->isAssigned()?$ticket->getStaffId():0;
                             foreach($users as $id => $name) {
                                 if($staffId && $staffId==$id)
                                     continue;
-
                                 if (!is_object($name))
                                     $name = new PersonsName($name);
-
                                 $k="s$id";
                                 echo sprintf('<option value="%s" %s>%s</option>',
                                         $k,(($info['assignId']==$k)?'selected="selected"':''), $name);
                             }
                             echo '</OPTGROUP>';
                         }
-
                         if(($teams=Team::getActiveTeams())) {
                             echo '<OPTGROUP label="'.sprintf(__('Teams (%d)'), count($teams)).'">';
                             $teamId=(!$sid && $ticket->isAssigned())?$ticket->getTeamId():0;
                             foreach($teams as $id => $name) {
                                 if($teamId && $teamId==$id)
                                     continue;
-
                                 $k="t$id";
                                 echo sprintf('<option value="%s" %s>%s</option>',
                                         $k,(($info['assignId']==$k)?'selected="selected"':''),$name);
@@ -1695,13 +1615,11 @@ $tcount = $ticket->getThreadEntries($types) ? $ticket->getThreadEntries($types)-
             document.addEventListener('DOMContentLoaded', function() {
               const canvas = document.getElementById('signatureCanvas');
               const signaturePad = new SignaturePad(canvas);
-
               document.getElementById('clearButton').addEventListener('click', function(event) {
                 event.stopPropagation();
                 event.preventDefault();
                 signaturePad.clear();
               });
-
               document.querySelector('#signature').addEventListener('submit', function(event) {
                 const signatureData = signaturePad.toDataURL();
                 document.getElementById('signatureData').value = signatureData;
@@ -1714,7 +1632,6 @@ $tcount = $ticket->getThreadEntries($types) ? $ticket->getThreadEntries($types)-
             }
             </script>
           </tr>
-
         </table>
         <p style="text-align:center;">
           <input class="save pending" type="submit" value=" <?php echo __('Post Reply'); ?>">
@@ -1859,7 +1776,6 @@ $tcount = $ticket->getThreadEntries($types) ? $ticket->getThreadEntries($types)-
           }
         });
       });
-
       $(document).on('click', 'a.manage-collaborators', function(e) {
         e.preventDefault();
         var url = 'ajax.php/' + $(this).attr('href').substr(1);
@@ -1876,7 +1792,6 @@ $tcount = $ticket->getThreadEntries($types) ? $ticket->getThreadEntries($types)-
         });
         return false;
       });
-
       // Post Reply or Note action buttons.
       $('a.post-response').click(function(e) {
         var $r = $('ul.tabs > li > a' + $(this).attr('href') + '-tab');
@@ -1888,21 +1803,17 @@ $tcount = $ticket->getThreadEntries($types) ? $ticket->getThreadEntries($types)-
           // Make the target response tab active.
           if (!$r.hasClass('active'))
             $r.trigger('click');
-
           // Scroll to the response section.
           var $stop = $(document).height();
           var $s = $('div#response_options');
           if ($s.length)
             $stop = $s.offset().top - 125
-
           $('html, body').animate({
             scrollTop: $stop
           }, 'fast');
         }
-
         return false;
       });
-
       $('#show_ccs').click(function() {
         var show = $('#arrow-icon');
         var collabs = $('a#managecollabs');
@@ -1917,11 +1828,9 @@ $tcount = $ticket->getThreadEntries($types) ? $ticket->getThreadEntries($types)-
         });
         return false;
       });
-
       $('.collaborators.noclick').click(function() {
         $('#show_ccs').trigger('click');
       });
-
       $('#collabselection').select2({
         width: '21.875rem',
         allowClear: true,
@@ -1953,7 +1862,6 @@ $tcount = $ticket->getThreadEntries($types) ? $ticket->getThreadEntries($types)-
         $(this).parent().find('.select2-search__field').prop('disabled', true);
       });
     });
-
     function saveDraft() {
       redactor = $('#response').redactor('plugin.draft');
       if (redactor.opts.draftId)

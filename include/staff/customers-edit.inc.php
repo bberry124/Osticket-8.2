@@ -124,7 +124,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Account Status
               </td>
               <td style="border-right:1px solid #ddd;">
-                <select name="custom_status" id="textInput" oninput="checkInput()" style="width: 166px;" id="custom_status"
+                <select name="custom_status" id="textInput" oninput="checkInput()" style="width: 120px;" id="custom_status"
                   onchange="this.className=this.options[this.selectedIndex].className">
                   <option value=""></option>
                   <option value="active" class="greenText"
@@ -136,20 +136,22 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                 <input type="text" id="textInput" oninput="checkInput()" size="59" name="acnt_rand_no" id="acnt_rand_no" class="typeahead"
                   value="<?php if ($info['acnt_rand_no'] != "") echo $info['acnt_rand_no'];
                                                                                                                             else echo generateRandom(8); ?>" autocomplete="off" autocorrect="off"
-                  autocapitalize="off" style="width: 30%;">
+                  autocapitalize="off" style="width: 25%;">
                 &nbsp;<span class="error">*&nbsp;</span>
               </td>
+              <form action="customers.php" method="get">
               <td style="text-align:center;border:0">
               <input type="button" onclick="document.location='tickets.php?a=open&cid=<?php echo $_REQUEST['id']; ?>';"
                 value="Create New Ticket" style="width:80%;background-color:#f45511;"><br />
             </td>
+              </form>
             </tr>
             <tr>
               <td class="required">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Account Type
               </td>
               <td style="border-right:1px solid #ddd;">
-                <select name="custom_type" id="textInput" oninput="checkInput()" id="custom_type" style="width: 166px;">
+                <select name="custom_type" id="textInput" oninput="checkInput()" id="custom_type" style="width: 120px;">
                   <option value=""></option>
                   <option value="business"
                     <?php echo $info['custom_type'] == 'business' ? "selected=\"selected\"" : ""; ?>>Business</option>
@@ -169,13 +171,15 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                 &nbsp;&nbsp;&nbsp;&nbsp;Account Manager&nbsp;
                 <input type="text" id="textInput" oninput="checkInput()" size="59" name="acnt_rand_manager" id="acnt_rand_manager" class="typeahead"
                   value="<?php if ($info['acnt_rand_manager'] != "") echo $info['acnt_rand_manager']; ?>"
-                  autocomplete="off" autocorrect="off" autocapitalize="off" style="width: 30%;">
+                  autocomplete="off" autocorrect="off" autocapitalize="off" style="width: 25%;">
                 &nbsp;<span class="error">*&nbsp;</span>
               </td>
+              <form action="customers.php" method="get">
               <td style="text-align:center;border:0;">
               <input type="button" onclick="document.location='tickets.php?<?php get_search_Query($info['email']); ?>'"
                 value="<?php echo __('View Ticket History'); ?>" style="width:80%;">
             </td>
+              </form>
             </tr>
           </tbody>
           <thead>
@@ -186,9 +190,11 @@ $(document).on("pageshow", "#cust_auth_table", function() {
               <th style="border-right:1px solid #ddd;">
               </th>
               <th style="text-align:center; background:#f3f3f3;border:0;">
+              <form action="customers.php" method="get">
               <input type="button"
-                onclick="window.open('customers.php?a=label&id=<?php echo $_REQUEST['id']; ?>','_blank','width=280,height=200,scrollbars=0,resizable=0');"
+                onclick="window.open('customers.php?a=label&id=<?php echo $_REQUEST['id']; ?>','_blank','width=297,height=210,scrollbars=0,resizable=0');"
                 value="Print Shipping Label" style="width:80%;">
+              </form>
               </th>
             </tr>
           </thead>
@@ -231,11 +237,11 @@ $(document).on("pageshow", "#cust_auth_table", function() {
             </td>
             <td style="border-right:1px solid #ddd;">
               <input type="text" id="textInput" oninput="checkInput()" size="18" name="abn" id="abn" class="typeahead" value="<?php echo $info['abn']; ?>"
-                autocomplete="off" autocorrect="off" autocapitalize="off">
+                autocomplete="off" autocorrect="off" autocapitalize="off" style="width:29%;">
               &nbsp;<span class="error">&nbsp;<?php echo $errors['fax']; ?></span>
               &nbsp;&nbsp;ACN Number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <input type="text" id="textInput" oninput="checkInput()" size="18" name="acn" id="acn" class="typeahead" value="<?php echo $info['acn']; ?>"
-                autocomplete="off" autocorrect="off" autocapitalize="off">
+                autocomplete="off" autocorrect="off" autocapitalize="off" style="width:30%;">
             </td>
           </tr>
           <tr>
@@ -462,7 +468,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
               </td>
               <td style="border-right:1px solid #ddd;">
 
-                <input type="text" id="textInput" oninput="checkInput()" size="20" name="suburb" id="suburb" value="<?php echo $info['suburb']; ?>">
+                <input type="text" id="textInput" oninput="checkInput()" size="20" name="suburb" id="suburb" value="<?php echo $info['suburb']; ?>" style="width:28%;">
                 &nbsp;&nbsp;&nbsp;
                 State:
                 <select name="state" id="textInput" oninput="checkInput()" id="state">
@@ -495,7 +501,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                 Country:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <input type="text" id="textInput" oninput="checkInput()" size="18" name="country" id="country" class="typeahead"
                   value="<?php echo $info['country']; ?>" autocomplete="off" autocorrect="off" autocapitalize="off"
-                  style="width:38%;">
+                  style="width:35%;">
               </td>
               <td style="display:flex;align-items:center;boder:0px;justify-content:space-around;">
               <input type="submit" name="do" id="update2" value="<?php echo ($info['id']) ? "Update" : "Add"; ?>" />
@@ -508,7 +514,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tbody>
           <thead>
             <tr>
-              <th>
+              <th style="width:23%;">
                 <strong>Company Contact Details</strong>
               </th>
               <th style="border-right:1px solid #ddd;"></th>
@@ -523,7 +529,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
               <td style="border-right:1px solid #ddd;">
                 <input type="text" id="textInput" oninput="checkInput()" size="15" name="landline" id="landline" value="<?php echo $info['landline']; ?>">
                 &nbsp;1300/1800 Telephone&nbsp;<input type="text" size="15" id="textInput" oninput="checkInput()" name="telephone" id="telephone"
-                  value="<?php echo $info['telephone']; ?>" style="width:32%;">
+                  value="<?php echo $info['telephone']; ?>" style="width:25%;">
               </td>
             </tr>
             <tr>
@@ -532,9 +538,9 @@ $(document).on("pageshow", "#cust_auth_table", function() {
               </td>
               <td style="border-right:1px solid #ddd;">
                 <input type="text" id="textInput" oninput="checkInput()" size="15" name="fax" id="fax" value="<?php echo $info['fax']; ?>">
-                &nbsp;1300/1800 Fax&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;1300/1800 Fax&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <input type="text" size="15" name="faxn" id="faxn" value="<?php echo $info['faxn']; ?>"
-                  style="width:32%;">
+                  style="width:25%;">
               </td>
             </tr>
             <tr>
@@ -552,7 +558,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Web URL
               </td>
               <td style="border-right:1px solid #ddd;">
-                <input type="text" id="textInput" oninput="checkInput()" size="59" name="website" id="website" class="typeahead"
+                <input type="text" id="website" oninput="checkInput()" size="59" name="website" class="typeahead"
                   value="<?php echo $info['website']; ?>" autocomplete="off" autocorrect="off" autocapitalize="off"
                   style="width:65%;">
                 <button style="margin-top:5px" type="button" onclick="gotoCustomerUrl();">Click
@@ -601,7 +607,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                 <input type="text" size="15" id="textInput" oninput="checkInput()" name="name" id="name" value="<?php echo $info['name']; ?>">
                 &nbsp;<span class="error">*&nbsp;</span>&nbsp;&nbsp;
                 Preferred Name&nbsp;<input type="text" size="15" name="preferredname" id="preferredname"
-                  value="<?php echo $info['preferredname']; ?>" style="width:35%;">
+                  value="<?php echo $info['preferredname']; ?>" style="width:27%;">
               </td>
             </tr>
             <tr>
@@ -666,7 +672,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           <strong>Primary Contact | Identification</strong>
         </th>
         <th style="border-right:1px solid #ddd;"></th>
-        <th></th> 
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -675,7 +681,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Drivers License #
         </td>
         <td style="border-right:1px solid #ddd;">
-          <input type="text" id="textInput" oninput="checkInput()" size="15" name="license_id" id="license_id" value="<?php echo $info['license_id']; ?>">
+          <input type="text" id="textInput" oninput="checkInput()" size="15" name="license_id" id="license_id" value="<?php echo $info['license_id']; ?>" style="width:20%;">
           Expiry Date <input type="date" id="textInput" oninput="checkInput()" size="5" name="exdate" id="exdate" value="<?php echo $info['exdate']; ?>">
           &nbsp;&nbsp;&nbsp;State
           <select name="state1" id="state1" id="textInput" oninput="checkInput()">
@@ -697,7 +703,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
         </td>
         <td style="border-right:1px solid #ddd;">
           <input type="text" id="textInput" oninput="checkInput()" size="15" name="passport_id" id="passport_id" value="<?php echo $info['passport_id']; ?>">
-          Expiry Date <input type="date" id="textInput" oninput="checkInput()" size="5" name="exdate1" id="exdate1" value="<?php echo $info['exdate1']; ?>">
+          &nbsp;&nbsp;&nbsp;Expiry Date <input type="date" id="textInput" oninput="checkInput()" size="5" name="exdate1" id="exdate1" value="<?php echo $info['exdate1']; ?>">
 
         </td>
       </tr>
@@ -753,7 +759,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
             <option value="Yes" <?php echo $info['vip'] == 'Yes' ? "selected=\"selected\"" : ""; ?>>Yes</option>
           </select>
           Contract Number: <input type="text" id="textInput" oninput="checkInput()" size="15" size="10" name="contract" id="contract"
-            value="<?php echo $info['contract']; ?>">
+            value="<?php echo $info['contract']; ?>" style="width: 20%;">
           Plan Code: <input type="text" id="textInput" oninput="checkInput()" size="10" name="plan_code" id="plan_code"
             value="<?php echo $info['plan_code']; ?>" style='width:13%;'>
         </td>
@@ -781,7 +787,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
             <option value="Yes" <?php echo $info['voice_sla'] == 'Yes' ? "selected=\"selected\"" : ""; ?>>Yes</option>
           </select>
           Contract Number: <input type="text" id="textInput" oninput="checkInput()" size="10" name="voice_contract" id="voice_contract"
-            value="<?php echo $info['voice_contract']; ?>">
+            value="<?php echo $info['voice_contract']; ?>" style="width: 18%;">
           Seats: <input type="text" size="10" id="textInput" oninput="checkInput()" name="voice_seats" id="voice_seats"
             value="<?php echo $info['voice_seats']; ?>">
         </td>
@@ -797,7 +803,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
             <option value="Yes" <?php echo $info['network_sla'] == 'Yes' ? "selected=\"selected\"" : ""; ?>>Yes</option>
           </select>
           Contract Number: <input type="text" id="textInput" oninput="checkInput()" size="10" name="network_contract" id="network_contract"
-            value="<?php echo $info['network_contract']; ?>">
+            value="<?php echo $info['network_contract']; ?>" style="width: 18%;">
           Seats: <input type="text" id="textInput" oninput="checkInput()" size="10" name="network_seats" id="network_seats"
             value="<?php echo $info['network_seats']; ?>">
         </td>
@@ -823,9 +829,9 @@ $(document).on("pageshow", "#cust_auth_table", function() {
         <td>
         </td>
         <td style="border-right:1px solid #ddd;">
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Start Date&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contact Term
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0%&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;25%&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50%&nbsp;&nbsp;&nbsp;&nbsp;75%&nbsp;&nbsp;&nbsp;&nbsp;100%
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Start Date
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contact Term
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0%&nbsp;&nbsp;25%&nbsp;&nbsp;&nbsp;50%&nbsp;&nbsp;75%&nbsp;&nbsp;100%
         </td>
       </tr>
       <tr>
@@ -1074,7 +1080,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                     }
                     ?>
         </td>
-        
+
       </tr>
     </tbody>
     <thead>
@@ -1165,7 +1171,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
             </th>
           </tr>
           <tr>
-            <th align='left' scope="col" width='12%'>Service</th>
+            <th align='left' scope="col" width='12%' style="font-weight: normal;">Service</th>
             <th scope="col" width='10%'>1</th>
             <th scope="col" width='10%'>2</th>
             <th scope="col" width='10%'>3</th>
@@ -1175,7 +1181,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
             <th scope="col" width='10%'>7</th>
           </tr>
           <tr>
-            <td><b>Service Status</b></td>
+            <td>Service Status</td>
             <td align="center">
               <div id="txt_status_ip1">
                 < Select>
@@ -1214,7 +1220,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td><b>Upstream Provider</b></td>
+            <td>Upstream Provider</td>
             <td align='left'>
               <select name="upstream_provider1" id="upstream_provider1" style='width:100%;'
                 onchange="getUpstreamProvider(1, 1);">
@@ -1315,7 +1321,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
             </td>
           </tr>
           <tr>
-            <td><b>Service Type</b></td>
+            <td>Service Type</td>
             <td><select name="service_type1" id="service_type1" width='100%' style='width:100%;'
                 onchange="getServiceType(1,1)">
                 <option value="">&lt;Select&gt;</option>
@@ -1754,7 +1760,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
             </td>
           </tr>
           <tr>
-            <td><b>Service Use</b></td>
+            <td>Service Use</td>
             <td><select name="service_use1" id="service_use1" width='100%' style='width:100%;'
                 onchange="getServiceUse(1, 1)">
                 <option value="">&lt;Select&gt;</option>
@@ -1905,7 +1911,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td><b>IP Address</b></td>
+            <td>IP Address</td>
             <td><input name="ip_address1" id="ip_address1" type="text"
                 style='width:97%; padding:0px;height:23px;padding-left:4px;padding-left:4px;border-radius:13px;'
                 value="<?php echo $info['ip_address1']; ?>" onchange="interact(1, 1)"></td>
@@ -1929,7 +1935,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                 value="<?php echo $info['ip_address7']; ?>" onchange="interact(7, 1)"></td>
           </tr>
           <tr>
-            <td><b>Details</b></td>
+            <td>Details</td>
             <td align='center'><button type="button" onclick="showDetails(1);">Details</button></td>
             <td align='center'><button type="button" onclick="showDetails(2);">Details</button></td>
             <td align='center'><button type="button" onclick="showDetails(3);">Details</button></td>
@@ -1946,16 +1952,16 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           class="service_details custtable">
           <tr>
             <td style="font-size:16px; color:red"><b>Service 1</b></td>
-            <td align="left">
+            <td align='left'>
               <b>Upstream Details</b>
             </td>
             <td> </td>
-            <td align="left">
+            <td align='left'>
               <b>Authentication Details</b>
             </td>
           </tr>
           <tr>
-            <td align="right">Service Status</td>
+            <td align='left'>Service Status</td>
             <td align='left'>
               <select name="service1" id="service1" width='80%' style='width:80%;'
                 onchange="this.className=this.options[this.selectedIndex].className">
@@ -1968,7 +1974,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                   <?php echo $info['service1'] == 'cancelled' ? "selected=\"selected\"" : ""; ?>>Cancelled</option>
               </select>
             </td>
-            <td align='right'>
+            <td align='left'>
               Public IP Address
             </td>
 
@@ -1979,7 +1985,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align="right">Upstream Provider</td>
+            <td align='left'>Upstream Provider</td>
             <td align='left'>
               <select name="upstream_provider1" id="upstream_provider_other1" style='width:80%;'
                 onchange="getUpstreamProvider(1,0);">
@@ -1994,7 +2000,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                 </option>
               </select>
             </td>
-            <td align='right'>
+            <td align='left'>
               Password
             </td>
             <td align='left'>
@@ -2004,14 +2010,14 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Provider Telephone
             </td>
             <td align='left'>
               <input name="provider_phone1" id="provider_phone1" type="text" style='width:78%;'
                 value="<?php echo $info['provider_phone1']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               Primary Route
             </td>
             <td align='left'>
@@ -2021,7 +2027,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Service Ping
             </td>
 
@@ -2048,22 +2054,22 @@ $(document).on("pageshow", "#cust_auth_table", function() {
 
           <tr>
             <td> </td>
-            <td align="left">
+            <td align='left'>
               <b>Service Details</b>
             </td>
             <td> </td>
-            <td align="left">
+            <td align='left'>
               <b>Service Hardware</b>
             </td>
           </tr>
 
           <tr>
-            <td align="right">Service Status</td>
+            <td align='left'>Service Status</td>
             <td align='left'>
               <input name="service_id1" id="service_id1" type="text" style='width:80%;'
                 value="<?php echo $info['service_id1']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               Device Type
             </td>
             <td align='left'>
@@ -2077,13 +2083,13 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               LOC ID
             </td>
             <td align='left'>
               <input name="loc_id1" id="loc_id1" type="text" style='width:80%;' value="<?php echo $info['loc_id1']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               Brand
             </td>
             <td align='left'>
@@ -2093,7 +2099,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align="right">Service Type</td>
+            <td align='left'>Service Type</td>
             <td>
               <select name="service_type1" id="service2_type1" style='width:81%;' onchange="getServiceType(1,0)">
                 <option value="">&lt;Select&gt;</option>
@@ -2151,7 +2157,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                   &lt;Other&gt;</option>
               </select>
             </td>
-            <td align='right'>
+            <td align='left'>
               Model
             </td>
             <td align='left'>
@@ -2161,7 +2167,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align="right">Underlining Carrier</td>
+            <td align='left'>Underlining Carrier</td>
             <td>
               <select name="internet_underlining_carrier1" id="internet_underlining_carrier1" style='width:81%;'>
                 <option value="">&lt;Select&gt;</option>
@@ -2186,7 +2192,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                   &lt;Other&gt;</option>
               </select>
             </td>
-            <td align='right'>
+            <td align='left'>
               Device IP
             </td>
             <td align='left'>
@@ -2196,11 +2202,11 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Service Use
             </td>
             <td align='left'>
-              <!--                    <input name="service2_use1" id="service2_use1" type="text" style='width:80%;' value="--><?php //echo $info['service2_use1']; 
+              <!--                    <input name="service2_use1" id="service2_use1" type="text" style='width:80%;' value="--><?php //echo $info['service2_use1'];
                                                                                                                                             ?>
               <!--">-->
               <select name="service_use1" id="service2_use1" style='width:81%;' onchange="getServiceUse(1,0)">
@@ -2223,7 +2229,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                   &lt;Other&gt;</option>
               </select>
             </td>
-            <td align='right'>
+            <td align='left'>
               Device User Name
             </td>
             <td align='left'>
@@ -2233,14 +2239,14 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Service Tel Number
             </td>
             <td align='left'>
               <input name="service_telnum1" id="service_telnum1" type="text" style='width:80%;'
                 value="<?php echo $info['service_telnum1']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               Device Password
             </td>
             <td align='left'>
@@ -2250,14 +2256,14 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Profile Speed
             </td>
             <td align='left'>
               <input name="profile_or_speed1" id="profile_or_speed1" type="text" style='width:80%;'
                 value="<?php echo $info['profile_or_speed1']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               Mac ID
             </td>
             <td align='left'>
@@ -2266,14 +2272,14 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Technology Type
             </td>
             <td align='left'>
               <input name="technology_type1" id="technology_type1" type="text" style='width:80%;'
                 value="<?php echo $info['technology_type1']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               ULL ID
             </td>
             <td align='left'>
@@ -2282,14 +2288,14 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               MDF Pair Detailed
             </td>
             <td align='left'>
               <input name="mdf_pair_detailed1" id="mdf_pair_detailed1" type="text" style='width:80%;'
                 value="<?php echo $info['mdf_pair_detailed1']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
 
             </td>
             <td align='left'>
@@ -2304,24 +2310,13 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td> </td>
-            <td align="left">
-              <b>Service Plan Details</b>
-            </td>
-            <td> </td>
-            <td align="left">
+            <td align='left'>
               <b>Wireless</b>
             </td>
           </tr>
 
           <tr>
-            <td align="right">Contact Term</td>
             <td align='left'>
-              <input name="contact_term1" id="contact_term1" type="text" style='width:80%;'
-                value="<?php echo $info['contact_term1']; ?>">
-              Months
-            </td>
-            <td align='right'>
               Enabled | Wireless
             </td>
             <td align='left'>
@@ -2336,15 +2331,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
-              Balance of contract
-            </td>
             <td align='left'>
-              <input name="balance_contract1" id="balance_contract1" type="text" style='width:80%;'
-                value="<?php echo $info['balance_contract1']; ?>">
-              Months
-            </td>
-            <td align='right'>
               SSD | Wireless
             </td>
             <td align='left'>
@@ -2354,14 +2341,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
-              MRC
-            </td>
             <td align='left'>
-              <input name="mrc1" id="mrc1" type="text" style='width:80%;' value="<?php echo $info['mrc1']; ?>">
-              Months
-            </td>
-            <td align='right'>
               Password | Wireless
             </td>
             <td align='left'>
@@ -2371,14 +2351,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
-              ETF
-            </td>
             <td align='left'>
-              <input name="etf1" id="etf1" type="text" style='width:80%;' value="<?php echo $info['etf1']; ?>">
-              Fee
-            </td>
-            <td align='right'>
               Comments
             </td>
             <td align='left'>
@@ -2395,15 +2368,15 @@ $(document).on("pageshow", "#cust_auth_table", function() {
 
           <tr>
             <td> </td>
-            <td align="left">
+            <td align='left'>
               <b>Service Provisioning Details</b>
             </td>
             <td> </td>
-            <td align="left"> </td>
+            <td align='left'> </td>
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Order Date
             </td>
             <td align='left'>
@@ -2413,17 +2386,16 @@ $(document).on("pageshow", "#cust_auth_table", function() {
               <input name="order_by1" id="order_by1" type="text" style='width:35%;'
                 value="<?php echo $info['order_by1']; ?>">
             </td>
-            <td align='right'>
-              Ref
-            </td>
             <td align='left'>
+              Ref
+
               <input name="order_ref1" id="order_ref1" type="text" style='width:80%;'
                 value="<?php echo $info['order_ref1']; ?>">
             </td>
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Activation Date
             </td>
             <td align='left'>
@@ -2433,17 +2405,16 @@ $(document).on("pageshow", "#cust_auth_table", function() {
               <input name="activation_by1" id="activation_by1" type="text" style='width:35%;'
                 value="<?php echo $info['activation_by1']; ?>">
             </td>
-            <td align='right'>
-              Ref
-            </td>
             <td align='left'>
+              Ref
+
               <input name="activation_ref1" id="activation_ref1" type="text" style='width:80%;'
                 value="<?php echo $info['activation_ref1']; ?>">
             </td>
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Cancellation Date
             </td>
             <td align='left'>
@@ -2453,10 +2424,8 @@ $(document).on("pageshow", "#cust_auth_table", function() {
               <input name="cancellation_by1" id="cancellation_by1" type="text" style='width:35%;'
                 value="<?php echo $info['cancellation_by1']; ?>">
             </td>
-            <td align='right'>
-              Ref
-            </td>
             <td align='left'>
+              Ref
               <input name="cancellation_ref1" id="cancellation_ref1" type="text" style='width:80%;'
                 value="<?php echo $info['cancellation_ref1']; ?>">
             </td>
@@ -2467,16 +2436,16 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           class="service_details custtable">
           <tr>
             <td style="font-size:16px; color:red"><b>Service 2</b></td>
-            <td align="left">
+            <td align='left'>
               <b>Upstream Details</b>
             </td>
             <td> </td>
-            <td align="left">
+            <td align='left'>
               <b>Authentication Details</b>
             </td>
           </tr>
           <tr>
-            <td align="right">Service Status</td>
+            <td align='left'>Service Status</td>
             <td align='left'>
               <select name="service2" id="service2" width='80%' style='width:80%;'
                 onchange="this.className=this.options[this.selectedIndex].className">
@@ -2489,7 +2458,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                   <?php echo $info['service2'] == 'cancelled' ? "selected=\"selected\"" : ""; ?>>Cancelled</option>
               </select>
             </td>
-            <td align='right'>
+            <td align='left'>
               Public IP Address
             </td>
 
@@ -2500,7 +2469,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align="right">Upstream Provider</td>
+            <td align='left'>Upstream Provider</td>
             <td align='left'>
               <select name="upstream_provider2" id="upstream_provider_other2" style='width:80%;'
                 onchange="getUpstreamProvider(2,0);">
@@ -2515,7 +2484,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                 </option>
               </select>
             </td>
-            <td align='right'>
+            <td align='left'>
               Password
             </td>
             <td align='left'>
@@ -2525,14 +2494,14 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Provider Telephone
             </td>
             <td align='left'>
               <input name="provider_phone2" id="provider_phone2" type="text" style='width:78%;'
                 value="<?php echo $info['provider_phone2']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               Primary Route
             </td>
             <td align='left'>
@@ -2542,7 +2511,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Service Ping
             </td>
 
@@ -2569,22 +2538,22 @@ $(document).on("pageshow", "#cust_auth_table", function() {
 
           <tr>
             <td> </td>
-            <td align="left">
+            <td align='left'>
               <b>Service Details</b>
             </td>
             <td> </td>
-            <td align="left">
+            <td align='left'>
               <b>Service Hardware</b>
             </td>
           </tr>
 
           <tr>
-            <td align="right">Service ID</td>
+            <td align='left'>Service Status</td>
             <td align='left'>
               <input name="service_id2" id="service_id2" type="text" style='width:80%;'
                 value="<?php echo $info['service_id2']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               Device Type
             </td>
             <td align='left'>
@@ -2598,13 +2567,13 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               LOC ID
             </td>
             <td align='left'>
               <input name="loc_id2" id="loc_id2" type="text" style='width:80%;' value="<?php echo $info['loc_id2']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               Brand
             </td>
             <td align='left'>
@@ -2614,7 +2583,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align="right">Service Type</td>
+            <td align='left'>Service Type</td>
             <td>
               <select name="service_type2" id="service2_type2" style='width:81%;' onchange="getServiceType(2,0)">
                 <option value="">&lt;Select&gt;</option>
@@ -2672,7 +2641,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                   &lt;Other&gt;</option>
               </select>
             </td>
-            <td align='right'>
+            <td align='left'>
               Model
             </td>
             <td align='left'>
@@ -2682,7 +2651,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align="right">Underlining Carrier</td>
+            <td align='left'>Underlining Carrier</td>
             <td>
               <select name="internet_underlining_carrier2" id="internet_underlining_carrier2" style='width:81%;'>
                 <option value="">&lt;Select&gt;</option>
@@ -2707,7 +2676,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                   &lt;Other&gt;</option>
               </select>
             </td>
-            <td align='right'>
+            <td align='left'>
               Device IP
             </td>
             <td align='left'>
@@ -2717,11 +2686,11 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Service Use
             </td>
             <td align='left'>
-              <!--                    <input name="service2_use2" id="service2_use2" type="text" style='width:80%;' value="--><?php //echo $info['service_use2']; 
+              <!--                    <input name="service2_use2" id="service2_use2" type="text" style='width:80%;' value="--><?php //echo $info['service_use2'];
                                                                                                                                             ?>
               <!--">-->
               <select name="service_use2" id="service2_use2" style='width:81%;' onchange="getServiceUse(2,0)">
@@ -2744,7 +2713,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                   &lt;Other&gt;</option>
               </select>
             </td>
-            <td align='right'>
+            <td align='left'>
               Device User Name
             </td>
             <td align='left'>
@@ -2754,14 +2723,14 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Service Tel Number
             </td>
             <td align='left'>
               <input name="service_telnum2" id="service_telnum2" type="text" style='width:80%;'
                 value="<?php echo $info['service_telnum2']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               Device Password
             </td>
             <td align='left'>
@@ -2771,14 +2740,14 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Profile Speed
             </td>
             <td align='left'>
               <input name="profile_or_speed2" id="profile_or_speed2" type="text" style='width:80%;'
                 value="<?php echo $info['profile_or_speed2']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               Mac ID
             </td>
             <td align='left'>
@@ -2787,14 +2756,14 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Technology Type
             </td>
             <td align='left'>
               <input name="technology_type2" id="technology_type2" type="text" style='width:80%;'
                 value="<?php echo $info['technology_type2']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               ULL ID
             </td>
             <td align='left'>
@@ -2803,14 +2772,14 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               MDF Pair Detailed
             </td>
             <td align='left'>
               <input name="mdf_pair_detailed2" id="mdf_pair_detailed2" type="text" style='width:80%;'
                 value="<?php echo $info['mdf_pair_detailed2']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
 
             </td>
             <td align='left'>
@@ -2826,23 +2795,15 @@ $(document).on("pageshow", "#cust_auth_table", function() {
 
           <tr>
             <td> </td>
-            <td align="left">
+            <td align='left'>
               <b>Service Plan Details</b>
             </td>
             <td> </td>
-            <td align="left">
-              <b>Wireless</b>
-            </td>
+
           </tr>
 
           <tr>
-            <td align="right"><b>Contact Term</b></td>
             <td align='left'>
-              <input name="contact_term2" id="contact_term2" type="text" style='width:80%;'
-                value="<?php echo $info['contact_term2']; ?>">
-              Months
-            </td>
-            <td align='right'>
               Enabled | Wireless
             </td>
             <td align='left'>
@@ -2857,15 +2818,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
-              Balance of contract
-            </td>
             <td align='left'>
-              <input name="balance_contract2" id="balance_contract2" type="text" style='width:80%;'
-                value="<?php echo $info['balance_contract2']; ?>">
-              Months
-            </td>
-            <td align='right'>
               SSD | Wireless
             </td>
             <td align='left'>
@@ -2875,14 +2828,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
-              MRC
-            </td>
             <td align='left'>
-              <input name="mrc2" id="mrc2" type="text" style='width:80%;' value="<?php echo $info['mrc2']; ?>">
-              Months
-            </td>
-            <td align='right'>
               Password | Wireless
             </td>
             <td align='left'>
@@ -2892,14 +2838,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
-              ETF
-            </td>
             <td align='left'>
-              <input name="etf2" id="etf2" type="text" style='width:80%;' value="<?php echo $info['etf2']; ?>">
-              Fee
-            </td>
-            <td align='right'>
               Comments
             </td>
             <td align='left'>
@@ -2916,15 +2855,15 @@ $(document).on("pageshow", "#cust_auth_table", function() {
 
           <tr>
             <td> </td>
-            <td align="left">
+            <td align='left'>
               <b>Service Provisioning Details</b>
             </td>
             <td> </td>
-            <td align="left"> </td>
+            <td align='left'> </td>
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Order Date
             </td>
             <td align='left'>
@@ -2934,17 +2873,15 @@ $(document).on("pageshow", "#cust_auth_table", function() {
               <input name="order_by2" id="order_by2" type="text" style='width:35%;'
                 value="<?php echo $info['order_by2']; ?>">
             </td>
-            <td align='right'>
-              Ref
-            </td>
             <td align='left'>
+              Ref
               <input name="order_ref2" id="order_ref2" type="text" style='width:80%;'
                 value="<?php echo $info['order_ref2']; ?>">
             </td>
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Activation Date
             </td>
             <td align='left'>
@@ -2954,17 +2891,15 @@ $(document).on("pageshow", "#cust_auth_table", function() {
               <input name="activation_by2" id="activation_by2" type="text" style='width:35%;'
                 value="<?php echo $info['activation_by2']; ?>">
             </td>
-            <td align='right'>
-              Ref
-            </td>
             <td align='left'>
+              Ref
               <input name="activation_ref2" id="activation_ref2" type="text" style='width:80%;'
                 value="<?php echo $info['activation_ref2']; ?>">
             </td>
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Cancellation Date
             </td>
             <td align='left'>
@@ -2974,10 +2909,8 @@ $(document).on("pageshow", "#cust_auth_table", function() {
               <input name="cancellation_by2" id="cancellation_by2" type="text" style='width:35%;'
                 value="<?php echo $info['cancellation_by2']; ?>">
             </td>
-            <td align='right'>
-              Ref
-            </td>
             <td align='left'>
+              Ref
               <input name="cancellation_ref2" id="cancellation_ref2" type="text" style='width:80%;'
                 value="<?php echo $info['cancellation_ref2']; ?>">
             </td>
@@ -2988,16 +2921,16 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           class="service_details custtable">
           <tr>
             <td style="font-size:16px; color:red"><b>Service 3</b></td>
-            <td align="left">
+            <td align='left'>
               <b>Upstream Details</b>
             </td>
             <td> </td>
-            <td align="left">
+            <td align='left'>
               <b>Authentication Details</b>
             </td>
           </tr>
           <tr>
-            <td align="right">Service Status</td>
+            <td align='left'>Service Status</td>
             <td align='left'>
               <select name="service3" id="service3" width='80%' style='width:80%;'
                 onchange="this.className=this.options[this.selectedIndex].className">
@@ -3010,7 +2943,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                   <?php echo $info['service3'] == 'cancelled' ? "selected=\"selected\"" : ""; ?>>Cancelled</option>
               </select>
             </td>
-            <td align='right'>
+            <td align='left'>
               Public IP Address
             </td>
 
@@ -3021,7 +2954,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align="right">Upstream Provider</td>
+            <td align='left'>Upstream Provider</td>
             <td align='left'>
               <select name="upstream_provider3" id="upstream_provider_other3" style='width:80%;'
                 onchange="getUpstreamProvider(3,0);">
@@ -3036,7 +2969,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                 </option>
               </select>
             </td>
-            <td align='right'>
+            <td align='left'>
               Password
             </td>
             <td align='left'>
@@ -3046,14 +2979,14 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Provider Telephone
             </td>
             <td align='left'>
               <input name="provider_phone3" id="provider_phone3" type="text" style='width:78%;'
                 value="<?php echo $info['provider_phone3']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               Primary Route
             </td>
             <td align='left'>
@@ -3063,7 +2996,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Service Ping
             </td>
 
@@ -3090,22 +3023,22 @@ $(document).on("pageshow", "#cust_auth_table", function() {
 
           <tr>
             <td> </td>
-            <td align="left">
+            <td align='left'>
               <b>Service Details</b>
             </td>
             <td> </td>
-            <td align="left">
+            <td align='left'>
               <b>Service Hardware</b>
             </td>
           </tr>
 
           <tr>
-            <td align="right">Service Status</td>
+            <td align='left'>Service Status</td>
             <td align='left'>
               <input name="service_id3" id="service_id3" type="text" style='width:80%;'
                 value="<?php echo $info['service_id3']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               Device Type
             </td>
             <td align='left'>
@@ -3119,13 +3052,13 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               LOC ID
             </td>
             <td align='left'>
               <input name="loc_id3" id="loc_id3" type="text" style='width:80%;' value="<?php echo $info['loc_id3']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               Brand
             </td>
             <td align='left'>
@@ -3135,7 +3068,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align="right">Service Type</td>
+            <td align='left'>Service Type</td>
             <td>
               <select name="service_type3" id="service2_type3" style='width:81%;' onchange="getServiceType(3,0)">
                 <option value="">&lt;Select&gt;</option>
@@ -3193,7 +3126,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                   &lt;Other&gt;</option>
               </select>
             </td>
-            <td align='right'>
+            <td align='left'>
               Model
             </td>
             <td align='left'>
@@ -3203,7 +3136,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align="right">Underlining Carrier</td>
+            <td align='left'>Underlining Carrier</td>
             <td>
               <select name="internet_underlining_carrier3" id="internet_underlining_carrier3" style='width:81%;'>
                 <option value="">&lt;Select&gt;</option>
@@ -3228,7 +3161,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                   &lt;Other&gt;</option>
               </select>
             </td>
-            <td align='right'>
+            <td align='left'>
               Device IP
             </td>
             <td align='left'>
@@ -3238,11 +3171,11 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Service Use
             </td>
             <td align='left'>
-              <!--                    <input name="service_use3" id="service_use3" type="text" style='width:80%;' value="--><?php //echo $info['service_use3']; 
+              <!--                    <input name="service_use3" id="service_use3" type="text" style='width:80%;' value="--><?php //echo $info['service_use3'];
                                                                                                                                             ?>
               <!--">-->
               <select name="service_use3" id="service2_use3" style='width:81%;' onchange="getServiceUse(3,0)">
@@ -3265,7 +3198,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                   &lt;Other&gt;</option>
               </select>
             </td>
-            <td align='right'>
+            <td align='left'>
               Device User Name
             </td>
             <td align='left'>
@@ -3275,14 +3208,14 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Service Tel Number
             </td>
             <td align='left'>
               <input name="service_telnum3" id="service_telnum3" type="text" style='width:80%;'
                 value="<?php echo $info['service_telnum3']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               Device Password
             </td>
             <td align='left'>
@@ -3292,14 +3225,14 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Profile Speed
             </td>
             <td align='left'>
               <input name="profile_or_speed3" id="profile_or_speed3" type="text" style='width:80%;'
                 value="<?php echo $info['profile_or_speed3']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               Mac ID
             </td>
             <td align='left'>
@@ -3308,14 +3241,14 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Technology Type
             </td>
             <td align='left'>
               <input name="technology_type3" id="technology_type3" type="text" style='width:80%;'
                 value="<?php echo $info['technology_type3']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               ULL ID
             </td>
             <td align='left'>
@@ -3324,14 +3257,14 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               MDF Pair Detailed
             </td>
             <td align='left'>
               <input name="mdf_pair_detailed3" id="mdf_pair_detailed3" type="text" style='width:80%;'
                 value="<?php echo $info['mdf_pair_detailed3']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
 
             </td>
             <td align='left'>
@@ -3347,23 +3280,16 @@ $(document).on("pageshow", "#cust_auth_table", function() {
 
           <tr>
             <td> </td>
-            <td align="left">
+            <td align='left'>
               <b>Service Plan Details</b>
             </td>
             <td> </td>
-            <td align="left">
-              <b>Wireless</b>
-            </td>
+
           </tr>
 
           <tr>
-            <td align="right"><b>Contact Term</b></td>
+
             <td align='left'>
-              <input name="contact_term3" id="contact_term3" type="text" style='width:80%;'
-                value="<?php echo $info['contact_term3']; ?>">
-              Months
-            </td>
-            <td align='right'>
               Enabled | Wireless
             </td>
             <td align='left'>
@@ -3378,15 +3304,8 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
-              Balance of contract
-            </td>
+
             <td align='left'>
-              <input name="balance_contract3" id="balance_contract3" type="text" style='width:80%;'
-                value="<?php echo $info['balance_contract3']; ?>">
-              Months
-            </td>
-            <td align='right'>
               SSD | Wireless
             </td>
             <td align='left'>
@@ -3396,14 +3315,8 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
-              MRC
             </td>
             <td align='left'>
-              <input name="mrc3" id="mrc3" type="text" style='width:80%;' value="<?php echo $info['mrc3']; ?>">
-              Months
-            </td>
-            <td align='right'>
               Password | Wireless
             </td>
             <td align='left'>
@@ -3413,14 +3326,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
-              ETF
-            </td>
             <td align='left'>
-              <input name="etf3" id="etf3" type="text" style='width:80%;' value="<?php echo $info['etf3']; ?>">
-              Fee
-            </td>
-            <td align='right'>
               Comments
             </td>
             <td align='left'>
@@ -3437,15 +3343,15 @@ $(document).on("pageshow", "#cust_auth_table", function() {
 
           <tr>
             <td> </td>
-            <td align="left">
+            <td align='left'>
               <b>Service Provisioning Details</b>
             </td>
             <td> </td>
-            <td align="left"> </td>
+            <td align='left'> </td>
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Order Date
             </td>
             <td align='left'>
@@ -3455,17 +3361,15 @@ $(document).on("pageshow", "#cust_auth_table", function() {
               <input name="order_by3" id="order_by3" type="text" style='width:35%;'
                 value="<?php echo $info['order_by3']; ?>">
             </td>
-            <td align='right'>
-              Ref
-            </td>
             <td align='left'>
+              Ref
               <input name="order_ref3" id="order_ref3" type="text" style='width:80%;'
                 value="<?php echo $info['order_ref3']; ?>">
             </td>
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Activation Date
             </td>
             <td align='left'>
@@ -3475,17 +3379,15 @@ $(document).on("pageshow", "#cust_auth_table", function() {
               <input name="activation_by3" id="activation_by3" type="text" style='width:35%;'
                 value="<?php echo $info['activation_by3']; ?>">
             </td>
-            <td align='right'>
-              Ref
-            </td>
             <td align='left'>
+              Ref
               <input name="activation_ref3" id="activation_ref3" type="text" style='width:80%;'
                 value="<?php echo $info['activation_ref3']; ?>">
             </td>
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Cancellation Date
             </td>
             <td align='left'>
@@ -3495,10 +3397,8 @@ $(document).on("pageshow", "#cust_auth_table", function() {
               <input name="cancellation_by3" id="cancellation_by3" type="text" style='width:35%;'
                 value="<?php echo $info['cancellation_by3']; ?>">
             </td>
-            <td align='right'>
-              Ref
-            </td>
             <td align='left'>
+              Ref
               <input name="cancellation_ref3" id="cancellation_ref3" type="text" style='width:80%;'
                 value="<?php echo $info['cancellation_ref3']; ?>">
             </td>
@@ -3509,16 +3409,16 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           class="service_details custtable">
           <tr>
             <td style="font-size:16px; color:red"><b>Service 4</b></td>
-            <td align="left">
+            <td align='left'>
               <b>Upstream Details</b>
             </td>
             <td> </td>
-            <td align="left">
+            <td align='left'>
               <b>Authentication Details</b>
             </td>
           </tr>
           <tr>
-            <td align="right">Service Status</td>
+            <td align='left'>Service Status</td>
             <td align='left'>
               <select name="service4" id="service4" width='80%' style='width:80%;'
                 onchange="this.className=this.options[this.selectedIndex].className">
@@ -3531,7 +3431,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                   <?php echo $info['service4'] == 'cancelled' ? "selected=\"selected\"" : ""; ?>>Cancelled</option>
               </select>
             </td>
-            <td align='right'>
+            <td align='left'>
               Public IP Address
             </td>
 
@@ -3542,7 +3442,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align="right">Upstream Provider</td>
+            <td align='left'>Upstream Provider</td>
             <td align='left'>
               <select name="upstream_provider4" id="upstream_provider_other4" style='width:80%;'
                 onchange="getUpstreamProvider(4,0);">
@@ -3557,7 +3457,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                 </option>
               </select>
             </td>
-            <td align='right'>
+            <td align='left'>
               Password
             </td>
             <td align='left'>
@@ -3567,14 +3467,14 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Provider Telephone
             </td>
             <td align='left'>
               <input name="provider_phone4" id="provider_phone4" type="text" style='width:78%;'
                 value="<?php echo $info['provider_phone4']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               Primary Route
             </td>
             <td align='left'>
@@ -3584,7 +3484,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Service Ping
             </td>
 
@@ -3611,22 +3511,22 @@ $(document).on("pageshow", "#cust_auth_table", function() {
 
           <tr>
             <td> </td>
-            <td align="left">
+            <td align='left'>
               <b>Service Details</b>
             </td>
             <td> </td>
-            <td align="left">
+            <td align='left'>
               <b>Service Hardware</b>
             </td>
           </tr>
 
           <tr>
-            <td align="right">Service Status</td>
+            <td align='left'>Service Status</td>
             <td align='left'>
               <input name="service_id4" id="service_id4" type="text" style='width:80%;'
                 value="<?php echo $info['service_id4']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               Device Type
             </td>
             <td align='left'>
@@ -3640,13 +3540,13 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               LOC ID
             </td>
             <td align='left'>
               <input name="loc_id4" id="loc_id4" type="text" style='width:80%;' value="<?php echo $info['loc_id4']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               Brand
             </td>
             <td align='left'>
@@ -3656,7 +3556,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align="right">Service Type</td>
+            <td align='left'>Service Type</td>
             <td>
               <select name="service_type4" id="service2_type4" style='width:81%;' onchange="getServiceType(4,0)">
                 <option value="">&lt;Select&gt;</option>
@@ -3714,7 +3614,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                   &lt;Other&gt;</option>
               </select>
             </td>
-            <td align='right'>
+            <td align='left'>
               Model
             </td>
             <td align='left'>
@@ -3724,7 +3624,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align="right">Underlining Carrier</td>
+            <td align='left'>Underlining Carrier</td>
             <td>
               <select name="internet_underlining_carrier4" id="internet_underlining_carrier4" style='width:81%;'>
                 <option value="">&lt;Select&gt;</option>
@@ -3749,7 +3649,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                   &lt;Other&gt;</option>
               </select>
             </td>
-            <td align='right'>
+            <td align='left'>
               Device IP
             </td>
             <td align='left'>
@@ -3759,11 +3659,11 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Service Use
             </td>
             <td align='left'>
-              <!--                    <input name="service_use4" id="service_use4" type="text" style='width:80%;' value="--><?php //echo $info['service_use4']; 
+              <!--                    <input name="service_use4" id="service_use4" type="text" style='width:80%;' value="--><?php //echo $info['service_use4'];
                                                                                                                                             ?>
               <!--">-->
               <select name="service_use4" id="service2_use4" style='width:81%;' onchange="getServiceUse(4,0)">
@@ -3786,7 +3686,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                   &lt;Other&gt;</option>
               </select>
             </td>
-            <td align='right'>
+            <td align='left'>
               Device User Name
             </td>
             <td align='left'>
@@ -3796,14 +3696,14 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Service Tel Number
             </td>
             <td align='left'>
               <input name="service_telnum4" id="service_telnum4" type="text" style='width:80%;'
                 value="<?php echo $info['service_telnum4']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               Device Password
             </td>
             <td align='left'>
@@ -3813,14 +3713,14 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Profile Speed
             </td>
             <td align='left'>
               <input name="profile_or_speed4" id="profile_or_speed4" type="text" style='width:80%;'
                 value="<?php echo $info['profile_or_speed4']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               Mac ID
             </td>
             <td align='left'>
@@ -3829,14 +3729,14 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Technology Type
             </td>
             <td align='left'>
               <input name="technology_type4" id="technology_type4" type="text" style='width:80%;'
                 value="<?php echo $info['technology_type4']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               ULL ID
             </td>
             <td align='left'>
@@ -3845,14 +3745,14 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               MDF Pair Detailed
             </td>
             <td align='left'>
               <input name="mdf_pair_detailed4" id="mdf_pair_detailed4" type="text" style='width:80%;'
                 value="<?php echo $info['mdf_pair_detailed4']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
 
             </td>
             <td align='left'>
@@ -3868,23 +3768,15 @@ $(document).on("pageshow", "#cust_auth_table", function() {
 
           <tr>
             <td> </td>
-            <td align="left">
+            <td align='left'>
               <b>Service Plan Details</b>
             </td>
             <td> </td>
-            <td align="left">
-              <b>Wireless</b>
-            </td>
+
           </tr>
 
           <tr>
-            <td align="right"><b>Contact Term</b></td>
             <td align='left'>
-              <input name="service_id4" id="service_id4" type="text" style='width:80%;'
-                value="<?php echo $info['service_id4']; ?>">
-              Months
-            </td>
-            <td align='right'>
               Enabled | Wireless
             </td>
             <td align='left'>
@@ -3899,15 +3791,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
-              Balance of contract
-            </td>
             <td align='left'>
-              <input name="balance_contract4" id="balance_contract4" type="text" style='width:80%;'
-                value="<?php echo $info['balance_contract4']; ?>">
-              Months
-            </td>
-            <td align='right'>
               SSD | Wireless
             </td>
             <td align='left'>
@@ -3917,14 +3801,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
-              MRC
-            </td>
             <td align='left'>
-              <input name="mrc4" id="mrc4" type="text" style='width:80%;' value="<?php echo $info['mrc4']; ?>">
-              Months
-            </td>
-            <td align='right'>
               Password | Wireless
             </td>
             <td align='left'>
@@ -3934,14 +3811,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
-              ETF
-            </td>
             <td align='left'>
-              <input name="etf4" id="etf4" type="text" style='width:80%;' value="<?php echo $info['etf4']; ?>">
-              Fee
-            </td>
-            <td align='right'>
               Comments
             </td>
             <td align='left'>
@@ -3958,15 +3828,15 @@ $(document).on("pageshow", "#cust_auth_table", function() {
 
           <tr>
             <td> </td>
-            <td align="left">
+            <td align='left'>
               <b>Service Provisioning Details</b>
             </td>
             <td> </td>
-            <td align="left"> </td>
+            <td align='left'> </td>
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Order Date
             </td>
             <td align='left'>
@@ -3976,17 +3846,15 @@ $(document).on("pageshow", "#cust_auth_table", function() {
               <input name="order_by4" id="order_by4" type="text" style='width:35%;'
                 value="<?php echo $info['order_by4']; ?>">
             </td>
-            <td align='right'>
-              Ref
-            </td>
             <td align='left'>
+              Ref
               <input name="order_ref4" id="order_ref4" type="text" style='width:80%;'
                 value="<?php echo $info['order_ref4']; ?>">
             </td>
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Activation Date
             </td>
             <td align='left'>
@@ -3996,17 +3864,15 @@ $(document).on("pageshow", "#cust_auth_table", function() {
               <input name="activation_by4" id="activation_by4" type="text" style='width:35%;'
                 value="<?php echo $info['activation_by4']; ?>">
             </td>
-            <td align='right'>
-              Ref
-            </td>
             <td align='left'>
+              Ref
               <input name="activation_ref4" id="activation_ref4" type="text" style='width:80%;'
                 value="<?php echo $info['activation_ref4']; ?>">
             </td>
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Cancellation Date
             </td>
             <td align='left'>
@@ -4016,10 +3882,8 @@ $(document).on("pageshow", "#cust_auth_table", function() {
               <input name="cancellation_by4" id="cancellation_by4" type="text" style='width:35%;'
                 value="<?php echo $info['cancellation_by4']; ?>">
             </td>
-            <td align='right'>
-              Ref
-            </td>
             <td align='left'>
+              Ref
               <input name="cancellation_ref4" id="cancellation_ref4" type="text" style='width:80%;'
                 value="<?php echo $info['cancellation_ref4']; ?>">
             </td>
@@ -4032,16 +3896,16 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           class="service_details custtable">
           <tr>
             <td style="font-size:16px; color:red"><b>Service 5</b></td>
-            <td align="left">
+            <td align='left'>
               <b>Upstream Details</b>
             </td>
             <td> </td>
-            <td align="left">
+            <td align='left'>
               <b>Authentication Details</b>
             </td>
           </tr>
           <tr>
-            <td align="right">Service Status</td>
+            <td align='left'>Service Status</td>
             <td align='left'>
               <select name="service5" id="service5" width='80%' style='width:80%;'
                 onchange="this.className=this.options[this.selectedIndex].className">
@@ -4054,7 +3918,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                   <?php echo $info['service5'] == 'cancelled' ? "selected=\"selected\"" : ""; ?>>Cancelled</option>
               </select>
             </td>
-            <td align='right'>
+            <td align='left'>
               Public IP Address
             </td>
 
@@ -4065,7 +3929,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align="right">Upstream Provider</td>
+            <td align='left'>Upstream Provider</td>
             <td align='left'>
               <select name="upstream_provider5" id="upstream_provider_other5" style='width:80%;'
                 onchange="getUpstreamProvider(5,0);">
@@ -4080,7 +3944,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                 </option>
               </select>
             </td>
-            <td align='right'>
+            <td align='left'>
               Password
             </td>
             <td align='left'>
@@ -4090,14 +3954,14 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Provider Telephone
             </td>
             <td align='left'>
               <input name="provider_phone5" id="provider_phone5" type="text" style='width:78%;'
                 value="<?php echo $info['provider_phone5']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               Primary Route
             </td>
             <td align='left'>
@@ -4107,7 +3971,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Service Ping
             </td>
 
@@ -4134,22 +3998,22 @@ $(document).on("pageshow", "#cust_auth_table", function() {
 
           <tr>
             <td> </td>
-            <td align="left">
+            <td align='left'>
               <b>Service Details</b>
             </td>
             <td> </td>
-            <td align="left">
+            <td align='left'>
               <b>Service Hardware</b>
             </td>
           </tr>
 
           <tr>
-            <td align="right">Service Status</td>
+            <td align='left'>Service Status</td>
             <td align='left'>
               <input name="service_id5" id="service_id5" type="text" style='width:80%;'
                 value="<?php echo $info['service_id5']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               Device Type
             </td>
             <td align='left'>
@@ -4163,13 +4027,13 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               LOC ID
             </td>
             <td align='left'>
               <input name="loc_id5" id="loc_id5" type="text" style='width:80%;' value="<?php echo $info['loc_id5']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               Brand
             </td>
             <td align='left'>
@@ -4179,7 +4043,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align="right">Service Type</td>
+            <td align='left'>Service Type</td>
             <td>
               <select name="service_type5" id="service2_type5" style='width:81%;' onchange="getServiceType(5,0)">
                 <option value="">&lt;Select&gt;</option>
@@ -4237,7 +4101,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                   &lt;Other&gt;</option>
               </select>
             </td>
-            <td align='right'>
+            <td align='left'>
               Model
             </td>
             <td align='left'>
@@ -4247,7 +4111,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align="right">Underlining Carrier</td>
+            <td align='left'>Underlining Carrier</td>
             <td>
               <select name="internet_underlining_carrier5" id="internet_underlining_carrier5" style='width:81%;'>
                 <option value="">&lt;Select&gt;</option>
@@ -4272,7 +4136,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                   &lt;Other&gt;</option>
               </select>
             </td>
-            <td align='right'>
+            <td align='left'>
               Device IP
             </td>
             <td align='left'>
@@ -4282,11 +4146,11 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Service Use
             </td>
             <td align='left'>
-              <!--                    <input name="service_use5" id="service_use5" type="text" style='width:80%;' value="--><?php //echo $info['service_use5']; 
+              <!--                    <input name="service_use5" id="service_use5" type="text" style='width:80%;' value="--><?php //echo $info['service_use5'];
                                                                                                                                             ?>
               <!--">-->
               <select name="service_use5" id="service2_use5" style='width:81%;' onchange="getServiceUse(5,0)">
@@ -4309,7 +4173,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                   &lt;Other&gt;</option>
               </select>
             </td>
-            <td align='right'>
+            <td align='left'>
               Device User Name
             </td>
             <td align='left'>
@@ -4319,14 +4183,14 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Service Tel Number
             </td>
             <td align='left'>
               <input name="service_telnum5" id="service_telnum5" type="text" style='width:80%;'
                 value="<?php echo $info['service_telnum5']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               Device Password
             </td>
             <td align='left'>
@@ -4336,14 +4200,14 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Profile Speed
             </td>
             <td align='left'>
               <input name="profile_or_speed5" id="profile_or_speed5" type="text" style='width:80%;'
                 value="<?php echo $info['profile_or_speed5']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               Mac ID
             </td>
             <td align='left'>
@@ -4352,14 +4216,14 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Technology Type
             </td>
             <td align='left'>
               <input name="technology_type5" id="technology_type5" type="text" style='width:80%;'
                 value="<?php echo $info['technology_type5']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               ULL ID
             </td>
             <td align='left'>
@@ -4368,14 +4232,14 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               MDF Pair Detailed
             </td>
             <td align='left'>
               <input name="mdf_pair_detailed5" id="mdf_pair_detailed5" type="text" style='width:80%;'
                 value="<?php echo $info['mdf_pair_detailed5']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
 
             </td>
             <td align='left'>
@@ -4391,23 +4255,15 @@ $(document).on("pageshow", "#cust_auth_table", function() {
 
           <tr>
             <td> </td>
-            <td align="left">
+            <td align='left'>
               <b>Service Plan Details</b>
             </td>
             <td> </td>
-            <td align="left">
-              <b>Wireless</b>
-            </td>
+
           </tr>
 
           <tr>
-            <td align="right"><b>Contact Term</b></td>
             <td align='left'>
-              <input name="service_id5" id="service_id5" type="text" style='width:80%;'
-                value="<?php echo $info['service_id5']; ?>">
-              Months
-            </td>
-            <td align='right'>
               Enabled | Wireless
             </td>
             <td align='left'>
@@ -4422,15 +4278,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
-              Balance of contract
-            </td>
             <td align='left'>
-              <input name="balance_contract5" id="balance_contract5" type="text" style='width:80%;'
-                value="<?php echo $info['balance_contract5']; ?>">
-              Months
-            </td>
-            <td align='right'>
               SSD | Wireless
             </td>
             <td align='left'>
@@ -4440,14 +4288,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
-              MRC
-            </td>
             <td align='left'>
-              <input name="mrc5" id="mrc5" type="text" style='width:80%;' value="<?php echo $info['mrc5']; ?>">
-              Months
-            </td>
-            <td align='right'>
               Password | Wireless
             </td>
             <td align='left'>
@@ -4457,14 +4298,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
-              ETF
-            </td>
             <td align='left'>
-              <input name="etf5" id="etf5" type="text" style='width:80%;' value="<?php echo $info['etf5']; ?>">
-              Fee
-            </td>
-            <td align='right'>
               Comments
             </td>
             <td align='left'>
@@ -4481,15 +4315,15 @@ $(document).on("pageshow", "#cust_auth_table", function() {
 
           <tr>
             <td> </td>
-            <td align="left">
+            <td align='left'>
               <b>Service Provisioning Details</b>
             </td>
             <td> </td>
-            <td align="left"> </td>
+            <td align='left'> </td>
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Order Date
             </td>
             <td align='left'>
@@ -4499,17 +4333,15 @@ $(document).on("pageshow", "#cust_auth_table", function() {
               <input name="order_by5" id="order_by5" type="text" style='width:35%;'
                 value="<?php echo $info['order_by5']; ?>">
             </td>
-            <td align='right'>
-              Ref
-            </td>
             <td align='left'>
+              Ref
               <input name="order_ref5" id="order_ref5" type="text" style='width:80%;'
                 value="<?php echo $info['order_ref5']; ?>">
             </td>
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Activation Date
             </td>
             <td align='left'>
@@ -4519,17 +4351,15 @@ $(document).on("pageshow", "#cust_auth_table", function() {
               <input name="activation_by5" id="activation_by5" type="text" style='width:35%;'
                 value="<?php echo $info['activation_by5']; ?>">
             </td>
-            <td align='right'>
-              Ref
-            </td>
             <td align='left'>
+              Ref
               <input name="activation_ref5" id="activation_ref5" type="text" style='width:80%;'
                 value="<?php echo $info['activation_ref5']; ?>">
             </td>
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Cancellation Date
             </td>
             <td align='left'>
@@ -4539,10 +4369,8 @@ $(document).on("pageshow", "#cust_auth_table", function() {
               <input name="cancellation_by5" id="cancellation_by5" type="text" style='width:35%;'
                 value="<?php echo $info['cancellation_by5']; ?>">
             </td>
-            <td align='right'>
-              Ref
-            </td>
             <td align='left'>
+              Ref
               <input name="cancellation_ref5" id="cancellation_ref5" type="text" style='width:80%;'
                 value="<?php echo $info['cancellation_ref5']; ?>">
             </td>
@@ -4555,16 +4383,16 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           class="service_details custtable">
           <tr>
             <td style="font-size:16px; color:red"><b>Service 6</b></td>
-            <td align="left">
+            <td align='left'>
               <b>Upstream Details</b>
             </td>
             <td> </td>
-            <td align="left">
+            <td align='left'>
               <b>Authentication Details</b>
             </td>
           </tr>
           <tr>
-            <td align="right">Service Status</td>
+            <td align='left'>Service Status</td>
             <td align='left'>
               <select name="service6" id="service6" width='80%' style='width:80%;'
                 onchange="this.className=this.options[this.selectedIndex].className">
@@ -4577,7 +4405,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                   <?php echo $info['service6'] == 'cancelled' ? "selected=\"selected\"" : ""; ?>>Cancelled</option>
               </select>
             </td>
-            <td align='right'>
+            <td align='left'>
               Public IP Address
             </td>
 
@@ -4588,7 +4416,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align="right">Upstream Provider</td>
+            <td align='left'>Upstream Provider</td>
             <td align='left'>
               <select name="upstream_provider6" id="upstream_provider_other6" style='width:80%;'
                 onchange="getUpstreamProvider(6,0);">
@@ -4603,7 +4431,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                 </option>
               </select>
             </td>
-            <td align='right'>
+            <td align='left'>
               Password
             </td>
             <td align='left'>
@@ -4613,14 +4441,14 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Provider Telephone
             </td>
             <td align='left'>
               <input name="provider_phone6" id="provider_phone6" type="text" style='width:78%;'
                 value="<?php echo $info['provider_phone6']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               Primary Route
             </td>
             <td align='left'>
@@ -4630,7 +4458,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Service Ping
             </td>
 
@@ -4657,22 +4485,22 @@ $(document).on("pageshow", "#cust_auth_table", function() {
 
           <tr>
             <td> </td>
-            <td align="left">
+            <td align='left'>
               <b>Service Details</b>
             </td>
             <td> </td>
-            <td align="left">
+            <td align='left'>
               <b>Service Hardware</b>
             </td>
           </tr>
 
           <tr>
-            <td align="right">Service Status</td>
+            <td align='left'>Service Status</td>
             <td align='left'>
               <input name="service_id6" id="service_id6" type="text" style='width:80%;'
                 value="<?php echo $info['service_id6']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               Device Type
             </td>
             <td align='left'>
@@ -4686,13 +4514,13 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               LOC ID
             </td>
             <td align='left'>
               <input name="loc_id6" id="loc_id6" type="text" style='width:80%;' value="<?php echo $info['loc_id6']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               Brand
             </td>
             <td align='left'>
@@ -4702,7 +4530,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align="right">Service Type</td>
+            <td align='left'>Service Type</td>
             <td>
               <select name="service_type6" id="service2_type6" style='width:81%;' onchange="getServiceType(6,0)">
                 <option value="">&lt;Select&gt;</option>
@@ -4760,7 +4588,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                   &lt;Other&gt;</option>
               </select>
             </td>
-            <td align='right'>
+            <td align='left'>
               Model
             </td>
             <td align='left'>
@@ -4770,7 +4598,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align="right">Underlining Carrier</td>
+            <td align='left'>Underlining Carrier</td>
             <td>
               <select name="internet_underlining_carrier6" id="internet_underlining_carrier6" style='width:81%;'>
                 <option value="">&lt;Select&gt;</option>
@@ -4795,7 +4623,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                   &lt;Other&gt;</option>
               </select>
             </td>
-            <td align='right'>
+            <td align='left'>
               Device IP
             </td>
             <td align='left'>
@@ -4805,11 +4633,11 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Service Use
             </td>
             <td align='left'>
-              <!--                    <input name="service_use6" id="service_use6" type="text" style='width:80%;' value="--><?php //echo $info['service_use6']; 
+              <!--                    <input name="service_use6" id="service_use6" type="text" style='width:80%;' value="--><?php //echo $info['service_use6'];
                                                                                                                                             ?>
               <!--">-->
               <select name="service_use6" id="service2_use6" style='width:81%;' onchange="getServiceUse(6,0)">
@@ -4832,7 +4660,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                   &lt;Other&gt;</option>
               </select>
             </td>
-            <td align='right'>
+            <td align='left'>
               Device User Name
             </td>
             <td align='left'>
@@ -4842,14 +4670,14 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Service Tel Number
             </td>
             <td align='left'>
               <input name="service_telnum6" id="service_telnum6" type="text" style='width:80%;'
                 value="<?php echo $info['service_telnum6']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               Device Password
             </td>
             <td align='left'>
@@ -4859,14 +4687,14 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Profile Speed
             </td>
             <td align='left'>
               <input name="profile_or_speed6" id="profile_or_speed6" type="text" style='width:80%;'
                 value="<?php echo $info['profile_or_speed6']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               Mac ID
             </td>
             <td align='left'>
@@ -4875,14 +4703,14 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Technology Type
             </td>
             <td align='left'>
               <input name="technology_type6" id="technology_type6" type="text" style='width:80%;'
                 value="<?php echo $info['technology_type6']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               ULL ID
             </td>
             <td align='left'>
@@ -4891,14 +4719,14 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               MDF Pair Detailed
             </td>
             <td align='left'>
               <input name="mdf_pair_detailed6" id="mdf_pair_detailed6" type="text" style='width:80%;'
                 value="<?php echo $info['mdf_pair_detailed6']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
 
             </td>
             <td align='left'>
@@ -4914,23 +4742,15 @@ $(document).on("pageshow", "#cust_auth_table", function() {
 
           <tr>
             <td> </td>
-            <td align="left">
+            <td align='left'>
               <b>Service Plan Details</b>
             </td>
             <td> </td>
-            <td align="left">
-              <b>Wireless</b>
-            </td>
+
           </tr>
 
           <tr>
-            <td align="right"><b>Contact Term</b></td>
             <td align='left'>
-              <input name="service_id6" id="service_id6" type="text" style='width:80%;'
-                value="<?php echo $info['service_id6']; ?>">
-              Months
-            </td>
-            <td align='right'>
               Enabled | Wireless
             </td>
             <td align='left'>
@@ -4945,15 +4765,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
-              Balance of contract
-            </td>
             <td align='left'>
-              <input name="balance_contract6" id="balance_contract6" type="text" style='width:80%;'
-                value="<?php echo $info['balance_contract6']; ?>">
-              Months
-            </td>
-            <td align='right'>
               SSD | Wireless
             </td>
             <td align='left'>
@@ -4963,14 +4775,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
-              MRC
-            </td>
             <td align='left'>
-              <input name="mrc6" id="mrc6" type="text" style='width:80%;' value="<?php echo $info['mrc6']; ?>">
-              Months
-            </td>
-            <td align='right'>
               Password | Wireless
             </td>
             <td align='left'>
@@ -4980,14 +4785,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
-              ETF
-            </td>
             <td align='left'>
-              <input name="etf6" id="etf6" type="text" style='width:80%;' value="<?php echo $info['etf6']; ?>">
-              Fee
-            </td>
-            <td align='right'>
               Comments
             </td>
             <td align='left'>
@@ -5004,15 +4802,15 @@ $(document).on("pageshow", "#cust_auth_table", function() {
 
           <tr>
             <td> </td>
-            <td align="left">
+            <td align='left'>
               <b>Service Provisioning Details</b>
             </td>
             <td> </td>
-            <td align="left"> </td>
+            <td align='left'> </td>
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Order Date
             </td>
             <td align='left'>
@@ -5022,17 +4820,15 @@ $(document).on("pageshow", "#cust_auth_table", function() {
               <input name="order_by6" id="order_by6" type="text" style='width:35%;'
                 value="<?php echo $info['order_by6']; ?>">
             </td>
-            <td align='right'>
-              Ref
-            </td>
             <td align='left'>
+              Ref
               <input name="order_ref6" id="order_ref6" type="text" style='width:80%;'
                 value="<?php echo $info['order_ref6']; ?>">
             </td>
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Activation Date
             </td>
             <td align='left'>
@@ -5042,17 +4838,15 @@ $(document).on("pageshow", "#cust_auth_table", function() {
               <input name="activation_by6" id="activation_by6" type="text" style='width:35%;'
                 value="<?php echo $info['activation_by6']; ?>">
             </td>
-            <td align='right'>
-              Ref
-            </td>
             <td align='left'>
+              Ref
               <input name="activation_ref6" id="activation_ref6" type="text" style='width:80%;'
                 value="<?php echo $info['activation_ref6']; ?>">
             </td>
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Cancellation Date
             </td>
             <td align='left'>
@@ -5062,10 +4856,8 @@ $(document).on("pageshow", "#cust_auth_table", function() {
               <input name="cancellation_by6" id="cancellation_by6" type="text" style='width:35%;'
                 value="<?php echo $info['cancellation_by6']; ?>">
             </td>
-            <td align='right'>
-              Ref
-            </td>
             <td align='left'>
+              Ref
               <input name="cancellation_ref6" id="cancellation_ref6" type="text" style='width:80%;'
                 value="<?php echo $info['cancellation_ref6']; ?>">
             </td>
@@ -5078,16 +4870,16 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           class="service_details custtable">
           <tr>
             <td style="font-size:16px; color:red"><b>Service 7</b></td>
-            <td align="left">
+            <td align='left'>
               <b>Upstream Details</b>
             </td>
             <td> </td>
-            <td align="left">
+            <td align='left'>
               <b>Authentication Details</b>
             </td>
           </tr>
           <tr>
-            <td align="right">Service Status</td>
+            <td align='left'>Service Status</td>
             <td align='left'>
               <select name="service7" id="service7" width='80%' style='width:80%;'
                 onchange="this.className=this.options[this.selectedIndex].className">
@@ -5100,7 +4892,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                   <?php echo $info['service7'] == 'cancelled' ? "selected=\"selected\"" : ""; ?>>Cancelled</option>
               </select>
             </td>
-            <td align='right'>
+            <td align='left'>
               Public IP Address
             </td>
 
@@ -5111,7 +4903,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align="right">Upstream Provider</td>
+            <td align='left'>Upstream Provider</td>
             <td align='left'>
               <select name="upstream_provider7" id="upstream_provider_other7" style='width:80%;'
                 onchange="getUpstreamProvider(7,0);">
@@ -5126,7 +4918,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                 </option>
               </select>
             </td>
-            <td align='right'>
+            <td align='left'>
               Password
             </td>
             <td align='left'>
@@ -5136,14 +4928,14 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Provider Telephone
             </td>
             <td align='left'>
               <input name="provider_phone7" id="provider_phone7" type="text" style='width:78%;'
                 value="<?php echo $info['provider_phone7']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               Primary Route
             </td>
             <td align='left'>
@@ -5153,7 +4945,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Service Ping
             </td>
 
@@ -5180,22 +4972,22 @@ $(document).on("pageshow", "#cust_auth_table", function() {
 
           <tr>
             <td> </td>
-            <td align="left">
+            <td align='left'>
               <b>Service Details</b>
             </td>
             <td> </td>
-            <td align="left">
+            <td align='left'>
               <b>Service Hardware</b>
             </td>
           </tr>
 
           <tr>
-            <td align="right">Service Status</td>
+            <td align='left'>Service Status</td>
             <td align='left'>
               <input name="service_id7" id="service_id7" type="text" style='width:80%;'
                 value="<?php echo $info['service_id7']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               Device Type
             </td>
             <td align='left'>
@@ -5209,13 +5001,13 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               LOC ID
             </td>
             <td align='left'>
               <input name="loc_id7" id="loc_id7" type="text" style='width:80%;' value="<?php echo $info['loc_id7']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               Brand
             </td>
             <td align='left'>
@@ -5225,7 +5017,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align="right">Service Type</td>
+            <td align='left'>Service Type</td>
             <td>
               <select name="service_type7" id="service2_type7" style='width:81%;' onchange="getServiceType(7,0)">
                 <option value="">&lt;Select&gt;</option>
@@ -5283,7 +5075,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                   &lt;Other&gt;</option>
               </select>
             </td>
-            <td align='right'>
+            <td align='left'>
               Model
             </td>
             <td align='left'>
@@ -5293,7 +5085,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align="right">Underlining Carrier</td>
+            <td align='left'>Underlining Carrier</td>
             <td>
               <select name="internet_underlining_carrier7" id="internet_underlining_carrier7" style='width:81%;'>
                 <option value="">&lt;Select&gt;</option>
@@ -5318,7 +5110,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                   &lt;Other&gt;</option>
               </select>
             </td>
-            <td align='right'>
+            <td align='left'>
               Device IP
             </td>
             <td align='left'>
@@ -5328,11 +5120,11 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Service Use
             </td>
             <td align='left'>
-              <!--                    <input name="service_use7" id="service_use7" type="text" style='width:80%;' value="--><?php //echo $info['service_use7']; 
+              <!--                    <input name="service_use7" id="service_use7" type="text" style='width:80%;' value="--><?php //echo $info['service_use7'];
                                                                                                                                             ?>
               <!--">-->
               <select name="service_use7" id="service2_use7" style='width:81%;' onchange="getServiceUse(7,0)">
@@ -5355,7 +5147,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
                   &lt;Other&gt;</option>
               </select>
             </td>
-            <td align='right'>
+            <td align='left'>
               Device User Name
             </td>
             <td align='left'>
@@ -5365,14 +5157,14 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Service Tel Number
             </td>
             <td align='left'>
               <input name="service_telnum7" id="service_telnum7" type="text" style='width:80%;'
                 value="<?php echo $info['service_telnum7']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               Device Password
             </td>
             <td align='left'>
@@ -5382,14 +5174,14 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Profile Speed
             </td>
             <td align='left'>
               <input name="profile_or_speed7" id="profile_or_speed7" type="text" style='width:80%;'
                 value="<?php echo $info['profile_or_speed7']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               Mac ID
             </td>
             <td align='left'>
@@ -5398,14 +5190,14 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Technology Type
             </td>
             <td align='left'>
               <input name="technology_type7" id="technology_type7" type="text" style='width:80%;'
                 value="<?php echo $info['technology_type7']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
               ULL ID
             </td>
             <td align='left'>
@@ -5414,14 +5206,14 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               MDF Pair Detailed
             </td>
             <td align='left'>
               <input name="mdf_pair_detailed7" id="mdf_pair_detailed7" type="text" style='width:80%;'
                 value="<?php echo $info['mdf_pair_detailed7']; ?>">
             </td>
-            <td align='right'>
+            <td align='left'>
 
             </td>
             <td align='left'>
@@ -5437,23 +5229,14 @@ $(document).on("pageshow", "#cust_auth_table", function() {
 
           <tr>
             <td> </td>
-            <td align="left">
+            <td align='left'>
               <b>Service Plan Details</b>
             </td>
             <td> </td>
-            <td align="left">
-              <b>Wireless</b>
-            </td>
           </tr>
 
           <tr>
-            <td align="right"><b>Contact Term</b></td>
             <td align='left'>
-              <input name="service_id7" id="service_id7" type="text" style='width:80%;'
-                value="<?php echo $info['service_id7']; ?>">
-              Months
-            </td>
-            <td align='right'>
               Enabled | Wireless
             </td>
             <td align='left'>
@@ -5468,15 +5251,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
-              Balance of contract
-            </td>
             <td align='left'>
-              <input name="balance_contract7" id="balance_contract7" type="text" style='width:80%;'
-                value="<?php echo $info['balance_contract7']; ?>">
-              Months
-            </td>
-            <td align='right'>
               SSD | Wireless
             </td>
             <td align='left'>
@@ -5486,14 +5261,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
-              MRC
-            </td>
             <td align='left'>
-              <input name="mrc7" id="mrc7" type="text" style='width:80%;' value="<?php echo $info['mrc7']; ?>">
-              Months
-            </td>
-            <td align='right'>
               Password | Wireless
             </td>
             <td align='left'>
@@ -5503,14 +5271,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
           </tr>
 
           <tr>
-            <td align='right'>
-              ETF
-            </td>
             <td align='left'>
-              <input name="etf7" id="etf7" type="text" style='width:80%;' value="<?php echo $info['etf7']; ?>">
-              Fee
-            </td>
-            <td align='right'>
               Comments
             </td>
             <td align='left'>
@@ -5527,15 +5288,15 @@ $(document).on("pageshow", "#cust_auth_table", function() {
 
           <tr>
             <td> </td>
-            <td align="left">
+            <td align='left'>
               <b>Service Provisioning Details</b>
             </td>
             <td> </td>
-            <td align="left"> </td>
+            <td align='left'> </td>
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Order Date
             </td>
             <td align='left'>
@@ -5545,17 +5306,15 @@ $(document).on("pageshow", "#cust_auth_table", function() {
               <input name="order_by7" id="order_by7" type="text" style='width:35%;'
                 value="<?php echo $info['order_by7']; ?>">
             </td>
-            <td align='right'>
-              Ref
-            </td>
             <td align='left'>
+              Ref
               <input name="order_ref7" id="order_ref7" type="text" style='width:80%;'
                 value="<?php echo $info['order_ref7']; ?>">
             </td>
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Activation Date
             </td>
             <td align='left'>
@@ -5565,17 +5324,15 @@ $(document).on("pageshow", "#cust_auth_table", function() {
               <input name="activation_by7" id="activation_by7" type="text" style='width:35%;'
                 value="<?php echo $info['activation_by7']; ?>">
             </td>
-            <td align='right'>
-              Ref
-            </td>
             <td align='left'>
+              Ref
               <input name="activation_ref7" id="activation_ref7" type="text" style='width:80%;'
                 value="<?php echo $info['activation_ref7']; ?>">
             </td>
           </tr>
 
           <tr>
-            <td align='right'>
+            <td align='left'>
               Cancellation Date
             </td>
             <td align='left'>
@@ -5585,10 +5342,8 @@ $(document).on("pageshow", "#cust_auth_table", function() {
               <input name="cancellation_by7" id="cancellation_by7" type="text" style='width:35%;'
                 value="<?php echo $info['cancellation_by7']; ?>">
             </td>
-            <td align='right'>
-              Ref
-            </td>
             <td align='left'>
+              Ref
               <input name="cancellation_ref7" id="cancellation_ref7" type="text" style='width:80%;'
                 value="<?php echo $info['cancellation_ref7']; ?>">
             </td>
@@ -5905,7 +5660,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
 
         <table cellspacing="10px" width="100%" border="0" id="tb_fax" style="display:none;" class="custtable">
           <tr>
-            <th scope="col" width="20%" align="left"><span style="color:black;">Fax In</span></th>
+            <th scope="col" width="20%" align='left'><span style="color:black;">Fax In</span></th>
             <th scope="col" width="16%"><span style="color:black;">Service Number</span></th>
             <th scope="col" width="16%"><span style="color:black;">Service Status</span></th>
             <th scope="col" width="16%"><span style="color:black;">Service Type</span></th>
@@ -6142,7 +5897,7 @@ $(document).on("pageshow", "#cust_auth_table", function() {
             <td colspan="6"><br /></td>
           </tr>
           <tr>
-            <th scope="col" width="20%" align="left"><span style="color:black;">Fax Out</span></th>
+            <th scope="col" width="20%" align='left'><span style="color:black;">Fax Out</span></th>
             <th scope="col" width="16%"><span style="color:black;">Service Number</span></th>
             <th scope="col" width="16%"><span style="color:black;">Service Status</span></th>
             <th scope="col" width="16%"><span style="color:black;">Service Type</span></th>
@@ -7102,7 +6857,6 @@ function gotoCustomerUrl() {
 }
 
 
-
 function gotoUpstreamProviderpage(idx) {
 
   var id = document.getElementById("upstream_provider" + idx).value;
@@ -7238,7 +6992,6 @@ displayNotes('<?php echo $newstring ?>');
 <script>
 
   function checkInput() {
-    console.log("dfd");
   var textInput = document.getElementById("textInput");
     var submitButton = document.querySelector('input[id="update"]');
     var submitButton1 = document.querySelector('input[id="update1"]');
@@ -7248,7 +7001,7 @@ displayNotes('<?php echo $newstring ?>');
     var submitButton5 = document.querySelector('input[id="update5"]');
     var submitButton6 = document.querySelector('input[id="update6"]');
     var submitButton7 = document.querySelector('input[id="update7"]');
-    
+
     if (textInput.value.trim() !== "") {
       submitButton.classList.add("has-text");
       submitButton1.classList.add("has-text");
