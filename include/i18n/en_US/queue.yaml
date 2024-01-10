@@ -60,7 +60,7 @@
       bits: 1
       sort: 5
       width: 85
-      heading: Priority
+      heading: Status
     - column_id: 8
       bits: 1
       sort: 6
@@ -107,7 +107,7 @@
       bits: 1
       sort: 5
       width: 85
-      heading: Priority
+      heading: Status
     - column_id: 8
       bits: 1
       sort: 6
@@ -147,7 +147,7 @@
       bits: 1
       sort: 5
       width: 85
-      heading: Priority
+      heading: Status
     - column_id: 8
       bits: 1
       sort: 6

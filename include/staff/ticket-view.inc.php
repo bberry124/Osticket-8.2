@@ -307,11 +307,24 @@ if ($ticket->isOverdue()) {
         echo TicketStatus::status_options();
         ?>
       </div>
-      <div class="flush-left">
-        <h2><a href="tickets.php?id=<?php echo $ticket->getId(); ?>" title="<?php echo __('Reload'); ?>"><i
+      <div class="flush-left" style="display: inline-block;">
+        <h2 style="display: inline-block;"><a href="tickets.php?id=<?php echo $ticket->getId(); ?>" title="<?php echo __('Reload'); ?>"><i
               class="icon-refresh"></i>
             <?php echo sprintf(__('Ticket #%s'), $ticket->getNumber()); ?></a>
         </h2>
+        <h2 style="display: inline-block; margin-left:10px;">Department: <font color="#cd853f"><?php echo Format::htmlchars($ticket->getDeptName()); ?></font>
+      </h2>
+      <h2 style="display: inline-block;margin-left:10px;">Status:
+        <?php if (ucfirst($ticket->getStatus()) == 'Open') {
+                    echo "<font color='00cc66'>";
+                    echo ucfirst($ticket->getStatus());
+                    echo "</font>";
+                } else if (ucfirst($ticket->getStatus()) == 'Closed') {
+                    echo "<font color='cc0000'>";
+                    echo ucfirst($ticket->getStatus());
+                    echo "</font>";
+                } ?>
+      </h2>
       </div>
     </div>
   </div>

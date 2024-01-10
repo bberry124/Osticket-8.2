@@ -2,8 +2,6 @@
 // Calling convention (assumed global scope):
 // $tickets - <QuerySet> with all columns and annotations necessary to
 //      render the full page
-
-
 // Impose visibility constraints
 // ------------------------------------------------------------
 //filter if limited visibility or if unlimited visibility and in a queue
@@ -13,19 +11,15 @@ if (
     ($ignoreVisibility && ($queue->isAQueue() || $queue->isASubQueue())) //unlimited visibility + not a search
 )
     $tickets->filter($thisstaff->getTicketsVisibility());
-
 // do not show children tickets unless agent is doing a search
 if ($queue->isAQueue() || $queue->isASubQueue())
     $tickets->filter(Q::any(
         array('ticket_pid' => null, 'flags__hasbit' => TICKET::FLAG_LINKED)
     ));
-
 // Make sure the cdata materialized view is available
 TicketForm::ensureDynamicDataView();
-
 // Identify columns of output
 $columns = $queue->getColumns();
-
 // Figure out REFRESH url — which might not be accurate after posting a
 // response
 // Remove some variables from query string.
@@ -33,7 +27,6 @@ $qsFilter = ['id'];
 if (isset($_REQUEST['a']) && ($_REQUEST['a'] !== 'search'))
     $qsFilter[] = 'a';
 $refresh_url = Http::refresh_url($qsFilter);
-
 // Establish the selected or default sorting mechanism
 if (isset($_GET['sort']) && is_numeric($_GET['sort'])) {
     $sort = $_SESSION['sort'][$queue->getId()] = array(
@@ -60,9 +53,7 @@ if (isset($_GET['sort']) && is_numeric($_GET['sort'])) {
         'dir' => (int) $_GET['dir'] ?? 0,
     );
 }
-
 // Handle current sorting preferences
-
 $sorted = false;
 foreach ($columns as $C) {
     // Sort by this column ?
@@ -71,7 +62,6 @@ foreach ($columns as $C) {
         $sorted = true;
     }
 }
-
 // Apply queue sort if it's not already sorted by a column
 if (!$sorted) {
     // Apply queue sort-dropdown selected preference
@@ -80,13 +70,10 @@ if (!$sorted) {
     else // otherwise sort by created DESC
         $tickets->order_by('-created');
 }
-
 // Apply pagination
-
 $page = (isset($_GET['p']) && is_numeric($_GET['p'])) ? $_GET['p'] : 1;
 $pageNav = new Pagenate(PHP_INT_MAX, $page, PAGE_LIMIT);
 $tickets = $pageNav->paginateSimple($tickets);
-
 if (isset($tickets->extra['tables'])) {
     // Creative twist here. Create a new query copying the query criteria, sort, limit,
     // and offset. Then join this new query to the $tickets query and clear the
@@ -103,10 +90,8 @@ if (isset($tickets->extra['tables'])) {
     # Index hint should be used on the $criteria query only
     $tickets->clearOption(QuerySet::OPT_INDEX_HINT);
 }
-
 $tickets->distinct('ticket_id');
 $Q = $queue->getBasicQuery();
-
 if ($Q->constraints) {
     if (count($Q->constraints) > 1) {
         foreach ($Q->constraints as $value) {
@@ -115,17 +100,14 @@ if ($Q->constraints) {
         }
     }
 }
-
 if (($Q->extra && isset($Q->extra['tables'])) || !$Q->constraints || $empty) {
     $skipCount = true;
     $count = '-';
 }
-
 $count = $count ?? $queue->getCount($thisstaff);
 $pageNav->setTotal($count, true);
 $pageNav->setURL('tickets.php', $args);
 ?>
-
 <!-- SEARCH FORM START -->
 <div id='basic_search'>
     <div class="pull-right" style="height:25px">
@@ -156,7 +138,6 @@ return false;">
     </form>
 </div>
 <!-- SEARCH FORM END -->
-
 <div class="clear"></div>
 <div style="margin-bottom:20px; padding-top:5px;">
     <div class="sticky bar opaque">
@@ -190,7 +171,6 @@ return false;">
                                 <?php echo __('Add Sub Queue'); ?></a>
                         </li>
                         <?php
-
                         if ($queue->id > 0 && $queue->isOwner($thisstaff)) { ?>
                             <li class="danger">
                                 <a class="no-pjax confirm-action" href="#" data-dialog="ajax.php/queue/<?php
@@ -201,7 +181,6 @@ return false;">
                     </ul>
                 </div>
             </div>
-
             <div class="pull-right flush-right">
                 <?php
                 // TODO: Respect queue root and corresponding actions
@@ -213,12 +192,10 @@ return false;">
     </div>
 </div>
 <div class="clear"></div>
-
 <form action="?" method="POST" name='tickets' id="tickets">
     <?php csrf_token(); ?>
     <input type="hidden" name="a" value="mass_process">
     <input type="hidden" name="do" id="action" value="">
-
     <table class="list queue tickets" border="0" cellspacing="1" cellpadding="2" width="940">
         <thead>
             <tr>
@@ -228,7 +205,6 @@ return false;">
                     <th style="width:12px"></th>
                 <?php
                 }
-
                 foreach ($columns as $C) {
                     $heading = Format::htmlchars($C->getLocalHeading());
                     if ($C->isSortable()) {
@@ -293,7 +269,6 @@ return false;">
             </tr>
         </tfoot>
     </table>
-
     <?php
     if ($count > 0 || $skipCount) { //if we actually had any tickets returned.
     ?> <div>
